@@ -106,8 +106,8 @@
     - service: actuator.actuate
       data:
         sensor_id: sensor.purifier7_temperature
-        sensor_values: [20, 22, 24, 25]
-        alt_sensor_values: [21, 23, 25, 26]
+        sensor_values: [20, 21.2, 24, 25]
+        alt_sensor_values: [21, 22, 25, 26]
         alt_time_range: [2, 7]
         entity_id: fan.fan
         entity_attr: speed_level
