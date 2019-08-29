@@ -370,7 +370,7 @@ def guessDeviceName(entity_id, attributes, places, aliases):
 
     # Name validation
     for alias in aliases:
-        if name == aliases['key'] or name in aliases['value']:
+        if name == alias['key'] or name in alias['value']:
             return name
 
     _LOGGER.error(
