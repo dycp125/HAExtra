@@ -251,7 +251,8 @@ start()
   ARIA2C=$(cd "${0%/*}"; pwd)/aria2c
   if [ ! -x $ARIA2C ]; then ARIA2C=aria2c; fi
 
-  $ARIA2C -D -d $DDIR -c -i $TASK --save-session=$TASK --enable-rpc --rpc-listen-all --rpc-allow-origin-all --file-allocation=falloc --disable-ipv6
+  XOPT="--rpc-certificate=/root/.homeassistant/fullchain.cer --rpc-private-key=/root/.homeassistant/privkey.pem --rpc-secure=true"
+  $ARIA2C -D -d $DDIR -c -i $TASK --save-session=$TASK --enable-rpc --rpc-listen-all --rpc-allow-origin-all --file-allocation=falloc --disable-ipv6 $XOPT
 }
 
 case "$1" in
