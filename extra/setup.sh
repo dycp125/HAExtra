@@ -130,17 +130,15 @@ cat >> /etc/v2ray/config.json << "EOF"
 }
 EOF
 
-# ============================== Samba ==============================
-# Disk
+# ============================== Disk ==============================
 hdparm -B 127 /dev/sda
 hdparm -S 180 /dev/sda
 hdparm -I /dev/sda
 hdparm -C /dev/sda
 echo -e "/dev/sda1\t/mnt/STORE\tntfs\t\tdefaults,noatime,nodiratime\t\t\t0 0" >> /etc/fstab
 
-# Samba
+# ============================== Samba ==============================
 apt install samba
-#smbpasswd -a admin
 
 cat <<\EOF > /etc/samba/smb.conf
 [global]
@@ -230,6 +228,7 @@ valid users = admin
 EOF
 /etc/init.d/smbd restart
 
+# ============================== Aria ==============================
 cat <<\EOF > /etc/init.d/aria
 #!/bin/sh
 
@@ -286,26 +285,9 @@ chmod 755 /etc/init.d/aria
 #ln -s /mnt/STORE/Downloads ~
 update-rc.d aria defaults
 
-# ============================== Samba ==============================
-# Auto start
-cat <<\EOF > /etc/systemd/system/homeassistant.service
-[Unit]
-Description=Home Assistant
-After=network-online.target
+# ============================== Transmission ==============================
+apt install transmission
 
-[Service]
-Type=simple
-User=root
-ExecStart=/usr/local/bin/hass
-
-[Install]
-WantedBy=multi-user.target
-
-EOF
-
-systemctl --system daemon-reload
-systemctl enable homeassistant
-systemctl start homeassistant
 
 # ============================== Deprecated Config ==============================
 # Global Customization file
