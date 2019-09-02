@@ -16,7 +16,7 @@
 # usermod -d /home/admin admin
 # passwd admin
 # raspi-config # Hostname, WiFi, locales(en_US.UTF-8/zh_CN.GB18030/zh_CN.UTF-8), Timezone
-##apt-get install python3 python3-pip
+##apt install python3 python3-pip
 
 # MacOS
 #ssh root@hassbian "mkdir ~/.ssh"
@@ -44,15 +44,15 @@ armbian-config #Hostname, wifi,timezone, apt-source
 #echo "Asia/Shanghai" > /etc/timezone && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # ============================== Home Assistant ==============================
-apt-get update && apt-get upgrade -y
-#apt-get autoclean
-#apt-get clean
+apt update && apt upgrade -y
+#apt autoclean
+#apt clean
 #apt autoremove -y
 
-apt-get install mosquitto mosquitto-clients libavahi-compat-libdnssd-dev adb
+apt install mosquitto mosquitto-clients libavahi-compat-libdnssd-dev adb
 
 # Armbian
-apt-get install python3-pip python3-dev libffi-dev python3-setuptools
+apt install python3-pip python3-dev libffi-dev python3-setuptools
 ln -sf /usr/bin/python3 /usr/bin/python
 
 # Speedtest
@@ -68,8 +68,8 @@ wget -O speedtest https://raw.githubusercontent.com/sivel/speedtest-cli/master/s
 #curl https://bc.gongxinke.cn/downloads/install-python-latest | bash
 
 # Baidu TTS
-#apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
-#apt-get install libjpeg-dev zlib1g-dev
+#apt install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+#apt install libjpeg-dev zlib1g-dev
 
 # Home Assistant
 pip3 install wheel
@@ -131,50 +131,180 @@ cat >> /etc/v2ray/config.json << "EOF"
 EOF
 
 # ============================== Samba ==============================
+# Disk
+hdparm -B 127 /dev/sda
+hdparm -S 180 /dev/sda
+hdparm -I /dev/sda
+hdparm -C /dev/sda
+echo -e "/dev/sda1\t/mnt/STORE\tntfs\t\tdefaults,noatime,nodiratime\t\t\t0 0" >> /etc/fstab
+
 # Samba
-apt-get install samba
-smbpasswd -a root
+apt install samba
+#smbpasswd -a admin
 
-cat <<EOF > /etc/samba/smb.conf
+cat <<\EOF > /etc/samba/smb.conf
 [global]
-workgroup = WORKGROUP
-wins support = yes
-dns proxy = no
-log file = /var/log/samba/log.%m
-max log size = 1000
-syslog = 0
-panic action = /usr/share/samba/panic-action %d
-server role = standalone server
-passdb backend = tdbsam
-obey pam restrictions = yes
-unix password sync = yes
-passwd program = /usr/bin/passwd %u
-passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
-pam password change = yes
-map to guest = bad user
-usershare allow guests = yes
+server string = Storage
+map to guest = Bad User
+min protocol = SMB2
 
-[homes]
-comment = Home Directories
-browseable = no
-create mask = 0700
-directory mask = 0700
-valid users = %S
+ea support = yes
+vfs objects = catia fruit streams_xattr
+fruit:aapl = yes
+readdir_attr:aapl_rsize = yes
+readdir_attr:aapl_finder_info = yes
+readdir_attr:aapl_max_access = yes
+fruit:nfs_aces = yes
+fruit:copyfile= yes
+fruit:metadata = netatalk
+fruit:resource = file
+fruit:locking = none
+fruit:encoding = private
+unix extensions = yes
+fruit:model = MacSamba
+spotlight = no
+smb2 max read = 8388608
+smb2 max write = 8388608
+smb2 max trans = 8388608
+smb2 leases = yes
+aio read size = 1
+aio write size = 1
+kernel oplocks = no
+use sendfile = yes
+strict sync = yes
+sync always = no
+delete veto files = true
+fruit:posix_rename = yes
+fruit:veto_appledouble = yes
+fruit:zero_file_id = yes
+fruit:wipe_intentionally_left_blank_rfork = yes
+fruit:delete_empty_adfiles = yes
+#disable netbios = yes
+#dns proxy = no
+#smb ports = 445
+#name resolve order = host bcast
 
-[hass]
-path = /root/.homeassistant
-valid users = root
-browseable = yes
+load printers = no
+min receivefile size = 16384
+write cache size = 524288
+getwd cache = yes
+#socket options = TCP_NODELAY IPTOS_LOWDELAY
+directory mask = 0755
+create mask = 0644
+force directory mode = 0755
+force create mode = 0644
+access based share enum = yes
+veto files = /aria.task/
+
+[Downloads]
+path = /mnt/STORE/Downloads
+public = yes
 writable = yes
 
-EOF
-/etc/init.d/samba restart
+[Public]
+path = /mnt/STORE/Public
+public = yes
+write list = admin
 
-# Merlin?
-mkdir /media/sda1
-cat <<\EOF > /etc/fstab
-/dev/sda1 /media/sda1 hfsplus ro,sync,noexec,nodev,noatime,nodiratime 0 0
+[Music]
+path = /mnt/STORE/Music
+public = yes
+write list = admin
+
+[Pictures]
+path = /mnt/STORE/Pictures
+public = yes
+write list = admin
+
+[Movies]
+path = /mnt/STORE/Movies
+public = yes
+write list = admin
+
+[Documents]
+path = /mnt/STORE/Documents
+public = no
+writable = yes
+valid users = admin
+
 EOF
+/etc/init.d/smbd restart
+
+cat <<\EOF > /etc/init.d/aria
+#!/bin/sh
+
+start()
+{
+  if [ ! -z "$1" ]; then
+    DDIR="$1"
+  elif [ -d /mnt/STORE/Downloads ]; then
+    DDIR=/mnt/STORE/Downloads
+  elif [ -d ~/Downloads ]; then
+    DDIR=~/Downloads
+  else
+    DDIR=$(pwd)
+  fi
+
+  TASK=$DDIR/aria.task
+  if [ ! -r $TASK ]; then touch $TASK; fi
+
+  ARIA2C=$(cd "${0%/*}"; pwd)/aria2c
+  if [ ! -x $ARIA2C ]; then ARIA2C=aria2c; fi
+
+  $ARIA2C -D -d $DDIR -c -i $TASK --save-session=$TASK --enable-rpc --rpc-listen-all --rpc-allow-origin-all --file-allocation=falloc --disable-ipv6
+}
+
+case "$1" in
+  start)
+    echo "Starting aria2c daemon..."
+    start $2
+    ;;
+  stop)
+    echo "Shutting down aria2c daemon..."
+    killall aria2c
+    ;;
+  restart)
+    killall aria2c
+    sleep 1
+    start $2
+    ;;
+  '')
+    echo "Aria2c helper by Yonsm"
+    echo
+    echo "Usage: $0 [start|stop|restart|<DIR>] [DIR]"
+    echo
+    ;;
+  *)
+    start $1
+    ;;
+esac
+
+EOF
+
+chmod 755 /etc/init.d/aria
+#ln -s /mnt/STORE/Downloads ~
+update-rc.d aria defaults
+
+# ============================== Samba ==============================
+# Auto start
+cat <<\EOF > /etc/systemd/system/homeassistant.service
+[Unit]
+Description=Home Assistant
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/hass
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+
+systemctl --system daemon-reload
+systemctl enable homeassistant
+systemctl start homeassistant
 
 # ============================== Deprecated Config ==============================
 # Global Customization file
