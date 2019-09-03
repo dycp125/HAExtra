@@ -139,7 +139,8 @@ hdparm -C /dev/sda
 echo -e "/dev/sda1\t/mnt/STORE\tntfs\t\tdefaults,noatime,nodiratime\t\t\t0 0" >> /etc/fstab
 
 # ============================== Samba ==============================
-apt install samba
+apt install samba samba-vfs-modules
+smbpasswd -a admin
 
 cat <<\EOF > /etc/samba/smb.conf
 [global]
