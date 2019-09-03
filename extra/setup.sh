@@ -131,6 +131,7 @@ cat >> /etc/v2ray/config.json << "EOF"
 EOF
 
 # ============================== Disk ==============================
+hdparm -I /dev/sda
 hdparm -B 127 /dev/sda
 hdparm -S 180 /dev/sda
 hdparm -I /dev/sda
@@ -229,6 +230,7 @@ EOF
 /etc/init.d/smbd restart
 
 # ============================== Aria ==============================
+apt install aria2c
 cat <<\EOF > /etc/init.d/aria
 #!/bin/sh
 
