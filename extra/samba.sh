@@ -14,13 +14,27 @@ smbpasswd -a admin
 
 cat <<\EOF > /etc/samba/smb.conf
 [global]
+netbios name = Store
 server string = Storage
 map to guest = Bad User
-min protocol = SMB2
+access based share enum = yes
+veto files = /aria.task/
+force create mode = 0644
+force directory mode = 0755
+load printers = no
+disable spoolss = yes
 
+min receivefile size = 16384
+write cache size = 524288
+socket options = TCP_NODELAY IPTOS_LOWDELAY
+aio read size = 16384
+aio write size = 16384
+
+min protocol = SMB2
 ea support = yes
 vfs objects = catia fruit streams_xattr
 fruit:aapl = yes
+fruit:model = Xserve
 readdir_attr:aapl_rsize = yes
 readdir_attr:aapl_finder_info = yes
 readdir_attr:aapl_max_access = yes
@@ -31,7 +45,6 @@ fruit:resource = file
 fruit:locking = none
 fruit:encoding = private
 unix extensions = yes
-fruit:model = MacSamba
 spotlight = no
 smb2 max read = 8388608
 smb2 max write = 8388608
@@ -53,18 +66,7 @@ fruit:delete_empty_adfiles = yes
 #dns proxy = no
 #smb ports = 445
 #name resolve order = host bcast
-
-load printers = no
-min receivefile size = 16384
-write cache size = 524288
-getwd cache = yes
-#socket options = TCP_NODELAY IPTOS_LOWDELAY
-directory mask = 0755
-create mask = 0644
-force directory mode = 0755
-force create mode = 0644
-access based share enum = yes
-veto files = /aria.task/
+writable = yes
 
 [Downloads]
 path = /mnt/STORE/Downloads
@@ -83,13 +85,15 @@ write list = admin
 
 [Pictures]
 path = /mnt/STORE/Pictures
-public = yes
-write list = admin
+public = no
+writable = yes
+valid users = admin
 
 [Movies]
 path = /mnt/STORE/Movies
-public = yes
-write list = admin
+public = no
+writable = yes
+valid users = admin
 
 [Documents]
 path = /mnt/STORE/Documents
@@ -99,4 +103,5 @@ valid users = admin
 
 EOF
 
+#smbd -F --no-process-group -S -d=3
 /etc/init.d/smbd restart
