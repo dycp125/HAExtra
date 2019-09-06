@@ -2,6 +2,18 @@
   trigger:
     - platform: state
       entity_id: sensor.fresher_co2
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: fan.fresher
+        state: Low
+      - condition: state
+        entity_id: fan.fresher
+        state: Middle
+      - condition: state
+        entity_id: fan.fresher
+        state: Strong
   action:
     - service: actuator.actuate
       data:
@@ -9,12 +21,24 @@
         sensor_values: [500, 680, 730]
         entity_id: fan.fresher
         entity_attr: speed
-        entity_values: [Auto, Middle, Strong]
+        entity_values: [Low, Middle, Strong]
 
 - alias: 调节新风@主卧
   trigger:
     - platform: state
       entity_id: sensor.fresher2_co2
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: fan.fresher2
+        state: Low
+      - condition: state
+        entity_id: fan.fresher2
+        state: Middle
+      - condition: state
+        entity_id: fan.fresher2
+        state: Strong
   action:
     - service: actuator.actuate
       data:
@@ -23,4 +47,4 @@
         alt_sensor_values: [550, 800, 1100]
         entity_id: fan.fresher2
         entity_attr: speed
-        entity_values: [Auto, Middle, Strong]
+        entity_values: [Low, Middle, Strong]

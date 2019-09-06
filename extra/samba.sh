@@ -66,7 +66,6 @@ fruit:delete_empty_adfiles = yes
 #dns proxy = no
 #smb ports = 445
 #name resolve order = host bcast
-writable = yes
 
 [Downloads]
 path = /mnt/STORE/Downloads

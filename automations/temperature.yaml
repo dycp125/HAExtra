@@ -1,4 +1,5 @@
 - alias: 调节空调@主卧
+  initial_state: false
   trigger:
     - platform: time
       at: '20:30:01'
@@ -21,6 +22,7 @@
         entity_values: [一档, 二档, 三档, 四档, 五档]
 
 - alias: 调节空调@儿童房
+  initial_state: false
   trigger:
     - platform: time
       at: '20:00:01'
@@ -43,6 +45,7 @@
         delay: 0
 
 - alias: 调节空调@书房
+  initial_state: false
   trigger:
     - platform: time
       at: '20:30:01'
@@ -58,8 +61,8 @@
         sensor_id: sensor.purifier4_temperature
         #sensor_values: [28, 28.5, 32, 34] #fan_temperature
         #alt_sensor_values: [28.8, 30, 32, 34]
-        sensor_values: [29.5, 30, 32, 33]
-        alt_sensor_values: [30, 31, 32, 33]
+        sensor_values: [29.7, 30.5, 32, 33]
+        alt_sensor_values: [30.5, 31, 32, 33]
         alt_time_range: [2, 8]
         entity_id: climate.mitsubishi
         entity_attr: fan_mode
