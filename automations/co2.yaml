@@ -3,17 +3,8 @@
     - platform: state
       entity_id: sensor.fresher_co2
   condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: fan.fresher
-        state: Low
-      - condition: state
-        entity_id: fan.fresher
-        state: Middle
-      - condition: state
-        entity_id: fan.fresher
-        state: Strong
+    - condition: template
+      value_template: '{{ is_state_attr("fan.fresher", "mode", "low") or is_state_attr("fan.fresher", "mode", "middle") or is_state_attr("fan.fresher", "mode", "strong") }}'
   action:
     - service: actuator.actuate
       data:
@@ -28,23 +19,14 @@
     - platform: state
       entity_id: sensor.fresher2_co2
   condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: fan.fresher2
-        state: Low
-      - condition: state
-        entity_id: fan.fresher2
-        state: Middle
-      - condition: state
-        entity_id: fan.fresher2
-        state: Strong
+    - condition: template
+      value_template: '{{ is_state_attr("fan.fresher2", "mode", "low") or is_state_attr("fan.fresher", "mode", "middle") or is_state_attr("fan.fresher", "mode", "strong") }}'
   action:
     - service: actuator.actuate
       data:
         sensor_id: sensor.fresher2_co2
         sensor_values: [500, 730, 800]
-        alt_sensor_values: [550, 800, 1100]
+        alt_sensor_values: [550, 800, 1500]
         entity_id: fan.fresher2
         entity_attr: speed
         entity_values: [Low, Middle, Strong]

@@ -44,7 +44,7 @@ Diningroom:
     - light.diningroom_light
     #- light.diningroom_light2
     - light.diningroom_spotlight
-    # - switch.outlet
+    - switch.outlet
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
@@ -110,7 +110,7 @@ Kidsroom:
     - fan.purifier7
     - fan.fan
     - sensor.fan_temperature
-    # - switch.outlet2
+    - switch.outlet2
     - sensor.purifier7_temperature
     - sensor.purifier7_humidity
     - sensor.purifier7_pm25
@@ -205,7 +205,7 @@ Balcony:
     - light.diningroom_light
     #- light.diningroom_light2
     - light.diningroom_spotlight
-    # - switch.outlet
+    - switch.outlet
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
@@ -277,7 +277,7 @@ Balcony:
     - fan.purifier7
     - fan.fan
     - sensor.fan_temperature
-    # - switch.outlet2
+    - switch.outlet2
     - sensor.purifier7_temperature
     - sensor.purifier7_humidity
     - sensor.purifier7_pm25
