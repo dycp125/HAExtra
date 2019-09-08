@@ -15,6 +15,8 @@
 # mv /home/pi /home/admin
 # usermod -d /home/admin admin
 # passwd admin
+#tzselect
+#cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # raspi-config # Hostname, WiFi, locales(en_US.UTF-8/zh_CN.GB18030/zh_CN.UTF-8), Timezone
 ##apt install python3 python3-pip
 
