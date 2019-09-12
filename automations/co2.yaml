@@ -20,7 +20,7 @@
       entity_id: sensor.fresher2_co2
   condition:
     - condition: template
-      value_template: '{{ is_state_attr("fan.fresher2", "mode", "low") or is_state_attr("fan.fresher", "mode", "middle") or is_state_attr("fan.fresher", "mode", "strong") }}'
+      value_template: '{{ is_state_attr("fan.fresher2", "mode", "low") or is_state_attr("fan.fresher2", "mode", "middle") or is_state_attr("fan.fresher2", "mode", "strong") }}'
   action:
     - service: actuator.actuate
       data:
