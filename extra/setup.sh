@@ -15,8 +15,10 @@
 # mv /home/pi /home/admin
 # usermod -d /home/admin admin
 # passwd admin
-#tzselect
-#cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# tzsleect
+# cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 # raspi-config # Hostname, WiFi, locales(en_US.UTF-8/zh_CN.GB18030/zh_CN.UTF-8), Timezone
 ##apt install python3 python3-pip
 
@@ -41,6 +43,7 @@ ssh root@hassbian
 
 #
 echo "admin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
 
 armbian-config #Hostname, wifi,timezone, apt-source
 #echo "Asia/Shanghai" > /etc/timezone && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
