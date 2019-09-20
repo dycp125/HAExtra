@@ -70,6 +70,7 @@
         delay: 0
 
 - alias: 调节风扇@书房
+  initial_state: false
   trigger:
     - platform: time
       at: '20:30:01'
@@ -109,8 +110,8 @@
     - service: actuator.actuate
       data:
         sensor_id: sensor.purifier7_temperature
-        sensor_values: [20, 21.2, 24, 25]
-        alt_sensor_values: [21, 23, 25, 26]
+        sensor_values: [19, 21.2, 24, 25]
+        alt_sensor_values: [20, 23, 25, 26]
         alt_time_range: [2, 8]
         entity_id: fan.fan
         entity_attr: speed_level
