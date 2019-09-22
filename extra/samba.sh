@@ -14,24 +14,39 @@ smbpasswd -a admin
 
 cat <<\EOF > /etc/samba/smb.conf
 [global]
+# General
 netbios name = Store
+#workgroup = WORKGROUP
 server string = Storage
+interfaces = lo br-lan
+bind interfaces only = yes
+
+# Account
+passdb backend = smbpasswd
 map to guest = Bad User
 access based share enum = yes
-veto files = /aria.task/
+
+# Content
+unix charset = UTF-8
+veto files = /Thumbs.db/.DS_Store/._.DS_Store/.apdisk/aria.task/
 force create mode = 0644
 force directory mode = 0755
 load printers = no
 disable spoolss = yes
 
+# Optimization
+deadtime = 15
 min receivefile size = 16384
 write cache size = 524288
 socket options = TCP_NODELAY IPTOS_LOWDELAY
 aio read size = 16384
 aio write size = 16384
+use sendfile = yes
 
+# Mac OS
 min protocol = SMB2
 ea support = yes
+mdns name = mdns
 vfs objects = catia fruit streams_xattr
 fruit:aapl = yes
 fruit:model = Xserve
@@ -50,10 +65,7 @@ smb2 max read = 8388608
 smb2 max write = 8388608
 smb2 max trans = 8388608
 smb2 leases = yes
-aio read size = 1
-aio write size = 1
 kernel oplocks = no
-use sendfile = yes
 strict sync = yes
 sync always = no
 delete veto files = true
@@ -62,10 +74,6 @@ fruit:veto_appledouble = yes
 fruit:zero_file_id = yes
 fruit:wipe_intentionally_left_blank_rfork = yes
 fruit:delete_empty_adfiles = yes
-#disable netbios = yes
-#dns proxy = no
-#smb ports = 445
-#name resolve order = host bcast
 
 [Downloads]
 path = /mnt/STORE/Downloads
