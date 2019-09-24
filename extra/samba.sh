@@ -18,6 +18,7 @@ cat <<\EOF > /etc/samba/smb.conf
 netbios name = Store
 #workgroup = WORKGROUP
 server string = Storage
+unix charset = UTF-8
 interfaces = lo br-lan
 bind interfaces only = yes
 
@@ -27,14 +28,13 @@ map to guest = Bad User
 access based share enum = yes
 
 # Content
-unix charset = UTF-8
-veto files = /Thumbs.db/.DS_Store/._.DS_Store/.apdisk/aria.task/
+veto files = /Thumbs.db/.DS_Store/._.DS_Store/.apdisk/
 force create mode = 0644
 force directory mode = 0755
 load printers = no
 disable spoolss = yes
 
-# Optimization
+# Connection
 deadtime = 15
 min receivefile size = 16384
 write cache size = 524288
@@ -46,7 +46,7 @@ use sendfile = yes
 # Mac OS
 min protocol = SMB2
 ea support = yes
-mdns name = mdns
+#mdns name = mdns
 vfs objects = catia fruit streams_xattr
 fruit:aapl = yes
 fruit:model = Xserve
@@ -74,6 +74,7 @@ fruit:veto_appledouble = yes
 fruit:zero_file_id = yes
 fruit:wipe_intentionally_left_blank_rfork = yes
 fruit:delete_empty_adfiles = yes
+
 
 [Downloads]
 path = /mnt/STORE/Downloads
@@ -107,6 +108,8 @@ path = /mnt/STORE/Documents
 public = no
 writable = yes
 valid users = admin
+
+
 
 EOF
 
