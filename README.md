@@ -38,11 +38,12 @@ panel_iframe:
 | key  | 用途 | 不配置/默认情况 | 备注 |
 | ------------- | ------------- | ------------- | ------------- |
 | dash_name | 名称 | 使用 attributes.friendly_name | 支持 template 模式 |
-| dash_icon | 图标 | 传感器显示 state；空调显示当前温度；其它使用 attributes.icon | 支持 template 模式 |
+| dash_icon | 图标 | 传感器显示 state；空调显示当前温度；其它使用 attributes.icon | 支持 template 模式，支持文字（如引用一个传感器属性） |
 | dash_extra | 扩展信息 | 空调和风扇显示操作模式和设定温度，其它无 | 支持 template 模式 |
 | dash_extra_forced | 强制显示扩展信息 | off 状态下不显示扩展信息 |
 | dash_hidden | 不显示 | | hidden 也不显示
 | dash_click | 点击时的动作 | 传感器无动作，其它执行开关操作 | 支持 http 链接或 JavaScript |
+| dash_relation | 驱动关联设备 | 无 | 用于驱动另外一个引用当前状态/属性的设备的状态更新 |
 
 关于 `template 模式`：支持以下几种示例：
 

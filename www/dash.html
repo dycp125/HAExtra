@@ -295,6 +295,15 @@
 					case 'event':
 						var entity = json.event.data.new_state
 						if (entity) {
+							if (_entities_retained) {
+								var entity_id = entity.entity_id
+								for (var i in _entities) {
+									if (_entities[i].entity_id == entity_id) {
+										_entities[i] = entity
+										break;
+									}
+								}
+							}
 							handleEvent(entity)
 						} else {
 							floater('error', '事件错误 ' + (json.error.message || message.data) + '，<a href="javascript:connect()">重新连接</a>')
@@ -386,6 +395,13 @@
 				if (grid) {
 					grid.innerHTML = makeEntity(entity)
 					//console.log('Update entity: ' + entity_id);
+
+					if (entity.attributes.dash_relation) {
+						var relation = findEntity(entity.attributes.dash_relation)
+						if (relation) {
+							handleEvent(relation)
+						}
+					}
 				} else if (isValidEntity(entity)) {
 					floater('error', '发现新设备“' + entity.attributes.friendly_name + '”，请<a href="javascript:connect()">重新连接</a>')
 				} else {
@@ -456,7 +472,7 @@
 				)
 			}
 
-			_STATE_MAPS = {
+			_TRANS = {
 				off: '关闭',
 				on: '开启',
 
@@ -545,7 +561,7 @@
 
 				var has_dash_icon = attributes.hasOwnProperty('dash_icon')
 				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
-					var value = !na && domain == 'climate' ? attributes.current_temperature : _STATE_MAPS[state] || state || '无'
+					var value = !na && domain == 'climate' ? attributes.current_temperature : _TRANS[state] || state || '无'
 					var nan = isNaN(value)
 					var overflow = nan ? '' : stateOverflow(entity_id, value)
 					html += '<div class="state' + off + overflow + (nan ? ' nan' : '') + '">'
@@ -561,7 +577,7 @@
 					}
 				} else {
 					html += '<div class="state' + off + '">'
-					
+
 					var icon = has_dash_icon ? renderTemplate(attributes.dash_icon, state, attributes) : attributes.icon
 					if (icon) {
 						if (icon.startsWith('mdi:')) {
@@ -604,7 +620,7 @@
 						for (var i in mode_list) {
 							var mode = mode_list[i]
 							var key = mode.toLowerCase()
-							var text = _STATE_MAPS[key] || mode.replace(/level/ig, '档位')
+							var text = _TRANS[key] || mode.replace(/level/ig, '档位')
 							extra += '<option value="' + mode + '"' + (mode == current ? ' selected' : '') + '>' + text
 							if (mode == current && domain == 'climate') {
 								extra += ' ' + attributes.temperature
@@ -689,7 +705,7 @@
 							return '错误'
 						}
 					}
-					return result
+					return _TRANS[result] || result
 				}
 			}
 

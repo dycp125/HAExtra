@@ -246,6 +246,7 @@ sensor.aircat_humidity:
   friendly_name: 餐厅湿度
 sensor.aircat_pm25:
   dash_click: /
+  dash_relation: fan.purifier5
   friendly_name: 餐厅颗粒物
 sensor.aircat_temperature:
   friendly_name: 餐厅温度
@@ -267,6 +268,7 @@ sensor.fresher2_co2:
 sensor.fresher2_humidity:
   friendly_name: 主卧湿度
 sensor.fresher2_pm25:
+  dash_relation: fan.purifier6
   friendly_name: 主卧颗粒物
   icon: mdi:blur
 sensor.fresher2_temperature:
@@ -302,6 +304,7 @@ sensor.purifier7_humidity:
   friendly_name: 儿童房湿度
 sensor.purifier7_pm25:
   dash_click: https://www.lewei50.com/u/g/33981
+  dash_relation: fan.purifier7
   friendly_name: 儿童房颗粒物
   icon: mdi:blur
 sensor.purifier7_temperature:
