@@ -560,9 +560,16 @@
 						}
 					}
 				} else {
+					html += '<div class="state' + off + '">'
+					
 					var icon = has_dash_icon ? renderTemplate(attributes.dash_icon, state, attributes) : attributes.icon
-					if (icon && icon.startsWith('mdi:')) {
-						icon = icon.slice(4)
+					if (icon) {
+						if (icon.startsWith('mdi:')) {
+							icon = icon.slice(4)
+						} else {
+							html += icon
+							icon = null
+						}
 					} else if (domain == 'binary_sensor') {
 						var device_class = attributes.device_class
 						if (!_BINARY_SENSOR_ICONS.hasOwnProperty(device_class)) {
@@ -573,8 +580,9 @@
 						icon = _DOMAIN_ICONS[domain]
 					}
 
-					html += '<div class="state' + off + '">'
-					html += '<i class="mdi mdi-' + icon + '"></i>'
+					if (icon) {
+						html += '<i class="mdi mdi-' + icon + '"></i>'
+					}
 				}
 				html += '</div>'
 

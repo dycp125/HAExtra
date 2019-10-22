@@ -49,14 +49,17 @@ fan.fan:
 fan.fan2:
   friendly_name: 书房风扇
 fan.fresher:
+  dash_icon: ${co2}
   friendly_name: 客厅新风机
   hagenie_deviceType: VMC
   icon: mdi:leaf
 fan.fresher2:
+  dash_icon: ${co2}
   friendly_name: 主卧新风机
   hagenie_deviceType: VMC
   icon: mdi:leaf
 fan.purifier:
+  dash_icon: ${aqi}
   friendly_name: 次卧净化器
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
@@ -65,14 +68,17 @@ fan.purifier4:
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.purifier5:
+  dash_icon: ${sensor.aircat_pm25}
   friendly_name: 餐厅净化器
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.purifier6:
+  dash_icon: ${sensor.fresher2_pm25}
   friendly_name: 主卧净化器
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.purifier7:
+  dash_icon: ${sensor.purifier7_pm25}
   friendly_name: 儿童房净化器
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
