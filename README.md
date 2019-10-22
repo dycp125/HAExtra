@@ -43,7 +43,7 @@ panel_iframe:
 | dash_extra_forced | 强制显示扩展信息 | off 状态下不显示扩展信息 |
 | dash_hidden | 不显示 | | hidden 也不显示
 | dash_click | 点击时的动作 | 传感器无动作，其它执行开关操作 | 支持 http 链接或 JavaScript |
-| dash_relation | 驱动关联设备 | 无 | 用于驱动另外一个引用当前状态/属性的设备的状态更新 |
+| dash_relation | 驱动关联设备 | | 用于更新另外一个引用当前状态/属性的设备 |
 
 关于 `template 模式`：支持以下几种示例：
 
