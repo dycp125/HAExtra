@@ -85,7 +85,7 @@ Washroom:
 
 Bedroom:
   entities:
-    #- media_player.x9300d
+    - media_player.x9300d
     - climate.daikin3
     - fan.fresher2
     - fan.purifier6
@@ -153,7 +153,7 @@ Balcony:
     - group.all_switches
     - group.all_fans
     - group.all_vacuum_cleaners
-    #- media_player.x9300d
+    - media_player.x9300d
     - media_player.x9400e
     - climate.saswell
     - climate.saswell2

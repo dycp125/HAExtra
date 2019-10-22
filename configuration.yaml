@@ -598,15 +598,12 @@ cover:
         command_close: 'sgD8AJ0xGAwMGBcNFw0XDQsYGAwYDAwZFwwMGAwYDBgXDQwXDBkMGBcNCxkXDBgMDBkMGAwYGAwMGBcNFw0MGAsZCxgYDQsYDBgXDRcNDBgMGBcNFwABIZ4xFw0MGBcNFwwYDA0YGAwYDAwYGAwMGAwYDBgXDQsYDBgMGBgMDBgXDRcNDBgMGAwYFw0MGBcMGAwMGAwYDBgXDQwYDBgXDRcMDBgMGBgMFwABI50yFw0LGBgMGAwXDQwYFw0XDQwYFw0MGAwYDBcYDAwYDBgMGBgMDBgXDRcNCxkLGAwYGA4MFxgMGAwMGAwYDBgXDQwYDBgXDBgNCxgMGBcNFwAF3AAAAAAAAAAAAAAAAA=='
 
 media_player:
-  # - platform: braviatv
-  #   host: X9300d
-  #   name: X9300d
+  - platform: braviatv
+    host: X9300d
+    name: X9300d
   - platform: braviatv
     host: X9400e
     name: X9400e
-  # - platform: dlna_dmr
-  #   url: http://Magic:7300/mdr/desc.xml
-  #   name: Magic
 
 panel_iframe:
   dash:
