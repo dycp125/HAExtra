@@ -225,7 +225,7 @@ class Thermostat(HomeAccessory):
             DOMAIN_CLIMATE,
             SERVICE_SET_TEMPERATURE_THERMOSTAT,
             params,
-            "cooling threshold {}{}".format(temperature, self._unit),
+            f"cooling threshold {temperature}{self._unit}",
         )
 
     @debounce
@@ -246,7 +246,7 @@ class Thermostat(HomeAccessory):
             DOMAIN_CLIMATE,
             SERVICE_SET_TEMPERATURE_THERMOSTAT,
             params,
-            "heating threshold {}{}".format(temperature, self._unit),
+            f"heating threshold {temperature}{self._unit}",
         )
 
     @debounce
@@ -260,7 +260,7 @@ class Thermostat(HomeAccessory):
             DOMAIN_CLIMATE,
             SERVICE_SET_TEMPERATURE_THERMOSTAT,
             params,
-            "{}{}".format(temperature, self._unit),
+            f"{temperature}{self._unit}",
         )
 
     def update_state(self, new_state):
@@ -402,7 +402,7 @@ class WaterHeater(HomeAccessory):
             DOMAIN_WATER_HEATER,
             SERVICE_SET_TEMPERATURE_WATER_HEATER,
             params,
-            "{}{}".format(temperature, self._unit),
+            f"{temperature}{self._unit}",
         )
 
     def update_state(self, new_state):
