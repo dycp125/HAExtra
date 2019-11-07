@@ -70,8 +70,9 @@ class Fan(HomeAccessory):
             speed_list = self.hass.states.get(self.entity_id).attributes.get(
                 ATTR_SPEED_LIST
             )
-            self.speed_mapping = HomeKitSpeedMapping(speed_list)
-            chars.append(CHAR_ROTATION_SPEED)
+            if speed_list is not None:
+                self.speed_mapping = HomeKitSpeedMapping(speed_list)
+                chars.append(CHAR_ROTATION_SPEED)
 
         serv_fan = self.add_preload_service(SERV_FANV2, chars)
         self.char_active = serv_fan.configure_char(
