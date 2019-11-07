@@ -186,7 +186,7 @@ sensor:
   #   username: !secret phicomm_username
   #   password: !secret phicomm_password
   - platform: aircat
-    mac: ['B0F8931EA148', 'B0F893249132']
+    mac: ['B0F8931EA148'] ##, 'B0F893249132']
   - platform: template
     sensors:
       purifier_temperature:
@@ -231,10 +231,10 @@ sensor:
         value_template: '{{ state_attr("fan.fresher2", "co2") }}'
         unit_of_measurement: ppm
 
-      fan_temperature:
-        device_class: temperature
-        value_template: '{{ state_attr("fan.fan", "temperature") }}'
-        unit_of_measurement: °C
+      ## fan_temperature:
+      ##   device_class: temperature
+      ##   value_template: '{{ state_attr("fan.fan", "temperature") }}'
+      ##   unit_of_measurement: °C
 
       daikin2_mode:
         friendly_name: 客厅空调模式
@@ -306,16 +306,16 @@ switch:
     value_template: '{% if value == "关闭" %}toggle{% else %}ON{% endif %}'
     icon_template: '{% if value == "关闭" %}mdi:speaker-off{% elif value == "蓝牙" %}mdi:speaker-bluetooth{% elif value == "光纤" %}mdi:speaker-wireless{% elif value == "优盘" %}mdi:usb{% elif value == "辅助" %}mdi:video-input-component{% else %}mdi:speaker{% endif %}'
     payload_off: 'toggle'
-  - platform: broadlink
-    host: Outlet
-    mac: 34:EA:34:B8:36:AC
-    friendly_name: Outlet
-    type: spmini2
-  - platform: broadlink
-    host: Outlet2
-    mac: 78:0f:77:cc:cc:be
-    friendly_name: Outlet2
-    type: spmini2
+  ## - platform: broadlink
+  ##   host: Outlet
+  ##   mac: 34:EA:34:B8:36:AC
+  ##   friendly_name: Outlet
+  ##   type: spmini2
+  ## - platform: broadlink
+  ##   host: Outlet2
+  ##   mac: 78:0f:77:cc:cc:be
+  ##   friendly_name: Outlet2
+  ##   type: spmini2
   - platform: broadlink
     friendly_name: Remote
     host: Remote
@@ -471,16 +471,16 @@ fan:
     host: Purifier
     model: zhimi.airpurifier.m1
     token: FE2D793B34DCE57F32BF50B2E6B00874
-  - platform: xiaomi_miio_fan
-    name: Fan
-    host: Fan
-    model: zhimi.fan.v3
-    token: 62df0c2f98752f87aa3c6258bf862c9b
-  - platform: xiaomi_miio_fan
-    name: Fan2
-    host: Fan2
-    model: zhimi.fan.sa1
-    token: 99ddab9b7d5cab866f8def02f348c5c0
+  ## - platform: xiaomi_miio_fan
+  ##   name: Fan
+  ##   host: Fan
+  ##   model: zhimi.fan.v3
+  ##   token: 62df0c2f98752f87aa3c6258bf862c9b
+  ## - platform: xiaomi_miio_fan
+  ##   name: Fan2
+  ##   host: Fan2
+  ##   model: zhimi.fan.sa1
+  ##   token: 99ddab9b7d5cab866f8def02f348c5c0
   - platform: xiaomi_miio
     name: Fresher
     host: Fresher

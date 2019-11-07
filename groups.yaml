@@ -44,7 +44,7 @@ Diningroom:
     - light.diningroom_light
     #- light.diningroom_light2
     - light.diningroom_spotlight
-    - switch.outlet
+    ##- switch.outlet
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
@@ -72,10 +72,10 @@ Passage:
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
     - input_text.miai
-    - sensor.aircat2_temperature
-    - sensor.aircat2_humidity
-    - sensor.aircat2_pm25
-    - sensor.aircat2_hcho
+    ##- sensor.aircat2_temperature
+    ##- sensor.aircat2_humidity
+    ##- sensor.aircat2_pm25
+    ##- sensor.aircat2_hcho
 
 Washroom:
   entities:
@@ -108,9 +108,9 @@ Kidsroom:
     - light.lamp2
     - climate.daikin4
     - fan.purifier7
-    - fan.fan
-    - sensor.fan_temperature
-    - switch.outlet2
+    ##- fan.fan
+    ##- sensor.fan_temperature
+    ##- switch.outlet2
     - sensor.purifier7_temperature
     - sensor.purifier7_humidity
     - sensor.purifier7_pm25
@@ -127,7 +127,7 @@ Studyroom:
     - switch.projector
     - switch.speaker
     - climate.mitsubishi
-    - fan.fan2
+    ##- fan.fan2
     - vacuum.vacuum
     - fan.purifier4
     - sensor.purifier4_temperature
