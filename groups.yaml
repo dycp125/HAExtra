@@ -82,6 +82,7 @@ Washroom:
     - light.washroom_light
     - switch.washroom_fan
     - binary_sensor.motion_sensor_158d0001f4a238
+    - binary_sensor.door_window_sensor_158d0003cf4735
 
 Bedroom:
   entities:
@@ -246,6 +247,7 @@ Balcony:
     - light.washroom_light
     - switch.washroom_fan
     - binary_sensor.motion_sensor_158d0001f4a238
+    - binary_sensor.door_window_sensor_158d0003cf4735
 
 主卧:
   view: yes
