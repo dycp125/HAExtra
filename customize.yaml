@@ -9,9 +9,9 @@ binary_sensor.door_window_sensor_158d0003cf4735:
 binary_sensor.lightness:
   friendly_name: 高亮光照
 binary_sensor.motion_sensor_158d0001d66ce9:
-  friendly_name: 过道人体感应
+  friendly_name: 过道感应
 binary_sensor.motion_sensor_158d0001f4a238:
-  friendly_name: 洗手间人体感应
+  friendly_name: 洗手间感应
 binary_sensor.switch_158d0001e59b33:
   friendly_name: 过道开关
   hidden: true
