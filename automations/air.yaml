@@ -59,27 +59,30 @@
     - platform: numeric_state
       entity_id: sensor.aircat_pm25
       above: 40
+      for:
+        minutes: 2
     - platform: numeric_state
       entity_id: sensor.fresher_co2
       above: 900
-    - platform: numeric_state
-      entity_id: sensor.fresher2_co2
-      above: 1000
+      for:
+        minutes: 2
     - platform: numeric_state
       entity_id: sensor.aircat_hcho
       above: 0.08
+      for:
+        minutes: 2
   action:
     - service: light.turn_on
       data_template:
         entity_id: light.gateway_light_34ce0090901a
-        color_name: '{% if states("sensor.fresher_co2") | int > 900 %}red{% elif states("sensor.fresher2_co2") | int > 1000 %}purple{% elif states("sensor.aircat_hcho") | float > 0.08 %}green{% elif states("sensor.aircat_pm25") | int > 40 %}blue{% endif %}'
+        color_name: '{% if states("sensor.fresher_co2") | int > 900 %}red{% elif states("sensor.aircat_hcho") | float > 0.08 %}green{% elif states("sensor.aircat_pm25") | int > 40 %}blue{% endif %}'
         brightness: 10
     - condition: time
       after: '06:00'
       before: '23:00'
     - service: miai.say
       data_template:
-        message: '{% set PM25 = states("sensor.aircat_pm25") | int %}{% if PM25 >= 40 %}PM2.5为{{ PM25 }}，空气不好。{% endif %}{% set CO2 = states("sensor.fresher_co2") | int %}{% if CO2 >= 900 %}二氧化碳浓度为{{ CO2 }}，空气很闷。{% endif %}{% set HCHO = states("sensor.aircat_hcho") | float %}{% if HCHO > 0.2 %}甲醛浓度为{{ HCHO }}，注意通风。{% endif %}'
+        message: '客厅{% set PM25 = states("sensor.aircat_pm25") | int %}{% if PM25 >= 40 %}PM2.5为{{ PM25 }}，空气不好。{% endif %}{% set CO2 = states("sensor.fresher_co2") | int %}{% if CO2 >= 900 %}二氧化碳浓度为{{ CO2 }}，空气很闷。{% endif %}{% set HCHO = states("sensor.aircat_hcho") | float %}{% if HCHO > 0.2 %}甲醛浓度为{{ HCHO }}，注意通风。{% endif %}'
 
 - alias: 空气好@室内
   trigger:
