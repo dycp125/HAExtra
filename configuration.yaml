@@ -101,14 +101,21 @@ homekit:
 #     track_new_devices: false
 #     hide_if_away: true
 
-# binary_sensor:
-# - platform: mqtt
-#   device_class: light
-#   state_topic: NodeMCU3/digital
-#   payload_on: 1
-#   payload_off: 0
-#   name: Lightness
-#   availability_topic: NodeMCU3/status
+binary_sensor:
+- platform: mqtt
+  device_class: motion
+  state_topic: NodeMCU6/digital/0
+  payload_on: 1
+  payload_off: 0
+  name: Purifier6 Motion
+  availability_topic: NodeMCU6/status
+- platform: mqtt
+  device_class: light
+  state_topic: NodeMCU6/digital/1
+  payload_on: 1
+  payload_off: 0
+  name: Purifier6 Light
+  availability_topic: NodeMCU6/status
 
 weather:
   - platform: caiyun
@@ -154,6 +161,10 @@ sensor:
     name: Purifier4 CO2
     unit_of_measurement: ppm
     availability_topic: NodeMCU4/status
+  - platform: mqtt
+    state_topic: NodeMCU6/analog
+    name: Purifier6 Lightness
+    availability_topic: NodeMCU6/status
   - platform: mqtt
     device_class: temperature
     state_topic: NodeMCU7/temperature

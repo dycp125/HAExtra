@@ -69,6 +69,7 @@ Passage:
     #- light.studyroom_light2
     - light.passage_backlight
     - switch.station
+    - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
     - input_text.miai
@@ -92,6 +93,9 @@ Bedroom:
     - fan.purifier6
     - fan.bedroom_fan
     - light.bedroom_light
+    - binary_sensor.purifier6_motion
+    - binary_sensor.purifier6_light
+    - sensor.purifier6_lightness
     - sensor.fresher2_temperature
     - sensor.fresher2_humidity
     # - sensor.fresher2_pm25
@@ -112,6 +116,7 @@ Kidsroom:
     ##- fan.fan
     ##- sensor.fan_temperature
     ##- switch.outlet2
+    - binary_sensor.cube_158d0002a66db1
     - sensor.purifier7_temperature
     - sensor.purifier7_humidity
     - sensor.purifier7_pm25
@@ -233,6 +238,7 @@ Balcony:
     #- light.studyroom_light2
     - light.passage_backlight
     - switch.station
+    - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
     - input_text.miai
@@ -258,6 +264,9 @@ Balcony:
     - fan.purifier6
     - fan.bedroom_fan
     - light.bedroom_light
+    - binary_sensor.purifier6_motion
+    - binary_sensor.purifier6_light
+    - sensor.purifier6_lightness
     - sensor.fresher2_temperature
     - sensor.fresher2_humidity
     - sensor.fresher2_pm25
@@ -280,6 +289,7 @@ Balcony:
     - fan.fan
     - sensor.fan_temperature
     - switch.outlet2
+    - binary_sensor.cube_158d0002a66db1
     - sensor.purifier7_temperature
     - sensor.purifier7_humidity
     - sensor.purifier7_pm25

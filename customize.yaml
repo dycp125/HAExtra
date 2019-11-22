@@ -1,3 +1,5 @@
+binary_sensor.cube_158d0002a66db1:
+  friendly_name: 魔方控制器
 binary_sensor.door_window_sensor_158d0001f3d2d1:
   friendly_name: 厨房移门
 binary_sensor.door_window_sensor_158d0001f3e5be:
@@ -12,6 +14,10 @@ binary_sensor.motion_sensor_158d0001d66ce9:
   friendly_name: 过道感应
 binary_sensor.motion_sensor_158d0001f4a238:
   friendly_name: 洗手间感应
+binary_sensor.purifier6_light:
+  friendly_name: 主卧明亮
+binary_sensor.purifier6_motion:
+  friendly_name: 主卧感应
 binary_sensor.switch_158d0001e59b33:
   friendly_name: 过道开关
   hidden: true
@@ -296,6 +302,8 @@ sensor.purifier4_humidity:
 sensor.purifier4_temperature:
   friendly_name: 书房温度
   unit_of_measurement: °C
+sensor.purifier6_lightness:
+  friendly_name: 主卧明度
 sensor.purifier7_co2:
   friendly_name: 儿童房二氧化碳
   icon: mdi:periodic-table-co2
@@ -331,6 +339,8 @@ switch.outlet2:
   friendly_name: 儿童房除湿机
   hagenie_deviceType: dehumidifier
   icon: mdi:power-socket-uk
+switch.plug_158d0003a58422:
+  friendly_name: 米家插座
 switch.projector:
   friendly_name: 投影仪
   hagenie_deviceName: 电视
