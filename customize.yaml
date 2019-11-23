@@ -14,8 +14,8 @@ binary_sensor.motion_sensor_158d0001d66ce9:
   friendly_name: 过道感应
 binary_sensor.motion_sensor_158d0001f4a238:
   friendly_name: 洗手间感应
-binary_sensor.purifier6_light:
-  friendly_name: 主卧明亮
+# binary_sensor.purifier6_light:
+#   friendly_name: 主卧明亮
 binary_sensor.purifier6_motion:
   friendly_name: 主卧感应
 binary_sensor.switch_158d0001e59b33:

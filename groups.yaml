@@ -94,7 +94,7 @@ Bedroom:
     - fan.bedroom_fan
     - light.bedroom_light
     - binary_sensor.purifier6_motion
-    - binary_sensor.purifier6_light
+    # - binary_sensor.purifier6_light
     - sensor.purifier6_lightness
     - sensor.fresher2_temperature
     - sensor.fresher2_humidity
@@ -265,7 +265,7 @@ Balcony:
     - fan.bedroom_fan
     - light.bedroom_light
     - binary_sensor.purifier6_motion
-    - binary_sensor.purifier6_light
+    # - binary_sensor.purifier6_light
     - sensor.purifier6_lightness
     - sensor.fresher2_temperature
     - sensor.fresher2_humidity
