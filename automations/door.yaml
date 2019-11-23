@@ -1,17 +1,104 @@
-# - alias: 入户门开启
-# #   trigger:
-#     platform: state
-#     entity_id: binary_sensor.door_window_sensor_158d0001f3e5be
-#     from: 'off'
-#     to: 'on'
-#   action:
-#   - service: xiaomi_aqara.play_ringtone
-#     data:
-#       gw_mac: 34CE0090901A
-#       ringtone_id: 10001
-#       ringtone_vol:100
+- alias: 入户门关闭
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001f3e5be
+      from: 'on'
+      to: 'off'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: 34CE0090901A
+        ringtone_id: 10001
+        ringtone_vol: 80
 
-#
+- alias: 入户门长时间开启
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001f3e5be
+      from: 'off'
+      to: 'on'
+      for:
+        minutes: 2
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: 34CE0090901A
+        ringtone_id: 10013
+        ringtone_vol: 100
+    - delay: 120
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_158d0001f3e5be
+      state: 'on'
+    - service: automation.trigger
+      entity_id: automation.ru_hu_men_chang_shi_jian_kai_qi
+
+- alias: 阳台空气污染
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+      from: 'off'
+      to: 'on'
+      for:
+        minutes: 2
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0003cf4735
+      from: 'off'
+      to: 'on'
+      for:
+        minutes: 2
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d000228a52b
+      from: 'off'
+      to: 'on'
+      for:
+        minutes: 2
+    - platform: numeric_state
+      entity_id: sensor.balcony_pm25
+      above: 100
+      for:
+        minutes: 5
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.balcony_pm25
+      above: 100
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0003cf4735
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d000228a52b
+          state: 'on'
+  action:
+    # - service: xiaomi_aqara.play_ringtone
+    #   data:
+    #     gw_mac: 34CE0090901A
+    #     ringtone_id: 10015
+    #     ringtone_vol: 100
+    - service: miai.say
+      data_template:
+        message: '阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，空气污染。请关好{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") %}厨房门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") %}洗手间门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}阳台门{% endif %}'
+    - delay: 120
+    - condition: numeric_state
+      entity_id: sensor.balcony_pm25
+      above: 100
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0003cf4735
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d000228a52b
+          state: 'on'
+    - service: automation.trigger
+      entity_id: automation.yang_tai_kong_qi_wu_ran
+
 - alias: 阳台灯感应
   trigger:
     - platform: state
