@@ -24,11 +24,6 @@ turn_on_projector:
         - fan.purifier
         - switch.speaker
         #- switch.station
-    - service: homeassistant.turn_off
-      entity_id:
-        - light.studyroom_light
-        - light.passage_light
-        #- light.airer_light
     - service: fan.set_speed
       data:
         entity_id: fan.purifier
@@ -40,6 +35,12 @@ turn_on_projector:
         packet: 'JgDYAAABJ5QSExITEhMRFBEUERMSExITEhMRFBEUERMSOBE4EhMSExI4ETgSOBE4EhMSExI4ERQRExITEhMSExE4EjgSExE4EgAF='
     - service: automation.turn_on
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
+    - delay: 20
+    - service: homeassistant.turn_off
+      entity_id:
+        - light.studyroom_light
+        - light.passage_light
+        #- light.airer_light
     - condition: numeric_state
       entity_id: sensor.purifier_temperature
       above: 28

@@ -58,76 +58,20 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_pm25
-      above: 40
+      above: 35
       for:
         minutes: 2
-    - platform: numeric_state
-      entity_id: sensor.fresher_co2
-      above: 900
-      for:
-        minutes: 2
-    - platform: numeric_state
-      entity_id: sensor.aircat_hcho
-      above: 0.08
-      for:
-        minutes: 2
-  action:
-    - service: light.turn_on
-      data_template:
-        entity_id: light.gateway_light_34ce0090901a
-        color_name: '{% if states("sensor.fresher_co2") | int > 900 %}red{% elif states("sensor.aircat_hcho") | float > 0.08 %}green{% elif states("sensor.aircat_pm25") | int > 40 %}blue{% endif %}'
-        brightness: 10
+  condition:
     - condition: time
       after: '06:00'
       before: '23:00'
+  action:
     - service: miai.say
       data_template:
-        message: '客厅{% set PM25 = states("sensor.aircat_pm25") | int %}{% if PM25 >= 40 %}PM2.5为{{ PM25 }}，空气不好。{% endif %}{% set CO2 = states("sensor.fresher_co2") | int %}{% if CO2 >= 900 %}二氧化碳浓度为{{ CO2 }}，空气很闷。{% endif %}{% set HCHO = states("sensor.aircat_hcho") | float %}{% if HCHO > 0.2 %}甲醛浓度为{{ HCHO }}，注意通风。{% endif %}'
+        message: '客厅PM2.5为{{ states("sensor.aircat_pm25") }}，空气不好。{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") or is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") or is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}请关好{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") %}厨房门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") %}洗手间门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}阳台门{% endif %}{% endif %}'
     - delay: 600
-    - condition: or
-      conditions:
-        - condition: numeric_state
-          entity_id: sensor.aircat_pm25
-          above: 40
-        - platform: numeric_state
-          entity_id: sensor.fresher_co2
-          above: 1000
-        - platform: numeric_state
-          entity_id: sensor.aircat_hcho
-          above: 0.1
+    - condition: numeric_state
+      entity_id: sensor.aircat_pm25
+      above: 40
     - service: automation.trigger
       entity_id: automation.kong_qi_chai_shi_nei
-
-- alias: 空气好@室内
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.aircat_pm25
-      below: 40
-    - platform: numeric_state
-      entity_id: sensor.fresher_co2
-      below: 900
-    - platform: numeric_state
-      entity_id: sensor.fresher2_co2
-      below: 1000
-    - platform: numeric_state
-      entity_id: sensor.aircat_hcho
-      below: 0.08
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.aircat_pm25
-      below: 40
-    - condition: numeric_state
-      entity_id: sensor.fresher_co2
-      below: 900
-    - condition: numeric_state
-      entity_id: sensor.fresher2_co2
-      below: 1000
-    - condition: numeric_state
-      entity_id: sensor.aircat_hcho
-      below: 0.08
-    - condition: state
-      entity_id: light.gateway_light_34ce0090901a
-      state: 'on'
-  action:
-    - service: light.turn_off
-      entity_id: light.gateway_light_34ce0090901a
