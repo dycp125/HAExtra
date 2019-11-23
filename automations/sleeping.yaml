@@ -13,10 +13,10 @@
       data:
         entity_id: fan.fresher2
         brightness: 2
-    - service: fan.set_speed
-      data:
-        entity_id: fan.purifier
-        speed: Silent
+    # - service: fan.set_speed
+    #   data:
+    #     entity_id: fan.purifier
+    #     speed: Silent
     - service: miai.set_vol
       data:
         vol: 25
