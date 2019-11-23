@@ -58,6 +58,9 @@
       for:
         minutes: 5
   condition:
+    - condition: time
+      after: '06:00'
+      before: '23:00'
     - condition: numeric_state
       entity_id: sensor.balcony_pm25
       above: 100
@@ -81,7 +84,7 @@
     - service: miai.say
       data_template:
         message: '阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，空气污染。请关好{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") %}厨房门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") %}洗手间门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}阳台门{% endif %}'
-    - delay: 120
+    - delay: 300
     - condition: numeric_state
       entity_id: sensor.balcony_pm25
       above: 100

@@ -1,11 +1,11 @@
 binary_sensor.cube_158d0002a66db1:
   friendly_name: 魔方控制器
 binary_sensor.door_window_sensor_158d0001f3d2d1:
-  friendly_name: 厨房移门
+  friendly_name: 厨房门
 binary_sensor.door_window_sensor_158d0001f3e5be:
   friendly_name: 入户门
 binary_sensor.door_window_sensor_158d000228a52b:
-  friendly_name: 阳台移门
+  friendly_name: 阳台门
 binary_sensor.door_window_sensor_158d0003cf4735:
   friendly_name: 洗手间门
 binary_sensor.lightness:

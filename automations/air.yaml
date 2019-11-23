@@ -83,6 +83,20 @@
     - service: miai.say
       data_template:
         message: '客厅{% set PM25 = states("sensor.aircat_pm25") | int %}{% if PM25 >= 40 %}PM2.5为{{ PM25 }}，空气不好。{% endif %}{% set CO2 = states("sensor.fresher_co2") | int %}{% if CO2 >= 900 %}二氧化碳浓度为{{ CO2 }}，空气很闷。{% endif %}{% set HCHO = states("sensor.aircat_hcho") | float %}{% if HCHO > 0.2 %}甲醛浓度为{{ HCHO }}，注意通风。{% endif %}'
+    - delay: 600
+    - condition: or
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.aircat_pm25
+          above: 40
+        - platform: numeric_state
+          entity_id: sensor.fresher_co2
+          above: 1000
+        - platform: numeric_state
+          entity_id: sensor.aircat_hcho
+          above: 0.1
+    - service: automation.trigger
+      entity_id: automation.kong_qi_chai_shi_nei
 
 - alias: 空气好@室内
   trigger:
