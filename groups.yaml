@@ -258,7 +258,7 @@ Balcony:
 主卧:
   view: yes
   entities:
-    - media_player.x9300d
+    - switch.x9300d
     - climate.daikin3
     - fan.fresher2
     - fan.purifier6

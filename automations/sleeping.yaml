@@ -19,7 +19,7 @@
     #     speed: Silent
     - service: miai.set_vol
       data:
-        vol: 25
+        vol: 30
     - service: climate.set_temperature
       data:
         entity_id: climate.daikin3
@@ -71,7 +71,7 @@
         brightness: 0
     - service: miai.set_vol
       data:
-        vol: 55
+        vol: 60
     - service: climate.set_fan_mode
       data:
         entity_id: climate.daikin3

@@ -66,6 +66,7 @@ homekit:
       - script
       - automation
       - input_boolean
+      - device_tracker
     exclude_entities:
       - light.studyroom_light2
       - light.studyroom_light3
@@ -84,38 +85,42 @@ homekit:
     switch.outlet2:
       type: outlet
     media_player.x9300d:
-      feature_list:
-        - feature: on_off
+     feature_list:
+       - feature: on_off
     media_player.x9400e:
       feature_list:
         - feature: on_off
 
-#TODO
-# device_tracker:
-# - platform: asuswrt
+# asuswrt:
 #   host: Router
 #   username: admin
 #   password: !secret http_password
-#   interval_seconds: 120
-#   new_device_defaults:
-#     track_new_devices: false
-#     hide_if_away: true
+
+# device_tracker:
+  # - platform: asuswrt
+  #   interval_seconds: 120
+  #   new_device_defaults:
+  #     track_new_devices: false
+  #     hide_if_away: true
+  # - platform: ping
+  #   hosts:
+  #     x9300d: 192.168.1.7
 
 binary_sensor:
-- platform: mqtt
-  device_class: motion
-  state_topic: NodeMCU6/digital/0
-  payload_on: 1
-  payload_off: 0
-  name: Purifier6 Motion
-  availability_topic: NodeMCU6/status
-# - platform: mqtt
-#   device_class: light
-#   state_topic: NodeMCU6/digital/1
-#   payload_on: 1
-#   payload_off: 0
-#   name: Purifier6 Light
-#   availability_topic: NodeMCU6/status
+  - platform: mqtt
+    device_class: motion
+    state_topic: NodeMCU6/digital/0
+    payload_on: 1
+    payload_off: 0
+    name: Purifier6 Motion
+    availability_topic: NodeMCU6/status
+  # - platform: mqtt
+  #   device_class: light
+  #   state_topic: NodeMCU6/digital/1
+  #   payload_on: 1
+  #   payload_off: 0
+  #   name: Purifier6 Light
+  #   availability_topic: NodeMCU6/status
 
 weather:
   - platform: caiyun
@@ -291,7 +296,6 @@ sensor:
         value_template: '{% set mode = state_attr("fan.purifier7", "speed") %}{% if is_state("fan.purifier7", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
 
 switch:
-  #TODO
   - platform: wake_on_lan
     name: Station
     mac_address: 00-11-32-6B-75-F7
@@ -346,6 +350,16 @@ switch:
           service: script.turn_on_projector
         turn_off:
           service: script.turn_off_projector
+      # x9300d:
+      #   friendly_name: X9300d
+      #   value_template: '{{ is_state("device_tracker.x9300d", "home") }}'
+      #   turn_on:
+      #     service: mqtt.publish
+      #     data:
+      #       topic: NodeMCU6/irout/set
+      #       payload: '2416,592,1210,594,608,618,1186,616,586,592,1210,618,584,618,586,616,1186,618,584,618,584,616,586,592,608,1,2,38'
+      #   turn_off:
+      #     service: shell_command.turn_off_x9300d
 
 yeelight:
   devices:
@@ -465,6 +479,7 @@ light:
 shell_command:
   turn_off_station: 'ssh root@Station shutdown -h now'
   turn_off_x9300d: 'adb connect x9300d; adb -s x9300d shell reboot -p'
+  turn_off_x9400d: 'adb connect x9400e; adb -s x9400e shell reboot -p'
 
 xiaomi_aqara:
   #interface: 192.168.2.40
@@ -611,9 +626,9 @@ cover:
         command_close: 'sgD8AJ0xGAwMGBcNFw0XDQsYGAwYDAwZFwwMGAwYDBgXDQwXDBkMGBcNCxkXDBgMDBkMGAwYGAwMGBcNFw0MGAsZCxgYDQsYDBgXDRcNDBgMGBcNFwABIZ4xFw0MGBcNFwwYDA0YGAwYDAwYGAwMGAwYDBgXDQsYDBgMGBgMDBgXDRcNDBgMGAwYFw0MGBcMGAwMGAwYDBgXDQwYDBgXDRcMDBgMGBgMFwABI50yFw0LGBgMGAwXDQwYFw0XDQwYFw0MGAwYDBcYDAwYDBgMGBgMDBgXDRcNCxkLGAwYGA4MFxgMGAwMGAwYDBgXDQwYDBgXDBgNCxgMGBcNFwAF3AAAAAAAAAAAAAAAAA=='
 
 media_player:
-  - platform: braviatv
-    host: X9300d
-    name: X9300d
+  # - platform: braviatv
+  #   host: X9300d
+  #   name: X9300d
   - platform: braviatv
     host: X9400e
     name: X9400e
