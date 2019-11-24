@@ -8,7 +8,7 @@
   action:
     - service: miai.say
       data_template:
-        message: '阳台PM2.5为{{ states("sensor.balcony_pm25") }}，餐厅PM2.5为{{ states("sensor.aircat_pm25") }}，主卧PM2.5为{{ states("sensor.fresher2_pm25") }}。客厅二氧化碳浓度为{{ states("sensor.fresher_co2") }}，主卧二氧化碳浓度为{{ states("sensor.fresher2_co2") }}，儿童房二氧化碳浓度为{{ states("sensor.purifier7_co2") }}'
+        message: '阳台PM2.5为{{ states("sensor.balcony_pm25") }}，餐厅PM2.5为{{ states("sensor.aircat_pm25") }}，主卧PM2.5为{{ states("sensor.fresher2_pm25") }}。客厅二氧化碳浓度为{{ states("sensor.fresher_co2") }}，主卧二氧化碳浓度为{{ states("sensor.fresher2_co2") }}，儿童房二氧化碳浓度为{{ states("sensor.nodemcu7_co2") }}'
 
 - alias: 按钮@过道双击—启用烘干
   trigger:

@@ -48,11 +48,11 @@
 - alias: 调节净化器@儿童房
   trigger:
     - platform: state
-      entity_id: sensor.purifier7_pm25
+      entity_id: sensor.nodemcu7_pm25
   action:
     - service: actuator.actuate
       data:
-        sensor_id: sensor.purifier7_pm25
+        sensor_id: sensor.nodemcu7_pm25
         sensor_values: [10, 20, 50]
         alt_sensor_values: [7, 30, 50]
         entity_id: fan.purifier7

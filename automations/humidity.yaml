@@ -23,7 +23,7 @@
 - alias: 除湿机开@卧室
   trigger:
     - platform: numeric_state
-      entity_id: sensor.purifier7_humidity
+      entity_id: sensor.nodemcu7_humidity
       above: 75
       for:
         minutes: 10
@@ -38,7 +38,7 @@
 - alias: 除湿机关@卧室
   trigger:
     - platform: numeric_state
-      entity_id: sensor.purifier7_humidity
+      entity_id: sensor.nodemcu7_humidity
       below: 72
       for:
         minutes: 10
@@ -81,7 +81,7 @@
 # - alias: 加湿器开@儿童房
 #   trigger:
 #     - platform: numeric_state
-#       entity_id: sensor.purifier7_humidity
+#       entity_id: sensor.nodemcu7_humidity
 #       below: 52
 #       for:
 #         minutes: 10

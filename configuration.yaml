@@ -112,8 +112,15 @@ binary_sensor:
     state_topic: NodeMCU6/digital/0
     payload_on: 1
     payload_off: 0
-    name: Purifier6 Motion
+    name: NodeMCU6 Motion
     availability_topic: NodeMCU6/status
+  - platform: mqtt
+    device_class: motion
+    state_topic: NodeMCU3/digital/0
+    payload_on: 1
+    payload_off: 0
+    name: NodeMCU3 Motion
+    availability_topic: NodeMCU3/status
   # - platform: mqtt
   #   device_class: light
   #   state_topic: NodeMCU6/digital/1
@@ -151,50 +158,50 @@ sensor:
     availability_topic: NodeMCU2/status
   - platform: mqtt
     device_class: temperature
-    state_topic: NodeMCU4/temperature
-    name: Purifier4 Temperature
+    state_topic: NodeMCU3/temperature
+    name: NodeMCU3 Temperature
     unit_of_measurement: °C
-    availability_topic: NodeMCU4/status
+    availability_topic: NodeMCU3/status
   - platform: mqtt
     device_class: humidity
-    state_topic: NodeMCU4/humidity
-    name: Purifier4 Humidity
+    state_topic: NodeMCU3/humidity
+    name: NodeMCU3 Humidity
     unit_of_measurement: '%'
-    availability_topic: NodeMCU4/status
+    availability_topic: NodeMCU3/status
   - platform: mqtt
-    state_topic: NodeMCU4/co2
-    name: Purifier4 CO2
+    state_topic: NodeMCU3/co2
+    name: NodeMCU3 CO2
     unit_of_measurement: ppm
-    availability_topic: NodeMCU4/status
+    availability_topic: NodeMCU3/status
   - platform: mqtt
     state_topic: NodeMCU6/analog
-    name: Purifier6 Lightness
+    name: NodeMCU6 Lightness
     availability_topic: NodeMCU6/status
   - platform: mqtt
     device_class: temperature
     state_topic: NodeMCU7/temperature
-    name: Purifier7 Temperature
+    name: NodeMCU7 Temperature
     unit_of_measurement: °C
     availability_topic: NodeMCU7/status
   - platform: mqtt
     device_class: humidity
     state_topic: NodeMCU7/humidity
-    name: Purifier7 Humidity
+    name: NodeMCU7 Humidity
     unit_of_measurement: '%'
     availability_topic: NodeMCU7/status
   - platform: mqtt
     state_topic: NodeMCU7/pm2dot5
-    name: Purifier7 PM25
+    name: NodeMCU7 PM25
     unit_of_measurement: μg/m³
     availability_topic: NodeMCU7/status
   - platform: mqtt
     state_topic: NodeMCU7/co2
-    name: Purifier7 CO2
+    name: NodeMCU7 CO2
     unit_of_measurement: ppm
     availability_topic: NodeMCU7/status
   - platform: mqtt
     state_topic: NodeMCU7/hcho
-    name: Purifier7 HCHO
+    name: NodeMCU7 HCHO
     unit_of_measurement: mg/m³
     availability_topic: NodeMCU7/status
   # - platform: phicomm
@@ -609,7 +616,7 @@ climate:
     name: Mitsubishi
     device_code: 1120
     controller_data: Remote
-    temperature_sensor: sensor.purifier4_temperature
+    temperature_sensor: sensor.nodemcu3_temperature
     humidity_sensor: sensor.aircat2_humidity
     #power_sensor: binary_sensor.ac_power
 

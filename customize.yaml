@@ -14,9 +14,9 @@ binary_sensor.motion_sensor_158d0001d66ce9:
   friendly_name: 过道感应
 binary_sensor.motion_sensor_158d0001f4a238:
   friendly_name: 洗手间感应
-# binary_sensor.purifier6_light:
-#   friendly_name: 主卧明亮
-binary_sensor.purifier6_motion:
+binary_sensor.nodemcu3_motion:
+  friendly_name: 书房感应
+binary_sensor.nodemcu6_motion:
   friendly_name: 主卧感应
 binary_sensor.switch_158d0001e59b33:
   friendly_name: 过道开关
@@ -86,7 +86,7 @@ fan.purifier6:
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.purifier7:
-  dash_icon: ${sensor.purifier7_pm25}
+  dash_icon: ${sensor.nodemcu7_pm25}
   friendly_name: 儿童房净化器
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
@@ -288,30 +288,30 @@ sensor.fresher_temperature:
   friendly_name: 客厅温度
 sensor.illumination_34ce0090901a:
   friendly_name: 餐厅亮度
-sensor.purifier4_co2:
+sensor.nodemcu3_co2:
   friendly_name: 书房二氧化碳
   icon: mdi:periodic-table-co2
-sensor.purifier4_humidity:
+sensor.nodemcu3_humidity:
   friendly_name: 书房湿度
-sensor.purifier4_temperature:
+sensor.nodemcu3_temperature:
   friendly_name: 书房温度
   unit_of_measurement: °C
-sensor.purifier6_lightness:
+sensor.nodemcu6_lightness:
   friendly_name: 主卧明度
-sensor.purifier7_co2:
+sensor.nodemcu7_co2:
   friendly_name: 儿童房二氧化碳
   icon: mdi:periodic-table-co2
-sensor.purifier7_hcho:
+sensor.nodemcu7_hcho:
   friendly_name: 儿童房甲醛
   icon: mdi:biohazard
-sensor.purifier7_humidity:
+sensor.nodemcu7_humidity:
   friendly_name: 儿童房湿度
-sensor.purifier7_pm25:
+sensor.nodemcu7_pm25:
   dash_click: https://www.lewei50.com/u/g/33981
   dash_relation: fan.purifier7
   friendly_name: 儿童房颗粒物
   icon: mdi:blur
-sensor.purifier7_temperature:
+sensor.nodemcu7_temperature:
   friendly_name: 儿童房温度
 sensor.purifier_humidity:
   friendly_name: 次卧湿度
