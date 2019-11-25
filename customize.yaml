@@ -36,11 +36,9 @@ climate.mitsubishi:
   friendly_name: 书房空调
 climate.saswell:
   friendly_name: 客厅地暖
-  hagenie_deviceName: 取暖器
   hagenie_deviceType: heater
 climate.saswell2:
   friendly_name: 餐厅地暖
-  hagenie_deviceName: 取暖器
   hagenie_deviceType: heater
 cover.airer:
   friendly_name: 晾衣架
@@ -50,6 +48,8 @@ cover.studyroom_cover:
   friendly_name: 书房窗帘
 customizer.customizer:
   friendly_name: 定制界面
+device_tracker.x9300d:
+  friendly_name: 主卧电视
 fan.bedroom_fan:
   friendly_name: 主卧壁扇
 fan.fan:
@@ -358,6 +358,9 @@ switch.washroom_fan:
   hagenie_deviceName: 顶扇
   hagenie_deviceType: fan
   icon: mdi:fan
+switch.x9300d:
+  friendly_name: 主卧电视盒子
+  hagenie_deviceType: STB
 updater.updater:
   friendly_name: 有更新
 vacuum.vacuum:

@@ -87,6 +87,7 @@ Washroom:
 
 Bedroom:
   entities:
+    - switch.x9300d
     - media_player.x9300d
     - climate.daikin3
     - fan.fresher2
@@ -260,6 +261,7 @@ Balcony:
   view: yes
   entities:
     - switch.x9300d
+    - media_player.x9300d
     - climate.daikin3
     - fan.fresher2
     - fan.purifier6
