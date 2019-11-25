@@ -116,7 +116,7 @@ binary_sensor:
     availability_topic: NodeMCU6/status
   - platform: mqtt
     device_class: motion
-    state_topic: NodeMCU3/digital/0
+    state_topic: NodeMCU3/digital
     payload_on: 1
     payload_off: 0
     name: NodeMCU3 Motion
@@ -633,9 +633,9 @@ cover:
         command_close: 'sgD8AJ0xGAwMGBcNFw0XDQsYGAwYDAwZFwwMGAwYDBgXDQwXDBkMGBcNCxkXDBgMDBkMGAwYGAwMGBcNFw0MGAsZCxgYDQsYDBgXDRcNDBgMGBcNFwABIZ4xFw0MGBcNFwwYDA0YGAwYDAwYGAwMGAwYDBgXDQsYDBgMGBgMDBgXDRcNDBgMGAwYFw0MGBcMGAwMGAwYDBgXDQwYDBgXDRcMDBgMGBgMFwABI50yFw0LGBgMGAwXDQwYFw0XDQwYFw0MGAwYDBcYDAwYDBgMGBgMDBgXDRcNCxkLGAwYGA4MFxgMGAwMGAwYDBgXDQwYDBgXDBgNCxgMGBcNFwAF3AAAAAAAAAAAAAAAAA=='
 
 media_player:
-  # - platform: braviatv
-  #   host: X9300d
-  #   name: X9300d
+  - platform: braviatv
+    host: X9300d
+    name: X9300d
   - platform: braviatv
     host: X9400e
     name: X9400e
