@@ -365,7 +365,7 @@ updater.updater:
   friendly_name: 有更新
 vacuum.vacuum:
   dash_extra: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger disconnected"
-    ? "充电断开" : "${status}")'
+    ? "充电断开" : ("${status}"=="Cleaning" ? "清扫中" : "${status}"))'
   dash_extra_forced: true
   friendly_name: 扫地机
 weather.caiyun:

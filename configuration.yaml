@@ -18,6 +18,8 @@ system_health:
 
 frontend:
 
+mobile_app:
+
 config:
 
 http:
@@ -272,12 +274,12 @@ sensor:
         friendly_name: 书房空调模式
         value_template: '{% set mode = state_attr("climate.mitsubishi", "fan_mode") %}{% if is_state("climate.mitsubishi", "off") %}off{% elif mode == "low" %}一{% elif mode == "mid" %}二{% elif mode == "high" %}三{% elif mode == "highest" %}四{% else %}{{ mode }}{% endif %}'
 
-      fan_mode:
-        friendly_name: 儿童房风扇模式
-        value_template: '{% set mode = state_attr("fan.fan", "speed_level") %}{% if is_state("fan.fan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
-      fan2_mode:
-        friendly_name: 书房风扇模式
-        value_template: '{% set mode = state_attr("fan.fan2", "speed_level") %}{% if is_state("fan.fan2", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+      # fan_mode:
+      #   friendly_name: 儿童房风扇模式
+      #   value_template: '{% set mode = state_attr("fan.fan", "speed_level") %}{% if is_state("fan.fan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+      # fan2_mode:
+      #   friendly_name: 书房风扇模式
+      #   value_template: '{% set mode = state_attr("fan.fan2", "speed_level") %}{% if is_state("fan.fan2", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
 
       fresher_mode:
         friendly_name: 客厅新风机模式
@@ -289,9 +291,9 @@ sensor:
       purifier_mode:
         friendly_name: 次卧净化器模式
         value_template: '{% set mode = state_attr("fan.purifier", "speed") %}{% if is_state("fan.purifier", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Favorite" %}{{ state_attr("fan.purifier", "favorite_level") }}{% else %}{{ mode }}{% endif %}'
-      purifier4_mode:
-        friendly_name: 书房净化器模式
-        value_template: '{% set mode = state_attr("fan.purifier4", "speed") %}{% if is_state("fan.purifier4", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      # purifier4_mode:
+      #   friendly_name: 书房净化器模式
+      #   value_template: '{% set mode = state_attr("fan.purifier4", "speed") %}{% if is_state("fan.purifier4", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
       purifier5_mode:
         friendly_name: 餐厅净化器模式
         value_template: '{% set mode = state_attr("fan.purifier5", "speed") %}{% if is_state("fan.purifier5", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
