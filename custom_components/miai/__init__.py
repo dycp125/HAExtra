@@ -128,9 +128,6 @@ class xiaomi_tts:
                 elif self._serviceLoginAuth2_json['code']==70016:
                     _LOGGER.error('incorrect password')
 
-
-
-
     def _get_sign(self):
         url = 'https://account.xiaomi.com/pass/serviceLogin?sid=micoapi'
         pattern = re.compile(r'_sign":"(.*?)",')
@@ -142,7 +139,6 @@ class xiaomi_tts:
         except BaseException as e:
             _LOGGER.warning(e)
             return False
-
 
     def _serviceLoginAuth2(self,captCode=None):
         url='https://account.xiaomi.com/pass/serviceLoginAuth2'
@@ -205,7 +201,6 @@ class xiaomi_tts:
         except BaseException as e :
             _LOGGER.warning(e)
             return False
-
 
     def _text_to_speech(self,text,tts_cookie,deviceIds_miai,num=0):
         try:
