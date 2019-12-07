@@ -359,8 +359,7 @@ switch.washroom_fan:
   hagenie_deviceType: fan
   icon: mdi:fan
 switch.x9300d:
-  friendly_name: 主卧电视盒子
-  hagenie_deviceType: STB
+  friendly_name: 主卧电视电源
 updater.updater:
   friendly_name: 有更新
 vacuum.vacuum:

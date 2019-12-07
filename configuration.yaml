@@ -527,7 +527,7 @@ fan:
     name: Fresher2
     host: Fresher2
     model: zhimi.airfresh.va2
-    token: 17487f22521cf634c50b64f5f95c96cb
+    token: 5fd8be12c63cc876ca5884ea00265a1e
   - platform: mqtt
     name: Purifier4
     state_topic: NodeMCU4/relay/0
