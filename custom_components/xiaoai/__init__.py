@@ -11,8 +11,8 @@ from homeassistant.helpers.state import AsyncTrackStates
 
 _LOGGER = logging.getLogger(__name__)
 
-MAIN = 'miai'
-DOMAIN = 'miai'
+MAIN = 'xiaoai'
+DOMAIN = 'xiaoai'
 EXPIRE_HOURS = 168  # 7天过期
 _hass = None
 

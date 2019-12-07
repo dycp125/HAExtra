@@ -662,9 +662,11 @@ panel_iframe:
     icon: mdi:chart-areaspline
     url: !secret nodemcu2_url
 
+actuator:
+
 aligenie:
 
-actuator:
+xiaoai:
 
 miai:
   miid: !secret miai_miid
