@@ -11,7 +11,6 @@ from homeassistant.helpers.state import AsyncTrackStates
 
 _LOGGER = logging.getLogger(__name__)
 
-MAIN = 'xiaoai'
 DOMAIN = 'xiaoai'
 EXPIRE_HOURS = 168  # 7天过期
 _hass = None
@@ -57,8 +56,8 @@ async def async_setup(hass, config):
 class MiAiView(HomeAssistantView):
     """View to handle Configuration requests."""
 
-    url = '/miai'
-    name = 'miai'
+    url = '/' + DOMAIN
+    name = DOMAIN
     requires_auth = False
 
     async def post(self, request):
