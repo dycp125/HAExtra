@@ -48,47 +48,110 @@
     - service: switch.turn_off
       entity_id: switch.outlet2
 
-# - alias: 加湿器开@餐厅
-#   trigger:
-#     - platform: numeric_state
-#       entity_id: sensor.purifier5_humidity
-#       below: 52
-#       for:
-#         minutes: 10
-#   action:
-#     - service: fan.turn_on
-#       entity_id: fan.purifier5
-#     - service: fan.oscillate
-#       data:
-#         entity_id: fan.purifier5
-#         oscillating: true
+- alias: 加湿器开@餐厅
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.aircat_humidity
+      below: 55
+      for:
+        minutes: 10
+  action:
+    - service: automation.turn_off
+      entity_id: automation.diao_jie_jing_hua_qi_can_ting
+    - service: fan.turn_on
+      entity_id: fan.purifier5
+    - service: fan.oscillate
+      data:
+        entity_id: fan.purifier5
+        oscillating: true
+    - service: fan.set_speed
+      data:
+        entity_id: fan.purifier5
+        speed: low
 
-# - alias: 加湿器开@主卧
-#   trigger:
-#     - platform: numeric_state
-#       entity_id: sensor.fresher2_humidity
-#       below: 52
-#       for:
-#         minutes: 10
-#   action:
-#     - service: fan.turn_on
-#       entity_id: fan.purifier7
-#     - service: fan.oscillate
-#       data:
-#         entity_id: fan.purifier7
-#         oscillating: true
+- alias: 加湿器关@餐厅
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.aircat_humidity
+      above: 60
+      for:
+        minutes: 10
+  action:
+    - service: fan.oscillate
+      data:
+        entity_id: fan.purifier5
+        oscillating: false
+    - service: automation.turn_on
+      entity_id: automation.diao_jie_jing_hua_qi_can_ting
 
-# - alias: 加湿器开@儿童房
-#   trigger:
-#     - platform: numeric_state
-#       entity_id: sensor.nodemcu7_humidity
-#       below: 52
-#       for:
-#         minutes: 10
-#   action:
-#     - service: fan.turn_on
-#       entity_id: fan.purifier7
-#     - service: fan.oscillate
-#       data:
-#         entity_id: fan.purifier7
-#         oscillating: true
+- alias: 加湿器开@主卧
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.fresher2_humidity
+      below: 55
+      for:
+        minutes: 10
+  action:
+    - service: automation.turn_off
+      entity_id: automation.diao_jie_jing_hua_qi_zhu_wo
+    - service: fan.turn_on
+      entity_id: fan.purifier6
+    - service: fan.oscillate
+      data:
+        entity_id: fan.purifier6
+        oscillating: true
+    - service: fan.set_speed
+      data:
+        entity_id: fan.purifier6
+        speed: low
+
+- alias: 加湿器关@主卧
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.fresher2_humidity
+      above: 60
+      for:
+        minutes: 10
+  action:
+    - service: fan.oscillate
+      data:
+        entity_id: fan.purifier6
+        oscillating: false
+    - service: automation.turn_on
+      entity_id: automation.diao_jie_jing_hua_qi_zhu_wo
+
+- alias: 加湿器开@儿童房
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.nodemcu7_humidity
+      below: 55
+      for:
+        minutes: 10
+  action:
+    - service: automation.turn_off
+      entity_id: automation.diao_jie_jing_hua_qi_er_tong_fang
+    - service: fan.turn_on
+      entity_id: fan.purifier7
+    - service: fan.oscillate
+      data:
+        entity_id: fan.purifier7
+        oscillating: true
+    - service: fan.set_speed
+      data:
+        entity_id: fan.purifier7
+        speed: low
+        
+- alias: 加湿器关@儿童房
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.nodemcu7_humidity
+      above: 60
+      for:
+        minutes: 10
+  action:
+    - service: fan.oscillate
+      data:
+        entity_id: fan.purifier7
+        oscillating: false
+    - service: automation.turn_on
+      entity_id: automation.diao_jie_jing_hua_qi_er_tong_fang

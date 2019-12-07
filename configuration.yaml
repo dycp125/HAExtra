@@ -554,6 +554,8 @@ fan:
     payload_low_speed: '1'
     payload_medium_speed: '5'
     payload_high_speed: '4'
+    payload_oscillation_on: '1'
+    payload_oscillation_off: '0'
   - platform: mqtt
     name: Purifier6
     state_topic: NodeMCU6/relay/0
@@ -567,6 +569,8 @@ fan:
     payload_low_speed: '1'
     payload_medium_speed: '5'
     payload_high_speed: '6'
+    payload_oscillation_on: '1'
+    payload_oscillation_off: '0'
   - platform: mqtt
     name: Purifier7
     state_topic: NodeMCU7/relay/0
@@ -580,6 +584,8 @@ fan:
     payload_low_speed: '1'
     payload_medium_speed: '5'
     payload_high_speed: '6'
+    payload_oscillation_on: '1'
+    payload_oscillation_off: '0'
   - platform: mqtt
     name: Bedroom Fan
     availability_topic: NodeMCU6/status
@@ -646,7 +652,7 @@ panel_iframe:
   dash:
     title: 面板
     icon: mdi:microsoft
-    url: /local/dash.html
+    url: !secret dash_url
   nodemcu:
     title: 室内
     icon: mdi:chart-line
@@ -668,3 +674,10 @@ input_text:
   miai:
     name: MiAI
     initial: 我是小爱
+
+notify:
+  - name: mobile_app
+    platform: group
+    services:
+      - service: mobile_app_zphone
+      - service: mobile_app_yphone
