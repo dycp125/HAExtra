@@ -29,9 +29,6 @@
   trigger:
     - platform: state
       entity_id: sensor.purifier_pm25
-  condition:
-    - condition: template
-      value_template: '{{ is_state_attr("fan.purifier", "mode", "favorite") }}'
   action:
     - service: actuator.actuate
       data:
@@ -44,6 +41,8 @@
         service_attr: level
         entity_values: [3, 6, 9, 10]
         delay: 300
+        condition_attr: mode
+        condition_values: [favorite]
 
 - alias: 调节净化器@儿童房
   trigger:

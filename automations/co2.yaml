@@ -2,9 +2,6 @@
   trigger:
     - platform: state
       entity_id: sensor.fresher_co2
-  condition:
-    - condition: template
-      value_template: '{{ is_state_attr("fan.fresher", "mode", "low") or is_state_attr("fan.fresher", "mode", "middle") or is_state_attr("fan.fresher", "mode", "strong") }}'
   action:
     - service: actuator.actuate
       data:
@@ -13,20 +10,21 @@
         entity_id: fan.fresher
         entity_attr: speed
         entity_values: [Low, Middle, Strong]
+        condition_attr: mode
+        condition_values: [low, middle, strong]
 
 - alias: 调节新风@主卧
   trigger:
     - platform: state
       entity_id: sensor.fresher2_co2
-  condition:
-    - condition: template
-      value_template: '{{ is_state_attr("fan.fresher2", "mode", "low") or is_state_attr("fan.fresher2", "mode", "middle") or is_state_attr("fan.fresher2", "mode", "strong") }}'
   action:
     - service: actuator.actuate
       data:
         sensor_id: sensor.fresher2_co2
-        sensor_values: [500, 730, 800]
-        alt_sensor_values: [550, 800, 1500]
+        sensor_values: [500, 750, 900]
+        alt_sensor_values: [550, 900, 1500]
         entity_id: fan.fresher2
         entity_attr: speed
         entity_values: [Low, Middle, Strong]
+        condition_attr: mode
+        condition_values: [low, middle, strong]

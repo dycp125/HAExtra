@@ -21,6 +21,8 @@ ACTUATE_SCHEMA = vol.Schema({
     vol.Optional('service'): cv.string,
     vol.Optional('service_attr'): cv.string,
     vol.Required('entity_values'): list,
+    vol.Optional('condition_attr'): cv.string,
+    vol.Optional('condition_values'): list,
     vol.Optional('delay'): int,
 })
 
@@ -28,6 +30,30 @@ _hass = None
 _executors = {}
 
 def execute(params):
+    # Get entity state
+    entity_id = params.get('entity_id')
+    domain = entity_id[:entity_id.find('.')]
+
+    state = _hass.states.get(entity_id)
+    if state is None:
+        _LOGGER.error("Entity %s error", sensor_id)
+        return
+    state_value = state.state
+    state_attributes = state.attributes
+
+    # Check condition
+    condition_attr = params.get('condition_attr')
+    if condition_attr is not None:
+        condition_value = state_value if condition_attr == 'STATE' else state_attributes.get(condition_attr)
+        if condition_value is None:
+            #_LOGGER.debug('Check condition: condition_value is None')
+            return
+        condition_values = params.get('condition_values')
+        if condition_values is not None and condition_value not in condition_values:
+            #_LOGGER.debug('Check condition: %s not in %s', condition_value, condition_values)
+            return
+
+    # Get sensor state
     sensor_id = params.get('sensor_id')
     sensor_attr = params.get('sensor_attr')
 
@@ -51,26 +77,20 @@ def execute(params):
         _LOGGER.error("Sensor %s %s error", sensor_id, sensor_attr or '')
         return
 
+    # Log prefix
     sensor_log = sensor_attributes.get('friendly_name')
     if sensor_attr:
          sensor_log += '.' + sensor_attr
     sensor_log += '=' + str(sensor_value)
 
-    entity_id = params.get('entity_id')
+    # Action params
     entity_attr = params.get('entity_attr')
     service_attr = params.get('service_attr') or entity_attr
     service = params.get('service') or 'set_' + service_attr
     entity_values = params.get('entity_values')
-    domain = entity_id[:entity_id.find('.')]
-
-    state = _hass.states.get(entity_id)
-    if state is None:
-        _LOGGER.error("Entity %s error", sensor_id)
-        return
-    state_value = state.state
-    state_attributes = state.attributes
     entity_log = state_attributes.get('friendly_name')
 
+    # Check sensor range
     i = len(sensor_values) - 1
     while i >= 0:
         if sensor_number >= sensor_values[i]:
@@ -97,11 +117,13 @@ def execute(params):
         else:
             i = i - 1
 
+    # Turn off
     sensor_log += '<' + str(sensor_values[0])
     if state_value == 'off':
         _LOGGER.debug('%s, %s=off', sensor_log, entity_log)
         return
 
+    # Log
     _LOGGER.warn('%s, %s=%s, ⇒off', sensor_log, entity_log, state_value)
     _hass.services.call(domain, 'turn_off', {'entity_id': entity_id}, True)
 
