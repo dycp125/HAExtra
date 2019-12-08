@@ -554,8 +554,8 @@ fan:
     payload_low_speed: '1'
     payload_medium_speed: '5'
     payload_high_speed: '4'
-    payload_oscillation_on: '1'
-    payload_oscillation_off: '0'
+    payload_oscillation_on: 'ON'
+    payload_oscillation_off: 'OFF'
   - platform: mqtt
     name: Purifier6
     state_topic: NodeMCU6/relay/0
@@ -569,8 +569,8 @@ fan:
     payload_low_speed: '1'
     payload_medium_speed: '5'
     payload_high_speed: '6'
-    payload_oscillation_on: '1'
-    payload_oscillation_off: '0'
+    payload_oscillation_on: 'ON'
+    payload_oscillation_off: 'OFF'
   - platform: mqtt
     name: Purifier7
     state_topic: NodeMCU7/relay/0
@@ -584,8 +584,8 @@ fan:
     payload_low_speed: '1'
     payload_medium_speed: '5'
     payload_high_speed: '6'
-    payload_oscillation_on: '1'
-    payload_oscillation_off: '0'
+    payload_oscillation_on: 'ON'
+    payload_oscillation_off: 'OFF'
   - platform: mqtt
     name: Bedroom Fan
     availability_topic: NodeMCU6/status
