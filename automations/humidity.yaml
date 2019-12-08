@@ -52,7 +52,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_humidity
-      below: 55
+      below: 56
       for:
         minutes: 10
   action:
@@ -88,7 +88,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.fresher2_humidity
-      below: 55
+      below: 58
       for:
         minutes: 10
   action:
@@ -109,7 +109,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.fresher2_humidity
-      above: 60
+      above: 62
       for:
         minutes: 10
   action:
@@ -124,7 +124,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.nodemcu7_humidity
-      below: 55
+      below: 56
       for:
         minutes: 10
   action:
