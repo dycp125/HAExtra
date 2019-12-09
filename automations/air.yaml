@@ -74,4 +74,4 @@
       entity_id: sensor.aircat_pm25
       above: 40
     - service: automation.trigger
-      entity_id: automation.kong_qi_chai_shi_nei
+      entity_id: automation.ke_ting_kong_qi_chai

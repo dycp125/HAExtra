@@ -10,6 +10,8 @@
         entity_id: fan.purifier5
         entity_attr: speed
         entity_values: [low, medium, high]
+        condition_attr: oscillating
+        condition_values: [false]
 
 - alias: 主卧净化器调节
   trigger:
@@ -24,6 +26,8 @@
         entity_id: fan.purifier6
         entity_attr: speed
         entity_values: [low, medium, high]
+        condition_attr: oscillating
+        condition_values: [false]
 
 - alias: 次卧净化器调节
   trigger:
@@ -57,6 +61,8 @@
         entity_id: fan.purifier7
         entity_attr: speed
         entity_values: [low, medium, high]
+        condition_attr: oscillating
+        condition_values: [false]
 
 - alias: 书房净化器调节
   initial_state: false

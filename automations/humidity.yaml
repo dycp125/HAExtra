@@ -56,10 +56,6 @@
       for:
         minutes: 10
   action:
-    - service: automation.turn_off
-      entity_id: automation.diao_jie_jing_hua_qi_can_ting
-    - service: fan.turn_on
-      entity_id: fan.purifier5
     - service: fan.oscillate
       data:
         entity_id: fan.purifier5
@@ -81,8 +77,6 @@
       data:
         entity_id: fan.purifier5
         oscillating: false
-    - service: automation.turn_on
-      entity_id: automation.diao_jie_jing_hua_qi_can_ting
 
 - alias: 主卧加湿器开
   trigger:
@@ -92,10 +86,6 @@
       for:
         minutes: 10
   action:
-    - service: automation.turn_off
-      entity_id: automation.diao_jie_jing_hua_qi_zhu_wo
-    - service: fan.turn_on
-      entity_id: fan.purifier6
     - service: fan.oscillate
       data:
         entity_id: fan.purifier6
@@ -117,8 +107,6 @@
       data:
         entity_id: fan.purifier6
         oscillating: false
-    - service: automation.turn_on
-      entity_id: automation.diao_jie_jing_hua_qi_zhu_wo
 
 - alias: 儿童房加湿器开
   trigger:
@@ -128,10 +116,6 @@
       for:
         minutes: 10
   action:
-    - service: automation.turn_off
-      entity_id: automation.diao_jie_jing_hua_qi_er_tong_fang
-    - service: fan.turn_on
-      entity_id: fan.purifier7
     - service: fan.oscillate
       data:
         entity_id: fan.purifier7
@@ -153,5 +137,3 @@
       data:
         entity_id: fan.purifier7
         oscillating: false
-    - service: automation.turn_on
-      entity_id: automation.diao_jie_jing_hua_qi_er_tong_fang
