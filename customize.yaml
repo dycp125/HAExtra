@@ -38,7 +38,7 @@ climate.saswell:
   friendly_name: 客厅地暖
   hagenie_deviceType: heater
 climate.saswell2:
-  friendly_name: 餐厅地暖
+  friendly_name: 主卧地暖
   hagenie_deviceType: heater
 cover.airer:
   friendly_name: 晾衣架

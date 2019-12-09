@@ -48,7 +48,6 @@ Diningroom:
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
-    - climate.saswell2
     - sensor.illumination_34ce0090901a
     - sensor.aircat_temperature
     - sensor.aircat_humidity
@@ -89,6 +88,7 @@ Bedroom:
   entities:
     - media_player.x9300d
     - climate.daikin3
+    - climate.saswell2
     - fan.fresher2
     - fan.purifier6
     - fan.bedroom_fan
@@ -216,7 +216,6 @@ Balcony:
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
-    - climate.saswell2
     - sensor.illumination_34ce0090901a
     - sensor.aircat_temperature
     - sensor.aircat_humidity
@@ -261,6 +260,7 @@ Balcony:
   entities:
     - media_player.x9300d
     - climate.daikin3
+    - climate.saswell2
     - fan.fresher2
     - fan.purifier6
     - fan.bedroom_fan
