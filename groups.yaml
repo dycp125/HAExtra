@@ -5,11 +5,11 @@ default_view:
     # - device_tracker.xphone
     # - device_tracker.yphone
     # - device_tracker.zphone
-    - sensor.balcony_pm25
-    - sensor.aircat_pm25
-    - sensor.fresher2_pm25
-    - sensor.fresher2_co2
-    - sensor.fresher_co2
+    # - sensor.balcony_pm25
+    # - sensor.aircat_pm25
+    # - sensor.fresher2_pm25
+    # - sensor.fresher2_co2
+    # - sensor.fresher_co2
     - group.livingroom
     - group.diningroom
     #- group.kitchen
@@ -37,7 +37,7 @@ Livingroom:
     - sensor.fresher_temperature
     - sensor.fresher_humidity
     - sensor.fresher_pm25
-    #- sensor.fresher_co2
+    - sensor.fresher_co2
 
 Diningroom:
   entities:
@@ -51,7 +51,7 @@ Diningroom:
     - sensor.illumination_34ce0090901a
     - sensor.aircat_temperature
     - sensor.aircat_humidity
-    #- sensor.aircat_pm25
+    - sensor.aircat_pm25
     - sensor.aircat_hcho
     - binary_sensor.door_window_sensor_158d0001f3d2d1
 
@@ -98,8 +98,8 @@ Bedroom:
     - sensor.nodemcu6_lightness
     - sensor.fresher2_temperature
     - sensor.fresher2_humidity
-    # - sensor.fresher2_pm25
-    # - sensor.fresher2_co2
+    - sensor.fresher2_pm25
+    - sensor.fresher2_co2
 
 Parentsroom:
   entities:
@@ -148,7 +148,7 @@ Balcony:
     - binary_sensor.door_window_sensor_158d000228a52b
     - sensor.balcony_temperature
     - sensor.balcony_humidity
-    #- sensor.balcony_pm25
+    - sensor.balcony_pm25
     - weather.caiyun
     - sun.sun
 
@@ -205,6 +205,11 @@ Balcony:
     - sensor.fresher_humidity
     - sensor.fresher_pm25
     - sensor.fresher_co2
+    - automation.ke_ting_deng_tong_bu
+    - automation.ke_ting_kong_diao_guan
+    - automation.ke_ting_kong_diao_kai
+    - automation.ke_ting_kong_qi_chai
+    - automation.ke_ting_xin_feng_ji_diao_jie
 
 餐厅:
   view: yes
@@ -222,6 +227,12 @@ Balcony:
     - sensor.aircat_pm25
     - sensor.aircat_hcho
     - binary_sensor.door_window_sensor_158d0001f3d2d1
+    - automation.can_ting_chu_shi_ji_guan
+    - automation.can_ting_chu_shi_ji_kai
+    - automation.can_ting_deng_tong_bu
+    - automation.can_ting_jia_shi_qi_guan
+    - automation.can_ting_jia_shi_qi_kai
+    - automation.can_ting_jing_hua_qi_diao_jie
 
 玄关:
   view: yes
@@ -229,6 +240,8 @@ Balcony:
     - light.hallway_light
     - light.hallway_spotlight
     - binary_sensor.door_window_sensor_158d0001f3e5be
+    - automation.ru_hu_men_chang_shi_jian_kai_qi
+    - automation.ru_hu_men_guan_bi
 
 过道:
   view: yes
@@ -246,6 +259,17 @@ Balcony:
     - sensor.aircat2_humidity
     - sensor.aircat2_pm25
     - sensor.aircat2_hcho
+    - automation.guo_dao_an_niu_chang_an_kai_guan_guo_dao_deng_gan_ying
+    - automation.guo_dao_an_niu_dan_ji_bo_bao_kong_qi
+    - automation.guo_dao_an_niu_shuang_ji_qi_yong_hong_gan
+    - automation.guo_dao_bei_jing_deng_gan_ying
+    - automation.guo_dao_deng_bai_tian_guan
+    - automation.guo_dao_deng_bai_tian_kai
+    - automation.guo_dao_deng_gan_ying_zhong_qi
+    - automation.guo_dao_deng_tong_bu
+    - automation.guo_dao_deng_wan_shang_guan
+    - automation.guo_dao_deng_wan_shang_kai
+    - automation.xiao_ai_yin_bo_bao
 
 洗手间:
   view: yes
@@ -254,6 +278,8 @@ Balcony:
     - switch.washroom_fan
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
+    - automation.xi_shou_jian_deng_yan_shi_guan
+    - automation.xi_shou_jian_deng_gan_ying_kai
 
 主卧:
   view: yes
@@ -272,6 +298,15 @@ Balcony:
     - sensor.fresher2_humidity
     - sensor.fresher2_pm25
     - sensor.fresher2_co2
+    - automation.shui_mian_jie_shu
+    - automation.shui_mian_shen_ru
+    - automation.shui_mian_zhun_bei
+    - automation.zhu_wo_jia_shi_qi_guan
+    - automation.zhu_wo_jia_shi_qi_kai
+    - automation.zhu_wo_jing_hua_qi_diao_jie
+    - automation.zhu_wo_kong_diao_diao_jie
+    - automation.zhu_wo_xin_feng_ji_diao_jie
+
 
 次卧:
   view: yes
@@ -280,6 +315,7 @@ Balcony:
     - sensor.purifier_temperature
     - sensor.purifier_humidity
     - sensor.purifier_pm25
+    - automation.ci_wo_jing_hua_qi_diao_jie
 
 儿童房:
   view: yes
@@ -296,6 +332,13 @@ Balcony:
     - sensor.nodemcu7_pm25
     - sensor.nodemcu7_co2
     - sensor.nodemcu7_hcho
+    - automation.er_tong_fang_chu_shi_ji_guan
+    - automation.er_tong_fang_chu_shi_ji_kai
+    - automation.er_tong_fang_feng_shan_diao_jie
+    - automation.er_tong_fang_jia_shi_qi_guan
+    - automation.er_tong_fang_jia_shi_qi_kai
+    - automation.er_tong_fang_jing_hua_qi_diao_jie
+    - automation.er_tong_fang_kong_diao_diao_jie
 
 书房:
   view: yes
@@ -316,6 +359,15 @@ Balcony:
     - sensor.nodemcu3_co2
     - sensor.studyroom_lightness
     - binary_sensor.nodemcu3_motion
+    - automation.shu_fang_an_niu_chang_an_guan_bi_yin_xiang
+    - automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
+    - automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
+    - automation.shu_fang_chuang_lian_guan
+    - automation.shu_fang_chuang_lian_kai
+    - automation.shu_fang_deng_tong_bu
+    - automation.shu_fang_feng_shan_diao_jie
+    - automation.shu_fang_jing_hua_qi_diao_jie
+    - automation.shu_fang_kong_diao_diao_jie
 
 阳台:
   view: yes
@@ -327,3 +379,6 @@ Balcony:
     - sensor.balcony_pm25
     - weather.caiyun
     - sun.sun
+    - automation.yang_tai_deng_gan_ying
+    - automation.yang_tai_kong_qi_chai
+    - automation.yang_tai_kong_qi_hao

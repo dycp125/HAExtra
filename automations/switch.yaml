@@ -1,4 +1,4 @@
-- alias: 按钮@过道单击—播报空气
+- alias: 过道按钮单击—播报空气
   trigger:
     - platform: event
       event_type: xiaomi_aqara.click
@@ -10,7 +10,7 @@
       data_template:
         message: '阳台PM2.5为{{ states("sensor.balcony_pm25") }}，餐厅PM2.5为{{ states("sensor.aircat_pm25") }}，主卧PM2.5为{{ states("sensor.fresher2_pm25") }}。客厅二氧化碳浓度为{{ states("sensor.fresher_co2") }}，主卧二氧化碳浓度为{{ states("sensor.fresher2_co2") }}，儿童房二氧化碳浓度为{{ states("sensor.nodemcu7_co2") }}'
 
-- alias: 按钮@过道双击—启用烘干
+- alias: 过道按钮双击—启用烘干
   trigger:
     - platform: event
       event_type: xiaomi_aqara.click
@@ -22,7 +22,7 @@
       data:
         message: 晾衣机将于今晚定时开启烘干功能
 
-- alias: 按钮@过道长按—开关过道灯感应
+- alias: 过道按钮长按—开关过道灯感应
   trigger:
     - platform: event
       event_type: xiaomi_aqara.click
@@ -67,7 +67,7 @@
     - service: automation.turn_off
       entity_id: automation.guo_dao_deng_gan_ying_zhong_qi
 
-- alias: 按钮@书房单击—切换音箱
+- alias: 书房按钮单击—切换音箱
   trigger:
     - platform: event
       event_type: xiaomi_aqara.click
@@ -80,7 +80,7 @@
         topic: NodeMCU3/relay/0/set
         payload: toggle
 
-- alias: 按钮@书房双击—开关投影仪
+- alias: 书房按钮双击—开关投影仪
   trigger:
     - platform: event
       event_type: xiaomi_aqara.click
@@ -94,7 +94,7 @@
     - service: switch.toggle
       entity_id: switch.projector
 
-- alias: 按钮@书房长按—关闭音箱
+- alias: 书房按钮长按—关闭音箱
   trigger:
     - platform: event
       event_type: xiaomi_aqara.click

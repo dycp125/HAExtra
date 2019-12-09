@@ -1,4 +1,4 @@
-- alias: 小爱音箱朗读
+- alias: 小爱音播报
   trigger:
     - platform: state
       entity_id: input_text.miai

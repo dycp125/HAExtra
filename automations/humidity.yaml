@@ -1,4 +1,4 @@
-- alias: 除湿机开@餐厅
+- alias: 餐厅除湿机开
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_humidity
@@ -9,7 +9,7 @@
     - service: switch.turn_on
       entity_id: switch.outlet
 
-- alias: 除湿机关@餐厅
+- alias: 餐厅除湿机关
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_humidity
@@ -20,7 +20,7 @@
     - service: switch.turn_off
       entity_id: switch.outlet
 
-- alias: 除湿机开@卧室
+- alias: 儿童房除湿机开
   trigger:
     - platform: numeric_state
       entity_id: sensor.nodemcu7_humidity
@@ -35,7 +35,7 @@
     - service: switch.turn_on
       entity_id: switch.outlet2
 
-- alias: 除湿机关@卧室
+- alias: 儿童房除湿机关
   trigger:
     - platform: numeric_state
       entity_id: sensor.nodemcu7_humidity
@@ -48,7 +48,7 @@
     - service: switch.turn_off
       entity_id: switch.outlet2
 
-- alias: 加湿器开@餐厅
+- alias: 餐厅加湿器开
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_humidity
@@ -69,7 +69,7 @@
         entity_id: fan.purifier5
         speed: low
 
-- alias: 加湿器关@餐厅
+- alias: 餐厅加湿器关
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_humidity
@@ -84,7 +84,7 @@
     - service: automation.turn_on
       entity_id: automation.diao_jie_jing_hua_qi_can_ting
 
-- alias: 加湿器开@主卧
+- alias: 主卧加湿器开
   trigger:
     - platform: numeric_state
       entity_id: sensor.fresher2_humidity
@@ -105,7 +105,7 @@
         entity_id: fan.purifier6
         speed: low
 
-- alias: 加湿器关@主卧
+- alias: 主卧加湿器关
   trigger:
     - platform: numeric_state
       entity_id: sensor.fresher2_humidity
@@ -120,7 +120,7 @@
     - service: automation.turn_on
       entity_id: automation.diao_jie_jing_hua_qi_zhu_wo
 
-- alias: 加湿器开@儿童房
+- alias: 儿童房加湿器开
   trigger:
     - platform: numeric_state
       entity_id: sensor.nodemcu7_humidity
@@ -141,7 +141,7 @@
         entity_id: fan.purifier7
         speed: low
         
-- alias: 加湿器关@儿童房
+- alias: 儿童房加湿器关
   trigger:
     - platform: numeric_state
       entity_id: sensor.nodemcu7_humidity
