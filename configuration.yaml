@@ -541,6 +541,8 @@ fan:
     payload_low_speed: '1'
     payload_medium_speed: '2'
     payload_high_speed: '3'
+    payload_oscillation_on: 'ON'
+    payload_oscillation_off: 'OFF'
   - platform: mqtt
     name: Purifier5
     state_topic: NodeMCU5/relay/0
