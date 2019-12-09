@@ -710,13 +710,38 @@
 			}
 
 			var _sorted_domains = Object.keys(_DOMAIN_ICONS)
+			var _sorted_classes = ['opening', 'motion', 'window', 'illuminance']
+			var _sorted_units = ['μg/m³', 'ppm', '°C', '%', 'mg/m³', 'lm']
 			function compareEntity(entity1, entity2) {
 				// Sort entities by domain+group order
 				var entity_id1 = entity1.entity_id
 				var entity_id2 = entity2.entity_id
-				var index1 = _sorted_domains.indexOf(entity_id1.split('.')[0])
-				var index2 = _sorted_domains.indexOf(entity_id2.split('.')[0])
+				var domain1 = entity_id1.split('.')[0]
+				var domain2 = entity_id2.split('.')[0]
+				var index1 = _sorted_domains.indexOf(domain1)
+				var index2 = _sorted_domains.indexOf(domain2)
 				if (index1 == index2) {
+					if (domain1 == 'sensor') {
+						var unit1 = entity1.attributes.unit_of_measurement
+						var unit2 = entity2.attributes.unit_of_measurement
+						index1 = _sorted_units.indexOf(unit1) >>> 0
+						index2 = _sorted_units.indexOf(unit2) >>> 0
+						if (index1 != index2) {
+							return index1 - index2
+						}
+						var result = unit1 ? unit1.localeCompare(unit2) : (unit2 ? unit2.localeCompare(unit1) : 0)
+						if (result) {
+							return result
+						}
+					}
+					else if (domain1 == 'binary_sensor') {
+						index1 = _sorted_classes.indexOf(entity1.attributes.device_class) >>> 0
+						index2 = _sorted_classes.indexOf(entity2.attributes.device_class) >>> 0
+						if (index1 != index2) {
+							return index1 - index2
+						}
+					}
+
 					if (_group_entity_ids) {
 						index1 = _group_entity_ids.indexOf(entity_id1)
 						index2 = _group_entity_ids.indexOf(entity_id2)
