@@ -1,26 +1,29 @@
-#import json
+
+# Logging
 import logging
-
-from homeassistant.components.http import HomeAssistantView
-from homeassistant.helpers.state import AsyncTrackStates
-
-import voluptuous as vol
-import homeassistant.helpers.config_validation as cv
-
 _LOGGER = logging.getLogger(__name__)
 
 DOMAIN = 'dingding'
 
-#
+# 
+from homeassistant.components.http import HomeAssistantView
+from homeassistant.helpers.state import AsyncTrackStates
+
+# Config
+import voluptuous as vol
+import homeassistant.helpers.config_validation as cv
+
 CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
         vol.Required('senderId'): cv.string,
         }),
     }, extra=vol.ALLOW_EXTRA)
 
-#
+# 
 _hass = None
 _senderId = None
+
+#
 async def async_setup(hass, config):
     global _hass, _senderId
     _hass = hass
@@ -71,8 +74,12 @@ class DingDingView(ChatView):
     async def handle(self, data):
         return await hassQuery(data['text']['content'])
 
-async def hassQuery(query):
+async def hassQuery(question):
+    query = question.strip()
     _LOGGER.debug("QUERY: %s", query)
+    if not query:
+        return "少说空话"
+
     states = _hass.states.async_all()
     names = [] if query == "全部设备" else None
 
@@ -80,14 +87,16 @@ async def hassQuery(query):
     if answer is not None:
        return answer
 
-    answer = await hassStates(query, states, True, names) # 先尝试处理分组
+    if names is not None:
+        import locale
+        locale.setlocale(locale.LC_COLLATE, 'zh_CN.UTF8')
+        names = sorted(names, cmp=locale.strcoll)
+
+    answer = await hassStates(query, states, True, names) # 再尝试处理分组
     if answer is not None:
         return answer
 
     if names is not None:
-        # import locale
-        # locale.setlocale(locale.LC_COLLATE, 'zh_CN.UTF8')
-        # names = sorted(names, cmp=locale.strcoll)
         return ','.join(names)
 
     return "未找到设备"

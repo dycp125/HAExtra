@@ -10,7 +10,7 @@ homeassistant:
 logger:
   default: warning
   logs:
-    custom_components.actuator: debug
+    custom_components.dingding: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
 
@@ -18,7 +18,7 @@ system_health:
 
 frontend:
 
-mobile_app:
+#mobile_app:
 
 config:
 
@@ -670,6 +670,7 @@ actuator:
 aligenie:
 
 dingding:
+  senderId: !secret dingding_senderId
 
 xiaoai:
 
