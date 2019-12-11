@@ -1,5 +1,5 @@
 homeassistant:
-  name: 智能物联
+  name: 智加加
   latitude: 30.23927
   longitude: 120.05633
   elevation: 32
@@ -53,6 +53,7 @@ sun:
 group: !include groups.yaml
 automation: !include_dir_merge_list automations
 script: !include scripts.yaml
+#scene: !include scenes.yaml
 
 mqtt:
   broker: localhost
@@ -667,6 +668,8 @@ panel_iframe:
 actuator:
 
 aligenie:
+
+dingding:
 
 xiaoai:
 
