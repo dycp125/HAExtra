@@ -1,5 +1,5 @@
 homeassistant:
-  name: 智加加
+  name: 智能物联
   latitude: 30.23927
   longitude: 120.05633
   elevation: 32
@@ -683,9 +683,9 @@ input_text:
     name: MiAI
     initial: 我是小爱
 
-notify:
-  - name: mobile_app
-    platform: group
-    services:
-      - service: mobile_app_zphone
-      - service: mobile_app_yphone
+# notify:
+#   - name: mobile_app
+#     platform: group
+#     services:
+#       - service: mobile_app_zphone
+#       - service: mobile_app_yphone
