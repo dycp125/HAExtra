@@ -1,4 +1,4 @@
-- alias: 调节新风@客厅
+- alias: 客厅新风机调节
   trigger:
     - platform: state
       entity_id: sensor.fresher_co2
@@ -13,7 +13,7 @@
         condition_attr: mode
         condition_values: [low, middle, strong]
 
-- alias: 调节新风@主卧
+- alias: 主卧新风机调节
   trigger:
     - platform: state
       entity_id: sensor.fresher2_co2

@@ -1,4 +1,4 @@
-- alias: 空气差@阳台
+- alias: 阳台空气差
   trigger:
     - platform: numeric_state
       entity_id: sensor.balcony_pm25
@@ -23,7 +23,7 @@
       data_template:
         message: '阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，{% if PM25 < 20 %}空气很好{% elif PM25 < 40 %}空气不错{% elif PM25 < 60 %}空气一般{% elif PM25 < 80 %}空气不好{% else %}空气污染，请关好门窗{% endif %}'
 
-- alias: 空气好@阳台
+- alias: 阳台空气好
   trigger:
     - platform: numeric_state
       entity_id: sensor.balcony_pm25
@@ -54,7 +54,7 @@
       data:
         message: 外面空气很好，可以打开门窗
 
-- alias: 空气差@室内
+- alias: 客厅空气差
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_pm25
@@ -74,4 +74,4 @@
       entity_id: sensor.aircat_pm25
       above: 40
     - service: automation.trigger
-      entity_id: automation.kong_qi_chai_shi_nei
+      entity_id: automation.ke_ting_kong_qi_chai

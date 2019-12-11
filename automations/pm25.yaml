@@ -1,4 +1,4 @@
-- alias: 调节净化器@餐厅
+- alias: 餐厅净化器调节
   trigger:
     - platform: state
       entity_id: sensor.aircat_pm25
@@ -10,8 +10,10 @@
         entity_id: fan.purifier5
         entity_attr: speed
         entity_values: [low, medium, high]
+        condition_attr: oscillating
+        condition_values: [false]
 
-- alias: 调节净化器@主卧
+- alias: 主卧净化器调节
   trigger:
     - platform: state
       entity_id: sensor.fresher2_pm25
@@ -24,8 +26,10 @@
         entity_id: fan.purifier6
         entity_attr: speed
         entity_values: [low, medium, high]
+        condition_attr: oscillating
+        condition_values: [false]
 
-- alias: 调节净化器@次卧
+- alias: 次卧净化器调节
   trigger:
     - platform: state
       entity_id: sensor.purifier_pm25
@@ -44,7 +48,7 @@
         condition_attr: mode
         condition_values: [favorite]
 
-- alias: 调节净化器@儿童房
+- alias: 儿童房净化器调节
   trigger:
     - platform: state
       entity_id: sensor.nodemcu7_pm25
@@ -57,8 +61,10 @@
         entity_id: fan.purifier7
         entity_attr: speed
         entity_values: [low, medium, high]
+        condition_attr: oscillating
+        condition_values: [false]
 
-- alias: 调节净化器@书房
+- alias: 书房净化器调节
   initial_state: false
   trigger:
     - platform: state
