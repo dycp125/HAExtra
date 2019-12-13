@@ -6,13 +6,14 @@ _LOGGER = logging.getLogger(__name__)
 DOMAIN = 'zhiplus'
 
 #
+import importlib
 async def async_setup(hass, config):
-	import importlib
-    bots = config[DOMAIN]
-    for bot in bots:
-    	_LOGGER.debug("Loading Zhi+ bot %s", bot['platform'])
-    	mod = importlib.import_module('.' + bot['platform'], __package__)
-    	await mod.async_setup(hass, bot)
-    	# mod._hass = hass
-    	# hass.http.register_view(mod.ChatBotView)
+    confs = config[DOMAIN]
+    for conf in confs:
+        platform = conf['platform']
+        _LOGGER.debug("Loading Zhi+ bot %s", platform)
+        mod = importlib.import_module('.' + platform, __package__)
+        mod._hass = hass
+        mod._conf = conf
+        hass.http.register_view(getattr(mod, platform + 'View'))
     return True
