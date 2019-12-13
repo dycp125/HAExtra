@@ -127,6 +127,8 @@ group.diningroom:
   friendly_name: 餐厅
 group.hallway:
   friendly_name: 玄关
+group.indoor:
+  friendly_name: 室内
 group.kidsroom:
   friendly_name: 儿童房
 group.kitchen:

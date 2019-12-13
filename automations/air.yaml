@@ -54,7 +54,7 @@
       data:
         message: 外面空气很好，可以打开门窗
 
-- alias: 客厅空气差
+- alias: 室内空气差
   trigger:
     - platform: numeric_state
       entity_id: sensor.aircat_pm25

@@ -2,15 +2,12 @@ default_view:
   view: yes
   icon: mdi:home-assistant
   entities:
-    # - device_tracker.xphone
-    - device_tracker.yphone
-    - device_tracker.zphone
-    - device_tracker.cphone
     # - sensor.balcony_pm25
     # - sensor.aircat_pm25
     # - sensor.fresher2_pm25
     # - sensor.fresher2_co2
     # - sensor.fresher_co2
+    - group.indoor
     - group.livingroom
     - group.diningroom
     #- group.kitchen
@@ -22,7 +19,12 @@ default_view:
     - group.kidsroom
     - group.studyroom
     - group.balcony
-    #- group.outside
+
+Indoor:
+  entities:
+    - person.ba_ba
+    - person.ma_ma
+    - person.a_yi
 
 Livingroom:
   entities:
@@ -190,6 +192,15 @@ Balcony:
     - sensor.purifier7_mode
     - group.all_automations
 
+室内:
+  view: yes
+  entities:
+    - person.ba_ba
+    - person.ma_ma
+    - person.a_yi
+    - automation.shi_nei_kong_qi_chai
+    - automation.shi_nei_men_ti_xing
+
 客厅:
   view: yes
   entities:
@@ -209,7 +220,6 @@ Balcony:
     - automation.ke_ting_deng_tong_bu
     - automation.ke_ting_kong_diao_guan
     - automation.ke_ting_kong_diao_kai
-    - automation.ke_ting_kong_qi_chai
     - automation.ke_ting_xin_feng_ji_diao_jie
 
 餐厅:
@@ -241,8 +251,8 @@ Balcony:
     - light.hallway_light
     - light.hallway_spotlight
     - binary_sensor.door_window_sensor_158d0001f3e5be
-    - automation.ru_hu_men_chang_shi_jian_kai_qi
-    - automation.ru_hu_men_guan_bi
+    - automation.ru_hu_men_huan_ying
+    - automation.ru_hu_men_ti_xing
 
 过道:
   view: yes
@@ -380,6 +390,6 @@ Balcony:
     - sensor.balcony_pm25
     - weather.caiyun
     - sun.sun
-    - automation.yang_tai_deng_gan_ying
+    - automation.yang_tai_men_gan_ying
     - automation.yang_tai_kong_qi_chai
     - automation.yang_tai_kong_qi_hao
