@@ -5,19 +5,19 @@ _LOGGER = logging.getLogger(__name__)
 
 from homeassistant.components.notify import (
     ATTR_DATA,
-    PLATFORM_SCHEMA,
+    # PLATFORM_SCHEMA,
     BaseNotificationService,
 )
 
-import voluptuous as vol
-import homeassistant.helpers.config_validation as cv
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
-    {
-        # vol.Required(CONF_HOST): cv.string,
-        # vol.Optional(CONF_FILENAME, default=WEBOSTV_CONFIG_FILE): cv.string,
-        # vol.Optional(CONF_ICON): cv.string,
-    }
-)
+# import voluptuous as vol
+# import homeassistant.helpers.config_validation as cv
+# PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+#     {
+#         # vol.Required(CONF_HOST): cv.string,
+#         # vol.Optional(CONF_FILENAME, default=WEBOSTV_CONFIG_FILE): cv.string,
+#         # vol.Optional(CONF_ICON): cv.string,
+#     }
+# )
 
 def get_service(hass, config, discovery_info=None):
     """Return the notify service."""

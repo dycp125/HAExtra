@@ -692,7 +692,7 @@ aligenie:
 
 zhiplus:
   - platform: dingbot
-    senderId: !secret dingding_senderId
+    senderId: !secret dingbot_senderId
   - platform: miaibot
 
 miai:
@@ -704,9 +704,13 @@ input_text:
     name: MiAI
     initial: 我是小爱
 
-# notify:
-#   - name: mobile_app
-#     platform: group
-#     services:
-#       - service: mobile_app_zphone
-#       - service: mobile_app_yphone
+notify:
+  - name: mobile
+    platform: group
+    services:
+      - service: zhiplus
+      # - service: mobile_app_zphone
+      # - service: mobile_app_yphone
+  - platform: zhiplus
+    token: !secret dingbot_token
+    secret: !secret dingbot_secret

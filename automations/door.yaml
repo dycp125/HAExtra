@@ -20,18 +20,18 @@
       for:
         minutes: 2
   action:
-    # - service: notify.mobile_app
-    #   data:
-    #     title: 大门没关好
-    #     message: 入户门长时间开启，请检查
-    #     data:
-    #       apns_headers:
-    #         apns-collapse-id: ru_hu_men_ti_xing
-          # push:
-          #   sound:
-          #     name: default
-          #     critical: 1
-          #     volume: 1
+    - service: notify.mobile
+      data:
+        title: 大门没关好
+        message: 入户门长时间开启，请检查
+        # data:
+        #   apns_headers:
+        #     apns-collapse-id: ru_hu_men_ti_xing
+        #   push:
+        #     sound:
+        #       name: default
+        #       critical: 1
+        #       volume: 1
     - service: xiaomi_aqara.play_ringtone
       data:
         gw_mac: 34CE0090901A
