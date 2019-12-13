@@ -10,7 +10,7 @@ homeassistant:
 logger:
   default: warning
   logs:
-    custom_components.dingding: debug
+    custom_components.zhiplus: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
 
@@ -693,8 +693,7 @@ aligenie:
 zhiplus:
   - platform: dingbot
     senderId: !secret dingding_senderId
-
-xiaoai:
+  - platform: miaibot
 
 miai:
   miid: !secret miai_miid

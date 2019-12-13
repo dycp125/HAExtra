@@ -19,10 +19,10 @@ async def zhibotQuery(hass, question):
     if answer is not None:
        return answer
 
-    if names is not None:
-        import locale
-        locale.setlocale(locale.LC_COLLATE, 'zh_CN.UTF8')
-        names = sorted(names, cmp=locale.strcoll)
+    # if names is not None:
+    #     import locale
+    #     locale.setlocale(locale.LC_COLLATE, 'zh_CN.UTF8')
+    #     names.sort(cmp=locale.strcoll)
 
     answer = await zhibotStates(hass, query, states, True, names) # 再尝试处理分组
     if answer is not None:

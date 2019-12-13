@@ -1,0 +1,55 @@
+
+# Logging
+import logging
+_LOGGER = logging.getLogger(__name__)
+
+#
+_hass = None
+_conf = None
+
+#
+from .zhibot import zhibotQuery
+from .chatbot import ChatBotView
+from homeassistant.components.http import KEY_REAL_IP
+
+#
+class miaibotView(ChatBotView):
+
+    async def post(self, request):
+        self.real_ip = str(request[KEY_REAL_IP])
+        return await super().post(request)
+
+    def response(self, answer):
+        return {
+            'version': '1.0',
+            'is_session_end': True,
+            'response': {
+                'open_mic': False,
+                'to_speak': {'type': 0, 'text': answer},
+                #'to_display': {'type': 0,'text': text}
+            }
+        }
+
+    def check(self, data):
+        return self.real_ip.startswith('124.251')
+
+    async def handle(self, data):
+
+        request = data['request']
+
+        #
+        if 'no_response' in request:
+            return "主人，您还在吗？"
+
+        #
+        request_type = request['type']
+        if request_type == 2:
+            return "再见主人，我在这里等你哦！"
+
+        #
+        slot_info = data['request'].get('slot_info')
+        intent_name = slot_info.get('intent_name') if slot_info is not None else None
+        if intent_name == 'Mi_Welcome':
+            return "您好主人，我能为你做什么呢？"
+
+        return await zhibotQuery(_hass, data['query'])
