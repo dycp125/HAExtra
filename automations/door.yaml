@@ -1,4 +1,4 @@
-- alias: 入户门关闭
+- alias: 入户门欢迎
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d0001f3e5be
@@ -11,7 +11,7 @@
         ringtone_id: 10001
         ringtone_vol: 80
 
-- alias: 入户门长时间开启
+- alias: 入户门提醒
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d0001f3e5be
@@ -20,13 +20,13 @@
       for:
         minutes: 2
   action:
-    - service: notify.mobile_app
-      data:
-        title: 大门没关好
-        message: 入户门长时间开启，请检查
-        data:
-          apns_headers:
-            apns-collapse-id: ru_hu_men_chang_shi_jian_kai_qi
+    # - service: notify.mobile_app
+    #   data:
+    #     title: 大门没关好
+    #     message: 入户门长时间开启，请检查
+    #     data:
+    #       apns_headers:
+    #         apns-collapse-id: ru_hu_men_ti_xing
           # push:
           #   sound:
           #     name: default
@@ -42,79 +42,9 @@
       entity_id: binary_sensor.door_window_sensor_158d0001f3e5be
       state: 'on'
     - service: automation.trigger
-      entity_id: automation.ru_hu_men_chang_shi_jian_kai_qi
+      entity_id: automation.ru_hu_men_ti_xing
 
-# - alias: 阳台空气污染
-#   trigger:
-#     - platform: state
-#       entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
-#       from: 'off'
-#       to: 'on'
-#       for:
-#         minutes: 2
-#     - platform: state
-#       entity_id: binary_sensor.door_window_sensor_158d0003cf4735
-#       from: 'off'
-#       to: 'on'
-#       for:
-#         minutes: 2
-#     - platform: state
-#       entity_id: binary_sensor.door_window_sensor_158d000228a52b
-#       from: 'off'
-#       to: 'on'
-#       for:
-#         minutes: 2
-#     - platform: numeric_state
-#       entity_id: sensor.balcony_pm25
-#       above: 100
-#       for:
-#         minutes: 5
-#   condition:
-#     - condition: time
-#       after: '06:00'
-#       before: '23:00'
-#     - condition: numeric_state
-#       entity_id: sensor.balcony_pm25
-#       above: 100
-#     - condition: or
-#       conditions:
-#         - condition: state
-#           entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
-#           state: 'on'
-#         - condition: state
-#           entity_id: binary_sensor.door_window_sensor_158d0003cf4735
-#           state: 'on'
-#         - condition: state
-#           entity_id: binary_sensor.door_window_sensor_158d000228a52b
-#           state: 'on'
-#   action:
-#     # - service: xiaomi_aqara.play_ringtone
-#     #   data:
-#     #     gw_mac: 34CE0090901A
-#     #     ringtone_id: 10015
-#     #     ringtone_vol: 100
-#     - service: miai.say
-#       data_template:
-#         message: '阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，空气污染。请关好{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") %}厨房门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") %}洗手间门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}阳台门{% endif %}'
-#     - delay: 300
-#     - condition: numeric_state
-#       entity_id: sensor.balcony_pm25
-#       above: 100
-#     - condition: or
-#       conditions:
-#         - condition: state
-#           entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
-#           state: 'on'
-#         - condition: state
-#           entity_id: binary_sensor.door_window_sensor_158d0003cf4735
-#           state: 'on'
-#         - condition: state
-#           entity_id: binary_sensor.door_window_sensor_158d000228a52b
-#           state: 'on'
-#     - service: automation.trigger
-#       entity_id: automation.yang_tai_kong_qi_wu_ran
-
-- alias: 阳台灯感应
+- alias: 阳台门灯感应
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d000228a52b
@@ -131,3 +61,76 @@
   action:
     - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
       entity_id: light.balcony_light
+
+- alias: 室内门提醒
+  trigger:
+    - platform: state # 厨房门
+      entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+      from: 'off'
+      to: 'on'
+      for:
+        minutes: 2 # 洗手间门
+    # - platform: state
+    #   entity_id: binary_sensor.door_window_sensor_158d0003cf4735
+    #   from: 'off'
+    #   to: 'on'
+    #   for:
+    #     minutes: 2
+    - platform: state # 阳台门
+      entity_id: binary_sensor.door_window_sensor_158d000228a52b
+      from: 'off'
+      to: 'on'
+      for:
+        minutes: 2
+    - platform: time
+      at: '21:00:00'
+    # - platform: numeric_state
+    #   entity_id: sensor.balcony_pm25
+    #   above: 100
+    #   for:
+    #     minutes: 5
+  condition:
+    - condition: time
+      after: '20:30'
+      before: '23:30'
+    # - condition: numeric_state
+    #   entity_id: sensor.balcony_pm25
+    #   above: 40
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+          state: 'on'
+        # - condition: state
+        #   entity_id: binary_sensor.door_window_sensor_158d0003cf4735
+        #   state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d000228a52b
+          state: 'on'
+  action:
+    # - service: xiaomi_aqara.play_ringtone
+    #   data:
+    #     gw_mac: 34CE0090901A
+    #     ringtone_id: 10015
+    #     ringtone_vol: 100
+    - service: miai.say
+      data_template:
+        #{% if is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") %}洗手间门、{% endif %}
+        message: '晚上请关好{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") %}厨房门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}阳台门{% endif %}'
+    - delay: 300
+    # - condition: numeric_state
+    #   entity_id: sensor.balcony_pm25
+    #   above: 40
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+          state: 'on'
+        # - condition: state
+        #   entity_id: binary_sensor.door_window_sensor_158d0003cf4735
+        #   state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d000228a52b
+          state: 'on'
+    - service: automation.trigger
+      entity_id: automation.shi_nei_men_ti_xing
