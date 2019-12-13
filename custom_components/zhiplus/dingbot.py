@@ -15,7 +15,7 @@ from .chatbot import ChatBotView
 class dingbotView(ChatBotView):
 
     def response(self, answer):
-        return {"msgtype": "text", "text": {"content": answer}}
+        return {'msgtype': 'text', 'text': {'content': answer}}
 
     def check(self, data):
         #_LOGGER.debug("TOKEN: <%s>~=<%s>", data['senderId'], _senderId)
