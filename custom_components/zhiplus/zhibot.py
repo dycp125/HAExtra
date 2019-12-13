@@ -12,10 +12,10 @@ async def zhibotQuery(hass, question):
     if not query:
         return "少说空话"
 
-    states = _hass.states.async_all()
+    states = hass.states.async_all()
     names = [] if query == "全部设备" else None
 
-    answer = await zhibot_states(hass, query, states, False, names) # 先尝试处理设备
+    answer = await zhibotStates(hass, query, states, False, names) # 先尝试处理设备
     if answer is not None:
        return answer
 

@@ -3,11 +3,17 @@
 import logging
 _LOGGER = logging.getLogger(__name__)
 
+from homeassistant.components.http import HomeAssistantView
+
 #
 class ChatBotView(HomeAssistantView):
     """View to handle Configuration requests."""
-    url = '/' + name
-    requires_auth = False
+
+    def __init__(self):
+        self.name = self.__class__.__name__.rstrip('View').lower()
+        self.url = '/' + self.name
+        _LOGGER.debug("URL: http://localhost:8123" + self.url)
+        self.requires_auth = False
 
     async def post(self, request):
         try:
