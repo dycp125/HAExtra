@@ -690,8 +690,9 @@ actuator:
 
 aligenie:
 
-dingding:
-  senderId: !secret dingding_senderId
+zhiplus:
+  - platform: dingbot
+    senderId: !secret dingding_senderId
 
 xiaoai:
 
