@@ -29,7 +29,6 @@ async def async_setup(hass, config):
     _hass = hass
     conf = config[DOMAIN]
     _senderId = conf['senderId']
-    _LOGGER.debug("%s,%s", config, _senderId)
     hass.http.register_view(DingDingView)
     return True
 

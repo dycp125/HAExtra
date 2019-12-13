@@ -94,20 +94,22 @@ homekit:
       feature_list:
         - feature: on_off
 
-# asuswrt:
-#   host: Router
-#   username: admin
-#   password: !secret http_password
+#mkdir -p /var/lib/misc
+#echo "/bin/ln -s /tmp/dnsmasq.leases /var/lib/misc/dnsmasq.leases" >> /etc/storage/started_script.sh
+asuswrt:
+  host: Router
+  username: admin
+  password: !secret http_password
 
 device_tracker:
-  - platform: ping
-    hosts:
-      x9300d: 192.168.1.7
-  # - platform: asuswrt
-  #   interval_seconds: 120
-  #   new_device_defaults:
-  #     track_new_devices: false
-  #     hide_if_away: true
+  - platform: asuswrt
+    interval_seconds: 120
+    new_device_defaults:
+      track_new_devices: false
+      hide_if_away: true
+  # - platform: ping
+  #   hosts:
+  #     x9300d: 192.168.1.7
 
 binary_sensor:
   - platform: mqtt

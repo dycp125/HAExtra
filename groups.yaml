@@ -3,8 +3,9 @@ default_view:
   icon: mdi:home-assistant
   entities:
     # - device_tracker.xphone
-    # - device_tracker.yphone
-    # - device_tracker.zphone
+    - device_tracker.yphone
+    - device_tracker.zphone
+    - device_tracker.cphone
     # - sensor.balcony_pm25
     # - sensor.aircat_pm25
     # - sensor.fresher2_pm25
