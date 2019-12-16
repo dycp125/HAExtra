@@ -20,9 +20,9 @@
       for:
         minutes: 2
   action:
-    - service: notify.mobile
+    - service: zhiplus_dingbot
       data:
-        title: 大门没关好
+        # title: 大门没关好
         message: 入户门长时间开启，请检查
         # data:
         #   apns_headers:
