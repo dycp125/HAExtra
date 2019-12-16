@@ -22,10 +22,10 @@ class miaibotView(ChatBotView):
 
     def check(self, data):
         app_id = _conf.get('app_id')
-        if app_id is not None and data['session']['application']['app_id'] != app_id
+        if app_id is not None and data['session']['application']['app_id'] != app_id:
             return False
         user_id = _conf.get('user_id')
-        if user_id is not None and data['session']['user']['user_id'] != user_id
+        if user_id is not None and data['session']['user']['user_id'] != user_id:
             return False
         # else
         #     return True
@@ -49,7 +49,7 @@ class miaibotView(ChatBotView):
         slot_info = data['request'].get('slot_info')
         intent_name = slot_info.get('intent_name') if slot_info is not None else None
         if intent_name == 'Mi_Welcome':
-            self.open_mic = True
+            self._open_mic = True
             return "您好主人，我能为你做什么呢？"
 
         answer = await zhibotQuery(_hass, data['query'])
@@ -59,7 +59,7 @@ class miaibotView(ChatBotView):
     def response(self, answer):
         return {
             'version': '1.0',
-            'is_session_end': !self._open_mic,
+            'is_session_end': not self._open_mic,
             'response': {
                 'open_mic': self._open_mic,
                 'to_speak': {'type': 0, 'text': answer},
