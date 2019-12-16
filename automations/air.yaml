@@ -81,6 +81,6 @@
     - platform: time
       at: '7:30:00'
   action:
-    - service: zhiplus_dingbot
+    - service: notify.zhiplus_dingbot
       data_template:
         message: '阳台PM2.5为{{ states("sensor.balcony_pm25") }}，温度为{{ states("sensor.balcony_temperature") }}；餐厅PM2.5为{{ states("sensor.aircat_pm25") }}，主卧PM2.5为{{ states("sensor.fresher2_pm25") }}。客厅二氧化碳浓度为{{ states("sensor.fresher_co2") }}，主卧二氧化碳浓度为{{ states("sensor.fresher2_co2") }}，儿童房二氧化碳浓度为{{ states("sensor.nodemcu7_co2") }}'
