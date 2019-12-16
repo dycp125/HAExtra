@@ -696,6 +696,8 @@ zhiplus:
   - platform: dingbot
     senderId: !secret dingbot_senderId
   - platform: miaibot
+    app_id: !secret miaibot_app_id
+    user_id: !secret miaibot_user_id
 
 miai:
   miid: !secret miai_miid

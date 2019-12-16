@@ -113,6 +113,7 @@ alias l='ls $LS_OPTIONS -lA'
 alias mqttsub='mosquitto_sub -t "#" -v'
 alias mqttre='systemctl stop mosquitto; sleep 2; rm -rf /var/lib/mosquitto/mosquitto.db; systemctl start mosquitto'
 alias hassre='echo .>~/.homeassistant/home-assistant.log; systemctl restart homeassistant'
+alias hasste='systemctl stop homeassistant; hass'
 alias hassup='systemctl stop homeassistant; pip3 install homeassistant --upgrade; systemctl start homeassistant'
 alias hasslog='tail -f ~/.homeassistant/home-assistant.log'
 EOF
