@@ -96,6 +96,7 @@ Bedroom:
     - fan.purifier6
     - fan.bedroom_fan
     - light.bedroom_light
+    - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.nodemcu6_motion
     # - binary_sensor.purifier6_light
     - sensor.nodemcu6_lightness
@@ -200,6 +201,7 @@ Balcony:
     - person.a_yi
     - automation.shi_nei_kong_qi_chai
     - automation.shi_nei_men_ti_xing
+    - automation.huan_jing_zhuang_kuang
 
 客厅:
   view: yes
@@ -302,6 +304,7 @@ Balcony:
     - fan.purifier6
     - fan.bedroom_fan
     - light.bedroom_light
+    - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.nodemcu6_motion
     # - binary_sensor.purifier6_light
     - sensor.nodemcu6_lightness
