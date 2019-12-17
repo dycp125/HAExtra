@@ -694,7 +694,7 @@ aligenie:
 
 zhiplus:
   - platform: dingbot
-    senderId: !secret dingbot_senderId
+    chatbotUserId: !secret dingbot_chatbotUserId
   - platform: miaibot
     app_id: !secret miaibot_app_id
     user_id: !secret miaibot_user_id

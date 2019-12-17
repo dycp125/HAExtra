@@ -15,8 +15,7 @@ from .chatbot import ChatBotView
 class dingbotView(ChatBotView):
 
     def check(self, data):
-        #_LOGGER.debug("TOKEN: <%s>~=<%s>", data['senderId'], _senderId)
-        return data['senderId'] == _conf['senderId']
+        return data['chatbotUserId'] == _conf['chatbotUserId']
 
     async def handle(self, data):
         return await zhibotQuery(_hass, data['text']['content'])

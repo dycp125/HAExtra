@@ -46,9 +46,8 @@ async def zhibotStates(hass, query, states, group, names):
 
         if names is not None:
             names.append(friendly_name)
-        elif query.startswith(friendly_name) or query.endswith(friendly_name):
-            action = zhibotAction(entity_id, query)
-            return friendly_name + await zhibotState(hass, entity_id, state.state, action)
+        elif query.endswith(friendly_name):
+            return friendly_name + await zhibotState(hass, entity_id, state.state, query)
     return None
 
 STATE_NAMES = {
@@ -72,14 +71,16 @@ STATE_NAMES = {
     'unavailable': '不可用',
 }
 
-async def zhibotState(hass, entity_id, state, action):
-    cover = entity_id.startswith('cover') or entity_id == 'group.all_covers'
-    domain = 'cover' if cover else 'homeassistant'
-    #domain = entity_id[:entity_id.find('.')]
-    if action == '打开':
-        service = 'open_cover' if cover else 'turn_on'
-    elif action == '关闭':
-        service = 'close_cover' if cover else 'turn_off'
+async def zhibotState(hass, entity_id, state, query):
+    domain = entity_id[:entity_id.find('.')]
+    is_cover = domain == 'cover' or entity_id == 'group.all_covers'
+    can_action = not domain in ['sensor', 'binary_sensor', 'device_tracker', 'person']
+    if can_action and '开' in query:
+        service = 'open_cover' if is_cover else 'turn_on'
+        action = '打开'
+    elif can_action and '关' in query:
+        service = 'close_cover' if is_cover else 'turn_off'
+        action = '关闭'
     else:
         return '为' + (STATE_NAMES[state] if state in STATE_NAMES else state)
 
@@ -88,11 +89,3 @@ async def zhibotState(hass, entity_id, state, action):
         result = await hass.services.async_call(domain, service, data, True)
 
     return action + ("成功" if result else "不成功")
-
-def zhibotAction(entity_id, query):
-    if not entity_id.startswith('sensor') and not entity_id.startswith('binary_sensor') and not entity_id.startswith('device_tracker'):
-        if query.startswith('打开') or query.startswith('开') or query.endswith('打开'):
-            return '打开'
-        elif query.startswith('关') or query.endswith('关掉') or query.endswith('关闭') or query.endswith('关上'):
-            return '关闭'
-    return '查询'
