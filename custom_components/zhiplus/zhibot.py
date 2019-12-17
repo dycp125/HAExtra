@@ -12,6 +12,9 @@ async def zhibotQuery(hass, question):
     if not query:
         return "少说空话"
 
+    if query == '全部动作':
+        return '打开/关闭（设备名或群组名）、查询（设备名或群组名，可省略）、触发（自动化，可省略）'
+
     states = hass.states.async_all()
     names = [] if query == "全部设备" else None
 
@@ -36,7 +39,7 @@ async def zhibotQuery(hass, question):
 async def zhibotStates(hass, query, states, group, names):
     for state in states:
         entity_id = state.entity_id
-        if entity_id.startswith('zone') or entity_id.startswith('automation') or group != entity_id.startswith('group'):
+        if entity_id.startswith('zone') or group != entity_id.startswith('group'):
             continue
 
         attributes = state.attributes
@@ -81,6 +84,9 @@ async def zhibotState(hass, entity_id, state, query):
     elif can_action and '关' in query:
         service = 'close_cover' if is_cover else 'turn_off'
         action = '关闭'
+    elif domain == 'automation' #and not '查' in query:
+        service = 'trigger'
+        action = '触发'
     else:
         return '为' + (STATE_NAMES[state] if state in STATE_NAMES else state)
 
