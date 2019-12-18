@@ -12,7 +12,7 @@ async def async_setup(hass, config):
     for conf in confs:
         platform = conf['platform']
         _LOGGER.debug("Loading Zhi+ %s", platform)
-        mod = importlib.import_module('.' + platform + '_view', __package__)
+        mod = importlib.import_module('.' + platform, __package__)
         mod._hass = hass
         mod._conf = conf
         hass.http.register_view(getattr(mod, platform + 'View'))

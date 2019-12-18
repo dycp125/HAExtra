@@ -9,7 +9,7 @@ _conf = None
 
 #
 from .zhibot import zhibotQuery
-from .chatbot_view import chatbotView
+from .chatbot import chatbotView
 from homeassistant.components.http import KEY_REAL_IP
 
 #
