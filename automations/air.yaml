@@ -83,4 +83,4 @@
   action:
     - service: notify.zhiplus_dingbot
       data_template:
-        message: '室内PM2.5为{{ states("sensor.aircat_pm25") }}，温度为{{ states("sensor.aircat_temperature") }}；客厅CO2为{{ states("sensor.fresher_co2") }}，主卧CO2为{{ states("sensor.fresher2_co2") }}，儿童房CO2为{{ states("sensor.nodemcu7_co2") }}，书房CO2为{{ states("sensor.nodemcu3_co2") }}；阳台PM2.5为{{ states("sensor.balcony_pm25") }}，温度为{{ states("sensor.balcony_temperature") }}；{{ state_attr("weather.caiyun", "attribution") }}'
+        message: '室内PM2.5为{{ states("sensor.aircat_pm25") }}，温度为{{ states("sensor.aircat_temperature") }}，CO2为客厅{{ states("sensor.fresher_co2") }}/主卧{{ states("sensor.fresher2_co2") }}/儿童房{{ states("sensor.nodemcu7_co2") }}。室外PM2.5为{{ states("sensor.balcony_pm25") }}，温度为{{ states("sensor.balcony_temperature") }}；{{ state_attr("weather.caiyun", "attribution") }}'
