@@ -17,8 +17,21 @@
 				font-size: 14px;
 				font-weight: 300;
 				text-align: center;
-			}
+/*K				border-radius: 5px;
+				position: relative;
+*/			}
 
+/*K			.entity:after {
+				position: absolute;
+				pointer-events: none;
+				content:"";
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+				opacity:0;
+			}
+*/
 			@media (hover: hover) {
 				.entity:hover {
 					background-color: #009688;
@@ -30,7 +43,15 @@
 					background-color: #9c27b0;
 					cursor: pointer;
 				}
-			}
+
+/*K				.tuner:hover,
+				.entity:hover:after
+				.moder:hover:after {
+					background-image: linear-gradient(rgba(0, 0, 0, 0), black);
+					cursor: pointer;
+					opacity: .5;
+				}
+*/			}
 
 			.sensor {
 				background-color: #00bcd4;
@@ -189,6 +210,7 @@
 		<script>
 			_ws = null // WebSocket handle
 			_wsid = 0 // WebSocket session id
+			_wsapi = null // WebSocket api url
 			_token = null // Access token or password
 			_call_entity_id = null // Processing entity_id
 			_entities = null // All entities
@@ -209,20 +231,17 @@
 				var width = (clientWidth - count * 4) / count
 				width = Math.floor(width * 10) / 10
 				document.styleSheets[1].cssRules[0].style.width = width + 'px'
+				document.styleSheets[1].insertRule('.camera { width:' + (width * 1.515) + 'px; }', 1);
 				//alert('clientWidth:' + clientWidth + ' count:' + count + ' width:' + width);
 
-				connect()
-			}
-
-			function connect() {
 				// Parse api url
 				var params = location.search.split('@')
 				if (params.length > 1 && params[1].startsWith('ws')) {
-					var wsapi = params[1]
+					_wsapi = params[1]
 				} else {
-					var wsapi = (location.protocol == 'https:' ? 'wss://' : 'ws://') + location.host
+					_wsapi = (location.protocol == 'https:' ? 'wss://' : 'ws://') + location.host
 				}
-				wsapi += '/api/websocket'
+				_wsapi += '/api/websocket'
 
 				// Parse access token
 				_token = params[0].slice(1)
@@ -231,10 +250,13 @@
 						_token = JSON.parse(localStorage.hassTokens).access_token
 					} catch (e) {}
 				}
+				connect();
+			}
 
+			function connect() {
 				floater('loading')
 
-				_ws = new WebSocket(wsapi)
+				_ws = new WebSocket(_wsapi)
 				_ws.onopen = handleOpen
 				_ws.onclose = handleClose
 				_ws.onmessage = handleMessage
@@ -336,8 +358,12 @@
 				vacuum: 'robot-vacuum',
 
 				fan: 'fan',
-				climate: 'thermostat'
+				climate: 'thermostat',
+
+				camera: 'camera'
 			}
+
+			_CLICKABLE_DOMAINS = ['light', 'switch', 'media_player', 'cover', 'vacuum', 'fan', 'climate']
 
 			var _group_entity_ids = null
 			function handleStates() {
@@ -538,8 +564,11 @@
 						dash_click = "location='" + dash_click + "'"
 					}
 					html += ' onclick="' + dash_click + '"'
-				} else if (domain != 'sensor' && domain != 'weather' && domain != 'binary_sensor' && domain != 'device_tracker') {
+				} else if (_CLICKABLE_DOMAINS.indexOf(domain) != -1) {
 					html += ' onclick="handleClick(this)"'
+				}
+				if (domain == "camera") {
+					html += ' style="background:center/cover no-repeat url(' + entity.attributes.entity_picture + ');"'
 				}
 				html += '>'
 				html += makeEntity(entity)
@@ -557,7 +586,7 @@
 				var name = attributes.hasOwnProperty('dash_name') ? renderTemplate(attributes.dash_name, state, attributes) : attributes.friendly_name
 				var html = '<div class="name">' + name + '</div>'
 
-				var na = state == '' || state == 'unavailable' || state == 'unknown' ||  state == 'None'
+				var na = state == '' || state == 'unavailable' || state == 'unknown' || state == 'None'
 				var off =
 					state == 'off' || state == 'not_home' || state == 'closed' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
 
@@ -577,7 +606,7 @@
 							html += '<span class="unit">' + unit + '</span>'
 						}
 					}
-				} else {
+				} else if (domain != 'camera') {
 					html += '<div class="state' + off + '">'
 
 					var icon = has_dash_icon ? renderTemplate(attributes.dash_icon, state, attributes) : attributes.icon
@@ -608,7 +637,7 @@
 					if (attributes.hasOwnProperty('dash_extra')) {
 						var extra = renderTemplate(attributes.dash_extra, state, attributes)
 						if (extra.length > 8) {
-							extra  = '<marquee scrollamount="3">' + extra + '</marquee>'
+							extra = '<marquee scrollamount="3">' + extra + '</marquee>'
 						}
 					} else if (domain == 'climate' || domain == 'fan') {
 						var extra = ''
@@ -748,6 +777,14 @@
 						index1 = _group_entity_ids.indexOf(entity_id1)
 						index2 = _group_entity_ids.indexOf(entity_id2)
 					} else {
+						if (entity1.attributes.icon) {
+							var result = entity1.attributes.icon.localeCompare(entity2.attributes.icon)
+							if (result) {
+								return result
+							}
+						} else if (entity2.attributes.icon) {
+							return -1
+						}
 						return entity1.attributes.friendly_name.localeCompare(entity2.attributes.friendly_name)
 					}
 				}
