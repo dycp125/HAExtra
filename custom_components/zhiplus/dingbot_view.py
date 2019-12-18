@@ -9,10 +9,10 @@ _conf = None
 
 #
 from .zhibot import zhibotQuery
-from .chatbot import ChatBotView
+from .chatbot_view import chatbotView
 
 #
-class dingbotView(ChatBotView):
+class dingbotView(chatbotView):
 
     def check(self, data):
         return data['chatbotUserId'] == _conf['chatbotUserId']

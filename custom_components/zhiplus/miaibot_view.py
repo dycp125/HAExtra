@@ -9,11 +9,11 @@ _conf = None
 
 #
 from .zhibot import zhibotQuery
-from .chatbot import ChatBotView
+from .chatbot_view import chatbotView
 from homeassistant.components.http import KEY_REAL_IP
 
 #
-class miaibotView(ChatBotView):
+class miaibotView(chatbotView):
 
     async def post(self, request):
         self._open_mic = False

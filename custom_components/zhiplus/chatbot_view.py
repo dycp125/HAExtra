@@ -6,7 +6,7 @@ _LOGGER = logging.getLogger(__name__)
 from homeassistant.components.http import HomeAssistantView
 
 #
-class ChatBotView(HomeAssistantView):
+class chatbotView(HomeAssistantView):
     """View to handle Configuration requests."""
 
     def __init__(self):
