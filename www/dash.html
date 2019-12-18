@@ -53,12 +53,18 @@
 				}
 */			}
 
-			.sensor {
-				background-color: #00bcd4;
+			.utility {
+				line-height: 120px;
+				font-size: 44px;
+				opacity: .8;
 			}
 
 			.weather {
 				background-color: #00bcd4; /*3f51b5;*/
+			}
+
+			.sensor {
+				background-color: #00bcd4;
 			}
 
 			.binary_sensor {
@@ -411,6 +417,8 @@
 				for (var i in entities) {
 					html += makeGrid(entities[i])
 				}
+
+				html += '<div class="entity utility" onclick="location.reload()"><i class="mdi mdi-reload"></i></div>'
 
 				floater()
 				document.getElementById('content').innerHTML = html

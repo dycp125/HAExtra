@@ -267,7 +267,6 @@ sensor.balcony_temperature:
 sensor.fan_temperature:
   friendly_name: 风扇温度
 sensor.fresher2_co2:
-  dash_click: location.reload()
   dash_extra: 'eval:${state}>1000 ? "<font color=red>空气闷</font>" : ""'
   friendly_name: 主卧二氧化碳
   icon: mdi:periodic-table-co2
@@ -280,7 +279,6 @@ sensor.fresher2_pm25:
 sensor.fresher2_temperature:
   friendly_name: 主卧温度
 sensor.fresher_co2:
-  dash_click: connect()
   friendly_name: 客厅二氧化碳
   icon: mdi:periodic-table-co2
 sensor.fresher_humidity:
