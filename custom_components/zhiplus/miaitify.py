@@ -31,10 +31,10 @@ def miai_ubus(deviceId, method, path, message):
         code = result['code']
         if code == 0: # Success
             return True
-        elif code == 100: # ubus error
-            pass
-        elif code == 1000: # Unauthorized
-            _LOGGER.error('Unauthorized')
+        # elif code == 100: # ubus error
+        #     pass
+        # elif code == 1000: # Unauthorized
+        #     _LOGGER.error('Unauthorized')
         else:
             _LOGGER.error(result)
     return False
@@ -46,49 +46,32 @@ def miai_player_set_volume(deviceId, cookie, volume):
     return miai_ubus(deviceId, 'player_set_volume', 'mediaplayer', {'volume':volume, 'media':'app_ios'})
 
 def miai_login(user, password):
-    sign, pass_trace = miai_serviceLogin()
-    if sign is None or pass_trace is None:
-        _LOGGER.warning("miai_serviceLogin Failed")
+    sign = miai_serviceLogin()
+    if sign is None:
         return None
 
-    auth_result = miai_serviceLoginAuth2(user, password, sign, pass_trace)
+    auth_result = miai_serviceLoginAuth2(user, password, sign)
     if auth_result is None:
-        _LOGGER.warning('miai_serviceLoginAuth2 Failed')
         return None
 
-    code = auth_result['code']
-    if code == 0:
-        cookies = miai_login_miai(auth_result['location'], auth_result['nonce'], auth_result['ssecurity'])
-        if cookies is None:
-            _LOGGER.warning('miai_login_miai Failed')
-            return None
-       
-        devices = miai_device_list(cookies['userId'], cookies['serviceToken'])
-        if devices is None:
-            _LOGGER.warning('miai_device_list Failed')
-        return devices
+    login_success = miai_login_miai(auth_result['location'], auth_result['nonce'], auth_result['ssecurity'])
+    if not login_success:
+        return None
 
-    elif code == 87001:
-        _LOGGER.error('Need capt code')
-    elif code == 70016:
-        _LOGGER.error('Incorrect password')
-    else:
-        _LOGGER.error(result)
-    return None
+    return miai_device_list()
 
 def miai_serviceLogin():
     url = 'https://account.xiaomi.com/pass/serviceLogin?sid=micoapi'
     pattern = re.compile(r'_sign":"(.*?)",')
     try:
         r = _request.get(url)
-        pass_trace = _request.cookies.get_dict()['pass_trace']
-        sign = pattern.findall(r.text)[0]
-        return (sign, pass_trace)
+        return pattern.findall(r.text)[0]
     except BaseException as e:
-        _LOGGER.warning(e)
-        return (None, None)
+        import traceback
+        _LOGGER.error(traceback.format_exc())
+        return None
 
-def miai_serviceLoginAuth2(user, password, sign, pass_trace, captCode=None, ick=None):
+def miai_serviceLoginAuth2(user, password, sign, captCode=None, ick=None):
     url='https://account.xiaomi.com/pass/serviceLoginAuth2'
     data = {
         '_json':'true',
@@ -107,10 +90,20 @@ def miai_serviceLoginAuth2(user, password, sign, pass_trace, captCode=None, ick=
 
     try:
         response =  _request.post(url, data=data)
-        return json.loads(response.text[11:])
+        result = json.loads(response.text[11:])
+        code = result['code']
+        if code == 0:
+            return result
+        elif code == 87001:
+            _LOGGER.error('Need capt code')
+        elif code == 70016:
+            _LOGGER.error('Incorrect password')
+        else:
+            _LOGGER.error(result)
     except BaseException as e:
-        _LOGGER.error(e)
-        return None
+        import traceback
+        _LOGGER.error(traceback.format_exc())
+    return None
 
 def miai_login_miai(url, nonce, ssecurity):
     token = 'nonce=' + str(nonce) + '&' + ssecurity
@@ -119,15 +112,12 @@ def miai_login_miai(url, nonce, ssecurity):
     url += '&clientSign=' + parse.quote(clientSign.decode())
     try:
         r = _request.get(url)
-        if r.status_code == 200:
-            return _request.cookies.get_dict()
-        else:
-            return None
+        return r.status_code == 200
     except BaseException as e:
         _LOGGER.warning(e)
-        return None
+        return False
 
-def miai_device_list(userId, serviceToken):
+def miai_device_list():
     url = 'https://api.mina.mi.com/admin/v2/device_list?master=1'
     result = miai_request(url)
     return result.get('data') if result else None

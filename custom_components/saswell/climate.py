@@ -230,7 +230,7 @@ class SaswellData():
             _LOGGER.info("List device: devs=%s", self.devs)
         except BaseException:
             import traceback
-            _LOGGER.error('Exception: %s', traceback.format_exc())
+            _LOGGER.error(traceback.format_exc())
 
     async def control(self, index, prop, value):
         """Control device via server."""
