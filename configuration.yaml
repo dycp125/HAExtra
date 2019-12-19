@@ -709,15 +709,13 @@ input_text:
     initial: 我是小爱
 
 notify:
-  # - name: mobile
-  #   platform: group
-  #   services:
-  #     - service: zhiplus_dingbot
-      # - service: mobile_app_zphone
-      # - service: mobile_app_yphone
   - platform: zhiplus
     targets:
-      dingbot:
-        type: dingbot
+      ding:
+        target: ding
         token: !secret dingbot_token
         secret: !secret dingbot_secret
+      miai:
+        target: miai
+        miid: !secret miai_miid
+        password: !secret miai_password

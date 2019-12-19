@@ -25,6 +25,7 @@ def get_service(hass, config, discovery_info=None):
     return ZhiPlusNotificationService(hass, config['targets'])
 
 
+import importlib
 class ZhiPlusNotificationService(BaseNotificationService):
     """Implement the notification service."""
     def __init__(self, hass, targets):
@@ -39,33 +40,13 @@ class ZhiPlusNotificationService(BaseNotificationService):
     async def async_send_message(self, message="", **kwargs):
         """Send a message."""
         try:
-            target = kwargs.get(ATTR_TARGET)[0]
+            conf = kwargs.get(ATTR_TARGET)[0]
             data = kwargs.get(ATTR_DATA)
-            _LOGGER.error('%s', kwargs)
-            if target['type'] == 'dingbot':
-                await self.async_send2_dingbot(message, target)
+            target = conf['target']
+            mod = importlib.import_module('.' + target + 'tify', __package__)
+            async_send = getattr(mod, 'async_send')
+            session = self._hass.helpers.aiohttp_client.async_get_clientsession()
+            await async_send(conf, session, message, data)
         except:
             import traceback
             _LOGGER.error(traceback.format_exc())
-
-    async def  async_send2_dingbot(self, message, target):
-        token = target['token']
-        secret = target.get('secret')
-        url = "https://oapi.dingtalk.com/robot/send?access_token=" + token
-        if secret is not None:
-            import time
-            import hmac
-            import hashlib
-            import base64
-            import urllib
-            timestamp = round(time.time() * 1000)
-            hmac_code = hmac.new(secret.encode('utf-8'), '{}\n{}'.format(timestamp, secret).encode('utf-8'), digestmod=hashlib.sha256).digest()
-            sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
-            url += '&timestamp=' + str(timestamp) + '&sign=' + sign
-
-        session = self._hass.helpers.aiohttp_client.async_get_clientsession()
-        _LOGGER.debug("URL: %s", url)
-        async with session.post(url, json={'msgtype': 'text', 'text': {'content': message}}) as response:
-            json = await response.json()
-            if json['errcode'] != 0:
-                _LOGGER.error("RESPONSE: %s", await response.text())
