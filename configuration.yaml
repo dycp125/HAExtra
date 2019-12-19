@@ -699,15 +699,6 @@ zhiplus:
     app_id: !secret miaibot_app_id
     user_id: !secret miaibot_user_id
 
-miai:
-  miid: !secret miai_miid
-  password: !secret miai_password
-
-input_text:
-  miai:
-    name: MiAI
-    initial: 我是小爱
-
 notify:
   - platform: zhiplus
     targets:
@@ -719,3 +710,8 @@ notify:
         target: miai
         miid: !secret miai_miid
         password: !secret miai_password
+
+input_text:
+  miai:
+    name: MiAI
+    initial: 我是小爱

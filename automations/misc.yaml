@@ -5,6 +5,6 @@
   action:
     - condition: template
       value_template: '{{ states("input_text.miai") != "unknown" and states("input_text.miai") != "" }}'
-    - service: miai.say
+    - service: notify.zhiplus_miai
       data_template:
         message: '{{ states("input_text.miai") }}'
