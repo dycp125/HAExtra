@@ -14,7 +14,6 @@ class chatbotView(HomeAssistantView):
     def __init__(self):
         self.name = self.__class__.__name__.rstrip('View').lower()
         self.url = '/' + self.name
-        _LOGGER.debug("URL: http://localhost:8123" + self.url)
         self.requires_auth = False
 
     async def post(self, request):

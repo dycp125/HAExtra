@@ -149,7 +149,7 @@ if __name__ == '__main__':
     import sys
     devices = miai_login(sys.argv[1], sys.argv[2])
     if devices:
-        miai_text_to_speech(devices[0]['deviceID'], sys.argv[3] if sys.argc > 3: "测试")
+        miai_text_to_speech(devices[0]['deviceID'], sys.argv[3] if len(sys.argv) > 3 else "测试")
     exit(0)
 
 _devices = None

@@ -88,9 +88,9 @@ async def zhibotState(hass, entity_id, state, query):
     elif can_action and '关' in query:
         service = 'close_cover' if is_cover else 'turn_off'
         action = '关闭'
-    elif domain == 'automation'  # and not '查' in query:
-    service = 'trigger'
-    action = '触发'
+    elif domain == 'automation':  # and not '查' in query
+        service = 'trigger'
+        action = '触发'
     else:
         return '为' + (STATE_NAMES[state] if state in STATE_NAMES else state)
 
