@@ -19,7 +19,9 @@
     #     speed: Silent
     - service: notify.zhiplus_miai
       data:
-        volume: 30
+        message: ''
+        data:
+          volume: 30
     - service: climate.set_temperature
       data:
         entity_id: climate.daikin3
@@ -71,7 +73,9 @@
         brightness: 0
     - service: notify.zhiplus_miai
       data:
-        volume: 60
+        message: ''
+        data:
+          volume: 60
     - service: climate.set_fan_mode
       data:
         entity_id: climate.daikin3
