@@ -1,4 +1,8 @@
 
+#
+from .zhibot import zhibotQuery
+from .chatbot import chatbotView
+
 # Logging
 import logging
 _LOGGER = logging.getLogger(__name__)
@@ -7,9 +11,6 @@ _LOGGER = logging.getLogger(__name__)
 _hass = None
 _conf = None
 
-#
-from .zhibot import zhibotQuery
-from .chatbot import chatbotView
 
 #
 class dingbotView(chatbotView):

@@ -1,11 +1,13 @@
 
+from homeassistant.components.http import HomeAssistantView
+
 # Logging
 import logging
 _LOGGER = logging.getLogger(__name__)
 
-from homeassistant.components.http import HomeAssistantView
 
 #
+
 class chatbotView(HomeAssistantView):
     """View to handle Configuration requests."""
 

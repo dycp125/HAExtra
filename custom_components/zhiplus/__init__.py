@@ -5,9 +5,9 @@ _LOGGER = logging.getLogger(__name__)
 
 DOMAIN = 'zhiplus'
 
-#
-import importlib
+
 async def async_setup(hass, config):
+    import importlib
     confs = config.get(DOMAIN)
     if confs:
         for conf in confs:

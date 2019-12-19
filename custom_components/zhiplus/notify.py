@@ -1,14 +1,15 @@
 
 # Logging
-import logging
-_LOGGER = logging.getLogger(__name__)
-
+import importlib
 from homeassistant.components.notify import (
     ATTR_DATA,
     ATTR_TARGET,
     # PLATFORM_SCHEMA,
     BaseNotificationService,
 )
+
+import logging
+_LOGGER = logging.getLogger(__name__)
 
 # import voluptuous as vol
 # import homeassistant.helpers.config_validation as cv
@@ -20,14 +21,15 @@ from homeassistant.components.notify import (
 #     }
 # )
 
+
 def get_service(hass, config, discovery_info=None):
     """Return the notify service."""
     return ZhiPlusNotificationService(config['targets'])
 
 
-import importlib
 class ZhiPlusNotificationService(BaseNotificationService):
     """Implement the notification service."""
+
     def __init__(self, targets):
         """Initialize the service."""
         self._targets = targets

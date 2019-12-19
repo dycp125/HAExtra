@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 
-import homeassistant.helpers.config_validation as cv
-import voluptuous as vol
-from homeassistant.components.notify import PLATFORM_SCHEMA
+
 import json
 import requests
 import os
@@ -29,8 +27,9 @@ def miai_request(url, data=None):
             url, data=data) if data is not None else _request.get(url)
         result = json.loads(response.text)
         return result
-    except BaseException as e:
-        _LOGGER.error(e)
+    except BaseException:
+        import traceback
+        _LOGGER.error(traceback.format_exc())
     return False
 
 
@@ -85,7 +84,7 @@ def miai_serviceLogin():
     try:
         r = _request.get(url)
         return pattern.findall(r.text)[0]
-    except BaseException as e:
+    except BaseException:
         import traceback
         _LOGGER.error(traceback.format_exc())
         return None
@@ -134,8 +133,9 @@ def miai_login_miai(url, nonce, ssecurity):
     try:
         r = _request.get(url)
         return r.status_code == 200
-    except BaseException as e:
-        _LOGGER.warning(e)
+    except BaseException:
+        import traceback
+        _LOGGER.error(traceback.format_exc())
         return False
 
 
@@ -155,7 +155,7 @@ if __name__ == '__main__':
 _devices = None
 
 
-async def async_send2(miid, password, devno=0, message, volume=None):
+async def async_send2(miid, password, devno, message, volume=None):
     global _devices
     if _devices is None:
         _devices = miai_login(miid, password)

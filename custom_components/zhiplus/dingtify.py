@@ -1,9 +1,9 @@
+import aiohttp
 
 # Logging
 import logging
 _LOGGER = logging.getLogger(__name__)
 
-import aiohttp
 
 async def async_send(conf, message, data=None):
     token = conf['token']
@@ -16,7 +16,8 @@ async def async_send(conf, message, data=None):
         import base64
         import urllib
         timestamp = round(time.time() * 1000)
-        hmac_code = hmac.new(secret.encode('utf-8'), '{}\n{}'.format(timestamp, secret).encode('utf-8'), digestmod=hashlib.sha256).digest()
+        hmac_code = hmac.new(secret.encode('utf-8'), '{}\n{}'.format(
+            timestamp, secret).encode('utf-8'), digestmod=hashlib.sha256).digest()
         sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
         url += '&timestamp=' + str(timestamp) + '&sign=' + sign
 

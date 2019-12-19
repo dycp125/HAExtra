@@ -1,10 +1,11 @@
+from homeassistant.helpers.state import AsyncTrackStates
 
 # Logging
 import logging
 _LOGGER = logging.getLogger(__name__)
 
-# 
-from homeassistant.helpers.state import AsyncTrackStates
+#
+
 
 async def zhibotQuery(hass, question):
     query = question.strip()
@@ -18,16 +19,16 @@ async def zhibotQuery(hass, question):
     states = hass.states.async_all()
     names = [] if query == "全部设备" else None
 
-    answer = await zhibotStates(hass, query, states, False, names) # 先尝试处理设备
+    answer = await zhibotStates(hass, query, states, False, names)  # 先尝试处理设备
     if answer is not None:
-       return answer
+        return answer
 
     # if names is not None:
     #     import locale
     #     locale.setlocale(locale.LC_COLLATE, 'zh_CN.UTF8')
     #     names.sort(cmp=locale.strcoll)
 
-    answer = await zhibotStates(hass, query, states, True, names) # 再尝试处理分组
+    answer = await zhibotStates(hass, query, states, True, names)  # 再尝试处理分组
     if answer is not None:
         return answer
 
@@ -35,6 +36,7 @@ async def zhibotQuery(hass, question):
         return ','.join(names)
 
     return "未找到设备"
+
 
 async def zhibotStates(hass, query, states, group, names):
     for state in states:
@@ -74,19 +76,21 @@ STATE_NAMES = {
     'unavailable': '不可用',
 }
 
+
 async def zhibotState(hass, entity_id, state, query):
     domain = entity_id[:entity_id.find('.')]
     is_cover = domain == 'cover' or entity_id == 'group.all_covers'
-    can_action = not domain in ['sensor', 'binary_sensor', 'device_tracker', 'person']
+    can_action = not domain in [
+        'sensor', 'binary_sensor', 'device_tracker', 'person']
     if can_action and '开' in query:
         service = 'open_cover' if is_cover else 'turn_on'
         action = '打开'
     elif can_action and '关' in query:
         service = 'close_cover' if is_cover else 'turn_off'
         action = '关闭'
-    elif domain == 'automation' #and not '查' in query:
-        service = 'trigger'
-        action = '触发'
+    elif domain == 'automation'  # and not '查' in query:
+    service = 'trigger'
+    action = '触发'
     else:
         return '为' + (STATE_NAMES[state] if state in STATE_NAMES else state)
 
