@@ -42,6 +42,7 @@ class ZhiPlusNotificationService(BaseNotificationService):
             conf = kwargs.get(ATTR_TARGET)[0]
             data = kwargs.get(ATTR_DATA)
             target = conf['target']
+            _LOGGER.debug(data)
             mod = importlib.import_module('.' + target + 'tify', __package__)
             async_send = getattr(mod, 'async_send')
             await async_send(conf, message, data)

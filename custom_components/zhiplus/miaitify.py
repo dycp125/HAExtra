@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 
+import homeassistant.helpers.config_validation as cv
+import voluptuous as vol
+from homeassistant.components.notify import PLATFORM_SCHEMA
 import json
 import requests
 import os
@@ -14,7 +17,7 @@ from urllib import parse
 
 import logging
 _LOGGER = logging.getLogger(__name__)
-_request = requests.session()
+_request = None
 
 
 def miai_request(url, data=None):
@@ -52,16 +55,19 @@ def miai_text_to_speech(deviceId, text):
     return miai_ubus(deviceId, 'text_to_speech', 'mibrain', {'text': text})
 
 
-def miai_player_set_volume(deviceId, cookie, volume):
+def miai_player_set_volume(deviceId, volume):
     return miai_ubus(deviceId, 'player_set_volume', 'mediaplayer', {'volume': volume, 'media': 'app_ios'})
 
 
-def miai_login(user, password):
+def miai_login(miid, password):
+    global _request
+    _request = requests.session()
+
     sign = miai_serviceLogin()
     if sign is None:
         return None
 
-    auth_result = miai_serviceLoginAuth2(user, password, sign)
+    auth_result = miai_serviceLoginAuth2(miid, password, sign)
     if auth_result is None:
         return None
 
@@ -85,7 +91,7 @@ def miai_serviceLogin():
         return None
 
 
-def miai_serviceLoginAuth2(user, password, sign, captCode=None, ick=None):
+def miai_serviceLoginAuth2(miid, password, sign, captCode=None, ick=None):
     url = 'https://account.xiaomi.com/pass/serviceLoginAuth2'
     data = {
         '_json': 'true',
@@ -95,7 +101,7 @@ def miai_serviceLoginAuth2(user, password, sign, captCode=None, ick=None):
         'qs': '%3Fsid%3Dmicoapi',
         'serviceParam': '{"checkSafePhone":false}',
         'sid': 'micoapi',
-        'user': user
+        'user': miid
     }
     if captCode:
         url += '?_dc=' + str(int(round(time.time() * 1000)))
@@ -143,4 +149,35 @@ if __name__ == '__main__':
     import sys
     devices = miai_login(sys.argv[1], sys.argv[2])
     if devices:
-        miai_text_to_speech(devices[0]['deviceID'], "测试")
+        miai_text_to_speech(devices[0]['deviceID'], sys.argv[3] if sys.argc > 3: "测试")
+    exit(0)
+
+_devices = None
+
+
+async def async_send2(miid, password, devno=0, message, volume=None):
+    global _devices
+    if _devices is None:
+        _devices = miai_login(miid, password)
+    if _devices is None:
+        return False
+
+    deviceId = _devices[devno if devno else 0]['deviceID']
+    result = False
+    if volume is not None:
+        result = miai_player_set_volume(deviceId, volume)
+    if message:
+        result = miai_text_to_speech(deviceId, message)
+    if not result:
+        _devices = None
+    return result
+
+
+async def async_send(conf, message, data=None):
+    miid = conf['miid']
+    password = conf['password']
+    devno = data.get('devno') if data else 0
+    volume = data.get('volume') if data else None
+    if not await async_send2(miid, password, devno, message, volume):
+        if not await async_send2(miid, password, devno, message, volume):
+            _LOGGER.error("Send failed: %s %s", message, data)
