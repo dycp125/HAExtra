@@ -3,7 +3,9 @@
 import logging
 _LOGGER = logging.getLogger(__name__)
 
-async def async_send(conf, session, message, data=None):
+import aiohttp
+
+async def async_send(conf, message, data=None):
     token = conf['token']
     secret = conf.get('secret')
     url = "https://oapi.dingtalk.com/robot/send?access_token=" + token
@@ -19,7 +21,8 @@ async def async_send(conf, session, message, data=None):
         url += '&timestamp=' + str(timestamp) + '&sign=' + sign
 
     _LOGGER.debug("URL: %s", url)
-    async with session.post(url, json={'msgtype': 'text', 'text': {'content': message}}) as response:
-        json = await response.json()
-        if json['errcode'] != 0:
-            _LOGGER.error("RESPONSE: %s", await response.text())
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, json={'msgtype': 'text', 'text': {'content': message}}) as response:
+            json = await response.json()
+            if json['errcode'] != 0:
+                _LOGGER.error("RESPONSE: %s", await response.text())

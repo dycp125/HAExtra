@@ -22,15 +22,14 @@ from homeassistant.components.notify import (
 
 def get_service(hass, config, discovery_info=None):
     """Return the notify service."""
-    return ZhiPlusNotificationService(hass, config['targets'])
+    return ZhiPlusNotificationService(config['targets'])
 
 
 import importlib
 class ZhiPlusNotificationService(BaseNotificationService):
     """Implement the notification service."""
-    def __init__(self, hass, targets):
+    def __init__(self, targets):
         """Initialize the service."""
-        self._hass = hass
         self._targets = targets
 
     @property
@@ -45,8 +44,7 @@ class ZhiPlusNotificationService(BaseNotificationService):
             target = conf['target']
             mod = importlib.import_module('.' + target + 'tify', __package__)
             async_send = getattr(mod, 'async_send')
-            session = self._hass.helpers.aiohttp_client.async_get_clientsession()
-            await async_send(conf, session, message, data)
+            await async_send(conf, message, data)
         except:
             import traceback
             _LOGGER.error(traceback.format_exc())
