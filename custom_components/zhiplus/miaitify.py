@@ -13,29 +13,37 @@ import logging
 _LOGGER = logging.getLogger(__name__)
 _request = requests.session()
 
-def miai_request(deviceId, method, path, message):
+def miai_request(url, data=None):
     try:
         requestId = ''.join(random.sample(string.ascii_letters + string.digits, 30))
-        url = "https://api.mina.mi.com/remote/ubus?deviceId=%s&message=%s&method=%s&path=%s&requestId=%s" % (deviceId, parse.quote(json.dumps(message, ensure_ascii=False)), method, path, requestId) 
-        r = _request.post(url)
-        result = json.loads(r.text)
-        if result['message'] == 'Success':
-            return True
-        else:
-            if result['error'] == 'Unauthorized':
-                _LOGGER.error('Unauthorized')
-                #TODO: self.login_resutl = False
-            else:
-                _LOGGER.error(result)
+        url += "&requestId=" + requestId
+        response = _request.post(url, data=data) if data is not None else _request.get(url)
+        result = json.loads(response.text)
+        return result
     except BaseException as e:
         _LOGGER.error(e)
     return False
 
+def miai_ubus(deviceId, method, path, message):
+    url = "https://api.mina.mi.com/remote/ubus?deviceId=%s&message=%s&method=%s&path=%s" % (deviceId, parse.quote(json.dumps(message, ensure_ascii=False)), method, path) 
+    result = miai_request(url, '')
+    if result:
+        code = result['code']
+        if code == 0: # Success
+            return True
+        elif code == 100: # ubus error
+            pass
+        elif code == 1000: # Unauthorized
+            _LOGGER.error('Unauthorized')
+        else:
+            _LOGGER.error(result)
+    return False
+
 def miai_text_to_speech(deviceId, text):
-    return miai_request(deviceId, 'text_to_speech', 'mibrain', {'text':text})
+    return miai_ubus(deviceId, 'text_to_speech', 'mibrain', {'text':text})
 
 def miai_player_set_volume(deviceId, cookie, volume):
-    return miai_request(deviceId, 'player_set_volume', 'mediaplayer', {'volume':volume, 'media':'app_ios'})
+    return miai_ubus(deviceId, 'player_set_volume', 'mediaplayer', {'volume':volume, 'media':'app_ios'})
 
 def miai_login(user, password):
     sign, pass_trace = miai_serviceLogin()
@@ -92,12 +100,12 @@ def miai_serviceLoginAuth2(user, password, sign, pass_trace, captCode=None, ick=
         'sid': 'micoapi',
         'user': user
         }
+    if captCode:
+        url += '?_dc=' + str(int(round(time.time() * 1000)))
+        data['captCode'] = captCode
+        #_headers['Cookie'] += '; ick=' + ick
 
     try:
-        if captCode:
-            url += '?_dc=' + str(int(round(time.time() * 1000)))
-            data['captCode'] = captCode
-            _headers['Cookie'] += '; ick=' + ick
         response =  _request.post(url, data=data)
         return json.loads(response.text[11:])
     except BaseException as e:
@@ -120,15 +128,9 @@ def miai_login_miai(url, nonce, ssecurity):
         return None
 
 def miai_device_list(userId, serviceToken):
-    #requestId = 'CdPhDBJMUwAhgxiUvOsKt0kwXThAvY'
-    requestId = ''.join(random.sample(string.ascii_letters + string.digits, 30))
-    url = 'https://api.mina.mi.com/admin/v2/device_list?master=1&requestId=' + requestId
-    try:
-        rsponse = _request.get(url)
-        return json.loads(rsponse.text)['data']
-    except BaseException as e:
-        _LOGGER.error(e)
-        return None
+    url = 'https://api.mina.mi.com/admin/v2/device_list?master=1'
+    result = miai_request(url)
+    return result.get('data') if result else None
 
 if __name__ == '__main__':
     import sys
