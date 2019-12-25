@@ -158,11 +158,15 @@ if __name__ == '__main__':
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 
-SERVICE_SCHEMA = vol.Schema({
-    vol.Optional('message'): cv.string,
-    vol.Optional('devno'): cv.string,
-    vol.Optional('volume'): int,
-})
+
+SERVICE_SCHEMA = vol.All(
+    vol.Schema({
+        vol.Optional('message'): cv.string,
+        vol.Optional('volume'): vol.Range(min=0, max=100),
+        vol.Optional('devno'): vol.Range(min=0, max=9),
+    }),
+    cv.has_at_least_one_key("message", "volume"),
+)
 
 
 class miaimsg(object):

@@ -1,5 +1,3 @@
-import homeassistant.helpers.config_validation as cv
-import voluptuous as vol
 import aiohttp
 
 # Logging
@@ -7,6 +5,9 @@ import logging
 _LOGGER = logging.getLogger(__name__)
 
 # Config validation
+import voluptuous as vol
+import homeassistant.helpers.config_validation as cv
+
 SERVICE_SCHEMA = vol.Schema({
     vol.Required('message'): cv.string,
 })
