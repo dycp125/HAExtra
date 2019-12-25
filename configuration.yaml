@@ -692,24 +692,20 @@ actuator:
 
 aligenie:
 
-zhiplus:
-  - platform: dingbot
+zhibot:
+  - platform: ding
     chatbotUserId: !secret dingbot_chatbotUserId
-  - platform: miaibot
+  - platform: miai
     app_id: !secret miaibot_app_id
     user_id: !secret miaibot_user_id
 
-notify:
-  - platform: zhiplus
-    targets:
-      ding:
-        target: ding
-        token: !secret dingbot_token
-        secret: !secret dingbot_secret
-      miai:
-        target: miai
-        miid: !secret miai_miid
-        password: !secret miai_password
+zhimsg:
+  - platform: ding
+    token: !secret dingbot_token
+    secret: !secret dingbot_secret
+  - platform: miai
+    miid: !secret miai_miid
+    password: !secret miai_password
 
 input_text:
   miai:

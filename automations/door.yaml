@@ -113,7 +113,7 @@
     #     gw_mac: 34CE0090901A
     #     ringtone_id: 10015
     #     ringtone_vol: 100
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data_template:
         #{% if is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") %}洗手间门、{% endif %}
         message: '晚上请关好{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") %}厨房门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}阳台门{% endif %}'

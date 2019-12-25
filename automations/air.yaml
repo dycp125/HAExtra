@@ -19,7 +19,7 @@
       after: '06:00'
       before: '23:00'
   action:
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data_template:
         message: '阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，{% if PM25 < 20 %}空气很好{% elif PM25 < 40 %}空气不错{% elif PM25 < 60 %}空气一般{% elif PM25 < 80 %}空气不好{% else %}空气污染，请关好门窗{% endif %}'
 
@@ -50,7 +50,7 @@
           entity_id: sensor.fresher_co2
           above: 800
   action:
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data:
         message: 外面空气很好，可以打开门窗
 
@@ -66,7 +66,7 @@
       after: '06:00'
       before: '23:00'
   action:
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data_template:
         message: '客厅PM2.5为{{ states("sensor.aircat_pm25") }}，空气不好。{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") or is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") or is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}请关好{% if is_state("binary_sensor.door_window_sensor_158d0001f3d2d1", "on") %}厨房门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d0003cf4735", "on") %}洗手间门、{% endif %}{% if is_state("binary_sensor.door_window_sensor_158d000228a52b", "on") %}阳台门{% endif %}{% endif %}'
     - delay: 600
@@ -81,6 +81,6 @@
     - platform: time
       at: '7:30:00'
   action:
-    - service: notify.zhiplus_ding
+    - service: zhimsg.ding
       data_template:
         message: '室内PM2.5为{{ states("sensor.aircat_pm25") }}，温度为{{ states("sensor.aircat_temperature") }}，CO2为客厅{{ states("sensor.fresher_co2") }}/主卧{{ states("sensor.fresher2_co2") }}/儿童房{{ states("sensor.nodemcu7_co2") }}。室外PM2.5为{{ states("sensor.balcony_pm25") }}，温度为{{ states("sensor.balcony_temperature") }}；{{ state_attr("weather.caiyun", "attribution") }}'

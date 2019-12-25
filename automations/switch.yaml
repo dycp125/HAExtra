@@ -6,7 +6,7 @@
         entity_id: binary_sensor.switch_158d0001e59b33
         click_type: single
   action:
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data_template:
         message: '阳台PM2.5为{{ states("sensor.balcony_pm25") }}，餐厅PM2.5为{{ states("sensor.aircat_pm25") }}，主卧PM2.5为{{ states("sensor.fresher2_pm25") }}。客厅二氧化碳浓度为{{ states("sensor.fresher_co2") }}，主卧二氧化碳浓度为{{ states("sensor.fresher2_co2") }}，儿童房二氧化碳浓度为{{ states("sensor.nodemcu7_co2") }}'
 
@@ -18,7 +18,7 @@
         entity_id: binary_sensor.switch_158d0001e59b33
         click_type: double
   action:
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data:
         message: 晾衣机将于今晚定时开启烘干功能
 
@@ -36,7 +36,7 @@
       entity_id: automation.guo_dao_deng_wan_shang_kai
     - service: automation.toggle
       entity_id: automation.guo_dao_bei_jing_deng_gan_ying
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data_template:
         message: '过道灯自动感应功能已{% if is_state("automation.guo_dao_bei_jing_deng_gan_ying", "on") %}启用{% else %}暂停，所有灯光将在10秒后关闭{% endif %}'
     - delay: '00:00:10'
@@ -60,7 +60,7 @@
       entity_id: automation.guo_dao_deng_wan_shang_kai
     - service: automation.turn_on
       entity_id: automation.guo_dao_bei_jing_deng_gan_ying
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data:
         message: 过道灯自动感应功能已重新启用
     - delay: '00:00:10'
@@ -88,7 +88,7 @@
         entity_id: binary_sensor.switch_158d000201a73f
         click_type: double
   action:
-    - service: notify.zhiplus_miai
+    - service: zhimsg.miai
       data_template:
         message: '正在{% if is_state("switch.projector", "on") %}关闭{% else %}打开{% endif %}投影仪'
     - service: switch.toggle
