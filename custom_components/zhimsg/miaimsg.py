@@ -165,36 +165,31 @@ SERVICE_SCHEMA = vol.Schema({
 })
 
 
-# Global variable
-_hass = None
-_conf = None
-_devices = None
+class miaimsg(object):
 
-async def async_send2(miid, password, devno, message, volume=None):
-    global _devices
-    if _devices is None:
-        _devices = miai_login(miid, password)
-    if _devices is None:
-        return False
+    def __init__(self, hass, conf):
+        self._miid = conf['miid']
+        self._password = conf.get('password')
+        self._devices = None
 
-    deviceId = _devices[devno if devno else 0]['deviceID']
-    result = False
-    if volume is not None:
-        result = miai_player_set_volume(deviceId, volume)
-    if message:
-        result = miai_text_to_speech(deviceId, message)
-    if not result:
-        _devices = None
-    return result
+    async def async_send_message(self, message, data):
+        devno = data.get('devno', 0)
+        volume = data.get('volume')
+        if message or volume:
+            if not await self.async_send_once(devno, message, volume):
+                if not await self.async_send_once(devno, message, volume):
+                    _LOGGER.error("Send failed: %s %s", message, data)
 
+    async def async_send_once(self, devno, message, volume):
+        if self._devices is None:
+            self._devices = miai_login(self._miid, self._password)
+        if self._devices is None:
+            return False
 
-async def async_send(call):
-    miid = _conf['miid']
-    password = _conf['password']
-    data = call.data
-    message = data.get('message')
-    devno = data.get('devno', 0)
-    volume = data.get('volume')
-    if not await async_send2(miid, password, devno, message, volume):
-        if not await async_send2(miid, password, devno, message, volume):
-            _LOGGER.error("Send failed: %s %s", message, data)
+        deviceId = self._devices[devno]['deviceID']
+        result = True if volume is None else miai_player_set_volume(deviceId, volume)
+        if result and message:
+            result = miai_text_to_speech(deviceId, message)
+        if not result:
+            self._devices = None
+        return result
