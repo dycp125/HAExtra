@@ -38,7 +38,7 @@ def miai_ubus(deviceId, method, path, message):
         deviceId, parse.quote(json.dumps(message, ensure_ascii=False)), method, path)
     result = miai_request(url, '')
     if result:
-        code = result['code']
+        code = result.get('code')
         if code == 0:  # Success
             return True
         # elif code == 100: # ubus error
@@ -71,7 +71,7 @@ def miai_login(miid, password):
         return None
 
     login_success = miai_login_miai(
-        auth_result['location'], auth_result['nonce'], auth_result['ssecurity'])
+        auth_result.get('location'), auth_result.get('nonce'), auth_result.get('ssecurity'))
     if not login_success:
         return None
 
