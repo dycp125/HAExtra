@@ -66,7 +66,6 @@ Passage:
     - light.passage_spotlight
     #- light.studyroom_light2
     - light.passage_backlight
-    - switch.station
     - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
@@ -131,6 +130,7 @@ Studyroom:
     - cover.studyroom_cover
     #- cover.airer
     - switch.projector
+    - switch.station
     - switch.speaker
     - climate.mitsubishi
     ##- fan.fan2
@@ -255,7 +255,6 @@ Balcony:
     - light.passage_spotlight
     #- light.studyroom_light2
     - light.passage_backlight
-    - switch.station
     - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
@@ -355,6 +354,7 @@ Balcony:
     - cover.studyroom_cover
     #- cover.airer
     - switch.projector
+    - switch.station
     - switch.speaker
     - climate.mitsubishi
     - fan.fan2
