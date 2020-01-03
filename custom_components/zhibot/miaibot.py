@@ -23,7 +23,7 @@ class miaibotView(chatbotView):
         self.conf.append(data['session']['application']['app_id'])
 
     def config_desc(self, data):
-        return "小爱同学“%s”的“%s”正在试图访问“%s”。" % (data['conversationTitle'], data['senderNick'], data['text']['content'])
+        return "小爱同学正在试图访问“%s”。\n\app_id: %s”\nuser_id: %s" % (data['query'], data['session']['application']['app_id'], data['session']['user']['user_id'])
 
     async def handle(self, data):
 

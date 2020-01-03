@@ -20,7 +20,7 @@ class dingbotView(chatbotView):
         self.conf.append(data['chatbotUserId'])
 
     def config_desc(self, data):
-        return "钉钉群“%s”的“%s”正在试图访问“%s”。" % (data['conversationTitle'], data['senderNick'], data['text']['content'])
+        return "钉钉群“%s”的“%s”正在试图访问“%s”。\n\nchatbotUserId: %s" % (data['conversationTitle'], data['senderNick'], data['text']['content'], data['chatbotUserId'])
 
     async def handle(self, data):
         return await zhibotQuery(data['text']['content'])
