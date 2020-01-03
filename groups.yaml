@@ -386,5 +386,5 @@ Balcony:
     - weather.caiyun
     - sun.sun
     - automation.yang_tai_men_gan_ying
-    - automation.yang_tai_kong_qi_chai
-    - automation.yang_tai_kong_qi_hao
+    - automation.yang_tai_men_ti_xing
+    - automation.shi_wai_kong_qi_hao

@@ -1,29 +1,4 @@
-- alias: 阳台空气差
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.balcony_pm25
-      above: 50
-      for:
-        minutes: 5
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d000228a52b
-      from: 'off'
-      to: 'on'
-      for:
-        seconds: 30
-  condition:
-    - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d000228a52b
-      state: 'on'
-    - condition: time
-      after: '06:00'
-      before: '23:00'
-  action:
-    - service: zhimsg.miai
-      data_template:
-        message: '阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，{% if PM25 < 20 %}空气很好{% elif PM25 < 40 %}空气不错{% elif PM25 < 60 %}空气一般{% elif PM25 < 80 %}空气不好{% else %}空气污染，请关好阳台门{% endif %}'
-
-- alias: 阳台空气好
+- alias: 室外空气好
   trigger:
     - platform: numeric_state
       entity_id: sensor.balcony_pm25

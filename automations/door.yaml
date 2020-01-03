@@ -62,6 +62,40 @@
     - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
       entity_id: light.balcony_light
 
+- alias: 阳台门提醒
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.balcony_pm25
+      above: 50
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d000228a52b
+      from: 'off'
+      to: 'on'
+      for:
+        seconds: 30
+  condition:
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_158d000228a52b
+      state: 'on'
+    - condition: time
+      after: '06:00'
+      before: '23:00'
+  action:
+    - service: zhimsg.miai
+      data_template:
+        message: '阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，{% if PM25 < 20 %}空气很好{% elif PM25 < 40 %}空气不错{% elif PM25 < 60 %}空气一般{% elif PM25 < 80 %}空气不好{% else %}空气污染，请关好阳台门{% endif %}'
+    - condition: numeric_state
+      entity_id: sensor.balcony_pm25
+      above: 50
+    - delay: 120
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_158d000228a52b
+      state: 'on'
+    - service: automation.trigger
+      entity_id: automation.yang_tai_men_ti_xing
+
 - alias: 室内门提醒
   trigger:
     - platform: state # 厨房门
