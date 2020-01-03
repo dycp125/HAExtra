@@ -2,34 +2,28 @@
 #
 from .zhibot import zhibotQuery
 from .chatbot import chatbotView
-from homeassistant.components.http import KEY_REAL_IP
 
 # Logging
 import logging
 _LOGGER = logging.getLogger(__name__)
-
-#
-_hass = None
-_conf = None
 
 
 class miaibotView(chatbotView):
 
     async def post(self, request):
         self._open_mic = False
-        self._real_ip = str(request[KEY_REAL_IP])
         return await super().post(request)
 
     def check(self, data):
-        app_id = _conf.get('app_id')
-        if app_id is not None and data['session']['application']['app_id'] != app_id:
-            return False
-        user_id = _conf.get('user_id')
-        if user_id is not None and data['session']['user']['user_id'] != user_id:
-            return False
-        # else
-        #     return True
-        return self._real_ip.startswith('124.251')
+        if data['session']['application']['app_id'] in self.conf:
+            return True
+        return super().check(data)
+
+    def config_done(self, data):
+        self.conf.append(data['session']['application']['app_id'])
+
+    def config_desc(self, data):
+        return "小爱同学“%s”的“%s”正在试图访问“%s”。" % (data['conversationTitle'], data['senderNick'], data['text']['content'])
 
     async def handle(self, data):
 
@@ -53,7 +47,7 @@ class miaibotView(chatbotView):
             self._open_mic = True
             return "您好主人，我能为你做什么呢？"
 
-        answer = await zhibotQuery(_hass, data['query'])
+        answer = await zhibotQuery(data['query'])
         self._open_mic = answer == "未找到设备"
         return answer
 

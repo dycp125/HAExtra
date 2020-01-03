@@ -1,4 +1,5 @@
 from homeassistant.helpers.state import AsyncTrackStates
+from . import hass
 
 # Logging
 import logging
@@ -7,7 +8,7 @@ _LOGGER = logging.getLogger(__name__)
 #
 
 
-async def zhibotQuery(hass, question):
+async def zhibotQuery(question):
     query = question.strip()
     _LOGGER.debug("QUERY: %s", query)
     if not query:
@@ -19,7 +20,7 @@ async def zhibotQuery(hass, question):
     states = hass.states.async_all()
     names = [] if query == "全部设备" else None
 
-    answer = await zhibotStates(hass, query, states, False, names)  # 先尝试处理设备
+    answer = await zhibotStates(query, states, False, names)  # 先尝试处理设备
     if answer is not None:
         return answer
 
@@ -28,7 +29,7 @@ async def zhibotQuery(hass, question):
     #     locale.setlocale(locale.LC_COLLATE, 'zh_CN.UTF8')
     #     names.sort(cmp=locale.strcoll)
 
-    answer = await zhibotStates(hass, query, states, True, names)  # 再尝试处理分组
+    answer = await zhibotStates(query, states, True, names)  # 再尝试处理分组
     if answer is not None:
         return answer
 
@@ -38,7 +39,7 @@ async def zhibotQuery(hass, question):
     return "未找到设备"
 
 
-async def zhibotStates(hass, query, states, group, names):
+async def zhibotStates(query, states, group, names):
     for state in states:
         entity_id = state.entity_id
         if entity_id.startswith('zone') or group != entity_id.startswith('group'):
@@ -52,7 +53,7 @@ async def zhibotStates(hass, query, states, group, names):
         if names is not None:
             names.append(friendly_name)
         elif query.endswith(friendly_name):
-            return friendly_name + await zhibotState(hass, entity_id, state.state, query)
+            return friendly_name + await zhibotState(entity_id, state.state, query)
     return None
 
 STATE_NAMES = {
@@ -77,7 +78,7 @@ STATE_NAMES = {
 }
 
 
-async def zhibotState(hass, entity_id, state, query):
+async def zhibotState(entity_id, state, query):
     domain = entity_id[:entity_id.find('.')]
     is_cover = domain == 'cover' or entity_id == 'group.all_covers'
     can_action = not domain in [

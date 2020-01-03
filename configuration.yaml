@@ -695,10 +695,7 @@ aligenie:
 
 zhibot:
   - platform: ding
-    chatbotUserId: !secret dingbot_chatbotUserId
   - platform: miai
-    app_id: !secret miaibot_app_id
-    user_id: !secret miaibot_user_id
 
 zhimsg:
   - platform: ding
