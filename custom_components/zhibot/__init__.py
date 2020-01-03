@@ -4,12 +4,9 @@ import logging
 _LOGGER = logging.getLogger(__name__)
 
 DOMAIN = 'zhibot'
-hass = None
 
 
-async def async_setup(_hass, config):
-    global hass
-    hass = _hass
+async def async_setup(hass, config):
     import importlib
     confs = config.get(DOMAIN)
     if confs:

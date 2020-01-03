@@ -1,7 +1,8 @@
 
 from homeassistant.components.http import HomeAssistantView
 from homeassistant.util.json import load_json, save_json
-from . import hass
+from homeassistant.components.http import (
+    KEY_REAL_IP, KEY_AUTHENTICATED, KEY_HASS, KEY_HASS_USER, KEY_REAL_IP)
 
 # Logging
 import logging
@@ -17,15 +18,20 @@ class chatbotView(HomeAssistantView):
         self.requires_auth = False
 
         self._configuring = None
-        self.conf = load_json(hass.config.path('.' + self.name))
-        if not self.conf:
-            self.conf = []
+        self.conf = None
 
     async def post(self, request):
         try:
+            #request[KEY_REAL_IP], request.query
+            hass = request.app[KEY_HASS]
+            if self.conf is None:
+                self.conf = load_json(hass.config.path('.' + self.name))
+                if not self.conf:
+                    self.conf = []
+
             data = await request.json()
             _LOGGER.debug("REQUEST: %s", data)
-            answer = await self.handle(data) if self.check(data) else "没有访问授权！"
+            answer = await self.handle(hass, data) if self.check(hass, data) else "没有访问授权！"
         except:
             import traceback
             _LOGGER.error(traceback.format_exc())
@@ -36,7 +42,10 @@ class chatbotView(HomeAssistantView):
     def response(self, answer):
         return None
 
-    def check(self, data):
+    async def handle(self, hass, data):
+        return "未能处理"
+
+    def check(self, hass, data):
         configurator = hass.components.configurator
         if self._configuring:
             configurator.async_request_done(self._configuring)
@@ -63,6 +72,3 @@ class chatbotView(HomeAssistantView):
 
     def config_desc(self, data):
         return "授权访问"
-
-    async def handle(self, data):
-        return "未能处理"

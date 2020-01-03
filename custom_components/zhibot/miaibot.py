@@ -14,10 +14,10 @@ class miaibotView(chatbotView):
         self._open_mic = False
         return await super().post(request)
 
-    def check(self, data):
+    def check(self, hass, data):
         if data['session']['application']['app_id'] in self.conf:
             return True
-        return super().check(data)
+        return super().check(hass, data)
 
     def config_done(self, data):
         self.conf.append(data['session']['application']['app_id'])
@@ -25,7 +25,7 @@ class miaibotView(chatbotView):
     def config_desc(self, data):
         return "小爱同学正在试图访问“%s”。\n\napp_id: %s”\nuser_id: %s" % (data['query'], data['session']['application']['app_id'], data['session']['user']['user_id'])
 
-    async def handle(self, data):
+    async def handle(self, hass, data):
 
         request = data['request']
 
@@ -47,7 +47,7 @@ class miaibotView(chatbotView):
             self._open_mic = True
             return "您好主人，我能为你做什么呢？"
 
-        answer = await zhibotQuery(data['query'])
+        answer = await zhibotQuery(hass, data['query'])
         self._open_mic = answer == "未找到设备"
         return answer
 
