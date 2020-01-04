@@ -11,26 +11,25 @@ _LOGGER = logging.getLogger(__name__)
 class chatbotView(HomeAssistantView):
     """View to handle Configuration requests."""
 
-    def __init__(self):
+    def __init__(self, hass, conf):
         self.name = self.__class__.__name__.rstrip('View').lower()
         self.url = '/' + self.name
         self.requires_auth = False
-
-        self._configuring = None
-        self.conf = None
+        self.hass = hass
+        self.password = conf.get('password')
+        if self.password is None: # Auth: config UI confirmation, intead of pre shared password
+            self._configuring = None
+            self.conf = load_json(hass.config.path('.' + self.name))
+            if not self.conf:
+                self.conf = []
 
     async def post(self, request):
         try:
-            #request[KEY_REAL_IP], request.query
-            hass = request.app[KEY_HASS]
-            if self.conf is None:
-                self.conf = load_json(hass.config.path('.' + self.name))
-                if not self.conf:
-                    self.conf = []
-
+            # request[KEY_REAL_IP]
+            # request.app[KEY_HASS]
             data = await request.json()
             _LOGGER.debug("REQUEST: %s", data)
-            answer = await self.handle(hass, data) if self.check(hass, data) else "没有访问授权！"
+            answer = await self.handle(data) if self.check(request, data) else "没有访问授权！"
         except:
             import traceback
             _LOGGER.error(traceback.format_exc())
@@ -41,11 +40,16 @@ class chatbotView(HomeAssistantView):
     def response(self, answer):
         return None
 
-    async def handle(self, hass, data):
+    async def handle(self, data):
         return "未能处理"
 
-    def check(self, hass, data):
-        configurator = hass.components.configurator
+    def check(self, request, data):
+        if self.password is not None:
+            return self.password == request.query.get('password') or self.password == ''
+        return self.config(data)
+
+    def config(self, data):
+        configurator = self.hass.components.configurator
         if self._configuring:
             configurator.async_request_done(self._configuring)
 
@@ -56,7 +60,7 @@ class chatbotView(HomeAssistantView):
             _LOGGER.debug(fields)
             if fields.get('agree') == 'ok':
                 self.config_done(data)
-                save_json(hass.config.path('.' + self.name), self.conf)
+                save_json(self.hass.config.path('.' + self.name), self.conf)
 
         self._configuring = configurator.async_request_config(
             '智加加', config_callback,

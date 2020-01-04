@@ -15,6 +15,7 @@ async def async_setup(hass, config):
         for conf in confs:
             platform = conf['platform'] + 'bot'
             mod = importlib.import_module('.' + platform, __package__)
-            hass.http.register_view(getattr(mod, platform + 'View'))
+            view = getattr(mod, platform + 'View')
+            hass.http.register_view(view(hass, conf))
             _LOGGER.debug("Listing on: %s/%s", base_url, platform)
     return True
