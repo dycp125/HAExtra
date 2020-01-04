@@ -695,7 +695,9 @@ aligenie:
 
 zhibot:
   - platform: ding
+    password: !secret http_password
   - platform: miai
+    password: !secret http_password
 
 zhimsg:
   - platform: ding
