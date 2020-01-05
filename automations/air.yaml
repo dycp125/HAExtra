@@ -48,6 +48,17 @@
     - condition: numeric_state
       entity_id: sensor.aircat_pm25
       above: 40
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d0003cf4735
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.door_window_sensor_158d000228a52b
+          state: 'on'
     - service: automation.trigger
       entity_id: automation.ke_ting_kong_qi_chai
 
