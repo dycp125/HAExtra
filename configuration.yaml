@@ -14,6 +14,8 @@ logger:
     custom_components.zhimsg: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
+    homeassistant.components.braviatv: debug
+    braviarc: debug
 
 system_health:
 
