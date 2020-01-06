@@ -263,12 +263,12 @@
 				floater('loading')
 
 				_ws = new WebSocket(_wsapi)
-				_ws.onopen = handleOpen
-				_ws.onclose = handleClose
-				_ws.onmessage = handleMessage
+				_ws.onopen = onOpen
+				_ws.onclose = onClose
+				_ws.onmessage = onMessage
 			}
 
-			function handleOpen() {
+			function onOpen() {
 				if (_token) {
 					_ws.send('{"type": "auth", "' + (_token.length < 20 ? 'api_password' : 'access_token') + '": "' + _token + '"}')
 				}
@@ -278,19 +278,22 @@
 			}
 
 			var _retryCount = 0
-			function handleClose() {
+			function onClose() {
 				var retry = ''
 				if (_retryCount < 5) {
 					var timeout = Math.pow(4, _retryCount++)
-					retry = timeout + ' 秒后尝试'
 					setTimeout('connect()', timeout * 1000)
+					if (_retryCount == 1) {
+						return
+					}
+					retry = timeout + ' 秒后尝试'
 				}
 				if (!document.getElementById('error')) {
 					floater('error', '连接关闭，' + retry + '<a href="javascript:connect()">重新连接</a>')
 				}
 			}
 
-			function handleMessage(message) {
+			function onMessage(message) {
 				var json = JSON.parse(message.data)
 				switch (json.type) {
 					case 'result':
