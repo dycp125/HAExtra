@@ -20,7 +20,7 @@
       for:
         minutes: 2
   action:
-    - service: notify.zhiplus_ding
+    - service: zhimsg.ding
       data:
         # title: 大门没关好
         message: 入户门长时间开启，请检查
