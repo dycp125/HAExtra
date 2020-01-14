@@ -129,4 +129,4 @@
       entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
       state: 'on'
     - service: automation.trigger
-      entity_id: automation.cu_fang_men_ti_xing
+      entity_id: automation.chu_fang_men_ti_xing
