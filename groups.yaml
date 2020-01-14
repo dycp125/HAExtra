@@ -28,7 +28,7 @@ Livingroom:
     #- media_player.magic
     - climate.daikin2
     - climate.saswell
-    - fan.wall_fan
+    #- fan.wall_fan
     - fan.fresher
     - sensor.fresher_temperature
     - sensor.fresher_humidity
@@ -58,6 +58,7 @@ Hallway:
     - binary_sensor.door_window_sensor_158d0001f3e5be
     - person.ba_ba
     - person.ma_ma
+    - person.ye_ye
     - person.a_yi
 
 Passage:
@@ -135,7 +136,7 @@ Studyroom:
     - climate.mitsubishi
     ##- fan.fan2
     - vacuum.vacuum
-    - fan.purifier4
+    #- fan.purifier4
     - sensor.nodemcu3_temperature
     - sensor.nodemcu3_humidity
     - sensor.nodemcu3_co2
@@ -183,7 +184,7 @@ Balcony:
     - sensor.fresher_mode
     - sensor.fresher2_mode
     - sensor.purifier_mode
-    - sensor.purifier4_mode
+    #- sensor.purifier4_mode
     - sensor.purifier5_mode
     - sensor.purifier6_mode
     - sensor.purifier7_mode
@@ -199,7 +200,7 @@ Balcony:
     #- media_player.magic
     - climate.daikin2
     - climate.saswell
-    - fan.wall_fan
+    #- fan.wall_fan
     - fan.fresher
     - sensor.fresher_temperature
     - sensor.fresher_humidity
@@ -360,7 +361,7 @@ Balcony:
     - climate.mitsubishi
     - fan.fan2
     - vacuum.vacuum
-    - fan.purifier4
+    #- fan.purifier4
     - sensor.nodemcu3_temperature
     - sensor.nodemcu3_humidity
     - sensor.nodemcu3_co2
