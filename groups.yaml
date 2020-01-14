@@ -232,6 +232,7 @@ Balcony:
     - automation.can_ting_jia_shi_qi_guan
     - automation.can_ting_jia_shi_qi_kai
     - automation.can_ting_jing_hua_qi_diao_jie
+    - automation.chu_fang_men_ti_xing
 
 玄关:
   view: yes
@@ -241,11 +242,11 @@ Balcony:
     - binary_sensor.door_window_sensor_158d0001f3e5be
     - person.ba_ba
     - person.ma_ma
+    - person.ye_ye
     - person.a_yi
     - automation.ru_hu_men_huan_ying
     - automation.ru_hu_men_ti_xing
     - automation.shi_nei_kong_qi_chai
-    - automation.shi_nei_men_ti_xing
     - automation.huan_jing_zhuang_kuang
 
 过道:
