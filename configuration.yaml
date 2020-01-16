@@ -15,7 +15,7 @@ logger:
     #homeassistant.components.homekit: debug
     #pyhap: debug
     homeassistant.components.braviatv: debug
-    braviarc: debug
+    braviarc.braviarc: debug
 
 system_health:
 
@@ -334,7 +334,7 @@ sensor:
 switch:
   - platform: wake_on_lan
     name: Station
-    mac_address: 00-11-32-6B-75-F7
+    mac: 00-11-32-6B-75-F7
     #broadcast_address: 192.168.1.255
     host: Station
     turn_off:
@@ -520,8 +520,9 @@ shell_command:
 xiaomi_aqara:
   #interface: 192.168.2.40
   gateways:
-    - mac: 34CE0090901A
-      key: 3ECB50168D7F4AEB
+    - key: 3ECB50168D7F4AEB
+      #mac: 34CE0090901A
+      #host: ZigBee
 
 vacuum:
   - platform: xiaomi_miio

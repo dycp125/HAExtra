@@ -57,7 +57,7 @@ apt update && apt upgrade -y
 apt install mosquitto mosquitto-clients libavahi-compat-libdnssd-dev adb
 
 # Armbian
-apt install python3-pip python3-dev libffi-dev python3-setuptools
+apt install python3-pip python3-dev python3-setuptools libffi-dev
 ln -sf /usr/bin/python3 /usr/bin/python
 
 # Speedtest
@@ -78,6 +78,7 @@ wget -O speedtest https://raw.githubusercontent.com/sivel/speedtest-cli/master/s
 
 # Home Assistant
 pip3 install wheel
+pip3 install netdisco
 pip3 install homeassistant
 
 # Auto start
