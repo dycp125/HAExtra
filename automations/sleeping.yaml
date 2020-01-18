@@ -5,11 +5,11 @@
   action:
     # - service: cover.close_cover
     #   entity_id: cover.studyroom_cover
-    - service: fan.xiaomi_miio_set_led_brightness
+    - service: xiaomi_miio.fan_set_led_brightness
       data:
         entity_id: fan.fresher
         brightness: 2
-    - service: fan.xiaomi_miio_set_led_brightness
+    - service: xiaomi_miio.fan_set_led_brightness
       data:
         entity_id: fan.fresher2
         brightness: 2
@@ -61,11 +61,11 @@
   action:
     # - service: cover.open_cover
     #   entity_id: cover.studyroom_cover
-    - service: fan.xiaomi_miio_set_led_brightness
+    - service: xiaomi_miio.fan_set_led_brightness
       data:
         entity_id: fan.fresher
         brightness: 0
-    - service: fan.xiaomi_miio_set_led_brightness
+    - service: xiaomi_miio.fan_set_led_brightness
       data:
         entity_id: fan.fresher2
         brightness: 0
