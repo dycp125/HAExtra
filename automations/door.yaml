@@ -117,14 +117,26 @@
       from: 'off'
       to: 'on'
       for:
-        minutes: 5
+        minutes: 2
+    - platform: time
+      at: '21:10:00'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
+      state: 'on'
+    - condition: time
+      after: '06:00'
+      before: '23:00'
   action:
     - service: xiaomi_aqara.play_ringtone
       data:
         gw_mac: 34CE0090901A
         ringtone_id: 10015
         ringtone_vol: 60
-    - delay: 300
+    - condition: time
+      after: '21:00'
+      before: '23:00'
+    - delay: 120
     - condition: state
       entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
       state: 'on'
