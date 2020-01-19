@@ -125,7 +125,7 @@
       entity_id: binary_sensor.door_window_sensor_158d0001f3d2d1
       state: 'on'
     - condition: time
-      after: '06:00'
+      after: '09:00'
       before: '23:00'
   action:
     - service: xiaomi_aqara.play_ringtone
