@@ -17,11 +17,11 @@
 				font-size: 14px;
 				font-weight: 300;
 				text-align: center;
-/*K				border-radius: 5px;
-				position: relative;
-*/			}
+				/*K border-radius: 5px;
+				position: relative;*/
+			}
 
-/*K			.entity:after {
+			/*K .entity:after {
 				position: absolute;
 				pointer-events: none;
 				content:"";
@@ -30,8 +30,7 @@
 				width:100%;
 				height:100%;
 				opacity:0;
-			}
-*/
+			}*/
 			@media (hover: hover) {
 				.entity:hover {
 					background-color: #009688;
@@ -44,19 +43,19 @@
 					cursor: pointer;
 				}
 
-/*K				.tuner:hover,
+				/*K .tuner:hover,
 				.entity:hover:after
 				.moder:hover:after {
 					background-image: linear-gradient(rgba(0, 0, 0, 0), black);
 					cursor: pointer;
 					opacity: .5;
-				}
-*/			}
+				}*/
+			}
 
 			.utility {
 				line-height: 120px;
 				font-size: 44px;
-				opacity: .8;
+				opacity: 0.8;
 			}
 
 			.weather {
@@ -237,7 +236,7 @@
 				var width = (clientWidth - count * 4) / count
 				width = Math.floor(width * 10) / 10
 				document.styleSheets[1].cssRules[0].style.width = width + 'px'
-				document.styleSheets[1].insertRule('.camera { width:' + (width * 1.515) + 'px; }', 1);
+				document.styleSheets[1].insertRule('.camera { width:' + width * 1.515 + 'px; }', 1)
 				//alert('clientWidth:' + clientWidth + ' count:' + count + ' width:' + width);
 
 				// Parse api url
@@ -256,7 +255,7 @@
 						_token = JSON.parse(localStorage.hassTokens).access_token
 					} catch (e) {}
 				}
-				connect();
+				connect()
 			}
 
 			function connect() {
@@ -331,7 +330,7 @@
 								for (var i in _entities) {
 									if (_entities[i].entity_id == entity_id) {
 										_entities[i] = entity
-										break;
+										break
 									}
 								}
 							}
@@ -341,8 +340,16 @@
 						}
 						break
 					case 'auth_invalid':
-						var error = '无效认证！请先 <a href="javascript:location=\'' + location.protocol + '//' + location.host + '\'">登录首页</a> 并保存后 <a href="javascript:location.reload()">刷新</a>'
-						error += '<div style="font-size:8px; color:#999999; line-height: 16px">也可以指定长期访问令牌和地址，如：' + location.href.split('?')[0] + '?password@ws:host:8123</div>'
+						var error =
+							'无效认证！请先 <a href="javascript:location=\'' +
+							location.protocol +
+							'//' +
+							location.host +
+							'\'">登录首页</a> 并保存后 <a href="javascript:location.reload()">刷新</a>'
+						error +=
+							'<div style="font-size:8px; color:#999999; line-height: 16px">也可以指定长期访问令牌和地址，如：' +
+							location.href.split('?')[0] +
+							'?password@ws:host:8123</div>'
 						floater('error', error)
 						break
 					default:
@@ -577,7 +584,7 @@
 				} else if (_CLICKABLE_DOMAINS.indexOf(domain) != -1) {
 					html += ' onclick="handleClick(this)"'
 				}
-				if (domain == "camera") {
+				if (domain == 'camera') {
 					html += ' style="background:center/cover no-repeat url(' + entity.attributes.entity_picture + ');"'
 				}
 				html += '>'
@@ -597,8 +604,7 @@
 				var html = '<div class="name">' + name + '</div>'
 
 				var na = state == '' || state == 'unavailable' || state == 'unknown' || state == 'None'
-				var off =
-					state == 'off' || state == 'not_home' || state == 'closed' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
+				var off = state == 'off' || state == 'not_home' || state == 'closed' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
 
 				var has_dash_icon = attributes.hasOwnProperty('dash_icon')
 				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
@@ -611,13 +617,11 @@
 					} else {
 						value = String(value)
 						var dot = value.indexOf('.')
-						html += dot < 0 ? value : value.substring(0, dot < 4 ? 5 : (dot == 4 ? 4 : dot))
+						html += dot < 0 ? value : value.substring(0, dot < 4 ? 5 : dot == 4 ? 4 : dot)
 					}
 
 					if (!off) {
-						var unit = attributes.hasOwnProperty('dash_unit')
-							? renderTemplate(attributes.dash_unit, state, attributes)
-							: attributes.unit_of_measurement
+						var unit = attributes.hasOwnProperty('dash_unit') ? renderTemplate(attributes.dash_unit, state, attributes) : attributes.unit_of_measurement
 						if (unit) {
 							html += '<span class="unit">' + unit + '</span>'
 						}
@@ -662,12 +666,12 @@
 						}
 
 						extra += '<select class="moder" onclick="event.stopPropagation()" onchange="handleMode(this)">'
-						var current = domain == 'climate' ? state : (attributes.speed_level || attributes.speed)
+						var current = domain == 'climate' ? state : attributes.speed_level || attributes.speed
 						var mode_list = domain == 'climate' ? attributes.hvac_modes : attributes.speed_list
 						for (var i in mode_list) {
 							var mode = mode_list[i]
 							var key = mode.toLowerCase()
-							var text = _TRANS[key] || mode.replace(/level/ig, '档位')
+							var text = _TRANS[key] || mode.replace(/level/gi, '档位')
 							extra += '<option value="' + mode + '"' + (mode == current ? ' selected' : '') + '>' + text
 							if (mode == current && domain == 'climate') {
 								extra += ' ' + attributes.temperature
@@ -731,13 +735,7 @@
 							} else {
 								_entities_retained = true // Retained _entities for feature using
 								var entity = findEntity(parts[0] + '.' + parts[1])
-								result += entity
-									? count == 2
-										? entity.state
-										: attributes.hasOwnProperty(parts[2])
-										? attributes[parts[2]]
-										: '无属性'
-									: '无设备'
+								result += entity ? (count == 2 ? entity.state : attributes.hasOwnProperty(parts[2]) ? attributes[parts[2]] : '无属性') : '无设备'
 							}
 							continue
 						}
@@ -776,12 +774,11 @@
 						if (index1 != index2) {
 							return index1 - index2
 						}
-						var result = unit1 ? unit1.localeCompare(unit2) : (unit2 ? unit2.localeCompare(unit1) : 0)
+						var result = unit1 ? unit1.localeCompare(unit2) : unit2 ? unit2.localeCompare(unit1) : 0
 						if (result) {
 							return result
 						}
-					}
-					else if (domain1 == 'binary_sensor') {
+					} else if (domain1 == 'binary_sensor') {
 						index1 = _sorted_classes.indexOf(entity1.attributes.device_class) >>> 0
 						index2 = _sorted_classes.indexOf(entity2.attributes.device_class) >>> 0
 						if (index1 != index2) {
@@ -851,6 +848,7 @@
 	</head>
 
 	<body onload="load()">
-		<div id="content"></div> <div id="floater"></div>
+		<div id="content"></div>
+		<div id="floater"></div>
 	</body>
 </html>
