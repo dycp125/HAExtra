@@ -95,30 +95,6 @@ fan.purifier7:
 fan.wall_fan:
   friendly_name: 客厅壁扇
   icon: mdi:fan
-group.all_automations:
-  friendly_name: 自动化
-  hidden: false
-group.all_covers:
-  friendly_name: 窗帘
-group.all_devices:
-  friendly_name: 设备
-group.all_fans:
-  friendly_name: 风扇
-  hidden: false
-group.all_lights:
-  friendly_name: 灯光
-  hidden: false
-group.all_remotes:
-  friendly_name: 遥控器
-  hidden: false
-group.all_scripts:
-  friendly_name: 脚本
-group.all_switches:
-  friendly_name: 开关
-  hidden: false
-group.all_vacuum_cleaners:
-  friendly_name: 扫地机
-  hidden: false
 group.balcony:
   friendly_name: 阳台
 group.bedroom:

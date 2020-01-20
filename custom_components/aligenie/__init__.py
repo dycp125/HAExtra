@@ -382,7 +382,7 @@ def groupsAttributes(states):
     groups_attributes = []
     for state in states:
         group_entity_id = state.entity_id
-        if group_entity_id.startswith('group.') and not group_entity_id.startswith('group.all_') and group_entity_id != 'group.default_view':
+        if group_entity_id != 'group.default_view' and group_entity_id.startswith('group.'): #and not group_entity_id.startswith('group.all_')
             group_attributes = state.attributes
             if 'entity_id' in group_attributes:
                 groups_attributes.append(group_attributes)
