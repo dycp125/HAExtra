@@ -401,7 +401,6 @@ Balcony:
     - automation.zhu_wo_kong_diao_diao_jie
     - automation.zhu_wo_xin_feng_ji_diao_jie
 
-
 次卧:
   view: yes
   entities:

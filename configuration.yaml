@@ -46,12 +46,12 @@ logbook:
 
 sun:
 
-#tts:
-  #- platform: google
-  #- platform: baidu
-  #  app_id: !secret baidu_app_id
-  #  api_key: !secret baidu_api_key
-  #  secret_key: !secret baidu_secret_key
+# tts:
+#   - platform: google
+#   - platform: baidu
+#     app_id: !secret baidu_app_id
+#     api_key: !secret baidu_api_key
+#     secret_key: !secret baidu_secret_key
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations
@@ -91,8 +91,8 @@ homekit:
     switch.outlet2:
       type: outlet
     media_player.x9300d:
-     feature_list:
-       - feature: on_off
+      feature_list:
+        - feature: on_off
     media_player.x9400e:
       feature_list:
         - feature: on_off
@@ -644,7 +644,7 @@ climate:
   - platform: modbus2
     name: Daikin
     fan_mode: { registers: [6, 10, 14, 18] }
-    fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5}
+    fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5 }
     hvac_mode: { registers: [5, 9, 13, 17] }
     hvac_modes: { 'off': 0, cool: 1, heat: 2, dry: 3, fan_only: 4 }
     hvac_off: { registers: [1, 2, 3, 4], register_type: coil }

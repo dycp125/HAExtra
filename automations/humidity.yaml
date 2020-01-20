@@ -124,7 +124,7 @@
       data:
         entity_id: fan.purifier7
         speed: low
-        
+
 - alias: 儿童房加湿器关
   trigger:
     - platform: numeric_state
