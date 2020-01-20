@@ -22,11 +22,14 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_ICON_TEMPLATE): cv.template,
 })
 
+
 async def async_setup_platform(hass: HomeAssistantType, config: ConfigType,
                                async_add_entities, discovery_info=None):
     """Set up MQTT switch through configuration.yaml."""
     async_add_entities([MqttSwitch2(config, discovery_info)])
 # pylint: disable=too-many-ancestors
+
+
 class MqttSwitch2(MqttSwitch):
     """Representation of a switch that can be toggled using MQTT."""
 
@@ -50,11 +53,13 @@ class MqttSwitch2(MqttSwitch):
             """Handle new MQTT state messages."""
             payload = msg.payload
             if icon_template is not None:
-                self._icon = icon_template.async_render_with_possible_json_value(payload)
+                self._icon = icon_template.async_render_with_possible_json_value(
+                    payload)
 
             if template is not None:
                 self._attributes = {'original_state': payload}
-                payload = template.async_render_with_possible_json_value(payload)
+                payload = template.async_render_with_possible_json_value(
+                    payload)
 
             if payload == self._state_on:
                 self._state = True

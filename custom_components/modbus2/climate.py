@@ -84,8 +84,8 @@ HVAC_ACTIONS = {
     HVAC_MODE_OFF: CURRENT_HVAC_OFF,
     HVAC_MODE_HEAT: CURRENT_HVAC_HEAT,
     HVAC_MODE_COOL: CURRENT_HVAC_COOL,
-    HVAC_MODE_HEAT_COOL: CURRENT_HVAC_IDLE, #?
-    HVAC_MODE_AUTO: CURRENT_HVAC_IDLE, #?
+    HVAC_MODE_HEAT_COOL: CURRENT_HVAC_IDLE,  # ?
+    HVAC_MODE_AUTO: CURRENT_HVAC_IDLE,  # ?
     HVAC_MODE_DRY: CURRENT_HVAC_DRY,
     HVAC_MODE_FAN_ONLY: CURRENT_HVAC_FAN,
 }
@@ -264,7 +264,8 @@ class ModbusClimate(ClimateDevice):
         if REG_HVAC_OFF in self._regs:
             if self.get_value(REG_HVAC_OFF) == ModbusClimate._hvac_off_value:
                 return HVAC_MODE_OFF
-        hvac_mode = self.get_mode(ModbusClimate._hvac_modes, REG_HVAC_MODE) or HVAC_MODE_OFF
+        hvac_mode = self.get_mode(
+            ModbusClimate._hvac_modes, REG_HVAC_MODE) or HVAC_MODE_OFF
         if hvac_mode != HVAC_MODE_OFF:
             self._last_on_operation = hvac_mode
         return hvac_mode
@@ -346,10 +347,10 @@ class ModbusClimate(ClimateDevice):
                 else:
                     if register_type == REGISTER_TYPE_INPUT:
                         result = self._hub.read_input_registers(slave,
-                                                                 register, count)
+                                                                register, count)
                     else:
                         result = self._hub.read_holding_registers(slave,
-                                                                   register, count)
+                                                                  register, count)
 
                     val = 0
                     registers = result.registers
@@ -395,13 +396,15 @@ class ModbusClimate(ClimateDevice):
     def set_hvac_mode(self, hvac_mode):
         """Set new hvac mode."""
         if REG_HVAC_OFF in self._regs:
-            self.set_value(REG_HVAC_OFF, ModbusClimate._hvac_off_value if hvac_mode == HVAC_MODE_OFF else ModbusClimate._hvac_on_value)
+            self.set_value(REG_HVAC_OFF, ModbusClimate._hvac_off_value if hvac_mode ==
+                           HVAC_MODE_OFF else ModbusClimate._hvac_on_value)
             if hvac_mode == HVAC_MODE_OFF:
                 return
 
-        if hvac_mode not in ModbusClimate._hvac_modes: # Support HomeKit Auto Mode
+        if hvac_mode not in ModbusClimate._hvac_modes:  # Support HomeKit Auto Mode
             best_hvac_mode = self.best_hvac_mode
-            _LOGGER.warn("Fix operation mode from %s to %s", hvac_mode, best_hvac_mode)
+            _LOGGER.warn("Fix operation mode from %s to %s",
+                         hvac_mode, best_hvac_mode)
             hvac_mode = best_hvac_mode
             # current = self.current_temperature
             # target = self.target_temperature
@@ -418,7 +421,8 @@ class ModbusClimate(ClimateDevice):
 
     def turn_on(self):
         """Turn on."""
-        _LOGGER.debug("Turn on with last operation mode: %s", self._last_on_operation)
+        _LOGGER.debug("Turn on with last operation mode: %s",
+                      self._last_on_operation)
         self.set_hvac_mode(self._last_on_operation or self.best_hvac_mode)
 
     def set_fan_mode(self, fan_mode):

@@ -14,9 +14,9 @@ import voluptuous as vol
 
 from homeassistant.components.climate import ClimateDevice, PLATFORM_SCHEMA
 from homeassistant.components.climate.const import (SUPPORT_TARGET_TEMPERATURE,
-    SUPPORT_PRESET_MODE, ATTR_HVAC_MODE, HVAC_MODE_HEAT, HVAC_MODE_OFF,
-    CURRENT_HVAC_HEAT, CURRENT_HVAC_OFF, ATTR_CURRENT_TEMPERATURE,
-    ATTR_PRESET_MODE, PRESET_HOME, PRESET_AWAY)
+                                                    SUPPORT_PRESET_MODE, ATTR_HVAC_MODE, HVAC_MODE_HEAT, HVAC_MODE_OFF,
+                                                    CURRENT_HVAC_HEAT, CURRENT_HVAC_OFF, ATTR_CURRENT_TEMPERATURE,
+                                                    ATTR_PRESET_MODE, PRESET_HOME, PRESET_AWAY)
 from homeassistant.const import (
     ATTR_ID, CONF_NAME, CONF_USERNAME, CONF_PASSWORD, CONF_SCAN_INTERVAL,
     ATTR_TEMPERATURE)
@@ -46,6 +46,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_SCAN_INTERVAL, default=timedelta(seconds=300)): (
         vol.All(cv.time_period, cv.positive_timedelta)),
 })
+
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the Saswell climate devices."""
@@ -150,17 +151,17 @@ class SaswellClimate(ClimateDevice):
         temperature = kwargs.get(ATTR_TEMPERATURE)
         if temperature is not None:
             await self.set_value(ATTR_TEMPERATURE, temperature)
-        #self.async_write_ha_state()
+        # self.async_write_ha_state()
 
     async def async_set_hvac_mode(self, hvac_mode):
         """Set new target temperature."""
         await self.set_value(ATTR_HVAC_MODE, hvac_mode)
-        #self.async_write_ha_state()
+        # self.async_write_ha_state()
 
     async def async_set_preset_mode(self, preset_mode):
         """Update preset_mode on."""
         await self.set_value(ATTR_PRESET_MODE, preset_mode)
-        #self.async_write_ha_state()
+        # self.async_write_ha_state()
 
     def get_value(self, prop):
         """Get property value"""
@@ -221,7 +222,7 @@ class SaswellData():
             for dev in json:
                 status = dev['status'].split(',')
                 devs.append({ATTR_HVAC_MODE: HVAC_MODE_HEAT if status[1] == '1' else HVAC_MODE_OFF,
-                             ATTR_PRESET_MODE: PRESET_AWAY if status[5] == '1' else PRESET_HOME,  # 8?
+                             ATTR_PRESET_MODE: PRESET_AWAY if status[5] == '1' else PRESET_HOME,
                              ATTR_CURRENT_TEMPERATURE: float(status[2]),
                              ATTR_TEMPERATURE: float(status[3]),
                              ATTR_AVAILABLE: dev['online'] == '1',

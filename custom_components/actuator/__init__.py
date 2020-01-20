@@ -29,6 +29,7 @@ ACTUATE_SCHEMA = vol.Schema({
 _hass = None
 _executors = {}
 
+
 def execute(params):
     # Get entity state
     entity_id = params.get('entity_id')
@@ -44,7 +45,8 @@ def execute(params):
     # Check condition
     condition_attr = params.get('condition_attr')
     if condition_attr is not None:
-        condition_value = state_value if condition_attr == 'STATE' else state_attributes.get(condition_attr)
+        condition_value = state_value if condition_attr == 'STATE' else state_attributes.get(
+            condition_attr)
         if condition_value is None:
             #_LOGGER.debug('Check condition: condition_value is None')
             return
@@ -66,12 +68,14 @@ def execute(params):
             alt_time = hour >= alt_time_range[0] or hour < alt_time_range[1]
     else:
         alt_time = False
-    sensor_values = params.get('alt_sensor_values' if alt_time else 'sensor_values')
+    sensor_values = params.get(
+        'alt_sensor_values' if alt_time else 'sensor_values')
 
     sensor_state = _hass.states.get(sensor_id)
     try:
         sensor_attributes = sensor_state.attributes
-        sensor_value = sensor_state.state if sensor_attr is None else sensor_attributes.get(sensor_attr)
+        sensor_value = sensor_state.state if sensor_attr is None else sensor_attributes.get(
+            sensor_attr)
         sensor_number = float(sensor_value)
     except:
         _LOGGER.error("Sensor %s %s error", sensor_id, sensor_attr or '')
@@ -80,7 +84,7 @@ def execute(params):
     # Log prefix
     sensor_log = sensor_attributes.get('friendly_name')
     if sensor_attr:
-         sensor_log += '.' + sensor_attr
+        sensor_log += '.' + sensor_attr
     sensor_log += '=' + str(sensor_value)
 
     # Action params
@@ -95,7 +99,8 @@ def execute(params):
     while i >= 0:
         if sensor_number >= sensor_values[i]:
             sensor_log += '≥' + str(sensor_values[i])
-            from_value = state_value if entity_attr is None else state_attributes.get(entity_attr)
+            from_value = state_value if entity_attr is None else state_attributes.get(
+                entity_attr)
             to_value = entity_values[i]
 
             if entity_attr:
@@ -104,14 +109,17 @@ def execute(params):
 
             if state_value == 'off':
                 entity_log += ', ⇒on'
-                _hass.services.call(domain, 'turn_on', {'entity_id': entity_id}, True)
+                _hass.services.call(domain, 'turn_on', {
+                                    'entity_id': entity_id}, True)
 
             if from_value == to_value:
                 _LOGGER.debug('%s; %s', sensor_log, entity_log)
                 return
 
-            data = {'entity_id': entity_id, service_attr or entity_attr: to_value}
-            _LOGGER.warn('%s; %s, %s⇒%s', sensor_log, entity_log, service, to_value)
+            data = {'entity_id': entity_id,
+                    service_attr or entity_attr: to_value}
+            _LOGGER.warn('%s; %s, %s⇒%s', sensor_log,
+                         entity_log, service, to_value)
             _hass.services.call(domain, service, data, True)
             return
         else:
@@ -127,6 +135,7 @@ def execute(params):
     _LOGGER.warn('%s, %s=%s, ⇒off', sensor_log, entity_log, state_value)
     _hass.services.call(domain, 'turn_off', {'entity_id': entity_id}, True)
 
+
 class DelayExecutor(object):
 
     def __init__(self, key, delay, params):
@@ -138,19 +147,22 @@ class DelayExecutor(object):
         del _executors[self.key]
         execute(self.params)
 
+
 def actuate(call):
     params = call.data
     delay = params.get('delay')
     if delay is None:
         delay = 120
     if delay > 0:
-        key = params['entity_id'] + '~' +(params.get('service_attr') or params.get('entity_attr'))
+        key = params['entity_id'] + '~' + \
+            (params.get('service_attr') or params.get('entity_attr'))
         if key not in _executors:
             _executors[key] = DelayExecutor(key, delay, params)
-        #else:
+        # else:
         #    _LOGGER.debug('%s ignored', key)
     else:
         execute(params)
+
 
 def setup(hass, config):
     global _hass

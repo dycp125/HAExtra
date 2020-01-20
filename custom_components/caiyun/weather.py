@@ -189,7 +189,8 @@ class CaiYunWeather(WeatherEntity):
                     date = v['date']
                     forecast = forecasts.get(date)
                     if forecast is None:
-                        forecast = {ATTR_FORECAST_TIME: datetime.strptime(date, '%Y-%m-%d')}
+                        forecast = {
+                            ATTR_FORECAST_TIME: datetime.strptime(date, '%Y-%m-%d')}
                         forecasts[date] = forecast
                     if key == 'temperature':
                         forecast[ATTR_FORECAST_TEMP] = v['avg']
@@ -202,7 +203,8 @@ class CaiYunWeather(WeatherEntity):
                         forecast[ATTR_FORECAST_WIND_SPEED] = v['avg']['speed']
                     elif key == 'precipitation':
                         forecast[ATTR_FORECAST_PRECIPITATION] = v['avg']
-            data['forecast'] = sorted(forecasts.values(), key=lambda k: k[ATTR_FORECAST_TIME])
+            data['forecast'] = sorted(
+                forecasts.values(), key=lambda k: k[ATTR_FORECAST_TIME])
 
         except:
             import traceback

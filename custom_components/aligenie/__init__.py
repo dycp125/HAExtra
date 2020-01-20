@@ -117,7 +117,8 @@ async def handleRequest(data):
             result = errorResult('ACCESS_TOKEN_INVALIDATE')
 
         # Check error and fill response name
-        header['name'] = ('Error' if 'errorCode' in result else name) + 'Response'
+        header['name'] = (
+            'Error' if 'errorCode' in result else name) + 'Response'
 
         # Fill response deviceId
         if 'deviceId' in payload:
@@ -261,7 +262,7 @@ def queryDevice(name, payload):
     else:
         state = hassState(deviceId)
         if state is not None or state.state != 'unavailable':
-            return {'name':'powerstate', 'value':'off' if state.state == 'off' else 'on'}
+            return {'name': 'powerstate', 'value': 'off' if state.state == 'off' else 'on'}
     return errorResult('IOT_DEVICE_OFFLINE')
 
 
@@ -382,7 +383,8 @@ def groupsAttributes(states):
     groups_attributes = []
     for state in states:
         group_entity_id = state.entity_id
-        if group_entity_id != 'group.default_view' and group_entity_id.startswith('group.'): #and not group_entity_id.startswith('group.all_')
+        # and not group_entity_id.startswith('group.all_')
+        if group_entity_id != 'group.default_view' and group_entity_id.startswith('group.'):
             group_attributes = state.attributes
             if 'entity_id' in group_attributes:
                 groups_attributes.append(group_attributes)

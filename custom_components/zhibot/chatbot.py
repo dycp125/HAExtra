@@ -17,7 +17,7 @@ class chatbotView(HomeAssistantView):
         self.requires_auth = False
         self.hass = hass
         self.password = conf.get('password')
-        if self.password is None: # Auth: config UI confirmation, intead of pre shared password
+        if self.password is None:  # Auth: config UI confirmation, intead of pre shared password
             self._configuring = None
             self.conf = load_json(hass.config.path('.' + self.name))
             if not self.conf:

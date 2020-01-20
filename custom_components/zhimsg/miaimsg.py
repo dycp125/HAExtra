@@ -191,7 +191,8 @@ class miaimsg(object):
             return False
 
         deviceId = self._devices[devno]['deviceID']
-        result = True if volume is None else miai_player_set_volume(deviceId, volume)
+        result = True if volume is None else miai_player_set_volume(
+            deviceId, volume)
         if result and message:
             result = miai_text_to_speech(deviceId, message)
         if not result:

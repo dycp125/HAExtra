@@ -79,7 +79,7 @@ STATE_NAMES = {
 
 async def zhibotState(hass, entity_id, state, query):
     domain = entity_id[:entity_id.find('.')]
-    is_cover = domain == 'cover' #or entity_id == 'group.all_covers'
+    is_cover = domain == 'cover'  # or entity_id == 'group.all_covers'
     can_action = not domain in [
         'sensor', 'binary_sensor', 'device_tracker', 'person']
     if can_action and '开' in query:
