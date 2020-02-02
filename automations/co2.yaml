@@ -9,9 +9,9 @@
         sensor_values: [500, 580, 680, 730]
         entity_id: fan.fresher
         entity_attr: speed
-        entity_values: [Auto, Low, Middle, Strong]
+        entity_values: [Silent, Low, Middle, Strong]
         condition_attr: mode
-        condition_values: [auto, low, middle, strong]
+        condition_values: [silent, low, middle, strong]
 
 - alias: 主卧新风机调节
   trigger:
@@ -25,6 +25,6 @@
         alt_sensor_values: [500, 720, 900, 1500]
         entity_id: fan.fresher2
         entity_attr: speed
-        entity_values: [Auto, Low, Middle, Strong]
+        entity_values: [Silent, Low, Middle, Strong]
         condition_attr: mode
-        condition_values: [auto, low, middle, strong]
+        condition_values: [silent, low, middle, strong]
