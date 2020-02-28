@@ -1,5 +1,4 @@
 - alias: 书房窗帘关
-  initial_state: false
   trigger:
     - platform: time
       at: '12:30:00'
@@ -20,7 +19,6 @@
       entity_id: cover.studyroom_cover
 
 - alias: 书房窗帘开
-  initial_state: false
   trigger:
     - platform: sun
       event: sunset
