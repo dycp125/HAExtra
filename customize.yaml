@@ -152,6 +152,8 @@ light.hallway_spotlight:
   friendly_name: 玄关筒灯
   hagenie_hidden: true
   icon: mdi:spotlight
+light.kids_light:
+  friendly_name: 儿童房灯
 light.lamp:
   friendly_name: 书房台灯
   icon: mdi:lamp

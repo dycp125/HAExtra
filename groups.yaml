@@ -110,6 +110,7 @@ Parentsroom:
 
 Kidsroom:
   entities:
+    - light.kids_light
     - light.lamp2
     - climate.daikin4
     - fan.purifier7
@@ -413,6 +414,7 @@ Balcony:
 儿童房:
   view: yes
   entities:
+    - light.kids_light
     - light.lamp2
     - climate.daikin4
     - fan.purifier7
