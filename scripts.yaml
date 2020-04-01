@@ -36,11 +36,8 @@ turn_on_projector:
     - service: automation.turn_on
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
     - delay: 20
-    - service: homeassistant.turn_off
-      entity_id:
-        - light.studyroom_light
-        - light.passage_light
-        #- light.airer_light
+    # - service: homeassistant.turn_off
+    #   entity_id: light.airer_light
     - condition: numeric_state
       entity_id: sensor.purifier_temperature
       above: 28
@@ -71,10 +68,8 @@ turn_off_projector:
       data:
         host: Remote
         packet: 'JgAgAQABJ5QSExITEhITEhMSEhMSExITEhITEhMSEhMSOBI3ExISExITEjcTNxI3ExITEhI4EhITNxITEhMSExI3EzcSExI3EwAF='
-    - service_template: '{% if is_state("sun.sun", "below_horizon") %}light.turn_on{% else %}light.turn_off{% endif %}'
-      entity_id:
-        - light.studyroom_light
-        #- light.passage_light
+    # - service_template: '{% if is_state("sun.sun", "below_horizon") %}light.turn_on{% else %}light.turn_off{% endif %}'
+    #   entity_id: light.airer_light
     - service: climate.turn_off
       entity_id: climate.mitsubishi
     - delay: 250

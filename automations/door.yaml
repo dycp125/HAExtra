@@ -35,23 +35,23 @@
     - service: automation.trigger
       entity_id: automation.ru_hu_men_ti_xing
 
-- alias: 阳台门感应
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d000228a52b
-      from: 'off'
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d000228a52b
-      from: 'on'
-      to: 'off'
-  condition:
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
-  action:
-    - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
-      entity_id: light.balcony_light
+# - alias: 阳台门感应
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.door_window_sensor_158d000228a52b
+#       from: 'off'
+#       to: 'on'
+#     - platform: state
+#       entity_id: binary_sensor.door_window_sensor_158d000228a52b
+#       from: 'on'
+#       to: 'off'
+#   condition:
+#     - condition: state
+#       entity_id: sun.sun
+#       state: below_horizon
+#   action:
+#     - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
+#       entity_id: light.balcony_light
 
 - alias: 阳台门提醒
   trigger:
