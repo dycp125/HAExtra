@@ -2,160 +2,18 @@ default_view:
   view: yes
   icon: mdi:home-assistant
   entities:
-    # - sensor.balcony_pm25
-    # - sensor.aircat_pm25
-    # - sensor.fresher2_pm25
-    # - sensor.fresher2_co2
-    # - sensor.fresher_co2
-    - group.livingroom
-    - group.diningroom
-    #- group.kitchen
-    - group.hallway
-    - group.passage
-    - group.washroom
-    - group.bedroom
-    - group.parentsroom
-    - group.kidsroom
-    - group.studyroom
-    - group.balcony
-
-Livingroom:
-  entities:
-    - light.livingroom_light
-    #- light.livingroom_light2
-    - light.livingroom_spotlight
-    - media_player.x9400e
-    #- media_player.magic
-    - climate.daikin2
-    - climate.saswell
-    #- fan.wall_fan
-    - fan.fresher
-    - sensor.fresher_temperature
-    - sensor.fresher_humidity
-    - sensor.fresher_pm25
-    - sensor.fresher_co2
-
-Diningroom:
-  entities:
-    - light.diningroom_light
-    #- light.diningroom_light2
-    - light.diningroom_spotlight
-    ##- switch.outlet
-    - light.gateway_light_34ce0090901a
-    - fan.purifier5
-    - climate.daikin1
-    - sensor.illumination_34ce0090901a
-    - sensor.aircat_temperature
-    - sensor.aircat_humidity
-    - sensor.aircat_pm25
-    - sensor.aircat_hcho
-    - binary_sensor.door_window_sensor_158d0001f3d2d1
-
-Hallway:
-  entities:
-    - light.hallway_light
-    - light.hallway_spotlight
-    - binary_sensor.door_window_sensor_158d0001f3e5be
-    - person.ba_ba
-    - person.ma_ma
-    - person.ye_ye
-    - person.a_yi
-
-Passage:
-  entities:
-    - light.passage_light
-    - light.passage_spotlight
-    #- light.studyroom_light2
-    - light.passage_backlight
-    - switch.plug_158d0003a58422
-    - binary_sensor.motion_sensor_158d0001d66ce9
-    # - binary_sensor.lightness
-    - input_text.miai
-    ##- sensor.aircat2_temperature
-    ##- sensor.aircat2_humidity
-    ##- sensor.aircat2_pm25
-    ##- sensor.aircat2_hcho
-
-Washroom:
-  entities:
-    - light.washroom_light
-    - switch.washroom_fan
-    - binary_sensor.motion_sensor_158d0001f4a238
-    - binary_sensor.door_window_sensor_158d0003cf4735
-
-Bedroom:
-  entities:
-    - media_player.x9300d
-    - climate.daikin3
-    - climate.saswell2
-    - fan.fresher2
-    - fan.purifier6
-    - fan.bedroom_fan
-    - light.bedroom_light
-    - binary_sensor.door_window_sensor_158d00041c74da
-    - binary_sensor.nodemcu6_motion
-    # - binary_sensor.purifier6_light
-    - sensor.nodemcu6_lightness
-    - sensor.fresher2_temperature
-    - sensor.fresher2_humidity
-    - sensor.fresher2_pm25
-    - sensor.fresher2_co2
-
-Parentsroom:
-  entities:
-    - fan.purifier
-    - sensor.purifier_temperature
-    - sensor.purifier_humidity
-    - sensor.purifier_pm25
-
-Kidsroom:
-  entities:
-    - light.kids_light
-    - light.lamp2
-    - climate.daikin4
-    - fan.purifier7
-    ##- fan.fan
-    ##- sensor.fan_temperature
-    ##- switch.outlet2
-    - binary_sensor.cube_158d0002a66db1
-    - sensor.nodemcu7_temperature
-    - sensor.nodemcu7_humidity
-    - sensor.nodemcu7_pm25
-    - sensor.nodemcu7_co2
-    - sensor.nodemcu7_hcho
-
-Studyroom:
-  entities:
-    - light.lamp
-    - light.studyroom_light
-    #- light.airer_light
-    - cover.studyroom_cover
-    #- cover.airer
-    - switch.projector
-    - switch.station
-    - switch.speaker
-    - climate.mitsubishi
-    ##- fan.fan2
-    - vacuum.vacuum
-    #- fan.purifier4
-    - sensor.nodemcu3_temperature
-    - sensor.nodemcu3_humidity
-    - sensor.nodemcu3_co2
-    - sensor.studyroom_lightness
-    - binary_sensor.nodemcu3_motion
-
-Balcony:
-  entities:
-    - light.balcony_light
-    - binary_sensor.door_window_sensor_158d000228a52b
-    - sensor.balcony_temperature
-    - sensor.balcony_humidity
-    - sensor.balcony_pm25
-    - weather.caiyun
-    - sun.sun
+    - group.ke_ting
+    - group.can_ting
+    - group.xuan_guan
+    - group.guo_dao
+    - group.xi_shou_jian
+    - group.zhu_wo
+    - group.ci_wo 
+    - group.er_tong_fang
+    - group.shu_fang
+    - group.yang_tai
 
 控制:
-  view: yes
   icon: mdi:set-center
   entities:
     - light.balcony_light
@@ -205,7 +63,6 @@ Balcony:
     - climate.mitsubishi
 
 智能:
-  view: yes
   icon: mdi:robot
   entities:
     - sensor.daikin2_mode
@@ -279,10 +136,7 @@ Balcony:
     - automation.zhu_wo_xin_feng_ji_diao_jie
 
 客厅:
-  view: yes
   entities:
-    - light.livingroom_light
-    #- light.livingroom_light2
     - light.livingroom_spotlight
     - media_player.x9400e
     #- media_player.magic
@@ -300,12 +154,9 @@ Balcony:
     - automation.ke_ting_xin_feng_ji_diao_jie
 
 餐厅:
-  view: yes
   entities:
-    - light.diningroom_light
-    #- light.diningroom_light2
     - light.diningroom_spotlight
-    - switch.outlet
+    #- switch.outlet
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
@@ -324,14 +175,11 @@ Balcony:
     - automation.chu_fang_men_ti_xing
 
 玄关:
-  view: yes
   entities:
-    - light.hallway_light
-    - light.hallway_spotlight
     - binary_sensor.door_window_sensor_158d0001f3e5be
     - person.ba_ba
     - person.ma_ma
-    - person.ye_ye
+    # - person.ye_ye
     - person.a_yi
     - automation.ru_hu_men_huan_ying
     - automation.ru_hu_men_ti_xing
@@ -339,20 +187,17 @@ Balcony:
     - automation.huan_jing_zhuang_kuang
 
 过道:
-  view: yes
   entities:
-    - light.passage_light
-    - light.passage_spotlight
     #- light.studyroom_light2
     - light.passage_backlight
     - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
     - input_text.miai
-    - sensor.aircat2_temperature
-    - sensor.aircat2_humidity
-    - sensor.aircat2_pm25
-    - sensor.aircat2_hcho
+    # - sensor.aircat2_temperature
+    # - sensor.aircat2_humidity
+    # - sensor.aircat2_pm25
+    # - sensor.aircat2_hcho
     - automation.guo_dao_an_niu_chang_an_kai_guan_guo_dao_deng_gan_ying
     - automation.guo_dao_an_niu_dan_ji_bo_bao_kong_qi
     - automation.guo_dao_an_niu_shuang_ji_qi_yong_hong_gan
@@ -366,7 +211,6 @@ Balcony:
     - automation.xiao_ai_yin_bo_bao
 
 洗手间:
-  view: yes
   entities:
     - light.washroom_light
     - switch.washroom_fan
@@ -376,7 +220,6 @@ Balcony:
     - automation.xi_shou_jian_deng_gan_ying_kai
 
 主卧:
-  view: yes
   entities:
     - media_player.x9300d
     - climate.daikin3
@@ -403,7 +246,6 @@ Balcony:
     - automation.zhu_wo_xin_feng_ji_diao_jie
 
 次卧:
-  view: yes
   entities:
     - fan.purifier
     - sensor.purifier_temperature
@@ -412,15 +254,14 @@ Balcony:
     - automation.ci_wo_jing_hua_qi_diao_jie
 
 儿童房:
-  view: yes
   entities:
     - light.kids_light
     - light.lamp2
     - climate.daikin4
     - fan.purifier7
-    - fan.fan
-    - sensor.fan_temperature
-    - switch.outlet2
+    #- fan.fan
+    #- sensor.fan_temperature
+    #- switch.outlet2
     - binary_sensor.cube_158d0002a66db1
     - sensor.nodemcu7_temperature
     - sensor.nodemcu7_humidity
@@ -436,7 +277,6 @@ Balcony:
     - automation.er_tong_fang_kong_diao_diao_jie
 
 书房:
-  view: yes
   entities:
     - light.lamp
     - light.studyroom_light
@@ -447,7 +287,7 @@ Balcony:
     - switch.station
     - switch.speaker
     - climate.mitsubishi
-    - fan.fan2
+    #- fan.fan2
     - vacuum.vacuum
     #- fan.purifier4
     - sensor.nodemcu3_temperature
@@ -466,9 +306,7 @@ Balcony:
     - automation.shu_fang_kong_diao_diao_jie
 
 阳台:
-  view: yes
   entities:
-    - light.balcony_light
     - binary_sensor.door_window_sensor_158d000228a52b
     - sensor.balcony_temperature
     - sensor.balcony_humidity

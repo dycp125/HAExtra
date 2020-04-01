@@ -126,18 +126,8 @@ light.airer_light:
   friendly_name: 晾衣灯
   hagenie_deviceName: 天花灯
   icon: mdi:ceiling-light
-light.balcony_light:
-  friendly_name: 阳台灯
-  icon: mdi:ceiling-light
 light.bedroom_light:
   friendly_name: 主卧灯
-light.diningroom_light:
-  friendly_name: 餐厅灯
-  icon: mdi:ceiling-light
-light.diningroom_light2:
-  friendly_name: 餐厅灯2
-  hidden: true
-  icon: mdi:ceiling-light
 light.diningroom_spotlight:
   friendly_name: 餐厅筒灯
   hagenie_hidden: true
@@ -145,13 +135,6 @@ light.diningroom_spotlight:
 light.gateway_light_34ce0090901a:
   friendly_name: 壁灯
   hagenie_hidden: true
-light.hallway_light:
-  friendly_name: 玄关灯
-  icon: mdi:ceiling-light
-light.hallway_spotlight:
-  friendly_name: 玄关筒灯
-  hagenie_hidden: true
-  icon: mdi:spotlight
 light.kids_light:
   friendly_name: 儿童房灯
 light.lamp:
@@ -160,13 +143,6 @@ light.lamp:
 light.lamp2:
   friendly_name: 儿童房台灯
   icon: mdi:lamp
-light.livingroom_light:
-  friendly_name: 客厅灯
-  icon: mdi:ceiling-light
-light.livingroom_light2:
-  friendly_name: 客厅灯2
-  hidden: true
-  icon: mdi:ceiling-light
 light.livingroom_spotlight:
   friendly_name: 客厅筒灯
   hagenie_hidden: true
@@ -175,27 +151,8 @@ light.passage_backlight:
   friendly_name: 过道背景灯
   hagenie_hidden: true
   icon: mdi:spotlight-beam
-light.passage_light:
-  friendly_name: 过道灯
-  icon: mdi:ceiling-light
-light.passage_light2:
-  friendly_name: 过道灯2
-  hidden: true
-  icon: mdi:ceiling-light
-light.passage_spotlight:
-  friendly_name: 过道筒灯
-  hagenie_hidden: true
-  icon: mdi:spotlight
 light.studyroom_light:
   friendly_name: 书房灯
-  icon: mdi:ceiling-light
-light.studyroom_light2:
-  friendly_name: 书房灯2
-  hidden: true
-  icon: mdi:ceiling-light
-light.studyroom_light3:
-  friendly_name: 书房灯3
-  hidden: true
   icon: mdi:ceiling-light
 light.washroom_light:
   friendly_name: 洗手间灯
