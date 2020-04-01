@@ -109,7 +109,6 @@ device_tracker:
     interval_seconds: 120
     new_device_defaults:
       track_new_devices: false
-      hide_if_away: true
   # - platform: ping
   #   hosts:
   #     x9300d: 192.168.1.7
