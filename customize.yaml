@@ -16,8 +16,6 @@ binary_sensor.motion_sensor_158d0001d66ce9:
   friendly_name: 过道感应
 binary_sensor.motion_sensor_158d0001f4a238:
   friendly_name: 洗手间感应
-binary_sensor.nodemcu3_motion:
-  friendly_name: 书房感应
 binary_sensor.nodemcu6_motion:
   friendly_name: 主卧感应
 binary_sensor.switch_158d0001e59b33:
@@ -46,10 +44,8 @@ cover.airer:
   friendly_name: 晾衣架
   hagenie_deviceType: hanger
   icon: mdi:hanger
-cover.studyroom_cover:
+cover.study_cover:
   friendly_name: 书房窗帘
-customizer.customizer:
-  friendly_name: 定制界面
 device_tracker.x9300d:
   friendly_name: 主卧电视
 fan.bedroom_fan:
@@ -95,30 +91,6 @@ fan.purifier7:
 fan.wall_fan:
   friendly_name: 客厅壁扇
   icon: mdi:fan
-group.balcony:
-  friendly_name: 阳台
-group.bedroom:
-  friendly_name: 主卧
-group.default_view:
-  friendly_name: 总览
-group.diningroom:
-  friendly_name: 餐厅
-group.hallway:
-  friendly_name: 玄关
-group.kidsroom:
-  friendly_name: 儿童房
-group.kitchen:
-  friendly_name: 厨房
-group.livingroom:
-  friendly_name: 客厅
-group.parentsroom:
-  friendly_name: 次卧
-group.passage:
-  friendly_name: 过道
-group.studyroom:
-  friendly_name: 书房
-group.washroom:
-  friendly_name: 洗手间
 input_text.miai:
   friendly_name: 小爱音箱
   icon: mdi:speaker-wireless
@@ -128,13 +100,11 @@ light.airer_light:
   icon: mdi:ceiling-light
 light.bedroom_light:
   friendly_name: 主卧灯
-light.diningroom_spotlight:
+light.dining_spotlight:
   friendly_name: 餐厅筒灯
-  hagenie_hidden: true
   icon: mdi:spotlight
 light.gateway_light_34ce0090901a:
   friendly_name: 壁灯
-  hagenie_hidden: true
 light.kids_light:
   friendly_name: 儿童房灯
 light.lamp:
@@ -143,15 +113,13 @@ light.lamp:
 light.lamp2:
   friendly_name: 儿童房台灯
   icon: mdi:lamp
-light.livingroom_spotlight:
+light.living_spotlight:
   friendly_name: 客厅筒灯
-  hagenie_hidden: true
   icon: mdi:spotlight
 light.passage_backlight:
   friendly_name: 过道背景灯
-  hagenie_hidden: true
   icon: mdi:spotlight-beam
-light.studyroom_light:
+light.study_light:
   friendly_name: 书房灯
   icon: mdi:ceiling-light
 light.washroom_light:
@@ -163,22 +131,6 @@ media_player.x9300d:
 media_player.x9400e:
   friendly_name: 客厅电视
   icon: mdi:play-circle-outline
-sensor.aircat2_hcho:
-  friendly_name: 过道甲醛
-sensor.aircat2_humidity:
-  friendly_name: 过道湿度
-sensor.aircat2_pm25:
-  friendly_name: 过道颗粒物
-sensor.aircat2_temperature:
-  friendly_name: 过道温度
-sensor.aircat3_hcho:
-  friendly_name: 工位甲醛
-sensor.aircat3_humidity:
-  friendly_name: 工位湿度
-sensor.aircat3_pm25:
-  friendly_name: 工位颗粒物
-sensor.aircat3_temperature:
-  friendly_name: 工位温度
 sensor.aircat_hcho:
   friendly_name: 餐厅甲醛
 sensor.aircat_humidity:
@@ -256,7 +208,7 @@ sensor.purifier_pm25:
   icon: mdi:blur
 sensor.purifier_temperature:
   friendly_name: 次卧温度
-sensor.studyroom_lightness:
+sensor.study_lightness:
   friendly_name: 书房亮度
 sun.sun:
   friendly_name: 日照
@@ -275,9 +227,6 @@ switch.projector:
   hagenie_deviceName: 电视
   hagenie_deviceType: television
   icon: mdi:projector-screen
-switch.projector_power:
-  friendly_name: 投影仪电源
-  hidden: true
 switch.speaker:
   dash_extra: original_state
   friendly_name: 音箱
@@ -307,5 +256,3 @@ weather.caiyun:
   dash_extra: attribution
   dash_name: ${temperature}℃ ${humidity}% ${pm25}μg
   friendly_name: 天气
-zone.home:
-  friendly_name: 我家

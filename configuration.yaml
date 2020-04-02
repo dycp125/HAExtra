@@ -74,14 +74,10 @@ homekit:
       - input_boolean
       - device_tracker
     exclude_entities:
-      - light.studyroom_light2
-      - light.studyroom_light3
-      - light.livingroom_light2
-      - light.diningroom_light2
-      - light.passage_light2
+      - light.living_spotlight2
+      - light.dining_spotlight2
       - binary_sensor.switch_158d0001e59b33
       - binary_sensor.switch_158d000201a73f
-      - switch.projector_power
       - sensor.fresher2_co2
       - climate.saswell
       - climate.saswell2
@@ -117,7 +113,7 @@ person:
   - name: 爸爸
     id: baba
     device_trackers:
-      - device_tracker.aphone
+      #- device_tracker.aphone
       - device_tracker.yphone
   - name: 妈妈
     id: mama
@@ -140,13 +136,6 @@ binary_sensor:
     payload_off: 0
     name: NodeMCU6 Motion
     availability_topic: NodeMCU6/status
-  - platform: mqtt
-    device_class: motion
-    state_topic: NodeMCU3/digital
-    payload_on: 1
-    payload_off: 0
-    name: NodeMCU3 Motion
-    availability_topic: NodeMCU3/status
   # - platform: mqtt
   #   device_class: light
   #   state_topic: NodeMCU6/digital/1
@@ -159,12 +148,6 @@ weather:
   - platform: caiyun
 
 sensor:
-  - platform: mqtt
-    device_class: illuminance
-    state_topic: Sonoff2/lux
-    name: Studyroom Lightness
-    unit_of_measurement: lm
-    availability_topic: Sonoff2/status
   - platform: mqtt
     device_class: temperature
     state_topic: NodeMCU2/temperature
@@ -198,6 +181,12 @@ sensor:
     state_topic: NodeMCU3/co2
     name: NodeMCU3 CO2
     unit_of_measurement: ppm
+    availability_topic: NodeMCU3/status
+  - platform: mqtt
+    device_class: illuminance
+    state_topic: NodeMCU3/lux
+    name: NodeMCU3 Lightness
+    unit_of_measurement: lm
     availability_topic: NodeMCU3/status
   - platform: mqtt
     device_class: illuminance
@@ -287,18 +276,18 @@ sensor:
       ##   value_template: '{{ state_attr("fan.fan", "temperature") }}'
       ##   unit_of_measurement: °C
 
-      daikin2_mode:
-        friendly_name: 客厅空调模式
-        value_template: '{% set mode = state_attr("climate.daikin2", "fan_mode") %}{% if is_state("climate.daikin2", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      daikin3_mode:
-        friendly_name: 主卧空调模式
-        value_template: '{% set mode = state_attr("climate.daikin3", "fan_mode") %}{% if is_state("climate.daikin3", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      daikin4_mode:
-        friendly_name: 儿童房空调模式
-        value_template: '{% set mode = state_attr("climate.daikin4", "fan_mode") %}{% if is_state("climate.daikin4", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      mitsubishi_mode:
-        friendly_name: 书房空调模式
-        value_template: '{% set mode = state_attr("climate.mitsubishi", "fan_mode") %}{% if is_state("climate.mitsubishi", "off") %}off{% elif mode == "low" %}一{% elif mode == "mid" %}二{% elif mode == "high" %}三{% elif mode == "highest" %}四{% else %}{{ mode }}{% endif %}'
+      # daikin2_mode:
+      #   friendly_name: 客厅空调模式
+      #   value_template: '{% set mode = state_attr("climate.daikin2", "fan_mode") %}{% if is_state("climate.daikin2", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # daikin3_mode:
+      #   friendly_name: 主卧空调模式
+      #   value_template: '{% set mode = state_attr("climate.daikin3", "fan_mode") %}{% if is_state("climate.daikin3", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # daikin4_mode:
+      #   friendly_name: 儿童房空调模式
+      #   value_template: '{% set mode = state_attr("climate.daikin4", "fan_mode") %}{% if is_state("climate.daikin4", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # mitsubishi_mode:
+      #   friendly_name: 书房空调模式
+      #   value_template: '{% set mode = state_attr("climate.mitsubishi", "fan_mode") %}{% if is_state("climate.mitsubishi", "off") %}off{% elif mode == "low" %}一{% elif mode == "mid" %}二{% elif mode == "high" %}三{% elif mode == "highest" %}四{% else %}{{ mode }}{% endif %}'
 
       # fan_mode:
       #   friendly_name: 儿童房风扇模式
@@ -307,28 +296,28 @@ sensor:
       #   friendly_name: 书房风扇模式
       #   value_template: '{% set mode = state_attr("fan.fan2", "speed_level") %}{% if is_state("fan.fan2", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
 
-      fresher_mode:
-        friendly_name: 客厅新风机模式
-        value_template: '{% set mode = state_attr("fan.fresher", "speed") %}{% if is_state("fan.fresher", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
-      fresher2_mode:
-        friendly_name: 主卧新风机模式
-        value_template: '{% set mode = state_attr("fan.fresher2", "speed") %}{% if is_state("fan.fresher2", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
+      # fresher_mode:
+      #   friendly_name: 客厅新风机模式
+      #   value_template: '{% set mode = state_attr("fan.fresher", "speed") %}{% if is_state("fan.fresher", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
+      # fresher2_mode:
+      #   friendly_name: 主卧新风机模式
+      #   value_template: '{% set mode = state_attr("fan.fresher2", "speed") %}{% if is_state("fan.fresher2", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
 
-      purifier_mode:
-        friendly_name: 次卧净化器模式
-        value_template: '{% set mode = state_attr("fan.purifier", "speed") %}{% if is_state("fan.purifier", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Favorite" %}{{ state_attr("fan.purifier", "favorite_level") }}{% else %}{{ mode }}{% endif %}'
+      # purifier_mode:
+      #   friendly_name: 次卧净化器模式
+      #   value_template: '{% set mode = state_attr("fan.purifier", "speed") %}{% if is_state("fan.purifier", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Favorite" %}{{ state_attr("fan.purifier", "favorite_level") }}{% else %}{{ mode }}{% endif %}'
       # purifier4_mode:
       #   friendly_name: 书房净化器模式
       #   value_template: '{% set mode = state_attr("fan.purifier4", "speed") %}{% if is_state("fan.purifier4", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      purifier5_mode:
-        friendly_name: 餐厅净化器模式
-        value_template: '{% set mode = state_attr("fan.purifier5", "speed") %}{% if is_state("fan.purifier5", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      purifier6_mode:
-        friendly_name: 主卧净化器模式
-        value_template: '{% set mode = state_attr("fan.purifier6", "speed") %}{% if is_state("fan.purifier6", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      purifier7_mode:
-        friendly_name: 儿童房净化器模式
-        value_template: '{% set mode = state_attr("fan.purifier7", "speed") %}{% if is_state("fan.purifier7", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      # purifier5_mode:
+      #   friendly_name: 餐厅净化器模式
+      #   value_template: '{% set mode = state_attr("fan.purifier5", "speed") %}{% if is_state("fan.purifier5", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      # purifier6_mode:
+      #   friendly_name: 主卧净化器模式
+      #   value_template: '{% set mode = state_attr("fan.purifier6", "speed") %}{% if is_state("fan.purifier6", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      # purifier7_mode:
+      #   friendly_name: 儿童房净化器模式
+      #   value_template: '{% set mode = state_attr("fan.purifier7", "speed") %}{% if is_state("fan.purifier7", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
 
 switch:
   - platform: wake_on_lan
@@ -343,11 +332,6 @@ switch:
     state_topic: Hassmart2/relay/1
     command_topic: Hassmart2/relay/1/set
     availability_topic: Hassmart2/status
-  - platform: mqtt
-    name: Projector Power
-    state_topic: Sonoff2/relay/1
-    command_topic: Sonoff2/relay/1/set
-    availability_topic: Sonoff2/status
   - platform: mqtt2
     name: Speaker
     state_topic: NodeMCU3/relay/0
@@ -407,12 +391,12 @@ yeelight:
 
 light:
   - platform: mqtt
-    name: Livingroom Spotlight
+    name: Living Spotlight
     state_topic: Hassmart1/relay/0
     command_topic: Hassmart1/relay/0/set
     availability_topic: Hassmart1/status
   - platform: mqtt
-    name: Diningroom Spotlight
+    name: Dining Spotlight
     state_topic: Hassmart1/relay/1
     command_topic: Hassmart1/relay/1/set
     availability_topic: Hassmart1/status
@@ -427,10 +411,15 @@ light:
     command_topic: Sonoff1/relay/0/set
     availability_topic: Sonoff1/status
   - platform: mqtt
-    name: Studyroom Light
-    state_topic: Sonoff2/relay/0
-    command_topic: Sonoff2/relay/0/set
-    availability_topic: Sonoff2/status
+    name: Living Spotlight2
+    state_topic: Sonoff1/relay/1
+    command_topic: Sonoff1/relay/1/set
+    availability_topic: Sonoff1/status
+  - platform: mqtt
+    name: Dining Spotlight2
+    state_topic: Sonoff1/relay/2
+    command_topic: Sonoff1/relay/2/set
+    availability_topic: Sonoff1/status
   - platform: mqtt
     name: Bedroom Light
     #state_topic: NodeMCU6/digital/1
@@ -600,8 +589,8 @@ cover:
     host: Remote
     mac: 34:EA:34:58:73:5D
     covers:
-      studyroom_cover:
-        name: Studyroom Cover
+      study_cover:
+        name: Study Cover
         travel_time: 13
         command_open: 'sgD8AJ8wGAwNFxgMGAwYDAwYFwwYDQwYGAsNFw0XDRcYDAwYDBgNFxkMDBgYDBgMDBcNFw0XGQsNFxgMGAwMGAwYDBgXDQwYDBcNFxgMDRcMGAwXGAABIZ4xGQwNFxgMGAwYDAwXGAwYDQwXGAwNFw0XDBgYDAwYDBgMGBgMDBcYDBgMDRcMGAwYGAwMGBgMGAwMFw0XDRcYDA0XDBgMGBgMDBkMFw0XGAABIZ4xFwwNFxgMGAwYDAwYGAwYDAwYGAwMFw0XDRcYDAwYDBgNFxgMDBgYDRgMDBgMFw0YGAsNFxgMGAwMGAwYDBcYDQwYDBcNFxgMDBgMGAwYFwAF3AAAAAAAAAAAAAAAAA=='
         command_stop: 'sgD8AJ4xGAwMGBcMGAwYDAwYGAwYDAwYGAwMGAwZDBcYDAwYDBkLGBgMDBgYDBcNDBgMFw0YFw0MFxgMGAwMGAwYDBgXDQwYFw0MFxgMDRcYDAwYFwABIZ8xGAwMGBcNFw0XDQwXGAwYDQwYFwwNFwwYDBgXDQwYDBgMGBcMDRcYDBgMDBgMGAwYGAwMGBcNFwwNFwwYDBgZDAwYFw0MGBcNDBcYDAwYGAABIJ4xGAwMGBgMGAwXDQwXGAwYDQwYFwwNFwwYDBgYDAwYDRgMGBcNDBcYDBgMDBgMGAwYGAwMGBcNFw0MGAsYDBgYDAwYGAwMGBcNDBcYDAwYGAAF3AAAAAAAAAAAAAAAAA=='

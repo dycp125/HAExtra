@@ -14,7 +14,7 @@ default_view:
 
 客厅:
   entities:
-    - light.livingroom_spotlight
+    - light.living_spotlight
     - media_player.x9400e
     #- media_player.magic
     - climate.daikin2
@@ -25,13 +25,14 @@ default_view:
     - sensor.fresher_humidity
     - sensor.fresher_pm25
     - sensor.fresher_co2
+    - automation.ke_ting_tong_deng_tong_bu
     - automation.ke_ting_kong_diao_guan
     - automation.ke_ting_kong_diao_kai
     - automation.ke_ting_xin_feng_ji_diao_jie
 
 餐厅:
   entities:
-    - light.diningroom_spotlight
+    - light.dining_spotlight
     #- switch.outlet
     - light.gateway_light_34ce0090901a
     - fan.purifier5
@@ -42,6 +43,7 @@ default_view:
     - sensor.aircat_pm25
     - sensor.aircat_hcho
     - binary_sensor.door_window_sensor_158d0001f3d2d1
+    - automation.can_ting_tong_deng_tong_bu
     - automation.can_ting_chu_shi_ji_guan
     - automation.can_ting_chu_shi_ji_kai
     - automation.can_ting_jia_shi_qi_guan
@@ -63,7 +65,7 @@ default_view:
 
 过道:
   entities:
-    #- light.studyroom_light2
+    #- light.study_light2
     - light.passage_backlight
     - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
@@ -149,9 +151,8 @@ default_view:
 书房:
   entities:
     - light.lamp
-    - light.studyroom_light
     #- light.airer_light
-    - cover.studyroom_cover
+    - cover.study_cover
     #- cover.airer
     - switch.projector
     - switch.station
@@ -163,8 +164,7 @@ default_view:
     - sensor.nodemcu3_temperature
     - sensor.nodemcu3_humidity
     - sensor.nodemcu3_co2
-    - sensor.studyroom_lightness
-    - binary_sensor.nodemcu3_motion
+    - sensor.nodemcu3_lightness
     - automation.shu_fang_an_niu_chang_an_guan_bi_yin_xiang
     - automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
     - automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi

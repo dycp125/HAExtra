@@ -30,7 +30,7 @@
           entity_id: sun.sun
           state: above_horizon
         - condition: state
-          entity_id: light.livingroom_light
+          entity_id: light.living_light
           state: 'on'
   action:
     - service: climate.turn_on
@@ -44,7 +44,7 @@
       for:
         minutes: 2
     - platform: state
-      entity_id: light.livingroom_light
+      entity_id: light.living_light
       from: 'on'
       to: 'off'
       for:

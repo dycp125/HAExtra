@@ -16,11 +16,22 @@
     - service: light.turn_off
       entity_id: light.passage_backlight
 
-# - alias: 过道灯同步
-#   trigger:
-#     - platform: state
-#       entity_id: light.passage_light2, light.passage_light
-#   action:
-#     - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
-#       data_template:
-#         entity_id: '{% if trigger.entity_id == "light.passage_light2" %}light.passage_light{% else %}light.passage_light2{% endif %}'
+#
+- alias: 餐厅筒灯同步
+  trigger:
+    - platform: state
+      entity_id: light.dining_spotlight2, light.dining_spotlight
+  action:
+    - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
+      data_template:
+        entity_id: '{% if trigger.entity_id == "light.dining_spotlight2" %}light.dining_spotlight{% else %}light.dining_spotlight2{% endif %}'
+
+#
+- alias: 客厅筒灯同步
+  trigger:
+    - platform: state
+      entity_id: light.living_spotlight2, light.living_spotlight
+  action:
+    - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
+      data_template:
+        entity_id: '{% if trigger.entity_id == "light.living_spotlight2" %}light.dining_spotlight{% else %}light.living_spotlight2{% endif %}'

@@ -3,20 +3,20 @@
     - platform: time
       at: '12:30:00'
     - platform: numeric_state
-      entity_id: sensor.studyroom_lightness
+      entity_id: sensor.study_lightness
       above: 180
       for:
         minutes: 10
   condition:
     - condition: numeric_state
-      entity_id: sensor.studyroom_lightness
+      entity_id: sensor.study_lightness
       above: 180
     - condition: time
       after: '12:00'
       before: '16:00'
   action:
     - service: cover.close_cover
-      entity_id: cover.studyroom_cover
+      entity_id: cover.study_cover
 
 - alias: 书房窗帘开
   trigger:
@@ -25,11 +25,11 @@
       offset: '-01:30:00'
   condition:
     - condition: state
-      entity_id: cover.studyroom_cover
+      entity_id: cover.study_cover
       state: closed
     - condition: state
       entity_id: switch.projector
       state: 'off'
   action:
     - service: cover.open_cover
-      entity_id: cover.studyroom_cover
+      entity_id: cover.study_cover
