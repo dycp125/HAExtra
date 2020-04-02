@@ -155,6 +155,7 @@ default_view:
     #- light.airer_light
     - cover.study_cover
     #- cover.airer
+    - cover.projector_screen
     - switch.projector
     - switch.station
     - switch.speaker

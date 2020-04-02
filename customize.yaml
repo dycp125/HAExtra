@@ -44,6 +44,10 @@ cover.airer:
   friendly_name: 晾衣架
   hagenie_deviceType: hanger
   icon: mdi:hanger
+cover.projector_screen:
+  friendly_name: 投影仪幕布
+  hagenie_deviceName: 幕帘
+  hagenie_zone: 影音室
 cover.study_cover:
   friendly_name: 书房窗帘
 device_tracker.x9300d:
