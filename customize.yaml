@@ -91,6 +91,9 @@ fan.purifier7:
 fan.wall_fan:
   friendly_name: 客厅壁扇
   icon: mdi:fan
+group.default_view:
+  friendly_name: 总览
+  hidden: true
 input_text.miai:
   friendly_name: 小爱音箱
   icon: mdi:speaker-wireless
@@ -103,6 +106,9 @@ light.bedroom_light:
 light.dining_spotlight:
   friendly_name: 餐厅筒灯
   icon: mdi:spotlight
+light.dining_spotlight2:
+  friendly_name: 餐厅筒灯2
+  hidden: true
 light.gateway_light_34ce0090901a:
   friendly_name: 壁灯
 light.kids_light:
@@ -116,6 +122,9 @@ light.lamp2:
 light.living_spotlight:
   friendly_name: 客厅筒灯
   icon: mdi:spotlight
+light.living_spotlight2:
+  friendly_name: 客厅筒灯2
+  hidden: true
 light.passage_backlight:
   friendly_name: 过道背景灯
   icon: mdi:spotlight-beam
@@ -180,6 +189,8 @@ sensor.nodemcu3_co2:
   icon: mdi:periodic-table-co2
 sensor.nodemcu3_humidity:
   friendly_name: 书房湿度
+sensor.nodemcu3_lightness:
+  friendly_name: 书房亮度
 sensor.nodemcu3_temperature:
   friendly_name: 书房温度
   unit_of_measurement: °C

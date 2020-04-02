@@ -34,4 +34,4 @@
   action:
     - service_template: '{% if trigger.to_state.state == "on" %}light.turn_on{% else %}light.turn_off{% endif %}'
       data_template:
-        entity_id: '{% if trigger.entity_id == "light.living_spotlight2" %}light.dining_spotlight{% else %}light.living_spotlight2{% endif %}'
+        entity_id: '{% if trigger.entity_id == "light.living_spotlight2" %}light.living_spotlight{% else %}light.living_spotlight2{% endif %}'

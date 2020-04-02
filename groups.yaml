@@ -93,6 +93,7 @@ default_view:
 
 主卧:
   entities:
+    - switch.x9300d
     - media_player.x9300d
     - climate.daikin3
     - climate.saswell2
