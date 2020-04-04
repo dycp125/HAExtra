@@ -369,6 +369,13 @@ switch:
           service: script.turn_on_projector
         turn_off:
           service: script.turn_off_projector
+      player:
+        friendly_name: Player
+        value_template: '{{ is_state("device_tracker.player", "home") }}'
+        turn_on:
+          service: script.turn_on_player
+        turn_off:
+          service: script.turn_off_player
       x9300d:
         friendly_name: X9300d
         value_template: '{{ is_state("device_tracker.x9300d", "home") }}'

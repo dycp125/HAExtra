@@ -4,35 +4,16 @@ turn_on_projector:
   sequence:
     - service: automation.turn_off
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
-    - service: switch.turn_on
-      entity_id: switch.projector_power
-    - delay: 2
-    - service: broadlink.send # BenQ On
+    - service: broadlink.send
       data:
         host: Remote
-        packet: 'JgDYAAABJ5QSExITEhMRFBEUERMSExITEhMRFBEUERMSOBE4EhMSExI4ETgSOBE4EhMSExI4ERQRExITEhMSExE4EjgSExE4EgAF='
-    - service: broadlink.send # HiMedia On
-      data:
-        host: Remote
-        packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
+        packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
     - service: cover.close_cover
       entity_id: cover.study_cover
+    - service: cover.close_cover
+      entity_id: cover.projector_screen
     #- service: cover.close_cover
     #  entity_id: cover.airer
-    - service: homeassistant.turn_on
-      entity_id:
-        - fan.purifier
-        - switch.speaker
-        #- switch.station
-    - service: fan.set_speed
-      data:
-        entity_id: fan.purifier
-        speed: auto
-    - delay: 2
-    - service: broadlink.send # BenQ On
-      data:
-        host: Remote
-        packet: 'JgDYAAABJ5QSExITEhMRFBEUERMSExITEhMRFBEUERMSOBE4EhMSExI4ETgSOBE4EhMSExI4ERQRExITEhMSExE4EjgSExE4EgAF='
     - service: automation.turn_on
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
     - delay: 20
@@ -50,30 +31,45 @@ turn_off_projector:
   sequence:
     - service: automation.turn_off
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
-    - service: broadlink.send # BenQ Off
+    - service: broadlink.send
       data:
         host: Remote
-        packet: 'JgAgAQABJ5QSExITEhITEhMSEhMSExITEhITEhMSEhMSOBI3ExISExITEjcTNxI3ExITEhI4EhITNxITEhMSExI3EzcSExI3EwAF='
-    - service: broadlink.send # HiMedia Off
-      data:
-        host: Remote
-        packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
+        packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
     - service: cover.open_cover
       entity_id: cover.study_cover
-    - service: mqtt.publish
-      data:
-        topic: NodeMCU3/relay/0/set
-        payload: 'off'
-    - service: broadlink.send # BenQ Off
-      data:
-        host: Remote
-        packet: 'JgAgAQABJ5QSExITEhITEhMSEhMSExITEhITEhMSEhMSOBI3ExISExITEjcTNxI3ExITEhI4EhITNxITEhMSExI3EzcSExI3EwAF='
+    - service: cover.open_cover
+      entity_id: cover.projector_screen
     # - service_template: '{% if is_state("sun.sun", "below_horizon") %}light.turn_on{% else %}light.turn_off{% endif %}'
     #   entity_id: light.airer_light
     - service: climate.turn_off
       entity_id: climate.mitsubishi
-    - delay: 250
-    - service: switch.turn_off
-      entity_id: switch.projector_power
     - service: automation.turn_on
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
+
+#
+turn_on_player:
+  alias: 打开播放器
+  sequence:
+    - service: script.turn_on_projector
+    - service: broadlink.send
+      data:
+        host: Remote
+        packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
+    - service: homeassistant.turn_on
+      entity_id:
+        - switch.speaker
+        #- switch.station
+
+#
+turn_off_player:
+  alias: 关闭播放器
+  sequence:
+    - service: script.turn_off_projector
+    - service: broadlink.send
+      data:
+        host: Remote
+        packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
+    - service: mqtt.publish
+      data:
+        topic: NodeMCU3/relay/0/set
+        payload: 'off'

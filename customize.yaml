@@ -46,8 +46,9 @@ cover.airer:
   icon: mdi:hanger
 cover.projector_screen:
   friendly_name: 投影仪幕布
-  hagenie_deviceName: 幕帘
+  hagenie_deviceName: 窗帘
   hagenie_zone: 影音室
+  icon: mdi:projector-screen
 cover.study_cover:
   friendly_name: 书房窗帘
 device_tracker.x9300d:
@@ -235,13 +236,19 @@ switch.outlet2:
   friendly_name: 儿童房除湿机
   hagenie_deviceType: dehumidifier
   icon: mdi:power-socket-uk
+switch.player:
+  friendly_name: 播放器
+  hagenie_deviceName: 电视
+  hagenie_deviceType: television
+  hagenie_zone: 影音室
+  icon: mdi:play-circle-outline
 switch.plug_158d0003a58422:
   friendly_name: 米家插座
 switch.projector:
   friendly_name: 投影仪
   hagenie_deviceName: 电视
   hagenie_deviceType: television
-  icon: mdi:projector-screen
+  icon: mdi:projector
 switch.speaker:
   dash_extra: original_state
   friendly_name: 音箱

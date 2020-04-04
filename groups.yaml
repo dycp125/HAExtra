@@ -157,6 +157,7 @@ default_view:
     #- cover.airer
     - cover.projector_screen
     - switch.projector
+    - switch.player
     - switch.station
     - switch.speaker
     - climate.mitsubishi
