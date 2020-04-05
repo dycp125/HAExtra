@@ -251,6 +251,8 @@ switch.projector:
   icon: mdi:projector
 switch.speaker:
   dash_extra: original_state
+  dash_extra_click: 'callService(''mqtt'', ''publish'', {''topic'': ''NodeMCU3/relay/0/set'',
+    ''payload'': ''toggle''})'
   friendly_name: 音箱
   hagenie_deviceName: 机顶盒
   hagenie_deviceType: STB

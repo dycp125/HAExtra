@@ -310,13 +310,15 @@
 							} else if (json.id == 2) {
 								// Responed to subscribe_events
 								break
-							} else if (json.id == _wsid && _call_entity_id) {
-								// Avoid mis-operation and ensure animation
-								setTimeout(function() {
-									// Responed to call_service
-									document.getElementById(_call_entity_id).style = ''
-									_call_entity_id = null
-								}, 1000)
+							} else if (json.id == _wsid) {
+								if (_call_entity_id) {
+									// Avoid mis-operation and ensure animation
+									setTimeout(function() {
+										// Responed to call_service
+										document.getElementById(_call_entity_id).style = ''
+										_call_entity_id = null
+									}, 1000)
+								}
 								break
 							}
 						}
@@ -471,7 +473,7 @@
 				// 	entity.state = off ? 'on' : 'off'
 				// 	grid.innerHTML = makeEntity(entity)
 				// }
-				callService(service, { entity_id: grid.id }, grid)
+				doService(service, { entity_id: grid.id }, grid)
 			}
 
 			function handleTune(event) {
@@ -483,7 +485,7 @@
 				var moder = extra.children[1]
 				var text = moder.options[moder.selectedIndex].innerText
 				var temperature = parseInt(text.split(' ')[1]) + (tuner.innerText == '△' ? 1 : -1)
-				callService('set_temperature', { entity_id: grid.id, temperature: temperature }, tuner)
+				doService('set_temperature', { entity_id: grid.id, temperature: temperature }, tuner)
 			}
 
 			function handleMode(moder) {
@@ -491,32 +493,34 @@
 				var grid = extra.parentElement
 				var mode = moder.options[moder.selectedIndex].value
 				if (grid.className == 'entity climate') {
-					callService('set_hvac_mode', { entity_id: grid.id, hvac_mode: mode }, moder)
+					doService('set_hvac_mode', { entity_id: grid.id, hvac_mode: mode }, moder)
 				} else {
-					callService('set_speed', { entity_id: grid.id, speed: mode }, moder)
+					doService('set_speed', { entity_id: grid.id, speed: mode }, moder)
 				}
 			}
 
-			function callService(service, data, element) {
+			function doService(service, data, element) {
 				var entity_id = data.entity_id
 				if (_call_entity_id) {
 					console.log('Skip call: ' + service + '/' + entity_id)
 					return
 				}
 				_call_entity_id = entity_id
-
-				var domain = entity_id.split('.')[0]
 				element.style = 'animation: tuning 1s infinite alternate'
-				console.log('Processing: ' + domain + '/' + service + '/' + entity_id)
-				_ws.send(
-					JSON.stringify({
+				console.log('Do service: ' + service + '/' + entity_id)
+				callService(entity_id.split('.')[0], service, data)
+			}
+
+			function callService(domain, service, data) {
+				var body = JSON.stringify({
 						id: ++_wsid,
 						type: 'call_service',
 						domain: domain,
 						service: service,
 						service_data: data
 					})
-				)
+				_ws.send(body)
+				console.log('Call service: ' + body)
 			}
 
 			_TRANS = {
@@ -606,7 +610,7 @@
 				var html = '<div class="name">' + name + '</div>'
 
 				var na = state == '' || state == 'unavailable' || state == 'unknown' || state == 'None'
-				var off = state == 'off' || state == 'not_home' || state == 'closed' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
+				var off = state == 'off' || state == 'not_home' || state == 'open' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
 
 				var has_dash_icon = attributes.hasOwnProperty('dash_icon')
 				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
@@ -660,6 +664,13 @@
 						var extra = renderTemplate(attributes.dash_extra, state, attributes)
 						if (extra.length > 8) {
 							extra = '<marquee scrollamount="3">' + extra + '</marquee>'
+						}
+						if (attributes.hasOwnProperty('dash_extra_click')) {
+							var dash_extra_click = attributes.dash_extra_click
+							if (dash_extra_click.startsWith('http') || dash_extra_click.startsWith('/')) {
+								dash_extra_click = "location='" + dash_extra_click + "'"
+							}
+							extra = '<span class="tuner" onclick="event.stopPropagation(); ' + dash_extra_click + '">' + extra + '</span>'
 						}
 					} else if (domain == 'climate' || domain == 'fan') {
 						var extra = ''
