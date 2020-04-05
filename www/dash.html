@@ -461,7 +461,7 @@
 			function handleClick(grid) {
 				var off = grid.children[1].className.startsWith('state off')
 				if (grid.className == 'entity cover') {
-					var service = off ? 'open_cover' : 'close_cover'
+					var service = off ? 'close_cover' : 'open_cover'
 				} else if (grid.className == 'entity vacuum') {
 					var service = off ? 'start' : 'return_to_base'
 				} else {
