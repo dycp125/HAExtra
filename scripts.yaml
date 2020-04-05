@@ -16,7 +16,7 @@ turn_on_projector:
     #  entity_id: cover.airer
     - service: automation.turn_on
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
-    - delay: 20
+    #- delay: 20
     # - service: homeassistant.turn_off
     #   entity_id: light.airer_light
     - condition: numeric_state
@@ -50,26 +50,24 @@ turn_off_projector:
 turn_on_player:
   alias: 打开播放器
   sequence:
-    - service: script.turn_on_projector
+    - service: switch.turn_on
+      entity_id: switch.projector
     - service: broadlink.send
       data:
         host: Remote
         packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
-    - service: homeassistant.turn_on
-      entity_id:
-        - switch.speaker
-        #- switch.station
+    - service: switch.turn_on
+      entity_id: switch.speaker
 
 #
 turn_off_player:
   alias: 关闭播放器
   sequence:
-    - service: script.turn_off_projector
+    - service: switch.turn_off
+      entity_id: switch.projector
     - service: broadlink.send
       data:
         host: Remote
         packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
-    - service: mqtt.publish
-      data:
-        topic: NodeMCU3/relay/0/set
-        payload: 'off'
+    - service: switch.turn_off
+      entity_id: switch.speaker

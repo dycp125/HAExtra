@@ -1,16 +1,3 @@
-default_view:
-  icon: mdi:home-assistant
-  entities:
-    - group.ke_ting
-    - group.can_ting
-    - group.xuan_guan
-    - group.guo_dao
-    - group.xi_shou_jian
-    - group.zhu_wo
-    - group.ci_wo 
-    - group.er_tong_fang
-    - group.shu_fang
-    - group.yang_tai
 
 客厅:
   entities:
@@ -51,13 +38,13 @@ default_view:
     - automation.can_ting_jing_hua_qi_diao_jie
     - automation.chu_fang_men_ti_xing
 
-玄关:
-  entities:
+# 玄关:
+#   entities:
     - binary_sensor.door_window_sensor_158d0001f3e5be
-    - person.ba_ba
-    - person.ma_ma
+    # - person.ba_ba
+    # - person.ma_ma
     # - person.ye_ye
-    - person.a_yi
+    # - person.a_yi
     - automation.ru_hu_men_huan_ying
     - automation.ru_hu_men_ti_xing
     - automation.shi_nei_kong_qi_chai
@@ -82,8 +69,8 @@ default_view:
     - automation.guo_dao_deng_gan_ying_zhong_qi
     - automation.xiao_ai_yin_bo_bao
 
-洗手间:
-  entities:
+# 洗手间:
+#   entities:
     - light.washroom_light
     - switch.washroom_fan
     - binary_sensor.motion_sensor_158d0001f4a238

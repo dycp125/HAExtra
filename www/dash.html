@@ -383,8 +383,10 @@
 			var _group_entity_ids = null
 			function handleStates() {
 				// Fetch entities id in group
-				var group_id = location.hash ? location.hash.slice(1) : 'group.default_view'
-				if (group_id.startsWith('group.')) {
+				var group_id = location.hash.slice(1)
+				if (group_id) {
+					if (!group_id.startsWith('group.'))
+						group_id = 'group.' + group_id
 					_group_entity_ids = []
 					fetchEntities(group_id)
 					if (_group_entity_ids.length == 0) {
