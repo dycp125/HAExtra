@@ -150,7 +150,7 @@ sensor.aircat_hcho:
 sensor.aircat_humidity:
   friendly_name: 餐厅湿度
 sensor.aircat_pm25:
-  dash_click: /
+  dash_click: if (self == top) location = '/'
   dash_relation: fan.purifier5
   friendly_name: 餐厅颗粒物
 sensor.aircat_temperature:
