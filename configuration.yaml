@@ -618,41 +618,9 @@ media_player:
 
 panel_iframe:
   dash:
-    title: 全部
+    title: 面板
     icon: mdi:microsoft
     url: !secret dash_url
-  ke_ting:
-    title: 客厅
-    icon: mdi:seat
-    url: /local/dash.html#ke_ting
-  can_ting:
-    title: 餐厅
-    icon: mdi:silverware-fork-knife
-    url: /local/dash.html#can_ting
-  guo_dao:
-    title: 过道
-    icon: mdi:road
-    url: /local/dash.html#guo_dao
-  zhu_wo:
-    title: 主卧
-    icon: mdi:bed-king
-    url: /local/dash.html#zhu_wo
-  ci_wo:
-    title: 次卧
-    icon: mdi:bed-double
-    url: /local/dash.html#ci_wo
-  er_tong_fang:
-    title: 儿童房
-    icon: mdi:car-child-seat
-    url: /local/dash.html#er_tong_fang
-  shu_fang:
-    title: 书房
-    icon: mdi:bookshelf
-    url: /local/dash.html#shu_fang
-  yang_tai:
-    title: 阳台
-    icon: mdi:home-minus
-    url: /local/dash.html#yang_tai
 
 actuator:
 
