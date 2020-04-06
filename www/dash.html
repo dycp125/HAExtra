@@ -264,6 +264,11 @@
 			}
 
 			function connect() {
+				_wsid = 2
+				_call_entity_id = null
+				_entities = null
+				_entities_retained = false
+
 				floater('loading')
 
 				_ws = new WebSocket(_wsapi)
@@ -278,7 +283,6 @@
 				}
 				_ws.send('{"id": 1, "type": "get_states"}')
 				_ws.send('{"id": 2, "type": "subscribe_events", "event_type": "state_changed"}')
-				_wsid = 2
 			}
 
 			var _retryCount = 0
@@ -306,7 +310,6 @@
 								// Responed to get_states
 								_retryCount = 0
 								_entities = json.result
-								_entities_retained = false
 								handleStates()
 								if (!_entities_retained) {
 									_entities = null // Free _entities if not used in handleEvent/makeEntity/renderTemplate
@@ -327,7 +330,7 @@
 								break
 							}
 						}
-						floater('error', '未知结果 ' + (json.error ? json.error.message : message.data) + '，<a href="javascript:location.reload()">重新载入</a>')
+						floater('error', '未知结果 ' + (json.error ? json.error.message : message.data) + '，<a href="javascript:connect()">重新连接</a>')
 						break
 					case 'event':
 						var entity = json.event.data.new_state
