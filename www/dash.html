@@ -6,7 +6,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<link rel="apple-touch-icon" href="/static/images/config_insteon.png" />
-		<link href="https://cdn.bootcss.com/MaterialDesign-Webfont/3.2.89/css/materialdesignicons.min.css" rel="stylesheet" />
+		<link href="https://cdn.bootcss.com/MaterialDesign-Webfont/5.0.45/css/materialdesignicons.min.css" rel="stylesheet" />
 		<style>
 			.entity {
 				float: left;
@@ -361,7 +361,7 @@
 			}
 
 			_DOMAIN_ICONS = {
-				weather: 'weather-partlycloudy',
+				weather: 'weather-partly-cloudy',
 				sensor: 'flower',
 				binary_sensor: 'bullseye',
 				person: 'account',
@@ -578,6 +578,24 @@
 				default: ['radiobox-blank', 'checkbox-marked-circle'],
 			}
 
+			_WEATHER_ICONS = {
+				'clear-night': 'night',
+				// 'cloudy': 'cloudy',
+				// 'fog': 'fog',
+				// 'hail': 'hail',
+				// 'lightning': 'lightning',
+				// 'lightning-rainy': 'lightning-rainy',
+				'partlycloudy': 'partly-cloudy',
+				// 'pouring': 'pouring',
+				// 'rainy': 'rainy',
+				// 'snowy': 'snowy',
+				// 'snowy-rainy': 'snowy-rainy',
+				// 'sunny': 'sunny',
+				// 'windy': 'windy',
+				// 'windy-variant': 'windy-variant',
+				'exceptional': 'partly-cloudy',
+			}
+
 			function makeGrid(entity) {
 				var entity_id = entity.entity_id
 				var domain = entity_id.split('.')[0]
@@ -651,6 +669,8 @@
 							device_class = 'default'
 						}
 						icon = _BINARY_SENSOR_ICONS[device_class][off ? 0 : 1]
+					} else if (domain == 'weather') {
+						icon = 'weather-' + (_WEATHER_ICONS[state] || state)
 					} else {
 						icon = _DOMAIN_ICONS[domain]
 					}
