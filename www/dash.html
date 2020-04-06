@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<title>智能物联</title>
 		<meta charset="utf-8" />
@@ -257,7 +258,7 @@
 				if (!_token && localStorage.hassTokens) {
 					try {
 						_token = JSON.parse(localStorage.hassTokens).access_token
-					} catch (e) {}
+					} catch (e) { }
 				}
 				connect()
 			}
@@ -902,4 +903,5 @@
 		<div id="content"></div>
 		<div id="floater"></div>
 	</body>
+
 </html>
