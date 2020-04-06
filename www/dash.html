@@ -59,7 +59,7 @@
 			}
 
 			.weather {
-				background-color: #00bcd4; /*3f51b5;*/
+				background-color: #00bcd4;
 			}
 
 			.sensor {
@@ -89,6 +89,10 @@
 			.fan,
 			.climate {
 				background-color: #8bc34a;
+			}
+
+			.group {
+				background-color: #3f51b5;
 			}
 
 			.name,
@@ -378,9 +382,10 @@
 				climate: 'thermostat',
 
 				camera: 'camera',
+				group: 'home-heart',
 			}
 
-			_CLICKABLE_DOMAINS = ['light', 'switch', 'media_player', 'cover', 'vacuum', 'fan', 'climate']
+			_CLICKABLE_DOMAINS = ['light', 'switch', 'media_player', 'cover', 'vacuum', 'fan', 'climate', 'group']
 
 			var _group_entity_ids = null
 			function handleStates() {
@@ -431,9 +436,12 @@
 					html += makeGrid(entities[i])
 				}
 
-				html += '<div class="entity utility" onclick="location.reload()"><i class="mdi mdi-reload"></i></div>'
+				if (location.hash) {
+					html += makeUtility("location.hash = ''; location.reload()", 'keyboard-backspace')
+				}
+				html += makeUtility("location.reload()", 'reload')
 				if (self == top) {
-					html += '<div class="entity utility" onclick="location = \'/\'"><i class="mdi mdi-home-assistant"></i></div>'
+					html += makeUtility("location = '/'", 'home-assistant')
 				}
 
 				floater()
@@ -466,6 +474,10 @@
 					var service = off ? 'close_cover' : 'open_cover'
 				} else if (grid.className == 'entity vacuum') {
 					var service = off ? 'start' : 'return_to_base'
+				} else if (location.hash == '' && grid.className == 'entity group') {
+					location.hash = '#' + grid.id
+					location.reload();
+					return
 				} else {
 					var service = off ? 'turn_on' : 'turn_off'
 				}
@@ -725,6 +737,10 @@
 				}
 
 				return html
+			}
+
+			function makeUtility(action, icon) {
+				return '<div class="entity utility" onclick="' + action + '"><i class="mdi mdi-' + icon + '"></i></div>'
 			}
 
 			_SENSOR_THRESHOLDS = {

@@ -1,5 +1,5 @@
-
 客厅:
+  icon: mdi:seat
   entities:
     - light.living_spotlight
     - media_player.x9400e
@@ -18,6 +18,7 @@
     - automation.ke_ting_xin_feng_ji_diao_jie
 
 餐厅:
+  icon: mdi:silverware-fork-knife
   entities:
     - light.dining_spotlight
     #- switch.outlet
@@ -51,6 +52,7 @@
     - automation.huan_jing_zhuang_kuang
 
 过道:
+  icon: mdi:road
   entities:
     #- light.study_light2
     - light.passage_backlight
@@ -79,6 +81,7 @@
     - automation.xi_shou_jian_deng_gan_ying_kai
 
 主卧:
+  icon: mdi:bed-king
   entities:
     - switch.x9300d
     - media_player.x9300d
@@ -106,6 +109,7 @@
     - automation.zhu_wo_xin_feng_ji_diao_jie
 
 次卧:
+  icon: mdi:bed-double
   entities:
     - fan.purifier
     - sensor.purifier_temperature
@@ -114,6 +118,7 @@
     - automation.ci_wo_jing_hua_qi_diao_jie
 
 儿童房:
+  icon: mdi:car-child-seat
   entities:
     - light.kids_light
     - light.lamp2
@@ -137,6 +142,7 @@
     - automation.er_tong_fang_kong_diao_diao_jie
 
 书房:
+  icon: mdi:bookshelf
   entities:
     - light.lamp
     #- light.airer_light
@@ -165,6 +171,7 @@
     - automation.shu_fang_kong_diao_diao_jie
 
 阳台:
+  icon: mdi:home-minus
   entities:
     - binary_sensor.door_window_sensor_158d000228a52b
     - sensor.balcony_temperature
