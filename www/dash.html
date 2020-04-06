@@ -313,7 +313,7 @@
 							} else if (json.id == _wsid) {
 								if (_call_entity_id) {
 									// Avoid mis-operation and ensure animation
-									setTimeout(function() {
+									setTimeout(function () {
 										// Responed to call_service
 										document.getElementById(_call_entity_id).style = ''
 										_call_entity_id = null
@@ -377,7 +377,7 @@
 				fan: 'fan',
 				climate: 'thermostat',
 
-				camera: 'camera'
+				camera: 'camera',
 			}
 
 			_CLICKABLE_DOMAINS = ['light', 'switch', 'media_player', 'cover', 'vacuum', 'fan', 'climate']
@@ -387,8 +387,7 @@
 				// Fetch entities id in group
 				var group_id = location.hash.slice(1)
 				if (group_id) {
-					if (!group_id.startsWith('group.'))
-						group_id = 'group.' + group_id
+					if (!group_id.startsWith('group.')) group_id = 'group.' + group_id
 					_group_entity_ids = []
 					fetchEntities(group_id)
 					if (_group_entity_ids.length == 0) {
@@ -513,12 +512,12 @@
 
 			function callService(domain, service, data) {
 				var body = JSON.stringify({
-						id: ++_wsid,
-						type: 'call_service',
-						domain: domain,
-						service: service,
-						service_data: data
-					})
+					id: ++_wsid,
+					type: 'call_service',
+					domain: domain,
+					service: service,
+					service_data: data,
+				})
 				_ws.send(body)
 				console.log('Call service: ' + body)
 			}
@@ -547,7 +546,7 @@
 
 				None: '无',
 				unknown: '未知',
-				unavailable: '不可用'
+				unavailable: '不可用',
 			}
 
 			_BINARY_SENSOR_ICONS = {
@@ -573,7 +572,7 @@
 				sound: ['music-note-off', 'music-note'],
 				vibration: ['crop-portrait', 'vibrate'],
 				window: ['window-closed', 'window-open'],
-				default: ['radiobox-blank', 'checkbox-marked-circle']
+				default: ['radiobox-blank', 'checkbox-marked-circle'],
 			}
 
 			function makeGrid(entity) {
@@ -710,7 +709,7 @@
 				co2: [900, 1600],
 				humidity: [72, 82],
 				hcho: [0.08, 0.2],
-				temperature: [30, 38]
+				temperature: [30, 38],
 			}
 
 			function stateOverflow(entity_id, value) {
