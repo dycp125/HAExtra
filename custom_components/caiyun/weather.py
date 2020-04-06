@@ -26,24 +26,24 @@ USER_AGENT = 'ColorfulCloudsPro/3.2.2 (iPhone; iOS 11.3; Scale/3.00)'
 DEVIEC_ID = '5F544F93-44F1-43C9-94B2-%012X' % random.randint(0, 0xffffffffffff)
 
 WEATHER_ICONS = {
-    'CLEAR_DAY': 'sunny',  # 晴（白天）
-    'CLEAR_NIGHT': 'clear-night',  # 晴（夜间）
-    'PARTLY_CLOUDY_DAY': 'partlycloudy',  # 白天多云
-    'PARTLY_CLOUDY_NIGHT': 'partlycloudy',  # 夜间多云
+    'CLEAR_NIGHT': 'clear-night', # 晴（夜间）
     'CLOUDY': 'cloudy',  # 阴
-    'RAIN': 'rainy',  # 雨
-    'SNOW': 'snowy',  # 雪
-    'WIND': 'windy',  # 大风
     'FOG': 'fog',  # 雾
-    # 'HAZE': #雾霾
-    'SLEET': 'snowy-rainy'  # 雨夹雪
-    # 'HAIL': hail', #冰雹
-    # 'LIGHTNING': 'lightning', #雷电
-    # 'LIGHTNING-RAINY': 'lightning-rainy', #雷阵雨
-    # 'POURING': 'pouring', #暴雨
-    # 'WINDY-VARIANT': 'windy-variant', #有风
+    'HAIL': 'hail', #冰雹
+    # '': 'lightning', #雷电
+    # '': 'lightning-rainy', #雷阵雨
+    'PARTLY_CLOUDY_DAY': 'partlycloudy', # 白天多云
+    'PARTLY_CLOUDY_NIGHT': 'partlycloudy', # 夜间多云
+    # '': 'pouring', #暴雨
+    'RAIN': 'rainy', # 雨
+    'SNOW': 'snowy', # 雪
+    'SLEET': 'snowy-rainy', # 雨夹雪
+    'CLEAR_DAY': 'sunny', # 晴（白天）
+    'WIND': 'windy', # 大风
+    'HAZE': 'windy-variant', # 雾霾->有风
+    # '': 'exceptional',
 }
-
+    
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default='CaiYun'): cv.string,
     vol.Optional(CONF_LONGITUDE): cv.longitude,
