@@ -224,7 +224,6 @@
 			_token = null // Access token or password
 			_call_entity_id = null // Processing entity_id
 			_entities = null // All entities
-			_entities_retained = false
 
 			function load() {
 				// Respond to mobile browser
@@ -267,7 +266,6 @@
 				_wsid = 2
 				_call_entity_id = null
 				_entities = null
-				_entities_retained = false
 
 				floater('loading')
 
@@ -311,9 +309,6 @@
 								_retryCount = 0
 								_entities = json.result
 								handleStates()
-								if (!_entities_retained) {
-									_entities = null // Free _entities if not used in handleEvent/makeEntity/renderTemplate
-								}
 								break
 							} else if (json.id == 2) {
 								// Responed to subscribe_events
@@ -441,7 +436,7 @@
 				}
 
 				if (location.hash) {
-					html += makeUtility("location.hash = ''; location.reload()", 'keyboard-backspace')
+					html += makeUtility("location.hash = ''; handleStates()", 'keyboard-backspace')
 				}
 				html += makeUtility("location.reload()", 'reload')
 				if (self == top) {
@@ -480,7 +475,7 @@
 					var service = off ? 'start' : 'return_to_base'
 				} else if (location.hash == '' && grid.className == 'entity group') {
 					location.hash = '#' + grid.id
-					location.reload();
+					handleStates();
 					return
 				} else {
 					var service = off ? 'turn_on' : 'turn_off'
@@ -788,7 +783,6 @@
 							if (count == 1) {
 								result += macro == 'state' ? state : attributes.hasOwnProperty(macro) ? attributes[macro] : '无属性'
 							} else {
-								_entities_retained = true // Retained _entities for feature using
 								var entity = findEntity(parts[0] + '.' + parts[1])
 								result += entity ? (count == 2 ? entity.state : attributes.hasOwnProperty(parts[2]) ? attributes[parts[2]] : '无属性') : '无设备'
 							}
