@@ -361,29 +361,6 @@
 				}
 			}
 
-			_DOMAIN_ICONS = {
-				weather: 'weather-partly-cloudy',
-				sensor: 'flower',
-				binary_sensor: 'bullseye',
-				person: 'account',
-				//device_tracker: 'cellphone',
-
-				light: 'lightbulb',
-
-				switch: 'light-switch',
-				media_player: 'play-circle-outline',
-				cover: 'window-closed',
-				vacuum: 'robot-vacuum',
-
-				fan: 'fan',
-				climate: 'thermostat',
-
-				camera: 'camera',
-				group: 'home-heart',
-			}
-
-			_CLICKABLE_DOMAINS = ['light', 'switch', 'media_player', 'cover', 'vacuum', 'fan', 'climate', 'group']
-
 			var _group_entity_ids = null
 			function reloadContent() {
 				// Fetch entities id in group
@@ -533,6 +510,29 @@
 				_ws.send(body)
 				console.log('Call service: ' + body)
 			}
+
+			_DOMAIN_ICONS = {
+				weather: 'weather-partly-cloudy',
+				sensor: 'flower',
+				binary_sensor: 'bullseye',
+				person: 'account',
+				//device_tracker: 'cellphone',
+
+				light: 'lightbulb',
+
+				switch: 'light-switch',
+				media_player: 'play-circle-outline',
+				cover: 'window-closed',
+				vacuum: 'robot-vacuum',
+
+				fan: 'fan',
+				climate: 'thermostat',
+
+				camera: 'camera',
+				group: 'home-heart',
+			}
+
+			_CLICKABLE_DOMAINS = ['light', 'switch', 'media_player', 'cover', 'vacuum', 'fan', 'climate', 'group']
 
 			_TRANS = {
 				off: '关闭',
