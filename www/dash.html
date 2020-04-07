@@ -308,7 +308,7 @@
 								// Responed to get_states
 								_retryCount = 0
 								_entities = json.result
-								handleStates()
+								reloadContent()
 								break
 							} else if (json.id == 2) {
 								// Responed to subscribe_events
@@ -330,16 +330,14 @@
 					case 'event':
 						var entity = json.event.data.new_state
 						if (entity) {
-							if (_entities_retained) {
-								var entity_id = entity.entity_id
-								for (var i in _entities) {
-									if (_entities[i].entity_id == entity_id) {
-										_entities[i] = entity
-										break
-									}
+							var entity_id = entity.entity_id
+							for (var i in _entities) {
+								if (_entities[i].entity_id == entity_id) {
+									_entities[i] = entity
+									break
 								}
 							}
-							handleEvent(entity)
+							updateGrid(entity)
 						} else {
 							floater('error', '事件错误 ' + (json.error.message || message.data) + '，<a href="javascript:connect()">重新连接</a>')
 						}
@@ -387,7 +385,7 @@
 			_CLICKABLE_DOMAINS = ['light', 'switch', 'media_player', 'cover', 'vacuum', 'fan', 'climate', 'group']
 
 			var _group_entity_ids = null
-			function handleStates() {
+			function reloadContent() {
 				// Fetch entities id in group
 				var group_id = location.hash.slice(1)
 				if (group_id) {
@@ -436,7 +434,7 @@
 				}
 
 				if (location.hash) {
-					html += makeUtility("location.hash = ''; handleStates()", 'keyboard-backspace')
+					html += makeUtility("location.hash = ''; reloadContent()", 'keyboard-backspace')
 				}
 				html += makeUtility("location.reload()", 'reload')
 				if (self == top) {
@@ -447,7 +445,7 @@
 				document.getElementById('content').innerHTML = html
 			}
 
-			function handleEvent(entity) {
+			function updateGrid(entity) {
 				var entity_id = entity.entity_id
 				var grid = document.getElementById(entity_id)
 				if (grid) {
@@ -457,7 +455,7 @@
 					if (entity.attributes.dash_relation) {
 						var relation = findEntity(entity.attributes.dash_relation)
 						if (relation) {
-							handleEvent(relation)
+							updateGrid(relation)
 						}
 					}
 				} else if (isValidEntity(entity)) {
@@ -467,7 +465,7 @@
 				}
 			}
 
-			function handleClick(grid) {
+			function onClick(grid) {
 				var off = grid.children[1].className.startsWith('state off')
 				if (grid.className == 'entity cover') {
 					var service = off ? 'close_cover' : 'open_cover'
@@ -475,7 +473,7 @@
 					var service = off ? 'start' : 'return_to_base'
 				} else if (location.hash == '' && grid.className == 'entity group') {
 					location.hash = '#' + grid.id
-					handleStates();
+					reloadContent();
 					return
 				} else {
 					var service = off ? 'turn_on' : 'turn_off'
@@ -489,7 +487,7 @@
 				doService(service, { entity_id: grid.id }, grid)
 			}
 
-			function handleTune(event) {
+			function onTune(event) {
 				event.stopPropagation()
 
 				var tuner = event.target
@@ -501,7 +499,7 @@
 				doService('set_temperature', { entity_id: grid.id, temperature: temperature }, tuner)
 			}
 
-			function handleMode(moder) {
+			function onMode(moder) {
 				var extra = moder.parentElement
 				var grid = extra.parentElement
 				var mode = moder.options[moder.selectedIndex].value
@@ -619,7 +617,7 @@
 					}
 					html += ' onclick="' + dash_click + '"'
 				} else if (_CLICKABLE_DOMAINS.indexOf(domain) != -1) {
-					html += ' onclick="handleClick(this)"'
+					html += ' onclick="onClick(this)"'
 				}
 				if (domain == 'camera') {
 					html += ' style="background:center/cover no-repeat url(' + entity.attributes.entity_picture + ');"'
@@ -708,10 +706,10 @@
 					} else if (domain == 'climate' || domain == 'fan') {
 						var extra = ''
 						if (domain == 'climate') {
-							extra += '<span class="tuner" onclick="handleTune(event)">▽</span>'
+							extra += '<span class="tuner" onclick="onTune(event)">▽</span>'
 						}
 
-						extra += '<select class="moder" onclick="event.stopPropagation()" onchange="handleMode(this)">'
+						extra += '<select class="moder" onclick="event.stopPropagation()" onchange="onMode(this)">'
 						var current = domain == 'climate' ? state : attributes.speed_level || attributes.speed
 						var mode_list = domain == 'climate' ? attributes.hvac_modes : attributes.speed_list
 						for (var i in mode_list) {
@@ -727,7 +725,7 @@
 						extra += '</select>'
 
 						if (domain == 'climate') {
-							extra += '<span class="tuner" onclick="handleTune(event)">△</span>'
+							extra += '<span class="tuner" onclick="onTune(event)">△</span>'
 						}
 					} else {
 						return html
