@@ -116,6 +116,10 @@ def execute(params):
                 _LOGGER.debug('%s; %s', sensor_log, entity_log)
                 return
 
+            pos = service.find('.')
+            if pos != -1:
+                domain = service[:pos]
+                service = service[pos + 1:]
             data = {'entity_id': entity_id,
                     service_attr or entity_attr: to_value}
             _LOGGER.warn('%s; %s, %s⇒%s', sensor_log,
