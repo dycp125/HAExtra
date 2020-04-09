@@ -8,7 +8,7 @@
   condition:
     - condition: numeric_state
       entity_id: sensor.illumination_34ce0090901a
-      below: 300
+      below: 200
   action:
     - service: light.turn_on
       entity_id: light.passage_backlight
