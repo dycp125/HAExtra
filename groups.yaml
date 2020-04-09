@@ -3,7 +3,6 @@
   entities:
     - light.living_spotlight
     - media_player.x9400e
-    #- media_player.magic
     - climate.daikin2
     - climate.saswell
     #- fan.wall_fan
@@ -21,7 +20,7 @@
   icon: mdi:silverware-fork-knife
   entities:
     - light.dining_spotlight
-    #- switch.outlet
+    - switch.outlet
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
@@ -124,8 +123,8 @@
     - light.lamp2
     - climate.daikin4
     - fan.purifier7
-    #- fan.fan
-    #- sensor.fan_temperature
+    - fan.fan
+    # - sensor.fan_temperature
     #- switch.outlet2
     - binary_sensor.cube_158d0002a66db1
     - sensor.nodemcu7_temperature
@@ -154,7 +153,7 @@
     - switch.station
     - switch.speaker
     - climate.mitsubishi
-    #- fan.fan2
+    - fan.fan2
     - vacuum.vacuum
     #- fan.purifier4
     - sensor.nodemcu3_temperature
