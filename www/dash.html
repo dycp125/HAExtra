@@ -639,7 +639,7 @@
 				var html = '<div class="name">' + name + '</div>'
 
 				var na = state == '' || state == 'unavailable' || state == 'unknown' || state == 'None'
-				var off = state == 'off' || state == 'not_home' || state == 'open' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
+				var off = state == 'off' || state == 'not_home' || state == 'closed' || state == 'closing' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
 
 				var has_dash_icon = attributes.hasOwnProperty('dash_icon')
 				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
