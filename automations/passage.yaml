@@ -6,9 +6,19 @@
       from: 'off'
       to: 'on'
   condition:
-    - condition: numeric_state
-      entity_id: sensor.illumination_34ce0090901a
-      below: 200
+    - condition: or
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.illumination_34ce0090901a
+          below: 100
+        - condition: and
+          conditions:
+          - condition: numeric_state
+            entity_id: sensor.illumination_34ce0090901a
+            below: 300
+          - condition: state
+            entity_id: sun.sun
+            state: above_horizon
   action:
     - service: light.turn_on
       entity_id: light.passage_backlight
