@@ -196,8 +196,6 @@ sensor.nodemcu3_lightness:
 sensor.nodemcu3_temperature:
   friendly_name: 书房温度
   unit_of_measurement: °C
-sensor.nodemcu6_lightness:
-  friendly_name: 主卧明度
 sensor.nodemcu7_co2:
   friendly_name: 儿童房二氧化碳
   icon: mdi:periodic-table-co2

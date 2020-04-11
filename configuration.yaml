@@ -182,12 +182,6 @@ sensor:
     unit_of_measurement: lm
     availability_topic: NodeMCU3/status
   - platform: mqtt
-    device_class: illuminance
-    state_topic: NodeMCU6/analog
-    name: NodeMCU6 Lightness
-    availability_topic: NodeMCU6/status
-    #unit_of_measurement: lm
-  - platform: mqtt
     device_class: temperature
     state_topic: NodeMCU7/temperature
     name: NodeMCU7 Temperature
