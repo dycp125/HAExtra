@@ -102,7 +102,5 @@
         entity_id: binary_sensor.switch_158d000201a73f
         click_type: long_click_press
   action:
-    - service: mqtt.publish
-      data:
-        topic: NodeMCU3/relay/0/set
-        payload: 'off'
+    - service: switch.turn_off
+      entity_id: switch.speaker
