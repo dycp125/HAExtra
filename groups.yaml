@@ -1,3 +1,15 @@
+default_view:
+  icon: mdi:home-assistant
+  entities:
+    - group.ke_ting
+    - group.can_ting
+    - group.guo_dao
+    - group.zhu_wo
+    - group.ci_wo 
+    - group.er_tong_fang
+    - group.shu_fang
+    - group.yang_tai
+
 客厅:
   icon: mdi:seat
   entities:

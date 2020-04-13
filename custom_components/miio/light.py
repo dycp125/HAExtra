@@ -34,7 +34,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     token = config[CONF_TOKEN]
     name = config.get(CONF_NAME)
     model = config.get(CONF_MODEL)
-    light = MrBangAirer(host, token)
+    light = MrBondAirer(host, token)
     devices = [MiioMiscLight(name or host, light, model, None)]
     async_add_entities(devices, True)
 
@@ -47,7 +47,7 @@ class MiioMiscLight(XiaomiPhilipsAbstractLight):
         """Return the supported features."""
         return 0
 
-class MrBangAirerStatus:
+class MrBondAirerStatus:
     """Container for status reports from MrBang Airer Light."""
 
     def __init__(self, data):
@@ -64,7 +64,7 @@ class MrBangAirerStatus:
     def __json__(self):
         return self.data
 
-class MrBangAirer(Device):
+class MrBondAirer(Device):
     """Main class representing MrBang Airer Light."""
 
     def status(self):
@@ -78,7 +78,7 @@ class MrBangAirer(Device):
         ]
         values = self.send("get_prop", properties)
 
-        return MrBangAirerStatus(defaultdict(lambda: None, zip(properties, values)))
+        return MrBondAirerStatus(defaultdict(lambda: None, zip(properties, values)))
 
     def on(self):
         """Power on."""
