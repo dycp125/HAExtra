@@ -444,34 +444,34 @@ vacuum:
   - platform: xiaomi_miio
     name: Vacuum
     host: Vacuum
-    token: 526373684671464d35724d3478667530
+    token: !secret vacuum_token
 
 fan:
   - platform: xiaomi_miio
     name: Purifier
     host: Purifier
     model: zhimi.airpurifier.m1
-    token: FE2D793B34DCE57F32BF50B2E6B00874
+    token: !secret purifier_token
   - platform: miio
     name: Fan
     host: Fan
     model: zhimi.fan.v3
-    token: 62df0c2f98752f87aa3c6258bf862c9b
+    token: !secret fan_token
   - platform: miio
     name: Fan2
     host: Fan2
     model: zhimi.fan.sa1
-    token: 99ddab9b7d5cab866f8def02f348c5c0
+    token: !secret fan2_token
   - platform: xiaomi_miio
     name: Fresher
     host: Fresher
     model: zhimi.airfresh.va2
-    token: bb1ee8999ee6bc7ce075a424bca664c3
+    token: !secret fresher_token
   - platform: xiaomi_miio
     name: Fresher2
     host: Fresher2
     model: zhimi.airfresh.va2
-    token: 5fd8be12c63cc876ca5884ea00265a1e
+    token: !secret fresher2_token
   # - platform: mqtt
   #   name: Purifier4
   #   state_topic: NodeMCU4/relay/0
@@ -576,7 +576,7 @@ climate:
 cover:
   # - platform: miio
   #   host: Airer
-  #   token: fe5a1e19a1fd91ca4138646a494a6f19
+  #   token: !secret airer_token
   - platform: broadlink2
     host: Remote
     mac: 34:EA:34:58:73:5D
