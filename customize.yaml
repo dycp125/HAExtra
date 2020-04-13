@@ -96,6 +96,8 @@ fan.purifier7:
 fan.wall_fan:
   friendly_name: 客厅壁扇
   icon: mdi:fan
+group.default_view:
+  friendly_name: 总览
 input_text.miai:
   friendly_name: 小爱音箱
   icon: mdi:speaker-wireless
