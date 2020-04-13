@@ -364,9 +364,11 @@
 			var _group_entity_ids = null
 			function reloadContent() {
 				// Fetch entities id in group
-				var group_id = location.hash.slice(1)
+				var group_id = location.hash ? location.hash.slice(1) : 'default_view'
 				if (group_id) {
-					if (!group_id.startsWith('group.')) group_id = 'group.' + group_id
+					if (!group_id.startsWith('group.')) {
+						group_id = 'group.' + group_id
+					}
 					_group_entity_ids = []
 					fetchEntities(group_id)
 					if (_group_entity_ids.length == 0) {
@@ -448,7 +450,7 @@
 					var service = off ? 'close_cover' : 'open_cover'
 				} else if (grid.className == 'entity vacuum') {
 					var service = off ? 'start' : 'return_to_base'
-				} else if (location.hash == '' && grid.className == 'entity group') {
+				} else if (grid.className == 'entity group') {
 					location.hash = '#' + grid.id
 					reloadContent();
 					return
@@ -871,9 +873,8 @@
 						var entity_id = ids[i]
 						if (entity_id.startsWith('group')) {
 							fetchEntities(entity_id)
-						} else {
-							_group_entity_ids.push(entity_id)
 						}
+						_group_entity_ids.push(entity_id)
 					}
 				}
 			}
