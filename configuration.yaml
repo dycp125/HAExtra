@@ -134,7 +134,7 @@ binary_sensor:
     state_topic: NodeMCU6/digital
     payload_on: 1
     payload_off: 0
-    name: NodeMCU6 Motion
+    name: 主卧感应
     availability_topic: NodeMCU6/status
 
 weather:
@@ -144,63 +144,63 @@ sensor:
   - platform: mqtt
     device_class: temperature
     state_topic: NodeMCU2/temperature
-    name: Balcony Temperature
+    name: 阳台温度
     unit_of_measurement: °C
     availability_topic: NodeMCU2/status
   - platform: mqtt
     device_class: humidity
     state_topic: NodeMCU2/humidity
-    name: Balcony Humidity
+    name: 阳台湿度
     unit_of_measurement: '%'
     availability_topic: NodeMCU2/status
   - platform: mqtt
     state_topic: NodeMCU2/pm2dot5
-    name: Balcony PM25
+    name: 阳台颗粒物
     unit_of_measurement: μg/m³
     availability_topic: NodeMCU2/status
   - platform: mqtt
     device_class: temperature
     state_topic: NodeMCU3/temperature
-    name: NodeMCU3 Temperature
+    name: 书房温度
     unit_of_measurement: °C
     availability_topic: NodeMCU3/status
   - platform: mqtt
     device_class: humidity
     state_topic: NodeMCU3/humidity
-    name: NodeMCU3 Humidity
+    name: 书房湿度
     unit_of_measurement: '%'
     availability_topic: NodeMCU3/status
   - platform: mqtt
     state_topic: NodeMCU3/co2
-    name: NodeMCU3 CO2
+    name: 书房二氧化碳
     unit_of_measurement: ppm
     availability_topic: NodeMCU3/status
   - platform: mqtt
     device_class: illuminance
     state_topic: NodeMCU3/lux
-    name: NodeMCU3 Lightness
+    name: 书房亮度
     unit_of_measurement: lm
     availability_topic: NodeMCU3/status
   - platform: mqtt
     device_class: temperature
     state_topic: NodeMCU7/temperature
-    name: NodeMCU7 Temperature
+    name: 儿童房温度
     unit_of_measurement: °C
     availability_topic: NodeMCU7/status
   - platform: mqtt
     device_class: humidity
     state_topic: NodeMCU7/humidity
-    name: NodeMCU7 Humidity
+    name: 儿童房湿度
     unit_of_measurement: '%'
     availability_topic: NodeMCU7/status
   - platform: mqtt
     state_topic: NodeMCU7/pm2dot5
-    name: NodeMCU7 PM25
+    name: 儿童房颗粒物
     unit_of_measurement: μg/m³
     availability_topic: NodeMCU7/status
   - platform: mqtt
     state_topic: NodeMCU7/co2
-    name: NodeMCU7 CO2
+    name: 儿童房二氧化碳
     unit_of_measurement: ppm
     availability_topic: NodeMCU7/status
   # - platform: phicomm
@@ -572,7 +572,7 @@ climate:
     name: Mitsubishi
     device_code: 1120
     controller_data: Remote
-    temperature_sensor: sensor.nodemcu3_temperature
+    temperature_sensor: sensor.shu_fang_wen_du
     humidity_sensor: sensor.aircat2_humidity
 
 cover:

@@ -56,7 +56,7 @@
 - alias: 阳台门提醒
   trigger:
     - platform: numeric_state
-      entity_id: sensor.balcony_pm25
+      entity_id: sensor.yang_tai_ke_li_wu
       above: 60
       for:
         minutes: 5
@@ -82,7 +82,7 @@
           {% if now().hour >= 21 %}
             晚上请关好阳台门
           {% else %}
-            阳台PM2.5为{% set PM25 = states("sensor.balcony_pm25") | int %}{{ PM25 }}，
+            阳台PM2.5为{% set PM25 = states("sensor.yang_tai_ke_li_wu") | int %}{{ PM25 }}，
             {% if PM25 < 20 %}
               空气很好
             {% elif PM25 < 40 %}
@@ -102,7 +102,7 @@
     - condition: or
       conditions:
         - condition: numeric_state
-          entity_id: sensor.balcony_pm25
+          entity_id: sensor.yang_tai_ke_li_wu
           above: 60
         - condition: time
           after: '21:00'

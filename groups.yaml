@@ -103,7 +103,7 @@ default_view:
     - fan.bedroom_fan
     - light.zhu_wo_deng
     - binary_sensor.door_window_sensor_158d00041c74da
-    - binary_sensor.nodemcu6_motion
+    - binary_sensor.zhu_wo_gan_ying
     # - binary_sensor.purifier6_light
     - sensor.fresher2_temperature
     - sensor.fresher2_humidity
@@ -138,10 +138,10 @@ default_view:
     # - sensor.fan_temperature
     #- switch.outlet2
     - binary_sensor.cube_158d0002a66db1
-    - sensor.nodemcu7_temperature
-    - sensor.nodemcu7_humidity
-    - sensor.nodemcu7_pm25
-    - sensor.nodemcu7_co2
+    - sensor.er_tong_fang_wen_du
+    - sensor.er_tong_fang_shi_du
+    - sensor.er_tong_fang_ke_li_wu
+    - sensor.er_tong_fang_er_yang_hua_tan
     # - sensor.nodemcu7_hcho
     - automation.er_tong_fang_chu_shi_ji_guan
     - automation.er_tong_fang_chu_shi_ji_kai
@@ -167,10 +167,10 @@ default_view:
     - fan.fan2
     - vacuum.vacuum
     #- fan.purifier4
-    - sensor.nodemcu3_temperature
-    - sensor.nodemcu3_humidity
-    - sensor.nodemcu3_co2
-    - sensor.nodemcu3_lightness
+    - sensor.shu_fang_wen_du
+    - sensor.shu_fang_shi_du
+    - sensor.shu_fang_er_yang_hua_tan
+    - sensor.shu_fang_liang_du
     - automation.shu_fang_an_niu_chang_an_guan_bi_yin_xiang
     - automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
     - automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
@@ -184,9 +184,9 @@ default_view:
   icon: mdi:home-minus
   entities:
     - binary_sensor.door_window_sensor_158d000228a52b
-    - sensor.balcony_temperature
-    - sensor.balcony_humidity
-    - sensor.balcony_pm25
+    - sensor.yang_tai_shi_du
+    - sensor.yang_tai_shi_du
+    - sensor.yang_tai_ke_li_wu
     - weather.caiyun
     - sun.sun
     - automation.yang_tai_men_ti_xing

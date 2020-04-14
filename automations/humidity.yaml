@@ -23,7 +23,7 @@
 - alias: 儿童房除湿机开
   trigger:
     - platform: numeric_state
-      entity_id: sensor.nodemcu7_humidity
+      entity_id: sensor.er_tong_fang_shi_du
       above: 75
       for:
         minutes: 10
@@ -38,7 +38,7 @@
 - alias: 儿童房除湿机关
   trigger:
     - platform: numeric_state
-      entity_id: sensor.nodemcu7_humidity
+      entity_id: sensor.er_tong_fang_shi_du
       below: 72
       for:
         minutes: 10
@@ -111,7 +111,7 @@
 - alias: 儿童房加湿器开
   trigger:
     - platform: numeric_state
-      entity_id: sensor.nodemcu7_humidity
+      entity_id: sensor.er_tong_fang_shi_du
       below: 56
       for:
         minutes: 10
@@ -128,7 +128,7 @@
 - alias: 儿童房加湿器关
   trigger:
     - platform: numeric_state
-      entity_id: sensor.nodemcu7_humidity
+      entity_id: sensor.er_tong_fang_shi_du
       above: 60
       for:
         minutes: 10
