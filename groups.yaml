@@ -172,7 +172,7 @@ default_view:
     - sensor.shu_fang_er_yang_hua_tan
     - sensor.shu_fang_liang_du
     - automation.shu_fang_an_niu_chang_an_guan_bi_yin_xiang
-    - automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
+    #- automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
     - automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
     - automation.shu_fang_chuang_lian_guan
     - automation.shu_fang_chuang_lian_kai

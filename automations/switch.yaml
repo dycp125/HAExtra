@@ -67,18 +67,18 @@
     - service: automation.turn_off
       entity_id: automation.guo_dao_deng_gan_ying_zhong_qi
 
-- alias: 书房按钮单击—切换音箱
-  trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.switch_158d000201a73f
-        click_type: single
-  action:
-    - service: mqtt.publish
-      data:
-        topic: NodeMCU3/relay/0/set
-        payload: toggle
+# - alias: 书房按钮单击—切换音箱
+#   trigger:
+#     - platform: event
+#       event_type: xiaomi_aqara.click
+#       event_data:
+#         entity_id: binary_sensor.switch_158d000201a73f
+#         click_type: single
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         topic: NodeMCU3/relay/0/set
+#         payload: toggle
 
 - alias: 书房按钮双击—开关投影仪
   trigger:
