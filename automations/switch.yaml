@@ -90,9 +90,9 @@
   action:
     - service: zhimsg.miai
       data_template:
-        message: '正在{% if is_state("switch.projector", "on") %}关闭{% else %}打开{% endif %}投影仪'
+        message: '正在{% if is_state("switch.tou_ying_yi", "on") %}关闭{% else %}打开{% endif %}投影仪'
     - service: switch.toggle
-      entity_id: switch.projector
+      entity_id: switch.tou_ying_yi
 
 - alias: 书房按钮长按—关闭音箱
   trigger:
@@ -103,4 +103,4 @@
         click_type: long_click_press
   action:
     - service: switch.turn_off
-      entity_id: switch.speaker
+      entity_id: switch.yin_xiang

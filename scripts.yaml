@@ -51,23 +51,23 @@ turn_on_player:
   alias: 打开播放器
   sequence:
     - service: switch.turn_on
-      entity_id: switch.projector
+      entity_id: switch.tou_ying_yi
     - service: broadlink.send
       data:
         host: Remote
         packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
     - service: switch.turn_on
-      entity_id: switch.speaker
+      entity_id: switch.yin_xiang
 
 #
 turn_off_player:
   alias: 关闭播放器
   sequence:
     - service: switch.turn_off
-      entity_id: switch.projector
+      entity_id: switch.tou_ying_yi
     - service: broadlink.send
       data:
         host: Remote
         packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
     - service: switch.turn_off
-      entity_id: switch.speaker
+      entity_id: switch.yin_xiang

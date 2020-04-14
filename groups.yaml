@@ -32,7 +32,7 @@ default_view:
   icon: mdi:silverware-fork-knife
   entities:
     - light.can_ting_tong_deng
-    - switch.outlet
+    - switch.can_ting_chu_shi_ji
     - light.gateway_light_34ce0090901a
     - fan.purifier5
     - climate.daikin1
@@ -85,7 +85,7 @@ default_view:
 # 洗手间:
 #   entities:
     - light.xi_shou_jian_deng
-    - switch.washroom_fan
+    - switch.xi_shou_jian_pai_qi_shan
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
     - automation.xi_shou_jian_deng_yan_shi_guan
@@ -94,7 +94,7 @@ default_view:
 主卧:
   icon: mdi:bed-king
   entities:
-    - switch.x9300d
+    - switch.zhu_wo_dian_shi
     - media_player.x9300d
     - climate.daikin3
     - climate.saswell2
@@ -131,12 +131,12 @@ default_view:
   icon: mdi:car-child-seat
   entities:
     - light.er_tong_fang_deng
-    - light.lamp2
+    - light.er_tong_fang_tai_deng
     - climate.daikin4
     - fan.purifier7
     - fan.fan
     # - sensor.feng_shan_wen_du
-    #- switch.outlet2
+    #- switch.yi_gui_chu_shi_ji
     - binary_sensor.cube_158d0002a66db1
     - sensor.er_tong_fang_wen_du
     - sensor.er_tong_fang_shi_du
@@ -154,15 +154,15 @@ default_view:
 书房:
   icon: mdi:bookshelf
   entities:
-    - light.lamp
+    - light.shu_fang_tai_deng
     - light.liang_yi_deng
     - cover.study_cover
     #- cover.airer
     - cover.projector_screen
-    - switch.projector
-    - switch.player
-    - switch.station
-    - switch.speaker
+    - switch.tou_ying_yi
+    - switch.bo_fang_qi
+    - switch.wang_luo_cun_chu
+    - switch.yin_xiang
     - climate.mitsubishi
     - fan.fan2
     - vacuum.vacuum

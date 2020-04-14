@@ -7,7 +7,7 @@
         minutes: 10
   action:
     - service: switch.turn_on
-      entity_id: switch.outlet
+      entity_id: switch.can_ting_chu_shi_ji
 
 - alias: 餐厅除湿机关
   trigger:
@@ -18,7 +18,7 @@
         minutes: 10
   action:
     - service: switch.turn_off
-      entity_id: switch.outlet
+      entity_id: switch.can_ting_chu_shi_ji
 
 - alias: 儿童房除湿机开
   trigger:
@@ -33,7 +33,7 @@
       state: above_horizon
   action:
     - service: switch.turn_on
-      entity_id: switch.outlet2
+      entity_id: switch.yi_gui_chu_shi_ji
 
 - alias: 儿童房除湿机关
   trigger:
@@ -46,7 +46,7 @@
       at: '20:30:00'
   action:
     - service: switch.turn_off
-      entity_id: switch.outlet2
+      entity_id: switch.yi_gui_chu_shi_ji
 
 - alias: 餐厅加湿器开
   trigger:

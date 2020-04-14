@@ -82,9 +82,9 @@ homekit:
       - climate.saswell
       - climate.saswell2
   entity_config:
-    switch.outlet:
+    switch.can_ting_chu_shi_ji:
       type: outlet
-    switch.outlet2:
+    switch.yi_gui_chu_shi_ji:
       type: outlet
     media_player.x9300d:
       feature_list:
@@ -319,19 +319,19 @@ sensor:
 
 switch:
   - platform: wake_on_lan
-    name: Station
+    name: 网络存储
     mac: 00-11-32-6B-75-F7
     #broadcast_address: 192.168.1.255
     host: Station
     turn_off:
       service: shell_command.turn_off_station
   - platform: mqtt
-    name: Washroom Fan
+    name: 洗手间排气扇
     state_topic: Hassmart2/relay/1
     command_topic: Hassmart2/relay/1/set
     availability_topic: Hassmart2/status
   - platform: mqtt2
-    name: Speaker
+    name: 音箱
     state_topic: NodeMCU3/relay/0
     command_topic: NodeMCU3/relay/0/set
     availability_topic: NodeMCU3/status
@@ -340,41 +340,41 @@ switch:
   - platform: broadlink
     host: Outlet
     mac: 34:EA:34:B8:36:AC
-    friendly_name: Outlet
+    friendly_name: 餐厅除湿机
     type: spmini2
   # - platform: broadlink
   #   host: Outlet2
   #   mac: 78:0f:77:cc:cc:be
-  #   friendly_name: Outlet2
+  #   friendly_name: 衣柜除湿机
   #   type: spmini2
   - platform: broadlink
-    friendly_name: Remote
+    friendly_name: 万能遥控
     host: Remote
     mac: 34:EA:34:58:73:5D
     type: rm2_pro_plus
   # - platform: broadlink
-  #   friendly_name: Remote2
+  #   friendly_name: 红外遥控
   #   host: Remote2
   #   mac: 78:0F:77:47:AA:8F
   #   type: rm_mini
   - platform: template
     switches:
-      projector:
-        friendly_name: Projector
+      tou_ying_yi:
+        friendly_name: 投影仪
         value_template: '{{ is_state("device_tracker.projector", "home") }}'
         turn_on:
           service: script.turn_on_projector
         turn_off:
           service: script.turn_off_projector
-      player:
-        friendly_name: Player
+      bo_fang_qi:
+        friendly_name: 播放器
         value_template: '{{ is_state("device_tracker.player", "home") }}'
         turn_on:
           service: script.turn_on_player
         turn_off:
           service: script.turn_off_player
-      x9300d:
-        friendly_name: X9300d
+      zhu_wo_dian_shi:
+        friendly_name: 主卧电视电源
         value_template: '{{ is_state("device_tracker.x9300d", "home") }}'
         turn_on:
           service: mqtt.publish
@@ -387,10 +387,10 @@ switch:
 yeelight:
   devices:
     Lamp:
-      name: Lamp
+      name: 书房台灯
       model: bslamp1
     Lamp2:
-      name: Lamp2
+      name: 儿童房台灯
       model: mono1
 
 light:
@@ -460,7 +460,7 @@ xiaomi_aqara:
 
 vacuum:
   - platform: xiaomi_miio
-    name: Vacuum
+    name: 扫地机
     host: Vacuum
     token: !secret vacuum_token
 

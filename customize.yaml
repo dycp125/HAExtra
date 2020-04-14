@@ -49,8 +49,6 @@ cover.projector_screen:
   icon: mdi:projector-screen
 cover.study_cover:
   friendly_name: 书房窗帘
-device_tracker.x9300d:
-  friendly_name: 主卧电视
 fan.bedroom_fan:
   friendly_name: 主卧壁扇
 fan.fan:
@@ -113,11 +111,9 @@ light.gateway_light_34ce0090901a:
   icon: mdi:car-light-high
 light.er_tong_fang_deng:
   icon: mdi:ceiling-light
-light.lamp:
-  friendly_name: 书房台灯
+light.shu_fang_tai_deng:
   icon: mdi:lamp
-light.lamp2:
-  friendly_name: 儿童房台灯
+light.er_tong_fang_tai_deng:
   icon: mdi:lamp
 light.ke_ting_tong_deng:
   icon: mdi:track-light
@@ -154,66 +150,49 @@ sensor.shu_fang_er_yang_hua_tan:
   icon: mdi:periodic-table-co2
 sensor.er_tong_fang_er_yang_hua_tan:
   icon: mdi:periodic-table-co2
-sensor.nodemcu7_hcho:
-  friendly_name: 儿童房甲醛
-  icon: mdi:biohazard
 sensor.er_tong_fang_ke_li_wu:
   dash_click: https://www.lewei50.com/u/g/33981
   dash_relation: fan.purifier7
   icon: mdi:blur
 sensor.ci_wo_ke_li_wu:
   icon: mdi:blur
-sensor.study_lightness:
-  friendly_name: 书房亮度
 sun.sun:
   friendly_name: 日照
-switch.outlet:
-  friendly_name: 餐厅除湿机
+switch.can_ting_chu_shi_ji:
   hagenie_deviceType: dehumidifier
   icon: mdi:power-socket-uk
-switch.outlet2:
-  friendly_name: 儿童房除湿机
+switch.yi_gui_chu_shi_ji:
   hagenie_deviceType: dehumidifier
   icon: mdi:power-socket-uk
-switch.player:
-  friendly_name: 播放器
+switch.bo_fang_qi:
   hagenie_deviceName: 电视
   hagenie_deviceType: television
   hagenie_zone: 影音室
   icon: mdi:play-circle-outline
 switch.plug_158d0003a58422:
   friendly_name: 米家插座
-switch.projector:
-  friendly_name: 投影仪
+switch.tou_ying_yi:
   hagenie_deviceName: 电视
   hagenie_deviceType: television
   icon: mdi:projector
-switch.speaker:
+switch.yin_xiang:
   dash_extra: original_state
   dash_extra_click: 'callService(''mqtt'', ''publish'', {''topic'': ''NodeMCU3/relay/0/set'',
     ''payload'': ''toggle''})'
-  friendly_name: 音箱
   hagenie_deviceName: 机顶盒
   hagenie_deviceType: STB
-switch.station:
-  friendly_name: 网络存储
+switch.wang_luo_cun_chu:
   hagenie_deviceName: 网关
   hagenie_deviceType: gateway
   icon: mdi:nas
-switch.washroom_fan:
-  friendly_name: 洗手间排气扇
+switch.xi_shou_jian_pai_qi_shan:
   hagenie_deviceName: 顶扇
   hagenie_deviceType: fan
   icon: mdi:fan
-switch.x9300d:
-  friendly_name: 主卧电视电源
-updater.updater:
-  friendly_name: 有更新
 vacuum.vacuum:
   dash_extra: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger disconnected"
     ? "充电断开" : ("${status}"=="Cleaning" ? "清扫中" : "${status}"))'
   dash_extra_forced: true
-  friendly_name: 扫地机
 weather.caiyun:
   dash_click: https://m.tianqi.com/hangzhou
   dash_extra: attribution
