@@ -16,11 +16,11 @@
 - alias: 主卧净化器调节
   trigger:
     - platform: state
-      entity_id: sensor.fresher2_pm25
+      entity_id: sensor.zhu_wo_ke_li_wu
   action:
     - service: actuator.actuate
       data:
-        sensor_id: sensor.fresher2_pm25
+        sensor_id: sensor.zhu_wo_ke_li_wu
         sensor_values: [7, 15, 40]
         alt_sensor_values: [5, 20, 40]
         entity_id: fan.purifier6
@@ -32,11 +32,11 @@
 - alias: 次卧净化器调节
   trigger:
     - platform: state
-      entity_id: sensor.purifier_pm25
+      entity_id: sensor.ci_wo_ke_li_wu
   action:
     - service: actuator.actuate
       data:
-        sensor_id: sensor.purifier_pm25
+        sensor_id: sensor.ci_wo_ke_li_wu
         sensor_values: [12, 15, 20, 30, 40, 50, 60, 70, 80, 90]
         alt_sensor_values: [15, 20, 30, 40, 50, 60, 70, 80, 90, 100]
         entity_id: fan.purifier

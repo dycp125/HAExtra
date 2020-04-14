@@ -78,7 +78,7 @@ homekit:
       - light.can_ting_tong_deng_2
       - binary_sensor.switch_158d0001e59b33
       - binary_sensor.switch_158d000201a73f
-      - sensor.fresher2_co2
+      - sensor.zhu_wo_er_yang_hua_tan
       - climate.saswell
       - climate.saswell2
   entity_config:
@@ -211,93 +211,109 @@ sensor:
     mac: ['B0F8931EA148'] ##, 'B0F893249132']
   - platform: template
     sensors:
-      purifier_temperature:
+      ci_wo_wen_du:
+        friendly_name: 次卧温度
         device_class: temperature
         value_template: '{{ state_attr("fan.purifier", "temperature") }}'
         unit_of_measurement: °C
-      purifier_humidity:
+      ci_wo_shi_du:
+        friendly_name: 次卧湿度
         device_class: humidity
         value_template: '{{ state_attr("fan.purifier", "humidity") }}'
         unit_of_measurement: '%'
-      purifier_pm25:
+      ci_wo_ke_li_wu:
+        friendly_name: 次卧颗粒物
         value_template: '{{ state_attr("fan.purifier", "aqi") }}'
         unit_of_measurement: μg/m³
+        icon_template: 'mdi:blur'
 
-      fresher_temperature:
+      ke_ting_wen_du:
+        friendly_name: 客厅温度
         device_class: temperature
         value_template: '{{ state_attr("fan.fresher", "temperature") }}'
         unit_of_measurement: °C
-      fresher_humidity:
+      ke_ting_shi_du:
+        friendly_name: 客厅湿度
         device_class: humidity
         value_template: '{{ state_attr("fan.fresher", "humidity") }}'
         unit_of_measurement: '%'
-      fresher_pm25:
+      ke_ting_ke_li_wu:
+        friendly_name: 客厅颗粒物
         value_template: '{{ state_attr("fan.fresher", "aqi") }}'
         unit_of_measurement: μg/m³
+        icon_template: 'mdi:blur'
       fresher_co2:
+        friendly_name: 客厅二氧化碳
         value_template: '{{ state_attr("fan.fresher", "co2") }}'
         unit_of_measurement: ppm
+        icon_template: 'mdi:periodic-table-co2'
 
-      fresher2_temperature:
+      zhu_wo_wen_du:
+        friendly_name: 主卧温度
         device_class: temperature
         value_template: '{{ state_attr("fan.fresher2", "temperature") }}'
         unit_of_measurement: °C
-      fresher2_humidity:
+      zhu_wo_shi_du:
+        friendly_name: 主卧湿度
         device_class: humidity
         value_template: '{{ state_attr("fan.fresher2", "humidity") }}'
         unit_of_measurement: '%'
-      fresher2_pm25:
+      zhu_wo_ke_li_wu:
+        friendly_name: 主卧颗粒物
         value_template: '{{ state_attr("fan.fresher2", "aqi") }}'
         unit_of_measurement: μg/m³
-      fresher2_co2:
+      zhu_wo_er_yang_hua_tan:
+        friendly_name: 主卧二氧化碳
         value_template: '{{ state_attr("fan.fresher2", "co2") }}'
         unit_of_measurement: ppm
+        icon_template: 'mdi:periodic-table-co2'
 
-      # fan_temperature:
+      # feng_shan_wen_du:
+      #   friendly_name: 风扇温度
       #   device_class: temperature
       #   value_template: '{{ state_attr("fan.fan", "temperature") }}'
       #   unit_of_measurement: °C
 
-      # daikin2_mode:
+      # ke_ting_kong_diao_mo_shi:
       #   friendly_name: 客厅空调模式
       #   value_template: '{% set mode = state_attr("climate.daikin2", "fan_mode") %}{% if is_state("climate.daikin2", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      # daikin3_mode:
+      # zhu_wo_kong_diao_mo_shi:
       #   friendly_name: 主卧空调模式
       #   value_template: '{% set mode = state_attr("climate.daikin3", "fan_mode") %}{% if is_state("climate.daikin3", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      # daikin4_mode:
+      # er_tong_fang_kong_diao_mo_shi:
       #   friendly_name: 儿童房空调模式
       #   value_template: '{% set mode = state_attr("climate.daikin4", "fan_mode") %}{% if is_state("climate.daikin4", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      # mitsubishi_mode:
+      # shu_fang_kong_diao_mo_shi:
       #   friendly_name: 书房空调模式
       #   value_template: '{% set mode = state_attr("climate.mitsubishi", "fan_mode") %}{% if is_state("climate.mitsubishi", "off") %}off{% elif mode == "low" %}一{% elif mode == "mid" %}二{% elif mode == "high" %}三{% elif mode == "highest" %}四{% else %}{{ mode }}{% endif %}'
 
-      # fan_mode:
+      # er_tong_fang_feng_shan_mo_shi:
       #   friendly_name: 儿童房风扇模式
       #   value_template: '{% set mode = state_attr("fan.fan", "speed_level") %}{% if is_state("fan.fan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
-      # fan2_mode:
+      # shu_fang_feng_shan_mo_shi:
       #   friendly_name: 书房风扇模式
       #   value_template: '{% set mode = state_attr("fan.fan2", "speed_level") %}{% if is_state("fan.fan2", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
 
-      # fresher_mode:
+      # ke_ting_xin_feng_ji_mo_shi:
       #   friendly_name: 客厅新风机模式
       #   value_template: '{% set mode = state_attr("fan.fresher", "speed") %}{% if is_state("fan.fresher", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
-      # fresher2_mode:
+      # zhu_wo_xin_feng_ji_mo_shi:
       #   friendly_name: 主卧新风机模式
       #   value_template: '{% set mode = state_attr("fan.fresher2", "speed") %}{% if is_state("fan.fresher2", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
 
-      # purifier_mode:
+      # ci_wo_jing_hua_qi_mo_shi:
       #   friendly_name: 次卧净化器模式
       #   value_template: '{% set mode = state_attr("fan.purifier", "speed") %}{% if is_state("fan.purifier", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Favorite" %}{{ state_attr("fan.purifier", "favorite_level") }}{% else %}{{ mode }}{% endif %}'
-      # purifier4_mode:
+      # shu_fang_jing_hua_qi_mo_shi:
       #   friendly_name: 书房净化器模式
       #   value_template: '{% set mode = state_attr("fan.purifier4", "speed") %}{% if is_state("fan.purifier4", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      # purifier5_mode:
+      # can_ting_jing_hua_qi_mo_shi:
       #   friendly_name: 餐厅净化器模式
       #   value_template: '{% set mode = state_attr("fan.purifier5", "speed") %}{% if is_state("fan.purifier5", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      # purifier6_mode:
+      # zhu_wo_jing_hua_qi_mo_shi:
       #   friendly_name: 主卧净化器模式
       #   value_template: '{% set mode = state_attr("fan.purifier6", "speed") %}{% if is_state("fan.purifier6", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      # purifier7_mode:
+      # er_tong_fang_jing_hua_qi_mo_shi:
       #   friendly_name: 儿童房净化器模式
       #   value_template: '{% set mode = state_attr("fan.purifier7", "speed") %}{% if is_state("fan.purifier7", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
 

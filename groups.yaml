@@ -19,9 +19,9 @@ default_view:
     - climate.saswell
     #- fan.wall_fan
     - fan.fresher
-    - sensor.fresher_temperature
-    - sensor.fresher_humidity
-    - sensor.fresher_pm25
+    - sensor.ke_ting_wen_du
+    - sensor.ke_ting_shi_du
+    - sensor.ke_ting_ke_li_wu
     - sensor.fresher_co2
     - automation.ke_ting_tong_deng_tong_bu
     - automation.ke_ting_kong_diao_guan
@@ -105,10 +105,10 @@ default_view:
     - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.zhu_wo_gan_ying
     # - binary_sensor.purifier6_light
-    - sensor.fresher2_temperature
-    - sensor.fresher2_humidity
-    - sensor.fresher2_pm25
-    - sensor.fresher2_co2
+    - sensor.zhu_wo_wen_du
+    - sensor.zhu_wo_shi_du
+    - sensor.zhu_wo_ke_li_wu
+    - sensor.zhu_wo_er_yang_hua_tan
     - automation.shui_mian_jie_shu
     - automation.shui_mian_shen_ru
     - automation.shui_mian_zhun_bei
@@ -122,9 +122,9 @@ default_view:
   icon: mdi:bed-double
   entities:
     - fan.purifier
-    - sensor.purifier_temperature
-    - sensor.purifier_humidity
-    - sensor.purifier_pm25
+    - sensor.ci_wo_wen_du
+    - sensor.ci_wo_shi_du
+    - sensor.ci_wo_ke_li_wu
     - automation.ci_wo_jing_hua_qi_diao_jie
 
 儿童房:
@@ -135,7 +135,7 @@ default_view:
     - climate.daikin4
     - fan.purifier7
     - fan.fan
-    # - sensor.fan_temperature
+    # - sensor.feng_shan_wen_du
     #- switch.outlet2
     - binary_sensor.cube_158d0002a66db1
     - sensor.er_tong_fang_wen_du

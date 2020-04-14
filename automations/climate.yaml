@@ -8,7 +8,7 @@
       entity_id: binary_sensor.door_window_sensor_158d000228a52b
       to: 'off'
     # - platform: numeric_state
-    #   entity_id: sensor.fresher_temperature
+    #   entity_id: sensor.ke_ting_wen_du
     #   above: 29
     #   for:
     #     minutes: 3
@@ -17,7 +17,7 @@
       after: '08:00'
       before: '21:00'
     - condition: numeric_state
-      entity_id: sensor.fresher_temperature
+      entity_id: sensor.ke_ting_wen_du
       above: 29
     - condition: state
       entity_id: binary_sensor.door_window_sensor_158d000228a52b
@@ -52,7 +52,7 @@
       for:
         seconds: 15
     - platform: numeric_state
-      entity_id: sensor.fresher_temperature
+      entity_id: sensor.ke_ting_wen_du
       below: 27
       for:
         minutes: 3

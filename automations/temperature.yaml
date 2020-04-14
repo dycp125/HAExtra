@@ -4,7 +4,7 @@
     - platform: time
       at: '20:30:01'
     - platform: state
-      entity_id: sensor.fresher2_temperature
+      entity_id: sensor.zhu_wo_wen_du
   condition:
     - condition: time
       after: '20:00'
@@ -12,7 +12,7 @@
   action:
     - service: actuator.actuate
       data:
-        sensor_id: sensor.fresher2_temperature
+        sensor_id: sensor.zhu_wo_wen_du
         sensor_values: [27.5, 29.3, 30, 31, 32]
         alt_sensor_values: [28, 29.5, 30, 31, 32]
         #alt_sensor_values: [28.5, 29.5, 30, 31, 32]
@@ -59,7 +59,7 @@
     - service: actuator.actuate
       data:
         sensor_id: sensor.shu_fang_wen_du
-        #sensor_values: [28, 28.5, 32, 34] #fan_temperature
+        #sensor_values: [28, 28.5, 32, 34] #feng_shan_wen_du
         #alt_sensor_values: [28.8, 30, 32, 34]
         sensor_values: [29.7, 30.5, 32, 33]
         alt_sensor_values: [30.5, 31, 32, 33]
@@ -84,7 +84,7 @@
     - service: actuator.actuate
       data:
         sensor_id: sensor.shu_fang_wen_du
-        #sensor_values: [24, 27.5, 30, 32] #fan_temperature
+        #sensor_values: [24, 27.5, 30, 32] #feng_shan_wen_du
         #alt_sensor_values: [25, 28.5, 32, 34]
         sensor_values: [26, 28.5, 32, 33]
         alt_sensor_values: [27, 30, 32, 34]

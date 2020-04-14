@@ -82,7 +82,7 @@ fan.purifier5:
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.purifier6:
-  dash_icon: ${sensor.fresher2_pm25}
+  dash_icon: ${sensor.zhu_wo_ke_li_wu}
   friendly_name: 主卧净化器
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
@@ -146,31 +146,8 @@ sensor.aircat_temperature:
   friendly_name: 餐厅温度
 sensor.yang_tai_ke_li_wu:
   dash_click: https://www.lewei50.com/u/g/34131
-  icon: mdi:blur
-sensor.fan_temperature:
-  friendly_name: 风扇温度
-sensor.fresher2_co2:
-  dash_extra: 'eval:${state}>1000 ? "<font color=red>空气闷</font>" : ""'
-  friendly_name: 主卧二氧化碳
-  icon: mdi:periodic-table-co2
-sensor.fresher2_humidity:
-  friendly_name: 主卧湿度
-sensor.fresher2_pm25:
+sensor.zhu_wo_ke_li_wu:
   dash_relation: fan.purifier6
-  friendly_name: 主卧颗粒物
-  icon: mdi:blur
-sensor.fresher2_temperature:
-  friendly_name: 主卧温度
-sensor.fresher_co2:
-  friendly_name: 客厅二氧化碳
-  icon: mdi:periodic-table-co2
-sensor.fresher_humidity:
-  friendly_name: 客厅湿度
-sensor.fresher_pm25:
-  friendly_name: 客厅颗粒物
-  icon: mdi:blur
-sensor.fresher_temperature:
-  friendly_name: 客厅温度
 sensor.illumination_34ce0090901a:
   friendly_name: 餐厅亮度
 sensor.shu_fang_er_yang_hua_tan:
@@ -184,14 +161,8 @@ sensor.er_tong_fang_ke_li_wu:
   dash_click: https://www.lewei50.com/u/g/33981
   dash_relation: fan.purifier7
   icon: mdi:blur
-sensor.purifier_humidity:
-  friendly_name: 次卧湿度
-  icon: mdi:water-percent
-sensor.purifier_pm25:
-  friendly_name: 次卧颗粒物
+sensor.ci_wo_ke_li_wu:
   icon: mdi:blur
-sensor.purifier_temperature:
-  friendly_name: 次卧温度
 sensor.study_lightness:
   friendly_name: 书房亮度
 sun.sun:
