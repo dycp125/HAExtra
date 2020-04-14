@@ -203,11 +203,6 @@ sensor:
     name: NodeMCU7 CO2
     unit_of_measurement: ppm
     availability_topic: NodeMCU7/status
-  - platform: mqtt
-    state_topic: NodeMCU7/hcho
-    name: NodeMCU7 HCHO
-    unit_of_measurement: mg/m³
-    availability_topic: NodeMCU7/status
   # - platform: phicomm
   #   name: AirCat
   #   username: !secret phicomm_username
@@ -383,6 +378,10 @@ yeelight:
       model: mono1
 
 light:
+  - platform: miio
+    name: Airer Light
+    host: Airer
+    token: !secret airer_token
   - platform: mqtt
     name: Living Spotlight
     state_topic: Hassmart1/relay/0

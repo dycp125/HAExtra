@@ -55,7 +55,7 @@ class MrBondAirerStatus:
 
     @property
     def is_on(self):
-        return self.data['led'] == 1
+        return self.data['led'] == '1'
 
     @property
     def brightness(self):

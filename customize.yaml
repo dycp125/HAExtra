@@ -103,20 +103,23 @@ input_text.miai:
   icon: mdi:speaker-wireless
 light.airer_light:
   friendly_name: 晾衣灯
-  hagenie_deviceName: 天花灯
-  icon: mdi:ceiling-light
+  hagenie_deviceName: 吊灯
+  icon: mdi:spotlight
 light.bedroom_light:
   friendly_name: 主卧灯
+  icon: mdi:ceiling-light
 light.dining_spotlight:
   friendly_name: 餐厅筒灯
-  icon: mdi:spotlight
+  icon: mdi:track-light
 light.dining_spotlight2:
   friendly_name: 餐厅筒灯2
   hidden: true
 light.gateway_light_34ce0090901a:
   friendly_name: 壁灯
+  icon: mdi:car-light-high
 light.kids_light:
   friendly_name: 儿童房灯
+  icon: mdi:ceiling-light
 light.lamp:
   friendly_name: 书房台灯
   icon: mdi:lamp
@@ -125,13 +128,13 @@ light.lamp2:
   icon: mdi:lamp
 light.living_spotlight:
   friendly_name: 客厅筒灯
-  icon: mdi:spotlight
+  icon: mdi:track-light
 light.living_spotlight2:
   friendly_name: 客厅筒灯2
   hidden: true
 light.passage_backlight:
   friendly_name: 过道背景灯
-  icon: mdi:spotlight-beam
+  icon: mdi:car-light-dimmed
 light.study_light:
   friendly_name: 书房灯
   icon: mdi:ceiling-light

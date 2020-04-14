@@ -142,7 +142,7 @@ default_view:
     - sensor.nodemcu7_humidity
     - sensor.nodemcu7_pm25
     - sensor.nodemcu7_co2
-    - sensor.nodemcu7_hcho
+    # - sensor.nodemcu7_hcho
     - automation.er_tong_fang_chu_shi_ji_guan
     - automation.er_tong_fang_chu_shi_ji_kai
     - automation.er_tong_fang_feng_shan_diao_jie
@@ -155,7 +155,7 @@ default_view:
   icon: mdi:bookshelf
   entities:
     - light.lamp
-    #- light.airer_light
+    - light.airer_light
     - cover.study_cover
     #- cover.airer
     - cover.projector_screen
