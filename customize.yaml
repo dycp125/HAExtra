@@ -94,35 +94,37 @@ fan.wall_fan:
   icon: mdi:fan
 group.default_view:
   friendly_name: 总览
+group.zhu_wo:
+  friendly_name: 主卧
 input_text.miai:
   friendly_name: 小爱音箱
   icon: mdi:speaker-wireless
-light.liang_yi_deng:
-  hagenie_deviceName: 吊灯
-  icon: mdi:spotlight
-light.zhu_wo_deng:
-  icon: mdi:ceiling-light
 light.can_ting_tong_deng:
   icon: mdi:track-light
 light.can_ting_tong_deng_2:
   hidden: true
+light.er_tong_fang_deng:
+  icon: mdi:ceiling-light
+light.er_tong_fang_tai_deng:
+  icon: mdi:lamp
 light.gateway_light_34ce0090901a:
   friendly_name: 壁灯
   icon: mdi:car-light-high
-light.er_tong_fang_deng:
-  icon: mdi:ceiling-light
-light.shu_fang_tai_deng:
-  icon: mdi:lamp
-light.er_tong_fang_tai_deng:
-  icon: mdi:lamp
+light.guo_dao_bei_jing_deng:
+  icon: mdi:car-light-dimmed
 light.ke_ting_tong_deng:
   icon: mdi:track-light
 light.ke_ting_tong_deng_2:
-  icon: mdi:track-light
   hidden: true
-light.guo_dao_bei_jing_deng:
-  icon: mdi:car-light-dimmed
+  icon: mdi:track-light
+light.liang_yi_deng:
+  hagenie_deviceName: 吊灯
+  icon: mdi:spotlight
+light.shu_fang_tai_deng:
+  icon: mdi:lamp
 light.xi_shou_jian_deng:
+  icon: mdi:ceiling-light
+light.zhu_wo_deng:
   icon: mdi:ceiling-light
 media_player.x9300d:
   friendly_name: 主卧电视
@@ -140,47 +142,38 @@ sensor.aircat_pm25:
   friendly_name: 餐厅颗粒物
 sensor.aircat_temperature:
   friendly_name: 餐厅温度
-sensor.yang_tai_ke_li_wu:
-  dash_click: https://www.lewei50.com/u/g/34131
-sensor.zhu_wo_ke_li_wu:
-  dash_relation: fan.purifier6
-sensor.illumination_34ce0090901a:
-  friendly_name: 餐厅亮度
-sensor.shu_fang_er_yang_hua_tan:
-  icon: mdi:periodic-table-co2
+sensor.ci_wo_ke_li_wu:
+  icon: mdi:blur
 sensor.er_tong_fang_er_yang_hua_tan:
   icon: mdi:periodic-table-co2
 sensor.er_tong_fang_ke_li_wu:
   dash_click: https://www.lewei50.com/u/g/33981
   dash_relation: fan.purifier7
   icon: mdi:blur
-sensor.ci_wo_ke_li_wu:
-  icon: mdi:blur
+sensor.illumination_34ce0090901a:
+  friendly_name: 餐厅亮度
+sensor.shu_fang_er_yang_hua_tan:
+  icon: mdi:periodic-table-co2
+sensor.yang_tai_ke_li_wu:
+  dash_click: https://www.lewei50.com/u/g/34131
+sensor.zhu_wo_ke_li_wu:
+  dash_relation: fan.purifier6
 sun.sun:
   friendly_name: 日照
-switch.can_ting_chu_shi_ji:
-  hagenie_deviceType: dehumidifier
-  icon: mdi:power-socket-uk
-switch.yi_gui_chu_shi_ji:
-  hagenie_deviceType: dehumidifier
-  icon: mdi:power-socket-uk
 switch.bo_fang_qi:
   hagenie_deviceName: 电视
   hagenie_deviceType: television
   hagenie_zone: 影音室
   icon: mdi:play-circle-outline
+switch.can_ting_chu_shi_ji:
+  hagenie_deviceType: dehumidifier
+  icon: mdi:power-socket-uk
 switch.plug_158d0003a58422:
   friendly_name: 米家插座
 switch.tou_ying_yi:
   hagenie_deviceName: 电视
   hagenie_deviceType: television
   icon: mdi:projector
-switch.yin_xiang:
-  dash_extra: original_state
-  dash_extra_click: 'callService(''mqtt'', ''publish'', {''topic'': ''NodeMCU3/relay/0/set'',
-    ''payload'': ''toggle''})'
-  hagenie_deviceName: 机顶盒
-  hagenie_deviceType: STB
 switch.wang_luo_cun_chu:
   hagenie_deviceName: 网关
   hagenie_deviceType: gateway
@@ -189,11 +182,20 @@ switch.xi_shou_jian_pai_qi_shan:
   hagenie_deviceName: 顶扇
   hagenie_deviceType: fan
   icon: mdi:fan
-vacuum.vacuum:
+switch.yi_gui_chu_shi_ji:
+  hagenie_deviceType: dehumidifier
+  icon: mdi:power-socket-uk
+switch.yin_xiang:
+  dash_extra: original_state
+  dash_extra_click: 'callService(''mqtt'', ''publish'', {''topic'': ''NodeMCU3/relay/0/set'',
+    ''payload'': ''toggle''})'
+  hagenie_deviceName: 机顶盒
+  hagenie_deviceType: STB
+vacuum.sao_di_ji:
   dash_extra: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger disconnected"
     ? "充电断开" : ("${status}"=="Cleaning" ? "清扫中" : "${status}"))'
   dash_extra_forced: true
-weather.caiyun:
+weather.tian_qi:
   dash_click: https://m.tianqi.com/hangzhou
   dash_extra: attribution
   dash_name: ${temperature}℃ ${humidity}% ${pm25}μg

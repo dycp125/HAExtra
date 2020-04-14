@@ -139,6 +139,7 @@ binary_sensor:
 
 weather:
   - platform: caiyun
+    name: 天气
 
 sensor:
   - platform: mqtt
