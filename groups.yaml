@@ -13,7 +13,7 @@ default_view:
 客厅:
   icon: mdi:seat
   entities:
-    - light.living_spotlight
+    - light.ke_ting_tong_deng
     - media_player.x9400e
     - climate.daikin2
     - climate.saswell
@@ -31,7 +31,7 @@ default_view:
 餐厅:
   icon: mdi:silverware-fork-knife
   entities:
-    - light.dining_spotlight
+    - light.can_ting_tong_deng
     - switch.outlet
     - light.gateway_light_34ce0090901a
     - fan.purifier5
@@ -66,7 +66,7 @@ default_view:
   icon: mdi:road
   entities:
     #- light.study_light2
-    - light.passage_backlight
+    - light.guo_dao_bei_jing_deng
     - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
@@ -84,7 +84,7 @@ default_view:
 
 # 洗手间:
 #   entities:
-    - light.washroom_light
+    - light.xi_shou_jian_deng
     - switch.washroom_fan
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
@@ -101,7 +101,7 @@ default_view:
     - fan.fresher2
     - fan.purifier6
     - fan.bedroom_fan
-    - light.bedroom_light
+    - light.zhu_wo_deng
     - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.nodemcu6_motion
     # - binary_sensor.purifier6_light
@@ -130,7 +130,7 @@ default_view:
 儿童房:
   icon: mdi:car-child-seat
   entities:
-    - light.kids_light
+    - light.er_tong_fang_deng
     - light.lamp2
     - climate.daikin4
     - fan.purifier7
@@ -155,7 +155,7 @@ default_view:
   icon: mdi:bookshelf
   entities:
     - light.lamp
-    - light.airer_light
+    - light.liang_yi_deng
     - cover.study_cover
     #- cover.airer
     - cover.projector_screen

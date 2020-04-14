@@ -5,14 +5,14 @@
       to: 'on'
   condition:
     # - condition: state
-    #   entity_id: light.washroom_light
+    #   entity_id: light.xi_shou_jian_deng
     #   state: 'off'
     - condition: state
       entity_id: sun.sun
       state: below_horizon
   action:
     - service: light.turn_on
-      entity_id: light.washroom_light
+      entity_id: light.xi_shou_jian_deng
     - service: automation.turn_off
       entity_id: automation.xi_shou_jian_deng_yan_shi_guan
     - service: automation.turn_on
@@ -29,6 +29,6 @@
       state: 'off'
   action:
     - service: light.turn_off
-      entity_id: light.washroom_light
+      entity_id: light.xi_shou_jian_deng
     - service: automation.turn_off
       entity_id: automation.xi_shou_jian_deng_yan_shi_guan

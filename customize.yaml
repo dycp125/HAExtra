@@ -101,24 +101,19 @@ group.default_view:
 input_text.miai:
   friendly_name: 小爱音箱
   icon: mdi:speaker-wireless
-light.airer_light:
-  friendly_name: 晾衣灯
+light.liang_yi_deng:
   hagenie_deviceName: 吊灯
   icon: mdi:spotlight
-light.bedroom_light:
-  friendly_name: 主卧灯
+light.zhu_wo_deng:
   icon: mdi:ceiling-light
-light.dining_spotlight:
-  friendly_name: 餐厅筒灯
+light.can_ting_tong_deng:
   icon: mdi:track-light
-light.dining_spotlight2:
-  friendly_name: 餐厅筒灯2
+light.can_ting_tong_deng_2:
   hidden: true
 light.gateway_light_34ce0090901a:
   friendly_name: 壁灯
   icon: mdi:car-light-high
-light.kids_light:
-  friendly_name: 儿童房灯
+light.er_tong_fang_deng:
   icon: mdi:ceiling-light
 light.lamp:
   friendly_name: 书房台灯
@@ -126,20 +121,14 @@ light.lamp:
 light.lamp2:
   friendly_name: 儿童房台灯
   icon: mdi:lamp
-light.living_spotlight:
-  friendly_name: 客厅筒灯
+light.ke_ting_tong_deng:
   icon: mdi:track-light
-light.living_spotlight2:
-  friendly_name: 客厅筒灯2
+light.ke_ting_tong_deng_2:
+  icon: mdi:track-light
   hidden: true
-light.passage_backlight:
-  friendly_name: 过道背景灯
+light.guo_dao_bei_jing_deng:
   icon: mdi:car-light-dimmed
-light.study_light:
-  friendly_name: 书房灯
-  icon: mdi:ceiling-light
-light.washroom_light:
-  friendly_name: 洗手间灯
+light.xi_shou_jian_deng:
   icon: mdi:ceiling-light
 media_player.x9300d:
   friendly_name: 主卧电视
