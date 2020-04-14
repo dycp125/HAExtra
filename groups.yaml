@@ -65,6 +65,7 @@ default_view:
 过道:
   icon: mdi:road
   entities:
+    - cover.curtain_158d0003f7951d
     #- light.study_light2
     - light.guo_dao_bei_jing_deng
     - switch.plug_158d0003a58422

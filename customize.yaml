@@ -36,31 +36,18 @@ climate.saswell:
 climate.saswell2:
   friendly_name: 主卧地暖
   hagenie_deviceType: heater
+cover.curtain_158d0003f7951d:
+  friendly_name: 过道卷帘
 cover.tou_ying_mu_bu:
-  hagenie_deviceName: 窗帘
+  hagenie_deviceName: 布帘
   hagenie_zone: 影音室
   icon: mdi:projector-screen
-fan.ke_ting_xin_feng_ji:
-  dash_icon: ${co2}
-  hagenie_deviceType: VMC
-  icon: mdi:leaf
-fan.zhu_wo_xin_feng_ji:
-  dash_icon: ${co2}
-  hagenie_deviceType: VMC
-  icon: mdi:leaf
-fan.ci_wo_jing_hua_qi:
-  dash_icon: ${aqi}
-  hagenie_deviceType: airpurifier
-  icon: mdi:cupcake
-fan.shu_fang_jing_hua_qi:
-  hagenie_deviceType: airpurifier
-  icon: mdi:cupcake
 fan.can_ting_jing_hua_qi:
   dash_icon: ${sensor.aircat_pm25}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
-fan.zhu_wo_jing_hua_qi:
-  dash_icon: ${sensor.zhu_wo_ke_li_wu}
+fan.ci_wo_jing_hua_qi:
+  dash_icon: ${aqi}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.er_tong_fang_jing_hua_qi:
@@ -69,6 +56,21 @@ fan.er_tong_fang_jing_hua_qi:
   icon: mdi:cupcake
 fan.ke_ting_bi_shan:
   icon: mdi:fan
+fan.ke_ting_xin_feng_ji:
+  dash_icon: ${co2}
+  hagenie_deviceType: VMC
+  icon: mdi:leaf
+fan.shu_fang_jing_hua_qi:
+  hagenie_deviceType: airpurifier
+  icon: mdi:cupcake
+fan.zhu_wo_jing_hua_qi:
+  dash_icon: ${sensor.zhu_wo_ke_li_wu}
+  hagenie_deviceType: airpurifier
+  icon: mdi:cupcake
+fan.zhu_wo_xin_feng_ji:
+  dash_icon: ${co2}
+  hagenie_deviceType: VMC
+  icon: mdi:leaf
 group.default_view:
   friendly_name: 总览
 light.can_ting_tong_deng:
