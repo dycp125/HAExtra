@@ -7,7 +7,7 @@
       data:
         sensor_id: sensor.fresher_co2
         sensor_values: [500, 580, 680, 730]
-        entity_id: fan.fresher
+        entity_id: fan.ke_ting_xin_feng_ji
         entity_attr: speed
         entity_values: [Silent, Low, Middle, Strong]
         condition_attr: mode
@@ -23,7 +23,7 @@
         sensor_id: sensor.zhu_wo_er_yang_hua_tan
         sensor_values: [500, 650, 750, 900]
         alt_sensor_values: [500, 720, 900, 1500]
-        entity_id: fan.fresher2
+        entity_id: fan.zhu_wo_xin_feng_ji
         entity_attr: speed
         entity_values: [Silent, Low, Middle, Strong]
         condition_attr: mode

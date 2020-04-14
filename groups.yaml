@@ -14,11 +14,11 @@ default_view:
   icon: mdi:seat
   entities:
     - light.ke_ting_tong_deng
-    - media_player.x9400e
+    - media_player.ke_ting_dian_shi
     - climate.daikin2
     - climate.saswell
-    #- fan.wall_fan
-    - fan.fresher
+    #- fan.ke_ting_bi_shan
+    - fan.ke_ting_xin_feng_ji
     - sensor.ke_ting_wen_du
     - sensor.ke_ting_shi_du
     - sensor.ke_ting_ke_li_wu
@@ -34,7 +34,7 @@ default_view:
     - light.can_ting_tong_deng
     - switch.can_ting_chu_shi_ji
     - light.gateway_light_34ce0090901a
-    - fan.purifier5
+    - fan.can_ting_jing_hua_qi
     - climate.daikin1
     - sensor.illumination_34ce0090901a
     - sensor.aircat_temperature
@@ -70,7 +70,7 @@ default_view:
     - switch.plug_158d0003a58422
     - binary_sensor.motion_sensor_158d0001d66ce9
     # - binary_sensor.lightness
-    - input_text.miai
+    - input_text.xiao_ai_yin_xiang
     # - sensor.aircat2_temperature
     # - sensor.aircat2_humidity
     # - sensor.aircat2_pm25
@@ -95,12 +95,12 @@ default_view:
   icon: mdi:bed-king
   entities:
     - switch.zhu_wo_dian_shi
-    - media_player.x9300d
+    - media_player.zhu_wo_dian_shi
     - climate.daikin3
     - climate.saswell2
-    - fan.fresher2
-    - fan.purifier6
-    - fan.bedroom_fan
+    - fan.zhu_wo_xin_feng_ji
+    - fan.zhu_wo_jing_hua_qi
+    - fan.zhu_wo_bi_shan
     - light.zhu_wo_deng
     - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.zhu_wo_gan_ying
@@ -121,7 +121,7 @@ default_view:
 次卧:
   icon: mdi:bed-double
   entities:
-    - fan.purifier
+    - fan.ci_wo_jing_hua_qi
     - sensor.ci_wo_wen_du
     - sensor.ci_wo_shi_du
     - sensor.ci_wo_ke_li_wu
@@ -133,8 +133,8 @@ default_view:
     - light.er_tong_fang_deng
     - light.er_tong_fang_tai_deng
     - climate.daikin4
-    - fan.purifier7
-    - fan.fan
+    - fan.er_tong_fang_jing_hua_qi
+    - fan.er_tong_fang_feng_shan
     # - sensor.feng_shan_wen_du
     #- switch.yi_gui_chu_shi_ji
     - binary_sensor.cube_158d0002a66db1
@@ -156,17 +156,17 @@ default_view:
   entities:
     - light.shu_fang_tai_deng
     - light.liang_yi_deng
-    - cover.study_cover
+    - cover.shu_fang_chuang_lian
     #- cover.airer
-    - cover.projector_screen
+    - cover.tou_ying_mu_bu
     - switch.tou_ying_yi
     - switch.bo_fang_qi
     - switch.wang_luo_cun_chu
     - switch.yin_xiang
-    - climate.mitsubishi
-    - fan.fan2
+    - climate.shu_fang_kong_diao
+    - fan.shu_fang_feng_shan
     - vacuum.sao_di_ji
-    #- fan.purifier4
+    #- fan.shu_fang_jing_hua_qi
     - sensor.shu_fang_wen_du
     - sensor.shu_fang_shi_du
     - sensor.shu_fang_er_yang_hua_tan
@@ -184,7 +184,7 @@ default_view:
   icon: mdi:home-minus
   entities:
     - binary_sensor.door_window_sensor_158d000228a52b
-    - sensor.yang_tai_shi_du
+    - sensor.yang_tai_wen_du
     - sensor.yang_tai_shi_du
     - sensor.yang_tai_ke_li_wu
     - weather.tian_qi

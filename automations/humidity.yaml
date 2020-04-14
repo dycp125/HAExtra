@@ -58,11 +58,11 @@
   action:
     - service: fan.oscillate
       data:
-        entity_id: fan.purifier5
+        entity_id: fan.can_ting_jing_hua_qi
         oscillating: true
     - service: fan.set_speed
       data:
-        entity_id: fan.purifier5
+        entity_id: fan.can_ting_jing_hua_qi
         speed: low
 
 - alias: 餐厅加湿器关
@@ -75,7 +75,7 @@
   action:
     - service: fan.oscillate
       data:
-        entity_id: fan.purifier5
+        entity_id: fan.can_ting_jing_hua_qi
         oscillating: false
 
 - alias: 主卧加湿器开
@@ -88,11 +88,11 @@
   action:
     - service: fan.oscillate
       data:
-        entity_id: fan.purifier6
+        entity_id: fan.zhu_wo_jing_hua_qi
         oscillating: true
     - service: fan.set_speed
       data:
-        entity_id: fan.purifier6
+        entity_id: fan.zhu_wo_jing_hua_qi
         speed: low
 
 - alias: 主卧加湿器关
@@ -105,7 +105,7 @@
   action:
     - service: fan.oscillate
       data:
-        entity_id: fan.purifier6
+        entity_id: fan.zhu_wo_jing_hua_qi
         oscillating: false
 
 - alias: 儿童房加湿器开
@@ -118,11 +118,11 @@
   action:
     - service: fan.oscillate
       data:
-        entity_id: fan.purifier7
+        entity_id: fan.fan.er_tong_fang_jing_hua_qi
         oscillating: true
     - service: fan.set_speed
       data:
-        entity_id: fan.purifier7
+        entity_id: fan.fan.er_tong_fang_jing_hua_qi
         speed: low
 
 - alias: 儿童房加湿器关
@@ -135,5 +135,5 @@
   action:
     - service: fan.oscillate
       data:
-        entity_id: fan.purifier7
+        entity_id: fan.fan.er_tong_fang_jing_hua_qi
         oscillating: false

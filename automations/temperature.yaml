@@ -64,7 +64,7 @@
         sensor_values: [29.7, 30.5, 32, 33]
         alt_sensor_values: [30.5, 31, 32, 33]
         alt_time_range: [2, 8]
-        entity_id: climate.mitsubishi
+        entity_id: climate.shu_fang_kong_diao
         entity_attr: fan_mode
         entity_values: [low, mid, high, highest]
         delay: 0
@@ -89,7 +89,7 @@
         sensor_values: [26, 28.5, 32, 33]
         alt_sensor_values: [27, 30, 32, 34]
         alt_time_range: [2, 8]
-        entity_id: fan.fan2
+        entity_id: fan.shu_fang_feng_shan
         entity_attr: speed_level
         #service: set_speed
         service_attr: speed
@@ -114,7 +114,7 @@
         sensor_values: [19, 21.2, 24, 25]
         alt_sensor_values: [20, 23, 25, 26]
         alt_time_range: [2, 8]
-        entity_id: fan.fan
+        entity_id: fan.er_tong_fang_feng_shan
         entity_attr: speed_level
         #service: set_speed
         service_attr: speed

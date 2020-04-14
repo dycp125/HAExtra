@@ -1,10 +1,10 @@
 - alias: 小爱音播报
   trigger:
     - platform: state
-      entity_id: input_text.miai
+      entity_id: input_text.xiao_ai_yin_xiang
   action:
     - condition: template
-      value_template: '{{ states("input_text.miai") != "unknown" and states("input_text.miai") != "" }}'
+      value_template: '{{ states("input_text.xiao_ai_yin_xiang") != "unknown" and states("input_text.xiao_ai_yin_xiang") != "" }}'
     - service: zhimsg.miai
       data_template:
-        message: '{{ states("input_text.miai") }}'
+        message: '{{ states("input_text.xiao_ai_yin_xiang") }}'

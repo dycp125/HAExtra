@@ -13,7 +13,7 @@
       entity_id: binary_sensor.door_window_sensor_158d000228a52b
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.yang_tai_shi_du
+      entity_id: sensor.yang_tai_wen_du
       above: 10
       below: 30
     - condition: or
@@ -69,4 +69,4 @@
   action:
     - service: zhimsg.ding
       data_template:
-        message: '室内PM2.5为{{ states("sensor.aircat_pm25") }}，温度为{{ states("sensor.aircat_temperature") }}，CO2为客厅{{ states("sensor.fresher_co2") }}/主卧{{ states("sensor.zhu_wo_er_yang_hua_tan") }}/儿童房{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}。室外PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，温度为{{ states("sensor.yang_tai_shi_du") }}；{{ state_attr("weather.tian_qi", "attribution") }}'
+        message: '室内PM2.5为{{ states("sensor.aircat_pm25") }}，温度为{{ states("sensor.aircat_temperature") }}，CO2为客厅{{ states("sensor.fresher_co2") }}/主卧{{ states("sensor.zhu_wo_er_yang_hua_tan") }}/儿童房{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}。\n\n室外PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，温度为{{ states("sensor.yang_tai_wen_du") }}；{{ state_attr("weather.tian_qi", "attribution") }}'

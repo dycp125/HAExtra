@@ -9,9 +9,9 @@ turn_on_projector:
         host: Remote
         packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
     - service: cover.close_cover
-      entity_id: cover.study_cover
+      entity_id: cover.shu_fang_chuang_lian
     - service: cover.close_cover
-      entity_id: cover.projector_screen
+      entity_id: cover.tou_ying_mu_bu
     #- service: cover.close_cover
     #  entity_id: cover.airer
     - service: automation.turn_on
@@ -36,13 +36,13 @@ turn_off_projector:
         host: Remote
         packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
     - service: cover.open_cover
-      entity_id: cover.study_cover
+      entity_id: cover.shu_fang_chuang_lian
     - service: cover.open_cover
-      entity_id: cover.projector_screen
+      entity_id: cover.tou_ying_mu_bu
     - service_template: '{% if is_state("sun.sun", "below_horizon") %}light.turn_on{% else %}light.turn_off{% endif %}'
       entity_id: light.liang_yi_deng
     - service: climate.turn_off
-      entity_id: climate.mitsubishi
+      entity_id: climate.shu_fang_kong_diao
     - service: automation.turn_on
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
 
