@@ -2,7 +2,7 @@
 
 # ============================== Basic Config ==============================
 # Raspberry Pi Only
-#ssh pi@hassbian
+#ssh pi@hass
 # sudo passwd root
 # sudo passwd --unlock root
 # sudo nano /etc/ssh/sshd_config #PermitRootLogin yes
@@ -23,23 +23,23 @@
 ##apt install python3 python3-pip
 
 # MacOS
-#ssh root@hassbian "mkdir ~/.ssh"
-#scp ~/.ssh/authorized_keys root@hassbian:~/.ssh/
-#scp ~/.ssh/id_rsa root@hassbian:~/.ssh/
-#scp ~/.ssh/config root@hassbian:~/.ssh/
+#ssh root@hass "mkdir ~/.ssh"
+#scp ~/.ssh/authorized_keys root@hass:~/.ssh/
+#scp ~/.ssh/id_rsa root@hass:~/.ssh/
+#scp ~/.ssh/config root@hass:~/.ssh/
 
 # SSH
-ssh root@hassbian "mkdir ~/.ssh"
-scp ~/.ssh/authorized_keys root@hassbian:~/.ssh/
-scp ~/.ssh/id_rsa root@hassbian:~/.ssh/
-scp ~/.ssh/config root@hassbian:~/.ssh/
+ssh root@hass "mkdir ~/.ssh"
+scp ~/.ssh/authorized_keys root@hass:~/.ssh/
+scp ~/.ssh/id_rsa root@hass:~/.ssh/
+scp ~/.ssh/config root@hass:~/.ssh/
 
-ssh admin@hassbian "mkdir ~/.ssh"
-scp ~/.ssh/authorized_keys admin@hassbian:~/.ssh/
-scp ~/.ssh/id_rsa admin@hassbian:~/.ssh/
-scp ~/.ssh/config admin@hassbian:~/.ssh/
+ssh admin@hass "mkdir ~/.ssh"
+scp ~/.ssh/authorized_keys admin@hass:~/.ssh/
+scp ~/.ssh/id_rsa admin@hass:~/.ssh/
+scp ~/.ssh/config admin@hass:~/.ssh/
 
-ssh root@hassbian
+ssh root@hass
 
 #
 echo "admin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
