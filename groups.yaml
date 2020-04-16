@@ -105,11 +105,11 @@ default_view:
     - light.zhu_wo_deng
     - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.zhu_wo_gan_ying
-    # - binary_sensor.purifier6_light
     - sensor.zhu_wo_wen_du
     - sensor.zhu_wo_shi_du
     - sensor.zhu_wo_ke_li_wu
     - sensor.zhu_wo_er_yang_hua_tan
+    - sensor.zhu_wo_liang_du
     - automation.shui_mian_jie_shu
     - automation.shui_mian_shen_ru
     - automation.shui_mian_zhun_bei
