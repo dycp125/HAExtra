@@ -5,15 +5,9 @@ For more details about this platform, please refer to the documentation
 https://home-assistant.io/components/fan.xiaomi_miio/
 """
 import asyncio
-from enum import Enum
-from functools import partial
 import logging
 
-import voluptuous as vol
-
 from homeassistant.components.fan import (
-    FanEntity,
-    PLATFORM_SCHEMA,
     SUPPORT_SET_SPEED,
     DOMAIN,
     SPEED_OFF,
@@ -25,133 +19,45 @@ from homeassistant.components.fan import (
     ATTR_DIRECTION,
 )
 from homeassistant.const import CONF_NAME, CONF_HOST, CONF_TOKEN, ATTR_ENTITY_ID
-from homeassistant.exceptions import PlatformNotReady
-import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
-DEFAULT_NAME = "Xiaomi Miio Fan"
-DEFAULT_RETRIES = 20
-DATA_KEY = "fan.xiaomi_miio_fan"
-
-CONF_MODEL = "model"
-CONF_RETRIES = "retries"
-
-MODEL_FAN_V2 = "zhimi.fan.v2"
-MODEL_FAN_V3 = "zhimi.fan.v3"
-MODEL_FAN_SA1 = "zhimi.fan.sa1"
-MODEL_FAN_ZA1 = "zhimi.fan.za1"
-MODEL_FAN_ZA3 = "zhimi.fan.za3"
-MODEL_FAN_ZA4 = "zhimi.fan.za4"
-MODEL_FAN_P5 = "dmaker.fan.p5"
-
-ATTR_MODEL = "model"
-ATTR_BRIGHTNESS = "brightness"
-
-ATTR_TEMPERATURE = "temperature"
-ATTR_HUMIDITY = "humidity"
-ATTR_LED = "led"
-ATTR_LED_BRIGHTNESS = "led_brightness"
-ATTR_BUZZER = "buzzer"
-ATTR_CHILD_LOCK = "child_lock"
-ATTR_NATURAL_SPEED = "natural_speed"
-ATTR_OSCILLATE = "oscillate"
-ATTR_BATTERY = "battery"
-ATTR_BATTERY_CHARGE = "battery_charge"
-ATTR_BATTERY_STATE = "battery_state"
-ATTR_AC_POWER = "ac_power"
-ATTR_DELAY_OFF_COUNTDOWN = "delay_off_countdown"
-ATTR_ANGLE = "angle"
-ATTR_DIRECT_SPEED = "direct_speed"
-ATTR_USE_TIME = "use_time"
-ATTR_BUTTON_PRESSED = "button_pressed"
-ATTR_RAW_SPEED = "raw_speed"
-ATTR_MODE = "mode"
-
 AVAILABLE_ATTRIBUTES_FAN = {
-    ATTR_ANGLE: "angle",
-    ATTR_RAW_SPEED: "speed",
-    ATTR_DELAY_OFF_COUNTDOWN: "delay_off_countdown",
-    ATTR_AC_POWER: "ac_power",
-    ATTR_OSCILLATE: "oscillate",
-    ATTR_DIRECT_SPEED: "direct_speed",
-    ATTR_NATURAL_SPEED: "natural_speed",
-    ATTR_CHILD_LOCK: "child_lock",
-    ATTR_BUZZER: "buzzer",
-    ATTR_LED_BRIGHTNESS: "led_brightness",
-    ATTR_USE_TIME: "use_time",
-    # Additional properties of version 2 and 3
-    ATTR_TEMPERATURE: "temperature",
-    ATTR_HUMIDITY: "humidity",
-    ATTR_BATTERY: "battery",
-    ATTR_BATTERY_CHARGE: "battery_charge",
-    ATTR_BUTTON_PRESSED: "button_pressed",
-    # Additional properties of version 2
-    ATTR_LED: "led",
-    ATTR_BATTERY_STATE: "battery_state",
+    "program": "program",
+    "wash_process": "wash_process",
+    "wash_status": "wash_status",
+    "water_temp": "water_temp",
+    "rinse_status": "rinse_status",
+    "spin_level": "spin_level",
+    "remain_time": "remain_time",
+    "appoint_time": "appoint_time",
+    "be_status": "be_status",
+    "run_status": "run_status",
+    "DryMode": "DryMode",
+    "child_lock": "child_lock",
 }
 
-AVAILABLE_ATTRIBUTES_FAN_P5 = {
-    ATTR_MODE: "mode",
-    ATTR_OSCILLATE: "oscillate",
-    ATTR_ANGLE: "angle",
-    ATTR_DELAY_OFF_COUNTDOWN: "delay_off_countdown",
-    ATTR_LED: "led",
-    ATTR_BUZZER: "buzzer",
-    ATTR_CHILD_LOCK: "child_lock",
-}
-
-FAN_SPEED_LEVEL1 = "Level 1"
-FAN_SPEED_LEVEL2 = "Level 2"
-FAN_SPEED_LEVEL3 = "Level 3"
-FAN_SPEED_LEVEL4 = "Level 4"
+FAN_SPEED_LEVEL1 = "goldenwash"
+FAN_SPEED_LEVEL2 = "spin"
 
 FAN_SPEED_LIST = {
     SPEED_OFF: range(0, 1),
     FAN_SPEED_LEVEL1: range(1, 26),
     FAN_SPEED_LEVEL2: range(26, 51),
-    FAN_SPEED_LEVEL3: range(51, 76),
-    FAN_SPEED_LEVEL4: range(76, 101),
 }
 
 FAN_SPEED_VALUES = {
     SPEED_OFF: 0,
     FAN_SPEED_LEVEL1: 1,
     FAN_SPEED_LEVEL2: 35,
-    FAN_SPEED_LEVEL3: 74,
-    FAN_SPEED_LEVEL4: 100,
 }
-
-FAN_SPEED_VALUES_P5 = {
-    SPEED_OFF: 0,
-    FAN_SPEED_LEVEL1: 1,
-    FAN_SPEED_LEVEL2: 35,
-    FAN_SPEED_LEVEL3: 70,
-    FAN_SPEED_LEVEL4: 100,
-}
-
-FEATURE_SET_BUZZER = 1
-FEATURE_SET_LED = 2
-FEATURE_SET_CHILD_LOCK = 4
-FEATURE_SET_LED_BRIGHTNESS = 8
-FEATURE_SET_OSCILLATION_ANGLE = 16
-FEATURE_SET_NATURAL_MODE = 32
-
-FEATURE_FLAGS_GENERIC = FEATURE_SET_BUZZER | FEATURE_SET_CHILD_LOCK
-
-FEATURE_FLAGS_FAN = (
-    FEATURE_FLAGS_GENERIC
-    | FEATURE_SET_LED_BRIGHTNESS
-    | FEATURE_SET_OSCILLATION_ANGLE
-    | FEATURE_SET_NATURAL_MODE
-)
 
 from miio import Fan
 
 class VioMiWasher(Fan):
     """Representation of a XiaoMi MiIO Light."""
 
-from .fan import XiaomiGenericDevice
+from .fan import XiaomiGenericDevice, FEATURE_SET_CHILD_LOCK
 
 class VioMiWasherEntity(XiaomiGenericDevice):
     """Representation of a Xiaomi Pedestal Fan."""
@@ -160,7 +66,7 @@ class VioMiWasherEntity(XiaomiGenericDevice):
         """Initialize the fan entity."""
         super().__init__(name, device, model, unique_id, retries)
 
-        self._device_features = FEATURE_FLAGS_FAN
+        self._device_features = FEATURE_SET_CHILD_LOCK
         self._available_attributes = AVAILABLE_ATTRIBUTES_FAN
         self._speed_list = list(FAN_SPEED_LIST)
         self._speed = None
