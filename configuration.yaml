@@ -401,7 +401,7 @@ yeelight:
       model: mono1
 
 light:
-  - platform: miio_airer
+  - platform: miio
     name: 晾衣灯
     host: Airer
     token: !secret airer_token
@@ -477,12 +477,12 @@ fan:
     host: Purifier
     model: zhimi.airpurifier.m1
     token: !secret purifier_token
-  - platform: miio_fan
+  - platform: miio
     name: 儿童房风扇
     host: Fan
     model: zhimi.fan.v3
     token: !secret fan_token
-  - platform: miio_fan
+  - platform: miio
     name: 书房风扇
     host: Fan2
     model: zhimi.fan.sa1
@@ -599,7 +599,7 @@ climate:
     humidity_sensor: sensor.aircat2_humidity
 
 cover:
-  # - platform: miio_airer
+  # - platform: miio
   #   host: Airer
   #   token: !secret airer_token
   - platform: broadlink2
