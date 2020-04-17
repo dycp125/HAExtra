@@ -647,7 +647,8 @@
 				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
 					var value = !na && domain == 'climate' ? attributes.current_temperature : _TRANS[state] || state || '无'
 					var nan = isNaN(value)
-					var overflow = nan ? '' : stateOverflow(entity_id, value)
+					var type = domain == 'climate' ? 'temperature' : (attributes.device_class || attributes.icon)
+					var overflow = nan ? '' : sensorOverflow(type, value)
 					html += '<div class="state' + off + overflow + (nan ? ' nan' : '') + '">'
 					if (nan) {
 						html += value
@@ -742,24 +743,22 @@
 				return '<div class="entity utility" onclick="' + action + '"><i class="mdi mdi-' + icon + '"></i></div>'
 			}
 
-			_SENSOR_THRESHOLDS = {
-				pm25: [40, 70],
-				co2: [900, 1600],
-				humidity: [72, 82],
-				hcho: [0.08, 0.2],
-				temperature: [30, 38],
+			_SENSOR_RANGES = {
+				'temperature': [30, 38], // TEMPERATURE
+				'humidity': [72, 82], // HUMIDITY
+				'mdi:blur': [40, 70], // PM25
+				'mdi:periodic-table-co2': [900, 1600], // CO2
+				'mdi:biohazard': [0.08, 0.2], // HCHO
 			}
 
-			function stateOverflow(entity_id, value) {
+			function sensorOverflow(type, value) {
 				var warning = ''
-				for (var k in _SENSOR_THRESHOLDS) {
-					if (entity_id.endsWith(k)) {
-						var thresholds = _SENSOR_THRESHOLDS[k]
-						if (value >= thresholds[1]) {
-							return ' critical'
-						} else if (value >= thresholds[0]) {
-							return ' caution'
-						}
+				var range = _SENSOR_RANGES[type]
+				if (range) {
+					if (value >= range[1]) {
+						return ' critical'
+					} else if (value >= range[0]) {
+						return ' caution'
 					}
 				}
 				return ''

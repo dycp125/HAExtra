@@ -143,71 +143,75 @@ weather:
 
 sensor:
   - platform: mqtt
+    name: 阳台温度
     device_class: temperature
     state_topic: NodeMCU2/temperature
-    name: 阳台温度
     unit_of_measurement: °C
     availability_topic: NodeMCU2/status
   - platform: mqtt
+    name: 阳台湿度
     device_class: humidity
     state_topic: NodeMCU2/humidity
-    name: 阳台湿度
     unit_of_measurement: '%'
     availability_topic: NodeMCU2/status
   - platform: mqtt
-    state_topic: NodeMCU2/pm2dot5
     name: 阳台颗粒物
+    icon: mdi:blur
+    state_topic: NodeMCU2/pm2dot5
     unit_of_measurement: μg/m³
     availability_topic: NodeMCU2/status
   - platform: mqtt
+    name: 书房温度
     device_class: temperature
     state_topic: NodeMCU3/temperature
-    name: 书房温度
     unit_of_measurement: °C
     availability_topic: NodeMCU3/status
   - platform: mqtt
+    name: 书房湿度
     device_class: humidity
     state_topic: NodeMCU3/humidity
-    name: 书房湿度
     unit_of_measurement: '%'
     availability_topic: NodeMCU3/status
   - platform: mqtt
-    state_topic: NodeMCU3/co2
     name: 书房二氧化碳
+    icon: mdi:periodic-table-co2
+    state_topic: NodeMCU3/co2
     unit_of_measurement: ppm
     availability_topic: NodeMCU3/status
   - platform: mqtt
+    name: 书房亮度
     device_class: illuminance
     state_topic: NodeMCU3/lux
-    name: 书房亮度
     unit_of_measurement: lm
     availability_topic: NodeMCU3/status
   - platform: mqtt
+    name: 主卧亮度
     device_class: illuminance
     state_topic: NodeMCU6/analog
-    name: 主卧亮度
     availability_topic: NodeMCU6/status
     #unit_of_measurement: lm
   - platform: mqtt
+    name: 儿童房温度
     device_class: temperature
     state_topic: NodeMCU7/temperature
-    name: 儿童房温度
     unit_of_measurement: °C
     availability_topic: NodeMCU7/status
   - platform: mqtt
+    name: 儿童房湿度
     device_class: humidity
     state_topic: NodeMCU7/humidity
-    name: 儿童房湿度
     unit_of_measurement: '%'
     availability_topic: NodeMCU7/status
   - platform: mqtt
-    state_topic: NodeMCU7/pm2dot5
     name: 儿童房颗粒物
+    icon: mdi:blur
+    state_topic: NodeMCU7/pm2dot5
     unit_of_measurement: μg/m³
     availability_topic: NodeMCU7/status
   - platform: mqtt
-    state_topic: NodeMCU7/co2
     name: 儿童房二氧化碳
+    icon: mdi:periodic-table-co2
+    state_topic: NodeMCU7/co2
     unit_of_measurement: ppm
     availability_topic: NodeMCU7/status
   # - platform: phicomm
@@ -232,7 +236,7 @@ sensor:
         friendly_name: 次卧颗粒物
         value_template: '{{ state_attr("fan.ci_wo_jing_hua_qi", "aqi") }}'
         unit_of_measurement: μg/m³
-        icon_template: 'mdi:blur'
+        icon_template: mdi:blur
 
       ke_ting_wen_du:
         friendly_name: 客厅温度
@@ -248,12 +252,12 @@ sensor:
         friendly_name: 客厅颗粒物
         value_template: '{{ state_attr("fan.ke_ting_xin_feng_ji", "aqi") }}'
         unit_of_measurement: μg/m³
-        icon_template: 'mdi:blur'
+        icon_template: mdi:blur
       fresher_co2:
         friendly_name: 客厅二氧化碳
         value_template: '{{ state_attr("fan.ke_ting_xin_feng_ji", "co2") }}'
         unit_of_measurement: ppm
-        icon_template: 'mdi:periodic-table-co2'
+        icon_template: mdi:periodic-table-co2
 
       zhu_wo_wen_du:
         friendly_name: 主卧温度
@@ -269,11 +273,12 @@ sensor:
         friendly_name: 主卧颗粒物
         value_template: '{{ state_attr("fan.zhu_wo_xin_feng_ji", "aqi") }}'
         unit_of_measurement: μg/m³
+        icon_template: mdi:blur
       zhu_wo_er_yang_hua_tan:
         friendly_name: 主卧二氧化碳
         value_template: '{{ state_attr("fan.zhu_wo_xin_feng_ji", "co2") }}'
         unit_of_measurement: ppm
-        icon_template: 'mdi:periodic-table-co2'
+        icon_template: mdi:periodic-table-co2
 
       # feng_shan_wen_du:
       #   friendly_name: 风扇温度

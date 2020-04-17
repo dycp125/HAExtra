@@ -36,19 +36,33 @@ class VioMiWasher(Device):
         for prop in properties:
             value = self.send("get_prop", [prop])
             data[prop] = value[0] if len(value) else None
+        self._program = data['program']
         return data
 
     def on(self):
-        return self.send("set_wash_action", [1])
+        try:
+            _LOGGER.debug("set_wash_action on")
+            return self.send("set_wash_action", [1])
+        except:
+            _LOGGER.debug("Try to turn on")
+            try:
+                set_program(self._program)
+            except:
+                set_program('goldenwash')
+            return self.send("set_wash_action", [1])
 
     def off(self):
-        return self.send("set_wash_action", [0])
+        _LOGGER.debug("set_wash_action off")
+        return self.send("set_wash_action", [2])
 
     def set_program(self, program):
+        _LOGGER.debug("set_wash_program=%s", program)
         return self.send("set_wash_program", [program])
 
     def set_dry_mode(self, dry_mode):
-        return self.send("SetDryMode", [17922 if dry_mode == True else int(dry_mode)])
+        dry_mode = 17922 if dry_mode == True else int(dry_mode)
+        _LOGGER.debug("SetDryMode=%s", dry_mode)
+        return self.send("SetDryMode", [dry_mode])
 
 
 WASH_PROGRAMS = {
