@@ -264,10 +264,10 @@ async def async_setup_platform(hass, config, async_add_devices, discovery_info=N
         fan = FanP5(host, token, model=model)
         device = XiaomiFanP5(name, fan, model, unique_id, retries)
     elif model == MODEL_WASHER_VIOMI_V5:
-        from .washer import VioMiWasher, VioMiWasherEntity
+        from .washer import VioMiWasher, VioMiEntity
 
         fan = VioMiWasher(host, token)
-        device = VioMiWasherEntity(name, fan, model, unique_id, retries)
+        device = VioMiEntity(name, fan, model, unique_id, retries)
     else:
         _LOGGER.error(
             "Unsupported device found! Please create an issue at "
