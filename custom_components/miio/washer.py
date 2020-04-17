@@ -48,7 +48,7 @@ class VioMiWasher(Device):
         return self.send("set_wash_program", [program])
 
     def set_dry_mode(self, dry_mode):
-        return self.send("set_wash_action", [2])
+        return self.send("SetDryMode", [17922 if dry_mode == True else int(dry_mode)])
 
 
 WASH_PROGRAMS = {
@@ -87,7 +87,7 @@ class VioMiWasherEntity(XiaomiGenericDevice):
         self._oscillate = None
 
     @property
-    def supported_features(self) -> int:
+    def supported_features(self):
         """Supported features."""
         return SUPPORT_SET_SPEED | SUPPORT_OSCILLATE
 
@@ -131,7 +131,7 @@ class VioMiWasherEntity(XiaomiGenericDevice):
                 )
 
     @property
-    def speed_list(self) -> list:
+    def speed_list(self):
         """Get the list of available speeds."""
         return list(WASH_PROGRAMS.values())
 
@@ -140,7 +140,7 @@ class VioMiWasherEntity(XiaomiGenericDevice):
         """Return the current speed."""
         return self._speed
 
-    async def async_set_speed(self, speed: str) -> None:
+    async def async_set_speed(self, speed):
         """Set the speed of the fan."""
 
         _LOGGER.debug("Setting the fan speed to: %s", speed)
@@ -165,7 +165,7 @@ class VioMiWasherEntity(XiaomiGenericDevice):
         """Return the oscillation state."""
         return self._oscillate
 
-    async def async_oscillate(self, oscillating: bool) -> None:
+    async def async_oscillate(self, oscillating):
         """Set oscillation."""
         await self._try_command(
             "Setting oscillate on of the miio device failed.",
