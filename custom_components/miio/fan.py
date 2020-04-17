@@ -266,7 +266,7 @@ async def async_setup_platform(hass, config, async_add_devices, discovery_info=N
     elif model == MODEL_WASHER_VIOMI_V5:
         from .washer import VioMiWasher, VioMiWasherEntity
 
-        fan = VioMiWasher(host, token, model=model)
+        fan = VioMiWasher(host, token)
         device = VioMiWasherEntity(name, fan, model, unique_id, retries)
     else:
         _LOGGER.error(
