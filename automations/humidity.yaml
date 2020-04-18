@@ -1,7 +1,7 @@
 - alias: 餐厅除湿机开
   trigger:
     - platform: numeric_state
-      entity_id: sensor.aircat_humidity
+      entity_id: sensor.can_ting_shi_du
       above: 74
       for:
         minutes: 10
@@ -12,7 +12,7 @@
 - alias: 餐厅除湿机关
   trigger:
     - platform: numeric_state
-      entity_id: sensor.aircat_humidity
+      entity_id: sensor.can_ting_shi_du
       below: 70
       for:
         minutes: 10
@@ -52,7 +52,7 @@
   initial_state: false
   trigger:
     - platform: numeric_state
-      entity_id: sensor.aircat_humidity
+      entity_id: sensor.can_ting_shi_du
       below: 56
       for:
         minutes: 10
@@ -72,7 +72,7 @@
   initial_state: false
   trigger:
     - platform: numeric_state
-      entity_id: sensor.aircat_humidity
+      entity_id: sensor.can_ting_shi_du
       above: 60
       for:
         minutes: 10

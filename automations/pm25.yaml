@@ -1,11 +1,11 @@
 - alias: 餐厅净化器调节
   trigger:
     - platform: state
-      entity_id: sensor.aircat_pm25
+      entity_id: sensor.can_ting_ke_li_wu
   action:
     - service: actuator.actuate
       data:
-        sensor_id: sensor.aircat_pm25
+        sensor_id: sensor.can_ting_ke_li_wu
         sensor_values: [10, 20, 50]
         entity_id: fan.can_ting_jing_hua_qi
         entity_attr: speed

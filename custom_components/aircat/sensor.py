@@ -168,7 +168,7 @@ from homeassistant.components.sensor import PLATFORM_SCHEMA
 import voluptuous as vol
 
 
-SENSOR_PM25 = 'value'
+SENSOR_PM25 = 'pm25'
 SENSOR_HCHO = 'hcho'
 SENSOR_TEMPERATURE = 'temperature'
 SENSOR_HUMIDITY = 'humidity'
@@ -178,14 +178,14 @@ DEFAULT_SENSORS = [SENSOR_PM25, SENSOR_HCHO,
                    SENSOR_TEMPERATURE, SENSOR_HUMIDITY]
 
 SENSOR_MAP = {
-    SENSOR_PM25: ('PM25', 'μg/m³', 'blur'),
-    SENSOR_HCHO: ('HCHO', 'mg/m³', 'biohazard'),
-    SENSOR_TEMPERATURE: ('Temperature', TEMP_CELSIUS, 'thermometer'),
-    SENSOR_HUMIDITY: ('Humidity', '%', 'water-percent')
+    SENSOR_PM25: ('μg/m³', 'blur'),
+    SENSOR_HCHO: ('mg/m³', 'biohazard'),
+    SENSOR_TEMPERATURE: (TEMP_CELSIUS, 'thermometer'),
+    SENSOR_HUMIDITY: ('%', 'water-percent')
 }
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
+    vol.Optional(CONF_NAME, default=DEFAULT_NAME): vol.Any(cv.string, list),
     vol.Optional(CONF_MAC, default=['']):
         vol.All(cv.ensure_list, vol.Length(min=1)),
     vol.Optional(CONF_SENSORS, default=DEFAULT_SENSORS):
@@ -214,11 +214,11 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
     devices = []
     for index in range(count):
-        for sensor_type in sensors:
-            devices.append(AirCatSensor(aircat,
-                                        name +
-                                        str(index + 1) if index else name,
-                                        macs[index], sensor_type))
+        device_name = name[index] if isinstance(name, list) else name + str(index + 1)
+        for sensor_index in range(len(sensors)):
+            sensor_type = sensors[sensor_index]
+            sensor_name = device_name[sensor_index] if isinstance(device_name, list) else device_name + ' ' + sensor_type
+            devices.append(AirCatSensor(aircat, sensor_name, macs[index], sensor_type))
 
     add_devices(devices)
 
@@ -228,8 +228,8 @@ class AirCatSensor(Entity):
 
     def __init__(self, aircat, name, mac, sensor_type):
         """Initialize the AirCat sensor."""
-        sensor_name, unit, icon = SENSOR_MAP[sensor_type]
-        self._name = name + ' ' + sensor_name
+        unit, icon = SENSOR_MAP[sensor_type]
+        self._name = name
         self._mac = mac
         self._sensor_type = sensor_type
         self._unit = unit
@@ -254,9 +254,7 @@ class AirCatSensor(Entity):
     @property
     def device_class(self):
         """Return the class of this device, from component DEVICE_CLASSES."""
-        if self._sensor_type == SENSOR_TEMPERATURE or self._sensor_type == SENSOR_HUMIDITY:
-            return self._sensor_type
-        return None
+        return self._sensor_type
 
     @property
     def available(self):
@@ -269,7 +267,7 @@ class AirCatSensor(Entity):
         attributes = self.attributes
         if attributes is None:
             return None
-        state = attributes[self._sensor_type]
+        state = attributes['value' if self._sensor_type == SENSOR_PM25 else self._sensor_type]
         if self._sensor_type == SENSOR_PM25:
             return state
         elif self._sensor_type == SENSOR_HCHO:

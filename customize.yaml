@@ -27,7 +27,7 @@ cover.tou_ying_mu_bu:
   hagenie_zone: 影音室
   icon: mdi:projector-screen
 fan.can_ting_jing_hua_qi:
-  dash_icon: ${sensor.aircat_pm25}
+  dash_icon: ${sensor.can_ting_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.ci_wo_jing_hua_qi:
@@ -38,13 +38,12 @@ fan.er_tong_fang_jing_hua_qi:
   dash_icon: ${sensor.er_tong_fang_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
-fan.ke_ting_bi_shan:
-  icon: mdi:fan
 fan.ke_ting_xin_feng_ji:
   dash_icon: ${co2}
   hagenie_deviceType: VMC
   icon: mdi:leaf
 fan.shu_fang_jing_hua_qi:
+  dash_icon: ${sensor.shu_fang_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.zhu_wo_jing_hua_qi:
@@ -84,16 +83,10 @@ light.xi_shou_jian_deng:
   icon: mdi:ceiling-light
 light.zhu_wo_deng:
   icon: mdi:ceiling-light
-sensor.aircat_hcho:
-  friendly_name: 餐厅甲醛
-sensor.aircat_humidity:
-  friendly_name: 餐厅湿度
-sensor.aircat_pm25:
+sensor.can_ting_ke_li_wu:
   dash_click: if (self == top) location = '/'
   dash_relation: fan.can_ting_jing_hua_qi
   friendly_name: 餐厅颗粒物
-sensor.aircat_temperature:
-  friendly_name: 餐厅温度
 sensor.er_tong_fang_ke_li_wu:
   dash_click: https://www.lewei50.com/u/g/33981
   dash_relation: fan.er_tong_fang_jing_hua_qi
@@ -106,11 +99,6 @@ sensor.zhu_wo_ke_li_wu:
   device_class: pm25
 sun.sun:
   friendly_name: 日照
-switch.bo_fang_qi:
-  hagenie_deviceName: 电视
-  hagenie_deviceType: television
-  hagenie_zone: 影音室
-  icon: mdi:play-circle-outline
 switch.can_ting_chu_shi_ji:
   hagenie_deviceType: dehumidifier
   icon: mdi:power-socket-uk
@@ -144,4 +132,3 @@ weather.tian_qi:
   dash_click: https://m.tianqi.com/hangzhou
   dash_extra: attribution
   dash_name: ${temperature}℃ ${humidity}% ${pm25}μg
-  friendly_name: 天气
