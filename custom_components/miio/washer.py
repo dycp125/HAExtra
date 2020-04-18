@@ -112,7 +112,6 @@ class VioMiWasher(Device):
             for prop in properties:
                 value = self.send("get_prop", [prop])
                 data[prop] = value[0] if len(value) else None
-            data['dash_extra_forced'] = True
         except Exception as ex:
             _LOGGER.debug("Exception on status: %s. Trying to turn on...", ex)
             self.up()
