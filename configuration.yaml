@@ -79,8 +79,8 @@ homekit:
       - binary_sensor.switch_158d0001e59b33
       - binary_sensor.switch_158d000201a73f
       - sensor.zhu_wo_er_yang_hua_tan
-      - climate.saswell
-      - climate.saswell2
+      - climate.ke_ting_di_nuan
+      - climate.zhu_wo_di_nuan
   entity_config:
     switch.can_ting_chu_shi_ji:
       type: outlet

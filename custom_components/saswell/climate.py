@@ -18,7 +18,7 @@ from homeassistant.components.climate.const import (SUPPORT_TARGET_TEMPERATURE,
                                                     CURRENT_HVAC_HEAT, CURRENT_HVAC_OFF, ATTR_CURRENT_TEMPERATURE,
                                                     ATTR_PRESET_MODE, PRESET_HOME, PRESET_AWAY)
 from homeassistant.const import (
-    ATTR_ID, CONF_NAME, CONF_USERNAME, CONF_PASSWORD, CONF_SCAN_INTERVAL,
+    ATTR_ID, ATTR_NAME, CONF_USERNAME, CONF_PASSWORD, CONF_SCAN_INTERVAL,
     ATTR_TEMPERATURE)
 from homeassistant.helpers.event import async_track_time_interval
 import homeassistant.helpers.config_validation as cv
@@ -40,7 +40,6 @@ DEFAULT_NAME = 'Saswell'
 ATTR_AVAILABLE = 'available'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
     vol.Required(CONF_USERNAME): cv.string,
     vol.Required(CONF_PASSWORD): cv.string,
     vol.Optional(CONF_SCAN_INTERVAL, default=timedelta(seconds=300)): (
@@ -50,7 +49,6 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the Saswell climate devices."""
-    name = config.get(CONF_NAME)
     username = config.get(CONF_USERNAME)
     password = config.get(CONF_PASSWORD)
     scan_interval = config.get(CONF_SCAN_INTERVAL)
@@ -58,12 +56,12 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     saswell = SaswellData(hass, username, password)
     await saswell.update_data()
     if not saswell.devs:
-        _LOGGER.error("No sensors added: %s.", name)
+        _LOGGER.error("No sensors added.")
         return None
 
     devices = []
     for index in range(len(saswell.devs)):
-        devices.append(SaswellClimate(saswell, name, index))
+        devices.append(SaswellClimate(saswell, index))
     async_add_entities(devices)
 
     saswell.devices = devices
@@ -73,23 +71,25 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 class SaswellClimate(ClimateDevice):
     """Representation of a Saswell climate device."""
 
-    def __init__(self, saswell, name, index):
+    def __init__(self, saswell, index):
         """Initialize the climate device."""
-        if index:
-            name += str(index + 1)
-        self._name = name
         self._index = index
         self._saswell = saswell
 
     @property
     def name(self):
         """Return the name of the climate device."""
-        return self._name
+        return self.get_value(ATTR_NAME)
 
     @property
     def available(self):
         """Return if the sensor data are available."""
         return self.get_value(ATTR_AVAILABLE)
+
+    @property
+    def device_state_attributes(self):
+        """Return the state attributes of the device."""
+        return {'hagenie_deviceType': 'heater'}
 
     @property
     def supported_features(self):
@@ -226,6 +226,7 @@ class SaswellData():
                              ATTR_CURRENT_TEMPERATURE: float(status[2]),
                              ATTR_TEMPERATURE: float(status[3]),
                              ATTR_AVAILABLE: dev['online'] == '1',
+                             ATTR_NAME: dev['title'],
                              ATTR_ID: dev['id']})
             self.devs = devs
             _LOGGER.info("List device: devs=%s", self.devs)

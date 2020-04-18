@@ -10,8 +10,6 @@ binary_sensor.door_window_sensor_158d0003cf4735:
   friendly_name: 洗手间门
 binary_sensor.door_window_sensor_158d00041c74da:
   friendly_name: 浴室门
-binary_sensor.lightness:
-  friendly_name: 高亮光照
 binary_sensor.motion_sensor_158d0001d66ce9:
   friendly_name: 过道感应
 binary_sensor.motion_sensor_158d0001f4a238:
@@ -30,12 +28,6 @@ climate.daikin3:
   friendly_name: 主卧空调
 climate.daikin4:
   friendly_name: 儿童房空调
-climate.saswell:
-  friendly_name: 客厅地暖
-  hagenie_deviceType: heater
-climate.saswell2:
-  friendly_name: 主卧地暖
-  hagenie_deviceType: heater
 cover.curtain_158d0003f7951d:
   friendly_name: 过道卷帘
 cover.tou_ying_mu_bu:
@@ -119,6 +111,7 @@ sensor.yang_tai_ke_li_wu:
   dash_click: https://www.lewei50.com/u/g/34131
 sensor.zhu_wo_ke_li_wu:
   dash_relation: fan.zhu_wo_jing_hua_qi
+  device_class: pm25
 sun.sun:
   friendly_name: 日照
 switch.bo_fang_qi:
@@ -153,8 +146,8 @@ switch.yin_xiang:
   hagenie_deviceName: 机顶盒
   hagenie_deviceType: STB
 vacuum.sao_di_ji:
-  dash_extra_forced: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger disconnected"
-    ? "充电断开" : ("${status}"=="Cleaning" ? "清扫中" : "${status}"))'
+  dash_extra_forced: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger
+    disconnected" ? "充电断开" : ("${status}"=="Cleaning" ? "清扫中" : "${status}"))'
 weather.tian_qi:
   dash_click: https://m.tianqi.com/hangzhou
   dash_extra: attribution

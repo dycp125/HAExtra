@@ -647,7 +647,7 @@
 				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
 					var value = !na && domain == 'climate' ? attributes.current_temperature : _TRANS[state] || state || '无'
 					var nan = isNaN(value)
-					var type = domain == 'climate' ? 'temperature' : (attributes.device_class || attributes.icon)
+					var type = domain == 'climate' ? 'temperature' : attributes.device_class
 					var overflow = nan ? '' : sensorOverflow(type, value)
 					html += '<div class="state' + off + overflow + (nan ? ' nan' : '') + '">'
 					if (nan) {
@@ -747,11 +747,11 @@
 			}
 
 			_SENSOR_RANGES = {
-				'temperature': [30, 38], // TEMPERATURE
-				'humidity': [72, 82], // HUMIDITY
-				'mdi:blur': [40, 70], // PM25
-				'mdi:periodic-table-co2': [900, 1600], // CO2
-				'mdi:biohazard': [0.08, 0.2], // HCHO
+				'temperature': [30, 38],
+				'humidity': [72, 82],
+				'pm25': [40, 70],
+				'co2': [900, 1600],
+				'hcho': [0.08, 0.2],
 			}
 
 			function sensorOverflow(type, value) {

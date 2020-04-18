@@ -22,7 +22,7 @@ default_view:
     #- fan.ke_ting_bi_shan
     - fan.ke_ting_xin_feng_ji
     - climate.daikin2
-    - climate.saswell
+    - climate.ke_ting_di_nuan
     - automation.ke_ting_tong_deng_tong_bu
     - automation.ke_ting_kong_diao_guan
     - automation.ke_ting_kong_diao_kai
@@ -98,7 +98,7 @@ default_view:
     - fan.zhu_wo_bi_shan
     - fan.xi_yi_ji
     - climate.daikin3
-    - climate.saswell2
+    - climate.zhu_wo_di_nuan
     - automation.shui_mian_jie_shu
     - automation.shui_mian_shen_ru
     - automation.shui_mian_zhun_bei
