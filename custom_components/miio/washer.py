@@ -45,7 +45,8 @@ class VioMiEntity(XiaomiGenericDevice):
 
             wash_status = attrs["wash_status"]
             wash_process = attrs["wash_process"]
-            self._state = wash_process > 0 and wash_process < 7 and wash_status == 1
+            appoint_time = attrs["appoint_time"]
+            self._state = wash_status == 1 and ((wash_process > 0 and wash_process < 7) or appoint_time)
 
             # program = attrs["program"]
             # dry_mode = program == 'dry' or program == 'weak_dry' or attrs["DryMode"] != 0
@@ -76,12 +77,16 @@ class VioMiEntity(XiaomiGenericDevice):
             "Setting fan speed of the miio device failed.",
             self._device.set_mode, speed,
         )
-        #self._device.mode = speed
 
     async def async_turn_on(self, speed, **kwargs):
         if speed:
-            self._device.mode = speed
-        await super().async_turn_on()
+            await self.async_set_speed(speed)
+            return
+
+        result = await self._try_command("Turning the miio device on failed: %s.", self._device.on)
+        if result:
+            self._state = True
+            self._skip_update = True
 
 
 class VioMiWasher(Device):
@@ -119,8 +124,8 @@ class VioMiWasher(Device):
         return data
 
     def on(self):
-        _LOGGER.debug("Turn washer ON!")
         self.set_mode()  # We should set mode to ensure appoint time
+        _LOGGER.debug("Turn washer ON!")
         return self.send("set_wash_action", [1])
 
     def off(self):
@@ -134,7 +139,7 @@ class VioMiWasher(Device):
         if mode is not None:
             self.mode = mode if mode in WASH_MODES else WASH_MODES[0]
 
-        dry_mode = '33282' if self.mode.endswith('烘') else '0'
+        dry_mode = 30721 if self.mode.endswith('烘') else 0
 
         if self.mode.startswith('预约'):
             now = datetime.datetime.now()
@@ -154,5 +159,10 @@ class VioMiWasher(Device):
                       dry_mode, appoint_time)
 
         self.up()
-        self.send("SetDryMode", [dry_mode])
-        return self.send("set_appoint_time", [appoint_time])
+        self.send("set_appoint_time", [0])
+        #self.send("set_wash_action", [0])
+
+        result = self.send("SetDryMode", [dry_mode])
+        if appoint_time:
+            self.send("set_appoint_time", [appoint_time])
+        return result

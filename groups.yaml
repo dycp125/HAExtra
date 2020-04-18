@@ -90,7 +90,7 @@ default_view:
     - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.zhu_wo_gan_ying
     - light.zhu_wo_deng
-    - switch.zhu_wo_dian_shi
+    #- switch.zhu_wo_dian_shi
     #- switch.yi_gui_chu_shi_ji
     - media_player.zhu_wo_dian_shi
     - fan.zhu_wo_xin_feng_ji
@@ -128,7 +128,7 @@ default_view:
     - light.er_tong_fang_deng
     - light.er_tong_fang_tai_deng
     - fan.er_tong_fang_jing_hua_qi
-    - fan.er_tong_fang_feng_shan
+    #- fan.er_tong_fang_feng_shan
     - climate.daikin4
     - automation.er_tong_fang_chu_shi_ji_guan
     - automation.er_tong_fang_chu_shi_ji_kai
@@ -154,7 +154,7 @@ default_view:
     - cover.shu_fang_chuang_lian
     #- cover.airer
     - vacuum.sao_di_ji
-    - fan.shu_fang_feng_shan
+    #- fan.shu_fang_feng_shan
     #- fan.shu_fang_jing_hua_qi
     - climate.shu_fang_kong_diao
     - automation.shu_fang_an_niu_chang_an_guan_bi_yin_xiang

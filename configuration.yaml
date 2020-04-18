@@ -378,16 +378,16 @@ switch:
           service: script.turn_on_projector
         turn_off:
           service: script.turn_off_projector
-      zhu_wo_dian_shi:
-        friendly_name: 主卧电视电源
-        value_template: '{{ is_state("device_tracker.x9300d", "home") }}'
-        turn_on:
-          service: mqtt.publish
-          data:
-            topic: NodeMCU6/irout/set
-            payload: '2416,592,1210,594,608,618,1186,616,586,592,1210,618,584,618,586,616,1186,618,584,618,584,616,586,592,608,1,2,38'
-        turn_off:
-          service: shell_command.turn_off_x9300d
+      # zhu_wo_dian_shi:
+      #   friendly_name: 主卧电视电源
+      #   value_template: '{{ is_state("device_tracker.x9300d", "home") }}'
+      #   turn_on:
+      #     service: mqtt.publish
+      #     data:
+      #       topic: NodeMCU6/irout/set
+      #       payload: '2416,592,1210,594,608,618,1186,616,586,592,1210,618,584,618,586,616,1186,618,584,618,584,616,586,592,608,1,2,38'
+      #   turn_off:
+      #     service: shell_command.turn_off_x9300d
 
 yeelight:
   devices:
@@ -480,16 +480,16 @@ fan:
     host: Purifier
     model: zhimi.airpurifier.m1
     token: !secret purifier_token
-  - platform: miio
-    name: 儿童房风扇
-    host: Fan
-    model: zhimi.fan.v3
-    token: !secret fan_token
-  - platform: miio
-    name: 书房风扇
-    host: Fan2
-    model: zhimi.fan.sa1
-    token: !secret fan2_token
+  # - platform: miio
+  #   name: 儿童房风扇
+  #   host: Fan
+  #   model: zhimi.fan.v3
+  #   token: !secret fan_token
+  # - platform: miio
+  #   name: 书房风扇
+  #   host: Fan2
+  #   model: zhimi.fan.sa1
+  #   token: !secret fan2_token
   - platform: xiaomi_miio
     name: 客厅新风机
     host: Fresher
