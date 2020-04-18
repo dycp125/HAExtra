@@ -2,6 +2,9 @@ import logging
 import datetime
 
 from miio import Device
+import voluptuous as vol
+import homeassistant.helpers.config_validation as cv
+from homeassistant.const import CONF_HOST, CONF_NAME, CONF_TOKEN
 from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED, PLATFORM_SCHEMA
 
 _LOGGER = logging.getLogger(__name__)
@@ -30,6 +33,7 @@ class VioMiWasher(FanEntity):
         self._name = name or host
         self._device = Device(host, token)
         self._attrs = None
+        self._state = False
         self._mode = DEFAULT_WASH_MODE
         self._skip_update = False
 
@@ -75,20 +79,19 @@ class VioMiWasher(FanEntity):
     @property
     def is_on(self):
         """Return true if device is on."""
-        attrs = self._attrs
-        if attrs is None:
-            return False
-        wash_process = attrs['wash_process']
-        return attrs['wash_status'] == 1 and ((wash_process > 0 and wash_process < 7) or attrs['appoint_time'])
+        return self._state
 
     async def async_update(self):
         """Fetch state from the device."""
         if self._skip_update:
             self._skip_update = False
-        else:
-            self._attrs = await self.try_command(self.status)
+            return
 
-    async def async_turn_on(self, speed, **kwargs):
+        attrs = await self.try_command(self.status)
+        self._state = attrs is not None and attrs['wash_status'] == 1 and ((attrs['wash_process'] > 0 and attrs['wash_process'] < 7) or attrs['appoint_time'])
+        self._attrs = attrs
+
+    async def async_turn_on(self, speed=None, **kwargs):
         """Turn the device on."""
         if speed:
             await self.async_set_speed(speed)
@@ -98,7 +101,7 @@ class VioMiWasher(FanEntity):
             self._state = True
             self._skip_update = True
 
-    async def async_turn_off(self, **kwargs) -> None:
+    async def async_turn_off(self, **kwargs):
         """Turn the device off."""
         result = await self.try_command(self.off)
         if result:
@@ -107,7 +110,7 @@ class VioMiWasher(FanEntity):
 
     async def async_set_speed(self, speed):
         """Set the speed of the fan."""
-        _LOGGER.debug("Setting washer mode to: %s", mode)
+        _LOGGER.debug("Setting washer mode to: %s", speed)
         self._mode = speed if speed in WASH_MODES else DEFAULT_WASH_MODE
 
     async def try_command(self, func):
@@ -145,7 +148,7 @@ class VioMiWasher(FanEntity):
         return attrs
 
     def on(self):
-        if self._attrs['program'] != 'goldenwash':
+        if self._attrs['program'] != 'goldenwash' or self._attrs['wash_process'] == 7:
             self.send("set_wash_program", 'goldenwash')
 
         dry_mode = 30721 if self._mode.endswith('烘') else 0

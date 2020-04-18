@@ -11,7 +11,7 @@ logger:
   default: warning
   logs:
     #custom_components.zhibot: debug
-    custom_components.miio: debug
+    custom_components.viomi_washer: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
     #homeassistant.components.braviatv: debug
