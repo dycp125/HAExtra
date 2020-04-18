@@ -1,15 +1,12 @@
 """Support for Xiaomi MiIO Lights."""
 import logging
-from collections import defaultdict
 
 from miio import Device
-
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 
-from homeassistant.components.light import PLATFORM_SCHEMA
+from homeassistant.components.light import Light, PLATFORM_SCHEMA
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_TOKEN
-from homeassistant.components.xiaomi_miio.light import XiaomiPhilipsAbstractLight, CONF_MODEL
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -18,12 +15,6 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         vol.Required(CONF_HOST): cv.string,
         vol.Required(CONF_TOKEN): vol.All(cv.string, vol.Length(min=32, max=32)),
         vol.Optional(CONF_NAME): cv.string,
-        vol.Optional(CONF_MODEL, default='mrbond.airer.m1pro'): vol.In(
-            [
-                'mrbang.airer.m1',
-                'mrbond.airer.m1pro',
-            ]
-        ),
     }
 )
 
@@ -33,59 +24,64 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     host = config[CONF_HOST]
     token = config[CONF_TOKEN]
     name = config.get(CONF_NAME)
-    model = config.get(CONF_MODEL)
-    light = MrBondAirer(host, token)
-    devices = [MiioMiscLight(name or host, light, model, None)]
-    async_add_entities(devices, True)
+    async_add_entities([MrBondLight(name, host, token)], True)
 
 
-class MiioMiscLight(XiaomiPhilipsAbstractLight):
-    """Representation of a XiaoMi MiIO Light."""
+class MrBondLight(Light):
+    """Representation of MrBond Airer Light."""
+
+    def __init__(self, name, host, token):
+        """Initialize the light device."""
+        self._name = name or host
+        self._device = Device(host, token)
+        self._state = None
 
     @property
-    def supported_features(self):
-        """Return the supported features."""
-        return 0
+    def name(self):
+        """Return the name of the device if any."""
+        return self._name
 
-
-class MrBondAirerStatus:
-    """Container for status reports from MrBang Airer Light."""
-
-    def __init__(self, data):
-        self.data = data
+    @property
+    def available(self):
+        """Return true when state is known."""
+        return self._state is not None
 
     @property
     def is_on(self):
-        return self.data['led'] == '1'
+        """Return true if light is on."""
+        return self._state
 
-    @property
-    def brightness(self):
-        return 100 if self.is_on else 0
+    async def async_turn_on(self, **kwargs):
+        """Turn the light on."""
+        if await self.try_command(self.on):
+            self._state = True
 
-    def __json__(self):
-        return self.data
+    async def async_turn_off(self, **kwargs):
+        """Turn the light off."""
+        if await self.try_command(self.off):
+            self._state = False
 
+    async def async_update(self):
+        """Fetch state from the device."""
+        self._state = await self.try_command(self.status)
 
-class MrBondAirer(Device):
-    """Main class representing MrBang Airer Light."""
+    async def try_command(self, func):
+        """Call a miio device command handling error messages."""
+        try:
+            result = await self.hass.async_add_job(func)
+            _LOGGER.debug("Response received from miio device: %s", result)
+            return result
+        except Exception as exc:
+            #import traceback
+            # _LOGGER.error(traceback.format_exc())
+            _LOGGER.error("Error on command: %s", exc)
+            return None
 
     def status(self):
-        """Retrieve properties."""
-        properties = [
-            # "dry",
-            "led",
-            # "motor",
-            # "drytime",
-            # "airer_location",
-        ]
-        values = self.send("get_prop", properties)
-
-        return MrBondAirerStatus(defaultdict(lambda: None, zip(properties, values)))
+        return self._device.send('get_prop', 'led') == ['1']
 
     def on(self):
-        """Power on."""
-        return self.send("set_led", [1])
+        return self._device.send('set_led', [1]) == ['ok']
 
     def off(self):
-        """Power off."""
-        return self.send("set_led", [0])
+        return self._device.send('set_led', [0]) == ['ok']

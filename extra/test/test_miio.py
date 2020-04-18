@@ -2,6 +2,21 @@
 
 from miio.device import Device
 
+device = Device('Airer', 'fe5a1e19a1fd91ca4138646a494a6f19')
+#device_info = device.info()
+#device.send("set_led", [0])
+#print('%s' % device_info)
+ret = device.send("get_prop", [
+            # "dry",
+            "led",
+            # "motor",
+            # "drytime",
+            # "airer_location",
+        ])
+print('%s' % ret)
+
+exit()
+
 device = Device('Washer', '1f63e0afaa20d062223b24c98eca7c11')
 device.send("set_wash_program", ['goldenwash'])
 # device_info = device.info()
@@ -34,15 +49,3 @@ for prop in properties:
 print('%s' % values)
 exit()
 
-device = Device('Airer', 'fe5a1e19a1fd91ca4138646a494a6f19')
-#device_info = device.info()
-#device.send("set_led", [0])
-#print('%s' % device_info)
-ret = device.send("get_prop", [
-            "dry",
-            "led",
-            "motor",
-            "drytime",
-            "airer_location",
-        ])
-print('%s' % ret)

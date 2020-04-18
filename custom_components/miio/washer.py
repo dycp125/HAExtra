@@ -2,20 +2,61 @@ import logging
 import datetime
 
 from miio import Device
-from .fan import XiaomiGenericDevice, FEATURE_SET_CHILD_LOCK
+from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED  # , PLATFORM_SCHEMA
 
 _LOGGER = logging.getLogger(__name__)
 
 WASH_MODES = ['立即洗衣', '立即洗烘', '预约洗衣', '预约洗烘']
+DEFAULT_WASH_MODE = '预约洗衣'
+
+# PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+#     {
+#         vol.Required(CONF_HOST): cv.string,
+#         vol.Required(CONF_TOKEN): vol.All(cv.string, vol.Length(min=32, max=32)),
+#         vol.Optional(CONF_NAME): cv.string,
+#     }
+# )
+
+# async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
+#     """Set up the light from config."""
+#     host = config[CONF_HOST]
+#     token = config[CONF_TOKEN]
+#     name = config.get(CONF_NAME)
+#     async_add_entities([VioMiWasher(name, host, token)], True)
 
 
-class VioMiEntity(XiaomiGenericDevice):
-    """Representation of a Xiaomi Pedestal Fan."""
+class VioMiWasher(FanEntity):
+    def __init__(self, name, host, token):
+        self._name = name or host
+        self._device = Device(host, token)
+        self._attrs = None
+        self._mode = DEFAULT_WASH_MODE
+        self._skip_update = False
+
+    @property
+    def supported_features(self):
+        """Flag supported features."""
+        return SUPPORT_SET_SPEED
+
+    @property
+    def name(self):
+        """Return the name of the device if any."""
+        return self._name
 
     @property
     def icon(self):
         """Return the icon to use for device if any."""
         return 'mdi:washing-machine'
+
+    @property
+    def available(self):
+        """Return true when state is known."""
+        return self._attrs is not None
+
+    @property
+    def device_state_attributes(self):
+        """Return the state attributes of the device."""
+        return self._attrs
 
     @property
     def speed_list(self):
@@ -25,80 +66,65 @@ class VioMiEntity(XiaomiGenericDevice):
     @property
     def speed(self):
         """Return the current speed."""
-        return self._device.mode
+        # program = attrs['program']
+        # dry_mode = program == 'dry' or program == 'weak_dry' or attrs['DryMode'] != 0
+        # appoint_time = attrs['appoint_time']
+        # return '预约' if appoint_time else '立即') + ('洗烘' if dry_mode else '洗')
+        return self._mode
+
+    @property
+    def is_on(self):
+        """Return true if device is on."""
+        attrs = self._attrs
+        if attrs is None:
+            return False
+        wash_process = attrs['wash_process']
+        return attrs['wash_status'] == 1 and ((wash_process > 0 and wash_process < 7) or attrs['appoint_time'])
 
     async def async_update(self):
         """Fetch state from the device."""
-
-        # On state change the device doesn't provide the new state immediately.
         if self._skip_update:
             self._skip_update = False
-            return
-
-        try:
-            attrs = await self.hass.async_add_job(self._device.status)
-            _LOGGER.debug("Got new state: %s", attrs)
-
-            self._available = True
-            self._retry = 0
-            self._state_attrs = attrs
-
-            wash_status = attrs["wash_status"]
-            wash_process = attrs["wash_process"]
-            appoint_time = attrs["appoint_time"]
-            self._state = wash_status == 1 and ((wash_process > 0 and wash_process < 7) or appoint_time)
-
-            # program = attrs["program"]
-            # dry_mode = program == 'dry' or program == 'weak_dry' or attrs["DryMode"] != 0
-            # appoint_time = attrs["appoint_time"]
-            # self._device.mode = (
-            #     '预约' if appoint_time else '立即') + ('洗烘' if dry_mode else '洗')
-
-        except Exception as ex:
-            self._retry = self._retry + 1
-            if self._retry < self._retries:
-                _LOGGER.info(
-                    "Got exception while fetching the state: %s , _retry=%s",
-                    ex,
-                    self._retry,
-                )
-            else:
-                self._available = False
-                _LOGGER.error(
-                    "Got exception while fetching the state: %s , _retry=%s",
-                    ex,
-                    self._retry,
-                )
-
-    async def async_set_speed(self, speed):
-        """Set the speed of the fan."""
-        _LOGGER.debug("Setting the fan speed to: %s", speed)
-        await self._try_command(
-            "Setting fan speed of the miio device failed.",
-            self._device.set_mode, speed,
-        )
+        else:
+            self._attrs = await self.try_command(self.status)
 
     async def async_turn_on(self, speed, **kwargs):
+        """Turn the device on."""
         if speed:
             await self.async_set_speed(speed)
             return
-
-        result = await self._try_command("Turning the miio device on failed: %s.", self._device.on)
+        result = await self.try_command(self.on)
         if result:
             self._state = True
             self._skip_update = True
 
+    async def async_turn_off(self, **kwargs) -> None:
+        """Turn the device off."""
+        result = await self.try_command(self.off)
+        if result:
+            self._state = False
+            self._skip_update = True
 
-class VioMiWasher(Device):
-    """Main class representing the VioMi Washer."""
+    async def async_set_speed(self, speed):
+        """Set the speed of the fan."""
+        _LOGGER.debug("Setting washer mode to: %s", mode)
+        self._mode = speed if speed in WASH_MODES else DEFAULT_WASH_MODE
 
-    def __init__(self, host, token):
-        super().__init__(host, token)
-        self.mode = WASH_MODES[0]
+    async def try_command(self, func):
+        """Call a miio device command handling error messages."""
+        try:
+            result = await self.hass.async_add_job(func)
+            _LOGGER.debug("Response received from miio device: %s", result)
+            return result
+        except Exception as exc:
+            #import traceback
+            #_LOGGER.error(traceback.format_exc())
+            _LOGGER.error("Error on command: %s", exc)
+            return None
 
     def status(self):
         """Retrieve properties."""
-        properties = [
+        props = [
             "program",
             "wash_process",
             "wash_status",
@@ -112,36 +138,21 @@ class VioMiWasher(Device):
             "DryMode",
             # "child_lock"
         ]
-        data = {}
-        try:
-            for prop in properties:
-                value = self.send("get_prop", [prop])
-                data[prop] = value[0] if len(value) else None
-        except Exception as ex:
-            _LOGGER.debug("Exception on status: %s. Trying to turn on...", ex)
-            self.up()
-
-        return data
+        attrs = {}
+        for prop in props:
+            value = self._device.send("get_prop", [prop])
+            attrs[prop] = value[0] if len(value) else None
+        return attrs
 
     def on(self):
-        self.set_mode()  # We should set mode to ensure appoint time
-        _LOGGER.debug("Turn washer ON!")
-        return self.send("set_wash_action", [1])
+        if self._attrs['program'] != 'goldenwash':
+            self.send("set_wash_program", 'goldenwash')
 
-    def off(self):
-        _LOGGER.debug("Turn washer OFF!")
-        return self.send("set_wash_action", [2])
+        dry_mode = 30721 if self._mode.endswith('烘') else 0
+        if self._attrs['DryMode'] != dry_mode:
+            self.send("SetDryMode", dry_mode)
 
-    def up(self):
-        return self.send("set_wash_program", ['goldenwash'])
-
-    def set_mode(self, mode=None):
-        if mode is not None:
-            self.mode = mode if mode in WASH_MODES else WASH_MODES[0]
-
-        dry_mode = 30721 if self.mode.endswith('烘') else 0
-
-        if self.mode.startswith('预约'):
+        if self._mode.startswith('预约'):
             now = datetime.datetime.now()
             hour = now.hour
             if now.minute > 10:
@@ -155,14 +166,15 @@ class VioMiWasher(Device):
         else:
             appoint_time = 0
 
-        _LOGGER.debug('set_mode: dry_mode=%s, appoint_time=%s',
-                      dry_mode, appoint_time)
-
-        self.up()
-        self.send("set_appoint_time", [0])
-        #self.send("set_wash_action", [0])
-
-        result = self.send("SetDryMode", [dry_mode])
         if appoint_time:
-            self.send("set_appoint_time", [appoint_time])
-        return result
+            result = self.send("set_appoint_time", appoint_time)
+        else:
+            result = self.send("set_wash_action", 1)
+        return result == ['ok']
+
+    def off(self):
+        return self.send('set_wash_action', 2) == ['ok']
+
+    def send(self, command, param):
+        _LOGGER.debug('Send command: %s=%s', command, param)
+        return self._device.send(command, [param])
