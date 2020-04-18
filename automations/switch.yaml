@@ -8,7 +8,7 @@
   action:
     - service: zhimsg.miai
       data_template:
-        message: '阳台PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，餐厅PM2.5为{{ states("sensor.can_ting_ke_li_wu") }}，主卧PM2.5为{{ states("sensor.zhu_wo_ke_li_wu") }}。客厅二氧化碳浓度为{{ states("sensor.fresher_co2") }}，主卧二氧化碳浓度为{{ states("sensor.zhu_wo_er_yang_hua_tan") }}，儿童房二氧化碳浓度为{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}'
+        message: '阳台PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，餐厅PM2.5为{{ states("sensor.can_ting_ke_li_wu") }}，主卧PM2.5为{{ states("sensor.zhu_wo_ke_li_wu") }}。客厅二氧化碳浓度为{{ states("sensor.ke_ting_er_yang_hua_tan") }}，主卧二氧化碳浓度为{{ states("sensor.zhu_wo_er_yang_hua_tan") }}，儿童房二氧化碳浓度为{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}'
 
 - alias: 过道按钮双击—启用烘干
   trigger:

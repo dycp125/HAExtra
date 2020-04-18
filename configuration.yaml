@@ -254,7 +254,7 @@ sensor:
         value_template: '{{ state_attr("fan.ke_ting_xin_feng_ji", "aqi") }}'
         unit_of_measurement: μg/m³
         icon_template: mdi:blur
-      fresher_co2:
+      ke_ting_er_yang_hua_tan:
         friendly_name: 客厅二氧化碳
         value_template: '{{ state_attr("fan.ke_ting_xin_feng_ji", "co2") }}'
         unit_of_measurement: ppm

@@ -22,7 +22,7 @@
           entity_id: sensor.can_ting_ke_li_wu
           above: 20
         - condition: numeric_state
-          entity_id: sensor.fresher_co2
+          entity_id: sensor.ke_ting_er_yang_hua_tan
           above: 800
   action:
     - service: zhimsg.miai
@@ -69,4 +69,4 @@
   action:
     - service: zhimsg.ding
       data_template:
-        message: '室内PM2.5为{{ states("sensor.can_ting_ke_li_wu") }}，温度为{{ states("sensor.can_ting_wen_du") }}，CO2为客厅{{ states("sensor.fresher_co2") }}/主卧{{ states("sensor.zhu_wo_er_yang_hua_tan") }}/儿童房{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}。室外PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，温度为{{ states("sensor.yang_tai_wen_du") }}；{{ state_attr("weather.tian_qi", "attribution") }}'
+        message: '室内PM2.5为{{ states("sensor.can_ting_ke_li_wu") }}，温度为{{ states("sensor.can_ting_wen_du") }}，CO2为客厅{{ states("sensor.ke_ting_er_yang_hua_tan") }}/主卧{{ states("sensor.zhu_wo_er_yang_hua_tan") }}/儿童房{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}。室外PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，温度为{{ states("sensor.yang_tai_wen_du") }}；{{ state_attr("weather.tian_qi", "attribution") }}'

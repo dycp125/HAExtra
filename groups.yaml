@@ -16,7 +16,7 @@ default_view:
     - sensor.ke_ting_wen_du
     - sensor.ke_ting_shi_du
     - sensor.ke_ting_ke_li_wu
-    - sensor.fresher_co2
+    - sensor.ke_ting_er_yang_hua_tan
     - light.ke_ting_tong_deng
     - media_player.ke_ting_dian_shi
     #- fan.ke_ting_bi_shan
