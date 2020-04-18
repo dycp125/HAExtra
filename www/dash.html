@@ -693,9 +693,12 @@
 				}
 				html += '</div>'
 
-				if (!off || attributes.dash_extra_forced) {
-					if (attributes.hasOwnProperty('dash_extra')) {
-						var extra = renderTemplate(attributes.dash_extra, state, attributes)
+				var selected = domain == 'climate' ? state : (domain == 'fan' ? attributes.speed_level || attributes.speed: null)
+				var dash_extra_forced = attributes.dash_extra_forced
+				if (!off || (selected && selected != 'off') || dash_extra_forced) {
+					var dash_extra = attributes.dash_extra || dash_extra_forced
+					if (dash_extra) {
+						var extra = renderTemplate(dash_extra, state, attributes)
 						if (extra.length > 8) {
 							extra = '<marquee scrollamount="3">' + extra + '</marquee>'
 						}
@@ -713,14 +716,14 @@
 						}
 
 						extra += '<select class="moder" onclick="event.stopPropagation()" onchange="onMode(this)">'
-						var current = domain == 'climate' ? state : attributes.speed_level || attributes.speed
+						
 						var mode_list = domain == 'climate' ? attributes.hvac_modes : attributes.speed_list
 						for (var i in mode_list) {
 							var mode = mode_list[i]
 							var key = mode.toLowerCase()
 							var text = _TRANS[key] || mode.replace(/level/gi, '档位')
-							extra += '<option value="' + mode + '"' + (mode == current ? ' selected' : '') + '>' + text
-							if (mode == current && domain == 'climate') {
+							extra += '<option value="' + mode + '"' + (mode == selected ? ' selected' : '') + '>' + text
+							if (mode == selected && domain == 'climate') {
 								extra += ' ' + attributes.temperature
 							}
 							extra += '</option>'

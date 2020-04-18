@@ -47,6 +47,7 @@ class MiioMiscLight(XiaomiPhilipsAbstractLight):
         """Return the supported features."""
         return 0
 
+
 class MrBondAirerStatus:
     """Container for status reports from MrBang Airer Light."""
 
@@ -63,6 +64,7 @@ class MrBondAirerStatus:
 
     def __json__(self):
         return self.data
+
 
 class MrBondAirer(Device):
     """Main class representing MrBang Airer Light."""

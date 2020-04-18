@@ -6,7 +6,8 @@ from .fan import XiaomiGenericDevice, FEATURE_SET_CHILD_LOCK
 
 _LOGGER = logging.getLogger(__name__)
 
-WASH_MODES = ['立即洗', '立即洗烘', '预约洗', '预约洗烘']
+WASH_MODES = ['立即洗衣', '立即洗烘', '预约洗衣', '预约洗烘']
+
 
 class VioMiEntity(XiaomiGenericDevice):
     """Representation of a Xiaomi Pedestal Fan."""
@@ -45,11 +46,12 @@ class VioMiEntity(XiaomiGenericDevice):
             wash_status = attrs["wash_status"]
             wash_process = attrs["wash_process"]
             self._state = wash_process > 0 and wash_process < 7 and wash_status == 1
-            
-            program = attrs["program"]
-            dry_mode = program == 'dry' or program == 'weak_dry' or attrs["DryMode"] != 0
-            appoint_time = attrs["appoint_time"]
-            self._device.mode = ('预约' if appoint_time else '立即') + ('洗烘' if dry_mode else '洗')
+
+            # program = attrs["program"]
+            # dry_mode = program == 'dry' or program == 'weak_dry' or attrs["DryMode"] != 0
+            # appoint_time = attrs["appoint_time"]
+            # self._device.mode = (
+            #     '预约' if appoint_time else '立即') + ('洗烘' if dry_mode else '洗')
 
         except Exception as ex:
             self._retry = self._retry + 1
@@ -78,13 +80,13 @@ class VioMiEntity(XiaomiGenericDevice):
 
     async def async_turn_on(self, speed, **kwargs):
         if speed:
-            await self.async_set_speed(speed)
-        else:
-            await super().async_turn_on()
+            self._device.mode = speed
+        await super().async_turn_on()
 
 
 class VioMiWasher(Device):
     """Main class representing the VioMi Washer."""
+
     def __init__(self, host, token):
         super().__init__(host, token)
         self.mode = WASH_MODES[0]
@@ -119,7 +121,7 @@ class VioMiWasher(Device):
 
     def on(self):
         _LOGGER.debug("Turn washer ON!")
-        self.set_mode() # We should set mode to ensure appoint time
+        self.set_mode()  # We should set mode to ensure appoint time
         return self.send("set_wash_action", [1])
 
     def off(self):
@@ -149,7 +151,8 @@ class VioMiWasher(Device):
         else:
             appoint_time = 0
 
-        _LOGGER.debug('set_mode: dry_mode=%s, appoint_time=%s', dry_mode, appoint_time)
+        _LOGGER.debug('set_mode: dry_mode=%s, appoint_time=%s',
+                      dry_mode, appoint_time)
 
         self.up()
         self.send("SetDryMode", [dry_mode])

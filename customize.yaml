@@ -153,9 +153,8 @@ switch.yin_xiang:
   hagenie_deviceName: 机顶盒
   hagenie_deviceType: STB
 vacuum.sao_di_ji:
-  dash_extra: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger disconnected"
+  dash_extra_forced: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger disconnected"
     ? "充电断开" : ("${status}"=="Cleaning" ? "清扫中" : "${status}"))'
-  dash_extra_forced: true
 weather.tian_qi:
   dash_click: https://m.tianqi.com/hangzhou
   dash_extra: attribution
