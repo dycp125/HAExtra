@@ -44,7 +44,6 @@ MODEL_FAN_ZA1 = "zhimi.fan.za1"
 MODEL_FAN_ZA3 = "zhimi.fan.za3"
 MODEL_FAN_ZA4 = "zhimi.fan.za4"
 MODEL_FAN_P5 = "dmaker.fan.p5"
-MODEL_WASHER_VIOMI_V5 = "viomi.washer.v5"
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -60,7 +59,6 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
                 MODEL_FAN_ZA3,
                 MODEL_FAN_ZA4,
                 MODEL_FAN_P5,
-                MODEL_WASHER_VIOMI_V5,
             ]
         ),
         vol.Optional(CONF_RETRIES, default=DEFAULT_RETRIES): cv.positive_int,
@@ -263,9 +261,6 @@ async def async_setup_platform(hass, config, async_add_devices, discovery_info=N
 
         fan = FanP5(host, token, model=model)
         device = XiaomiFanP5(name, fan, model, unique_id, retries)
-    elif model == MODEL_WASHER_VIOMI_V5:
-        from .washer import VioMiWasher
-        device = VioMiWasher(name, host, token)
     else:
         _LOGGER.error(
             "Unsupported device found! Please create an issue at "

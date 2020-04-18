@@ -1,6 +1,6 @@
 {
   "domain": "miio",
-  "name": "Xiaomi Mi Smart Pedestal Fan, VioMi Washer, MrBond Airer",
+  "name": "Xiaomi Mi Smart Pedestal Fan",
   "documentation": "https://github.com/syssi/xiaomi_fan",
   "requirements": [
     "construct==2.9.45",
@@ -9,6 +9,5 @@
   "dependencies": [],
   "codeowners": [
     "@syssi",
-    "@Yonsm"
   ]
 }

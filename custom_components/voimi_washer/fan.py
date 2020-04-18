@@ -2,27 +2,27 @@ import logging
 import datetime
 
 from miio import Device
-from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED  # , PLATFORM_SCHEMA
+from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED, PLATFORM_SCHEMA
 
 _LOGGER = logging.getLogger(__name__)
 
 WASH_MODES = ['立即洗衣', '立即洗烘', '预约洗衣', '预约洗烘']
 DEFAULT_WASH_MODE = '预约洗衣'
 
-# PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
-#     {
-#         vol.Required(CONF_HOST): cv.string,
-#         vol.Required(CONF_TOKEN): vol.All(cv.string, vol.Length(min=32, max=32)),
-#         vol.Optional(CONF_NAME): cv.string,
-#     }
-# )
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+    {
+        vol.Required(CONF_HOST): cv.string,
+        vol.Required(CONF_TOKEN): vol.All(cv.string, vol.Length(min=32, max=32)),
+        vol.Optional(CONF_NAME): cv.string,
+    }
+)
 
-# async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
-#     """Set up the light from config."""
-#     host = config[CONF_HOST]
-#     token = config[CONF_TOKEN]
-#     name = config.get(CONF_NAME)
-#     async_add_entities([VioMiWasher(name, host, token)], True)
+async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
+    """Set up the light from config."""
+    host = config[CONF_HOST]
+    token = config[CONF_TOKEN]
+    name = config.get(CONF_NAME)
+    async_add_entities([VioMiWasher(name, host, token)], True)
 
 
 class VioMiWasher(FanEntity):
