@@ -8,6 +8,10 @@ turn_on_projector:
       data:
         host: Remote
         packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
+    - service: broadlink.send
+      data:
+        host: Remote
+        packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
     - service: cover.close_cover
       entity_id: cover.shu_fang_chuang_lian
     - service: cover.close_cover
@@ -35,6 +39,10 @@ turn_off_projector:
       data:
         host: Remote
         packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
+    - service: broadlink.send
+      data:
+        host: Remote
+        packet: 'JgBQAAABKZMTNxQ3ExIUERQSExITEhM3FBITEhM3ExITOBM3EzcUNxM3EzcUNxMSEzcTExMSExITEhMSExIUNxMSEzcUNxM3EwAFGQABJUkTAA0FAAAAAAAAAAA='
     - service: cover.open_cover
       entity_id: cover.shu_fang_chuang_lian
     - service: cover.open_cover
@@ -45,29 +53,3 @@ turn_off_projector:
       entity_id: climate.shu_fang_kong_diao
     - service: automation.turn_on
       entity_id: automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
-
-#
-turn_on_player:
-  alias: 打开播放器
-  sequence:
-    - service: switch.turn_on
-      entity_id: switch.tou_ying_yi
-    - service: broadlink.send
-      data:
-        host: Remote
-        packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
-    - service: switch.turn_on
-      entity_id: switch.yin_xiang
-
-#
-turn_off_player:
-  alias: 关闭播放器
-  sequence:
-    - service: switch.turn_off
-      entity_id: switch.tou_ying_yi
-    - service: broadlink.send
-      data:
-        host: Remote
-        packet: 'JgBgAAABJ5QSExITExITExI4EhMSExITEjgSOBI4EjgTEhM4EjgSOBI4EhMSOBI4EjgTEhM4EhMSExI4EhMSExITEjgSExM3EwAFGQABJksSAAxWAAEnSxIADFYAASZLEgANBQAAAAAAAAAA'
-    - service: switch.turn_off
-      entity_id: switch.yin_xiang

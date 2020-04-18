@@ -13,16 +13,16 @@ default_view:
 客厅:
   icon: mdi:seat
   entities:
-    - light.ke_ting_tong_deng
-    - media_player.ke_ting_dian_shi
-    - climate.daikin2
-    - climate.saswell
-    #- fan.ke_ting_bi_shan
-    - fan.ke_ting_xin_feng_ji
     - sensor.ke_ting_wen_du
     - sensor.ke_ting_shi_du
     - sensor.ke_ting_ke_li_wu
     - sensor.fresher_co2
+    - light.ke_ting_tong_deng
+    - media_player.ke_ting_dian_shi
+    #- fan.ke_ting_bi_shan
+    - fan.ke_ting_xin_feng_ji
+    - climate.daikin2
+    - climate.saswell
     - automation.ke_ting_tong_deng_tong_bu
     - automation.ke_ting_kong_diao_guan
     - automation.ke_ting_kong_diao_kai
@@ -31,17 +31,18 @@ default_view:
 餐厅:
   icon: mdi:silverware-fork-knife
   entities:
-    - light.can_ting_tong_deng
-    - switch.can_ting_chu_shi_ji
-    - light.gateway_light_34ce0090901a
-    - fan.can_ting_jing_hua_qi
-    - climate.daikin1
-    - sensor.illumination_34ce0090901a
     - sensor.aircat_temperature
     - sensor.aircat_humidity
     - sensor.aircat_pm25
     - sensor.aircat_hcho
+    - sensor.illumination_34ce0090901a
     - binary_sensor.door_window_sensor_158d0001f3d2d1
+    - binary_sensor.door_window_sensor_158d0001f3e5be
+    - light.can_ting_tong_deng
+    - light.gateway_light_34ce0090901a
+    - switch.can_ting_chu_shi_ji
+    - fan.can_ting_jing_hua_qi
+    - climate.daikin1
     - automation.can_ting_tong_deng_tong_bu
     - automation.can_ting_chu_shi_ji_guan
     - automation.can_ting_chu_shi_ji_kai
@@ -50,13 +51,6 @@ default_view:
     - automation.can_ting_jing_hua_qi_diao_jie
     - automation.chu_fang_men_ti_xing
 
-# 玄关:
-#   entities:
-    - binary_sensor.door_window_sensor_158d0001f3e5be
-    # - person.ba_ba
-    # - person.ma_ma
-    # - person.ye_ye
-    # - person.a_yi
     - automation.ru_hu_men_huan_ying
     - automation.ru_hu_men_ti_xing
     - automation.shi_nei_kong_qi_chai
@@ -65,17 +59,12 @@ default_view:
 过道:
   icon: mdi:road
   entities:
-    - cover.curtain_158d0003f7951d
-    #- light.study_light2
+    - binary_sensor.motion_sensor_158d0001d66ce9
+    - binary_sensor.cube_158d0002a66db1
     - light.guo_dao_bei_jing_deng
     - switch.plug_158d0003a58422
-    - binary_sensor.motion_sensor_158d0001d66ce9
-    # - binary_sensor.lightness
+    - cover.curtain_158d0003f7951d
     - input_text.xiao_ai_yin_xiang
-    # - sensor.aircat2_temperature
-    # - sensor.aircat2_humidity
-    # - sensor.aircat2_pm25
-    # - sensor.aircat2_hcho
     - automation.guo_dao_an_niu_chang_an_kai_guan_guo_dao_deng_gan_ying
     - automation.guo_dao_an_niu_dan_ji_bo_bao_kong_qi
     - automation.guo_dao_an_niu_shuang_ji_qi_yong_hong_gan
@@ -83,33 +72,33 @@ default_view:
     - automation.guo_dao_deng_gan_ying_zhong_qi
     - automation.xiao_ai_yin_bo_bao
 
-# 洗手间:
-#   entities:
-    - light.xi_shou_jian_deng
-    - switch.xi_shou_jian_pai_qi_shan
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
+    - light.xi_shou_jian_deng
+    - switch.xi_shou_jian_pai_qi_shan
     - automation.xi_shou_jian_deng_yan_shi_guan
     - automation.xi_shou_jian_deng_gan_ying_kai
 
 主卧:
   icon: mdi:bed-king
   entities:
-    - switch.zhu_wo_dian_shi
-    - media_player.zhu_wo_dian_shi
-    - climate.daikin3
-    - climate.saswell2
-    - fan.zhu_wo_xin_feng_ji
-    - fan.zhu_wo_jing_hua_qi
-    - fan.zhu_wo_bi_shan
-    - light.zhu_wo_deng
-    - binary_sensor.door_window_sensor_158d00041c74da
-    - binary_sensor.zhu_wo_gan_ying
     - sensor.zhu_wo_wen_du
     - sensor.zhu_wo_shi_du
     - sensor.zhu_wo_ke_li_wu
     - sensor.zhu_wo_er_yang_hua_tan
     - sensor.zhu_wo_liang_du
+    - binary_sensor.door_window_sensor_158d00041c74da
+    - binary_sensor.zhu_wo_gan_ying
+    - light.zhu_wo_deng
+    - switch.zhu_wo_dian_shi
+    #- switch.yi_gui_chu_shi_ji
+    - media_player.zhu_wo_dian_shi
+    - fan.zhu_wo_xin_feng_ji
+    - fan.zhu_wo_jing_hua_qi
+    - fan.zhu_wo_bi_shan
+    - fan.xi_yi_ji
+    - climate.daikin3
+    - climate.saswell2
     - automation.shui_mian_jie_shu
     - automation.shui_mian_shen_ru
     - automation.shui_mian_zhun_bei
@@ -122,28 +111,25 @@ default_view:
 次卧:
   icon: mdi:bed-double
   entities:
-    - fan.ci_wo_jing_hua_qi
     - sensor.ci_wo_wen_du
     - sensor.ci_wo_shi_du
     - sensor.ci_wo_ke_li_wu
+    - fan.ci_wo_jing_hua_qi
     - automation.ci_wo_jing_hua_qi_diao_jie
 
 儿童房:
   icon: mdi:car-child-seat
   entities:
-    - light.er_tong_fang_deng
-    - light.er_tong_fang_tai_deng
-    - climate.daikin4
-    - fan.er_tong_fang_jing_hua_qi
-    - fan.er_tong_fang_feng_shan
-    # - sensor.feng_shan_wen_du
-    #- switch.yi_gui_chu_shi_ji
-    - binary_sensor.cube_158d0002a66db1
     - sensor.er_tong_fang_wen_du
     - sensor.er_tong_fang_shi_du
     - sensor.er_tong_fang_ke_li_wu
     - sensor.er_tong_fang_er_yang_hua_tan
-    # - sensor.nodemcu7_hcho
+    # - sensor.feng_shan_wen_du
+    - light.er_tong_fang_deng
+    - light.er_tong_fang_tai_deng
+    - fan.er_tong_fang_jing_hua_qi
+    - fan.er_tong_fang_feng_shan
+    - climate.daikin4
     - automation.er_tong_fang_chu_shi_ji_guan
     - automation.er_tong_fang_chu_shi_ji_kai
     - automation.er_tong_fang_feng_shan_diao_jie
@@ -155,23 +141,22 @@ default_view:
 书房:
   icon: mdi:bookshelf
   entities:
-    - light.shu_fang_tai_deng
-    - light.liang_yi_deng
-    - cover.shu_fang_chuang_lian
-    #- cover.airer
-    - cover.tou_ying_mu_bu
-    - switch.tou_ying_yi
-    - switch.bo_fang_qi
-    - switch.wang_luo_cun_chu
-    - switch.yin_xiang
-    - climate.shu_fang_kong_diao
-    - fan.shu_fang_feng_shan
-    - vacuum.sao_di_ji
-    #- fan.shu_fang_jing_hua_qi
     - sensor.shu_fang_wen_du
     - sensor.shu_fang_shi_du
     - sensor.shu_fang_er_yang_hua_tan
     - sensor.shu_fang_liang_du
+    - light.shu_fang_tai_deng
+    - light.liang_yi_deng
+    - switch.tou_ying_yi
+    - switch.wang_luo_cun_chu
+    - switch.yin_xiang
+    - cover.tou_ying_mu_bu
+    - cover.shu_fang_chuang_lian
+    #- cover.airer
+    - vacuum.sao_di_ji
+    - fan.shu_fang_feng_shan
+    #- fan.shu_fang_jing_hua_qi
+    - climate.shu_fang_kong_diao
     - automation.shu_fang_an_niu_chang_an_guan_bi_yin_xiang
     #- automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
     - automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
@@ -184,11 +169,11 @@ default_view:
 阳台:
   icon: mdi:home-minus
   entities:
-    - binary_sensor.door_window_sensor_158d000228a52b
+    - weather.tian_qi
     - sensor.yang_tai_wen_du
     - sensor.yang_tai_shi_du
     - sensor.yang_tai_ke_li_wu
-    - weather.tian_qi
+    - binary_sensor.door_window_sensor_158d000228a52b
     - sun.sun
     - automation.yang_tai_men_ti_xing
     - automation.shi_wai_kong_qi_hao

@@ -394,7 +394,7 @@ class XiaomiGenericDevice(FanEntity):
     async def async_turn_on(self, speed: str = None, **kwargs) -> None:
         """Turn the device on."""
         result = await self._try_command(
-            "Turning the miio device on failed.", self._device.on
+            "Turning the miio device on failed: %s.", self._device.on
         )
         if speed:
             result = await self.async_set_speed(speed)
@@ -406,7 +406,7 @@ class XiaomiGenericDevice(FanEntity):
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the device off."""
         result = await self._try_command(
-            "Turning the miio device off failed.", self._device.off
+            "Turning the miio device off failed: %s.", self._device.off
         )
 
         if result:

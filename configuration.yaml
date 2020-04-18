@@ -10,12 +10,12 @@ homeassistant:
 logger:
   default: warning
   logs:
-    custom_components.zhibot: debug
-    custom_components.zhimsg: debug
+    #custom_components.zhibot: debug
+    custom_components.miio: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
-    homeassistant.components.braviatv: debug
-    braviarc.braviarc: debug
+    #homeassistant.components.braviatv: debug
+    #braviarc.braviarc: debug
 
 system_health:
 
@@ -378,13 +378,6 @@ switch:
           service: script.turn_on_projector
         turn_off:
           service: script.turn_off_projector
-      bo_fang_qi:
-        friendly_name: 播放器
-        value_template: '{{ is_state("device_tracker.player", "home") }}'
-        turn_on:
-          service: script.turn_on_player
-        turn_off:
-          service: script.turn_off_player
       zhu_wo_dian_shi:
         friendly_name: 主卧电视电源
         value_template: '{{ is_state("device_tracker.x9300d", "home") }}'
@@ -477,6 +470,11 @@ vacuum:
     token: !secret vacuum_token
 
 fan:
+  - platform: miio
+    name: 洗衣机
+    host: Washer
+    model: viomi.washer.v5
+    token: !secret washer_token
   - platform: xiaomi_miio
     name: 次卧净化器
     host: Purifier
