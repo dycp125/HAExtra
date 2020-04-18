@@ -9,6 +9,10 @@ from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED, PLATFORM_
 
 _LOGGER = logging.getLogger(__name__)
 
+
+APPOINT_MIN = 3
+APPOINT_MAX = 19
+APPOINT_CLOCK = 8
 WASH_MODES = ['立即洗衣', '立即洗烘', '预约洗衣', '预约洗烘']
 DEFAULT_WASH_MODE = '预约洗衣'
 
@@ -70,10 +74,6 @@ class VioMiWasher(FanEntity):
     @property
     def speed(self):
         """Return the current speed."""
-        # program = attrs['program']
-        # dry_mode = program == 'dry' or program == 'weak_dry' or attrs['DryMode'] != 0
-        # appoint_time = attrs['appoint_time']
-        # return '预约' if appoint_time else '立即') + ('洗烘' if dry_mode else '洗')
         return self._mode
 
     @property
@@ -90,6 +90,10 @@ class VioMiWasher(FanEntity):
         attrs = await self.try_command(self.status)
         self._state = attrs is not None and attrs['wash_status'] == 1 and ((attrs['wash_process'] > 0 and attrs['wash_process'] < 7) or attrs['appoint_time'])
         self._attrs = attrs
+        if self._state: # 仅做开启状态时获取模式
+            program = attrs['program']
+            dry_mode = program == 'dry' or program == 'weak_dry' or attrs['DryMode'] != 0
+            self._mode = ('预约' if attrs['appoint_time'] else '立即') + ('洗烘' if dry_mode else '洗衣')
 
     async def async_turn_on(self, speed=None, **kwargs):
         """Turn the device on."""
@@ -111,7 +115,7 @@ class VioMiWasher(FanEntity):
     async def async_set_speed(self, speed):
         """Set the speed of the fan."""
         _LOGGER.debug("Setting washer mode to: %s", speed)
-        self._mode = speed if speed in WASH_MODES else DEFAULT_WASH_MODE
+        self._mode = speed # if speed in WASH_MODES else DEFAULT_WASH_MODE
 
     async def try_command(self, func):
         """Call a miio device command handling error messages."""
@@ -160,10 +164,10 @@ class VioMiWasher(FanEntity):
             hour = now.hour
             if now.minute > 10:
                 hour += 1
-            if hour <= 5:
-                appoint_time = 8 - hour
-            elif hour >= 13:
-                appoint_time = 8 + 24 - hour
+            if hour <= APPOINT_CLOCK - APPOINT_MIN:
+                appoint_time = APPOINT_CLOCK - hour
+            elif hour >= APPOINT_CLOCK + 24 - APPOINT_MAX:
+                appoint_time = APPOINT_CLOCK + 24 - hour
             else:
                 appoint_time = 0
         else:
