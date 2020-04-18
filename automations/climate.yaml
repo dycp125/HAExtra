@@ -23,7 +23,7 @@
       entity_id: binary_sensor.door_window_sensor_158d000228a52b
       state: 'off'
     - condition: state
-      entity_id: climate.daikin2
+      entity_id: climate.ke_ting_kong_diao
       state: 'off'
     - condition: or
       conditions:
@@ -35,7 +35,7 @@
           state: 'on'
   action:
     - service: climate.turn_on
-      entity_id: climate.daikin2
+      entity_id: climate.ke_ting_kong_diao
 
 - alias: 客厅空调关
   initial_state: false
@@ -60,31 +60,31 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: climate.daikin1
+          entity_id: climate.can_ting_kong_diao
           state: cool
         - condition: state
-          entity_id: climate.daikin1
+          entity_id: climate.can_ting_kong_diao
           state: heat
         - condition: state
-          entity_id: climate.daikin1
+          entity_id: climate.can_ting_kong_diao
           state: dry
         - condition: state
-          entity_id: climate.daikin1
+          entity_id: climate.can_ting_kong_diao
           state: fan_only
         - condition: state
-          entity_id: climate.daikin2
+          entity_id: climate.ke_ting_kong_diao
           state: cool
         - condition: state
-          entity_id: climate.daikin2
+          entity_id: climate.ke_ting_kong_diao
           state: heat
         - condition: state
-          entity_id: climate.daikin2
+          entity_id: climate.ke_ting_kong_diao
           state: dry
         - condition: state
-          entity_id: climate.daikin2
+          entity_id: climate.ke_ting_kong_diao
           state: fan_only
   action:
     - service: climate.turn_off
-      entity_id: climate.daikin2
+      entity_id: climate.ke_ting_kong_diao
     - service: climate.turn_off
-      entity_id: climate.daikin1
+      entity_id: climate.can_ting_kong_diao

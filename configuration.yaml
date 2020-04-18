@@ -288,13 +288,13 @@ sensor:
 
       # ke_ting_kong_diao_mo_shi:
       #   friendly_name: 客厅空调模式
-      #   value_template: '{% set mode = state_attr("climate.daikin2", "fan_mode") %}{% if is_state("climate.daikin2", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      #   value_template: '{% set mode = state_attr("climate.ke_ting_kong_diao", "fan_mode") %}{% if is_state("climate.ke_ting_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
       # zhu_wo_kong_diao_mo_shi:
       #   friendly_name: 主卧空调模式
-      #   value_template: '{% set mode = state_attr("climate.daikin3", "fan_mode") %}{% if is_state("climate.daikin3", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      #   value_template: '{% set mode = state_attr("climate.zhu_wo_kong_diao", "fan_mode") %}{% if is_state("climate.zhu_wo_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
       # er_tong_fang_kong_diao_mo_shi:
       #   friendly_name: 儿童房空调模式
-      #   value_template: '{% set mode = state_attr("climate.daikin4", "fan_mode") %}{% if is_state("climate.daikin4", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      #   value_template: '{% set mode = state_attr("climate.er_tong_fang_kong_diao", "fan_mode") %}{% if is_state("climate.er_tong_fang_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
       # shu_fang_kong_diao_mo_shi:
       #   friendly_name: 书房空调模式
       #   value_template: '{% set mode = state_attr("climate.shu_fang_kong_diao", "fan_mode") %}{% if is_state("climate.shu_fang_kong_diao", "off") %}off{% elif mode == "low" %}一{% elif mode == "mid" %}二{% elif mode == "high" %}三{% elif mode == "highest" %}四{% else %}{{ mode }}{% endif %}'
@@ -585,7 +585,7 @@ climate:
     username: !secret saswell_username
     password: !secret saswell_password
   - platform: modbus2
-    name: Daikin
+    name: [餐厅空调, 客厅空调, 主卧空调, 儿童房空调]
     fan_mode: { registers: [6, 10, 14, 18] }
     fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5 }
     hvac_mode: { registers: [5, 9, 13, 17] }

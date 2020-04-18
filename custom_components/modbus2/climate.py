@@ -94,7 +94,7 @@ DEFAULT_NAME = 'Modbus'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_HUB, default=DEFAULT_HUB): cv.string,
-    vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
+    vol.Optional(CONF_NAME, default=DEFAULT_NAME): vol.Any(cv.string, list),
 
     vol.Optional(CONF_FAN_MODES, default={}): dict,
     vol.Optional(CONF_HVAC_MODES, default={}): dict,
@@ -205,7 +205,7 @@ class ModbusClimate(ClimateDevice):
     def __init__(self, hub, name, mods, index=-1):
         """Initialize the climate device."""
         self._hub = hub
-        self._name = name + str(index + 1) if index != -1 else name
+        self._name = name[0 if index == -1 else index] if isinstance(name, list) else (name + str(index + 1) if index != -1 else name)
         self._index = index
         self._regs = mods
         self._values = {}

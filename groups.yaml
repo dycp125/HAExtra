@@ -21,7 +21,7 @@ default_view:
     - media_player.ke_ting_dian_shi
     #- fan.ke_ting_bi_shan
     - fan.ke_ting_xin_feng_ji
-    - climate.daikin2
+    - climate.ke_ting_kong_diao
     - climate.ke_ting_di_nuan
     - automation.ke_ting_tong_deng_tong_bu
     - automation.ke_ting_kong_diao_guan
@@ -42,7 +42,7 @@ default_view:
     - light.gateway_light_34ce0090901a
     - switch.can_ting_chu_shi_ji
     - fan.can_ting_jing_hua_qi
-    - climate.daikin1
+    - climate.can_ting_kong_diao
     - automation.can_ting_tong_deng_tong_bu
     - automation.can_ting_chu_shi_ji_guan
     - automation.can_ting_chu_shi_ji_kai
@@ -97,7 +97,7 @@ default_view:
     - fan.zhu_wo_jing_hua_qi
     - fan.zhu_wo_bi_shan
     - fan.xi_yi_ji
-    - climate.daikin3
+    - climate.zhu_wo_kong_diao
     - climate.zhu_wo_di_nuan
     - automation.shui_mian_jie_shu
     - automation.shui_mian_shen_ru
@@ -129,7 +129,7 @@ default_view:
     - light.er_tong_fang_tai_deng
     - fan.er_tong_fang_jing_hua_qi
     #- fan.er_tong_fang_feng_shan
-    - climate.daikin4
+    - climate.er_tong_fang_kong_diao
     - automation.er_tong_fang_chu_shi_ji_guan
     - automation.er_tong_fang_chu_shi_ji_kai
     - automation.er_tong_fang_feng_shan_diao_jie

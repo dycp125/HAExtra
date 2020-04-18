@@ -20,14 +20,6 @@ binary_sensor.switch_158d0001e59b33:
 binary_sensor.switch_158d000201a73f:
   friendly_name: 书房开关
   hidden: true
-climate.daikin1:
-  friendly_name: 餐厅空调
-climate.daikin2:
-  friendly_name: 客厅空调
-climate.daikin3:
-  friendly_name: 主卧空调
-climate.daikin4:
-  friendly_name: 儿童房空调
 cover.curtain_158d0003f7951d:
   friendly_name: 过道卷帘
 cover.tou_ying_mu_bu:

@@ -22,12 +22,12 @@
         volume: 30
     - service: climate.set_temperature
       data:
-        entity_id: climate.daikin3
+        entity_id: climate.zhu_wo_kong_diao
         temperature: 25
         #hvac_mode: cool
     - service: climate.set_temperature
       data:
-        entity_id: climate.daikin4
+        entity_id: climate.er_tong_fang_kong_diao
         temperature: 25
         #hvac_mode: cool
 
@@ -45,12 +45,12 @@
   action:
     - service: climate.set_temperature
       data:
-        entity_id: climate.daikin3
+        entity_id: climate.zhu_wo_kong_diao
         temperature: 26
         #hvac_mode: cool
     - service: climate.set_temperature
       data:
-        entity_id: climate.daikin4
+        entity_id: climate.er_tong_fang_kong_diao
         temperature: 26
         #hvac_mode: cool
 
@@ -74,16 +74,16 @@
         volume: 60
     - service: climate.set_fan_mode
       data:
-        entity_id: climate.daikin3
+        entity_id: climate.zhu_wo_kong_diao
         fan_mode: 自动
     - service: climate.set_fan_mode
       data:
-        entity_id: climate.daikin4
+        entity_id: climate.er_tong_fang_kong_diao
         fan_mode: 自动
     - service: climate.turn_off
-      entity_id: climate.daikin3
+      entity_id: climate.zhu_wo_kong_diao
     - service: climate.turn_off
-      entity_id: climate.daikin4
+      entity_id: climate.er_tong_fang_kong_diao
     - service: climate.turn_off
       entity_id: climate.shu_fang_kong_diao
     - service: fan.turn_off

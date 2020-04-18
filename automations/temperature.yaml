@@ -17,7 +17,7 @@
         alt_sensor_values: [28, 29.5, 30, 31, 32]
         #alt_sensor_values: [28.5, 29.5, 30, 31, 32]
         alt_time_range: [2, 8]
-        entity_id: climate.daikin3
+        entity_id: climate.zhu_wo_kong_diao
         entity_attr: fan_mode
         entity_values: [一档, 二档, 三档, 四档, 五档]
 
@@ -39,7 +39,7 @@
         sensor_values: [22, 22.5, 23, 24, 25]
         alt_sensor_values: [23.3, 24, 25, 26, 27]
         alt_time_range: [2, 8]
-        entity_id: climate.daikin4
+        entity_id: climate.er_tong_fang_kong_diao
         entity_attr: fan_mode
         entity_values: [一档, 二档, 三档, 四档, 五档]
         delay: 0
