@@ -145,11 +145,10 @@ class VioMiWasher(FanEntity):
             "DryMode",
             # "child_lock"
         ]
-        attrs = {}
+        attrs = {'dash_extra_forced': True, 'genie_deviceType': 'washmachine'}
         for prop in props:
             value = self._device.send("get_prop", [prop])
             attrs[prop] = value[0] if len(value) else None
-        attrs['dash_extra_forced'] = True
         return attrs
 
     def on(self):
