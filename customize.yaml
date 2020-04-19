@@ -31,7 +31,7 @@ fan.can_ting_jing_hua_qi:
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.ci_wo_jing_hua_qi:
-  dash_value: ${aqi}
+  dash_icon: ${aqi}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.er_tong_fang_jing_hua_qi:
@@ -39,19 +39,21 @@ fan.er_tong_fang_jing_hua_qi:
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.ke_ting_xin_feng_ji:
-  dash_value: ${co2}
+  dash_icon: ${co2}
   hagenie_deviceType: VMC
   icon: mdi:leaf
 fan.shu_fang_jing_hua_qi:
   dash_icon: ${sensor.shu_fang_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
+fan.xi_yi_ji:
+  dash_extra_forced: 1
 fan.zhu_wo_jing_hua_qi:
   dash_icon: ${sensor.zhu_wo_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.zhu_wo_xin_feng_ji:
-  dash_value: ${co2}
+  dash_icon: ${co2}
   hagenie_deviceType: VMC
   icon: mdi:leaf
 group.default_view:
@@ -97,10 +99,10 @@ sensor.er_tong_fang_ke_li_wu:
   device_class: pm25
 sensor.illumination_34ce0090901a:
   friendly_name: 餐厅亮度
-sensor.ke_ting_ke_li_wu:
-  device_class: pm25
 sensor.ke_ting_er_yang_hua_tan:
   device_class: co2
+sensor.ke_ting_ke_li_wu:
+  device_class: pm25
 sensor.shu_fang_er_yang_hua_tan:
   device_class: co2
 sensor.yang_tai_ke_li_wu:
