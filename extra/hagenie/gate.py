@@ -130,8 +130,8 @@ EXCLUDE_DOMAINS = [
 
 # http://doc-bot.tmall.com/docs/doc.htm?treeId=393&articleId=108271&docType=1
 def guessDeviceType(entity_id, attributes):
-    if 'hagenie_deviceType' in attributes:
-        return attributes['hagenie_deviceType']
+    if 'genie_deviceType' in attributes:
+        return attributes['genie_deviceType']
 
     # Exclude with domain
     domain = entity_id[:entity_id.find('.')]
@@ -144,8 +144,8 @@ def guessDeviceType(entity_id, attributes):
 
 # https://open.bot.tmall.com/oauth/api/aliaslist
 def guessDeviceName(entity_id, attributes, places, aliases):
-    if 'hagenie_deviceName' in attributes:
-        return attributes['hagenie_deviceName']
+    if 'genie_deviceName' in attributes:
+        return attributes['genie_deviceName']
 
     # Remove place prefix
     name = attributes['friendly_name']
@@ -180,8 +180,8 @@ def groupsAttributes(items):
 
 # https://open.bot.tmall.com/oauth/api/placelist
 def guessZone(entity_id, attributes, places, groups_attributes):
-    if 'hagenie_zone' in attributes:
-        return attributes['hagenie_zone']
+    if 'genie_zone' in attributes:
+        return attributes['genie_zone']
 
     # Guess with friendly_name prefix
     name = attributes['friendly_name']
@@ -193,8 +193,8 @@ def guessZone(entity_id, attributes, places, groups_attributes):
     for group_attributes in groups_attributes:
         for child_entity_id in group_attributes['entity_id']:
             if child_entity_id == entity_id:
-                if 'hagenie_zone' in group_attributes:
-                    return group_attributes['hagenie_zone']
+                if 'genie_zone' in group_attributes:
+                    return group_attributes['genie_zone']
                 return group_attributes['friendly_name']
 
     return None
@@ -204,8 +204,8 @@ def guessPropertyAndAction(entity_id, attributes, state):
     # http://doc-bot.tmall.com/docs/doc.htm?treeId=393&articleId=108264&docType=1
     # http://doc-bot.tmall.com/docs/doc.htm?treeId=393&articleId=108268&docType=1
     # Support On/Off/Query only at this time
-    if 'hagenie_propertyName' in attributes:
-        name = attributes['hagenie_propertyName']
+    if 'genie_propertyName' in attributes:
+        name = attributes['genie_propertyName']
 
     elif entity_id.startswith('sensor.'):
         unit = attributes['unit_of_measurement'] if 'unit_of_measurement' in attributes else ''
@@ -344,7 +344,7 @@ def queryDevice(name, payload):
         entity_ids = None
         for item in items:
             attributes = item['attributes']
-            if item['entity_id'].startswith('group.') and (attributes['friendly_name'] == deviceId or attributes.get('hagenie_zone') == deviceId):
+            if item['entity_id'].startswith('group.') and (attributes['friendly_name'] == deviceId or attributes.get('genie_zone') == deviceId):
                 entity_ids = attributes.get('entity_id')
                 break
 
@@ -353,7 +353,7 @@ def queryDevice(name, payload):
             for item in items:
                 entity_id = item['entity_id']
                 attributes = item['attributes']
-                if entity_id.startswith('sensor.') and (entity_id in entity_ids or attributes['friendly_name'].startswith(deviceId) or attributes.get('hagenie_zone') == deviceId):
+                if entity_id.startswith('sensor.') and (entity_id in entity_ids or attributes['friendly_name'].startswith(deviceId) or attributes.get('genie_zone') == deviceId):
                     prop,action = guessPropertyAndAction(entity_id, attributes, item['state'])
                     if prop is None:
                         continue

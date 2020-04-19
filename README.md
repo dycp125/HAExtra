@@ -94,7 +94,7 @@ SasWell 温控面板插件（地暖），详情请参考 [https://yonsm.github.i
 - 支持 icon_template 配置，可以使用 Jinja 脚本运算出不同的图标（参考我的 configuration.yaml 中的 mqtt2 Speaker）；
 - 支持 original_state attribute。
 
-# 7. [aligenie](custom_components/aligenie/__init__.py)
+# 7. [genie](custom_components/genie/__init__.py)
 
 几乎零配置，一键接入 Home Assistant 的大部分设备到天猫精灵，可以语音控制相关设备开关。详情请参考 [https://bbs.hassbian.com/thread-2700-1-1.html](https://bbs.hassbian.com/thread-2700-1-1.html)
 

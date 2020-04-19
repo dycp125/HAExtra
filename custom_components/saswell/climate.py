@@ -89,7 +89,7 @@ class SaswellClimate(ClimateDevice):
     @property
     def device_state_attributes(self):
         """Return the state attributes of the device."""
-        return {'hagenie_deviceType': 'heater'}
+        return {'genie_deviceType': 'heater'}
 
     @property
     def supported_features(self):

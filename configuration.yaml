@@ -638,7 +638,7 @@ panel_iframe:
 
 actuator:
 
-aligenie:
+genie:
 
 zhibot:
   - platform: ding

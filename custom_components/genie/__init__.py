@@ -155,7 +155,7 @@ def discoveryDevice():
     for state in states:
         attributes = state.attributes
 
-        if attributes.get('hidden') or attributes.get('hagenie_hidden'):
+        if attributes.get('hidden') or attributes.get('genie_hidden'):
             continue
 
         friendly_name = attributes.get('friendly_name')
@@ -244,7 +244,7 @@ def queryDevice(name, payload):
         entity_ids = []
         for state in states:
             attributes = state.attributes
-            if state.entity_id.startswith('group.') and (attributes['friendly_name'] == deviceId or attributes.get('hagenie_zone') == deviceId):
+            if state.entity_id.startswith('group.') and (attributes['friendly_name'] == deviceId or attributes.get('genie_zone') == deviceId):
                 entity_ids = attributes.get('entity_id')
                 break
 
@@ -252,7 +252,7 @@ def queryDevice(name, payload):
         for state in states:
             entity_id = state.entity_id
             attributes = state.attributes
-            if entity_id.startswith('sensor.') and (entity_id in entity_ids or attributes['friendly_name'].startswith(deviceId) or attributes.get('hagenie_zone') == deviceId):
+            if entity_id.startswith('sensor.') and (entity_id in entity_ids or attributes['friendly_name'].startswith(deviceId) or attributes.get('genie_zone') == deviceId):
                 prop, action = guessPropertyAndAction(
                     entity_id, attributes, state.state)
                 if prop is None:
@@ -343,8 +343,8 @@ EXCLUDE_DOMAINS = [
 def guessDeviceType(entity_id, attributes):
     # http://doc-bot.tmall.com/docs/doc.htm?treeId=393&articleId=108271&docType=1
 
-    if 'hagenie_deviceType' in attributes:
-        return attributes['hagenie_deviceType']
+    if 'genie_deviceType' in attributes:
+        return attributes['genie_deviceType']
 
     # Exclude with domain
     domain = entity_id[: entity_id.find('.')]
@@ -356,8 +356,8 @@ def guessDeviceType(entity_id, attributes):
 
 
 def guessDeviceName(entity_id, attributes, places, aliases):
-    if 'hagenie_deviceName' in attributes:
-        return attributes['hagenie_deviceName']
+    if 'genie_deviceName' in attributes:
+        return attributes['genie_deviceName']
 
     # Remove place prefix
     name = attributes['friendly_name']
@@ -394,8 +394,8 @@ def groupsAttributes(states):
 
 
 def guessZone(entity_id, attributes, groups_attributes, places):
-    if 'hagenie_zone' in attributes:
-        return attributes['hagenie_zone']
+    if 'genie_zone' in attributes:
+        return attributes['genie_zone']
 
     # Guess with friendly_name prefix
     name = attributes['friendly_name']
@@ -407,8 +407,8 @@ def guessZone(entity_id, attributes, groups_attributes, places):
     for group_attributes in groups_attributes:
         for child_entity_id in group_attributes['entity_id']:
             if child_entity_id == entity_id:
-                if 'hagenie_zone' in group_attributes:
-                    return group_attributes['hagenie_zone']
+                if 'genie_zone' in group_attributes:
+                    return group_attributes['genie_zone']
                 return group_attributes['friendly_name']
 
     return None
@@ -418,8 +418,8 @@ def guessPropertyAndAction(entity_id, attributes, state):
     # http://doc-bot.tmall.com/docs/doc.htm?treeId=393&articleId=108264&docType=1
     # http://doc-bot.tmall.com/docs/doc.htm?treeId=393&articleId=108268&docType=1
     # Support On/Off/Query only at this time
-    if 'hagenie_propertyName' in attributes:
-        name = attributes['hagenie_propertyName']
+    if 'genie_propertyName' in attributes:
+        name = attributes['genie_propertyName']
 
     elif entity_id.startswith('sensor.'):
         unit = attributes['unit_of_measurement'] if 'unit_of_measurement' in attributes else ''
@@ -486,8 +486,8 @@ import homeassistant.auth.models as models
 from homeassistant.auth.const import ACCESS_TOKEN_EXPIRATION
 from homeassistant.components.http import HomeAssistantView
 
-MAIN = 'aligenie'
-DOMAIN = 'aligenie'
+MAIN = 'genie'
+DOMAIN = 'genie'
 EXPIRE_HOURS = 8760  # 365天过期
 
 
@@ -502,8 +502,8 @@ async def async_setup(hass, config):
 class AliGenieView(HomeAssistantView):
     """View to handle Configuration requests."""
 
-    url = '/aligenie'
-    name = 'aligenie'
+    url = '/genie'
+    name = 'genie'
     requires_auth = False
 
     async def post(self, request):

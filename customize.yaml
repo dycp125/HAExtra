@@ -23,36 +23,36 @@ binary_sensor.switch_158d000201a73f:
 cover.curtain_158d0003f7951d:
   friendly_name: 过道卷帘
 cover.tou_ying_mu_bu:
-  hagenie_deviceName: 布帘
-  hagenie_zone: 影音室
+  genie_deviceName: 布帘
+  genie_zone: 影音室
   icon: mdi:projector-screen
 fan.can_ting_jing_hua_qi:
   dash_icon: ${sensor.can_ting_ke_li_wu}
-  hagenie_deviceType: airpurifier
+  genie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.ci_wo_jing_hua_qi:
   dash_icon: ${aqi}
-  hagenie_deviceType: airpurifier
+  genie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.er_tong_fang_jing_hua_qi:
   dash_icon: ${sensor.er_tong_fang_ke_li_wu}
-  hagenie_deviceType: airpurifier
+  genie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.ke_ting_xin_feng_ji:
   dash_icon: ${co2}
-  hagenie_deviceType: VMC
+  genie_deviceType: VMC
   icon: mdi:leaf
 fan.shu_fang_jing_hua_qi:
   dash_icon: ${sensor.shu_fang_ke_li_wu}
-  hagenie_deviceType: airpurifier
+  genie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.zhu_wo_jing_hua_qi:
   dash_icon: ${sensor.zhu_wo_ke_li_wu}
-  hagenie_deviceType: airpurifier
+  genie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.zhu_wo_xin_feng_ji:
   dash_icon: ${co2}
-  hagenie_deviceType: VMC
+  genie_deviceType: VMC
   icon: mdi:leaf
 group.default_view:
   friendly_name: 总览
@@ -75,7 +75,7 @@ light.ke_ting_tong_deng_2:
   hidden: true
   icon: mdi:track-light
 light.liang_yi_deng:
-  hagenie_deviceName: 吊灯
+  genie_deviceName: 吊灯
   icon: mdi:spotlight
 light.shu_fang_tai_deng:
   icon: mdi:lamp
@@ -113,31 +113,31 @@ sensor.zhu_wo_ke_li_wu:
 sun.sun:
   friendly_name: 日照
 switch.can_ting_chu_shi_ji:
-  hagenie_deviceType: dehumidifier
+  genie_deviceType: dehumidifier
   icon: mdi:power-socket-uk
 switch.plug_158d0003a58422:
   friendly_name: 米家插座
 switch.tou_ying_yi:
-  hagenie_deviceName: 电视
-  hagenie_deviceType: television
+  genie_deviceName: 电视
+  genie_deviceType: television
   icon: mdi:projector
 switch.wang_luo_cun_chu:
-  hagenie_deviceName: 网关
-  hagenie_deviceType: gateway
+  genie_deviceName: 网关
+  genie_deviceType: gateway
   icon: mdi:nas
 switch.xi_shou_jian_pai_qi_shan:
-  hagenie_deviceName: 顶扇
-  hagenie_deviceType: fan
+  genie_deviceName: 顶扇
+  genie_deviceType: fan
   icon: mdi:fan
 switch.yi_gui_chu_shi_ji:
-  hagenie_deviceType: dehumidifier
+  genie_deviceType: dehumidifier
   icon: mdi:power-socket-uk
 switch.yin_xiang:
   dash_extra: original_state
   dash_extra_click: 'callService(''mqtt'', ''publish'', {''topic'': ''NodeMCU3/relay/0/set'',
     ''payload'': ''toggle''})'
-  hagenie_deviceName: 机顶盒
-  hagenie_deviceType: STB
+  genie_deviceName: 机顶盒
+  genie_deviceType: STB
 vacuum.sao_di_ji:
   dash_extra_forced: 'eval:"${status}"=="Charging" ? "充电中" : ("${status}"=="Charger
     disconnected" ? "充电断开" : ("${status}"=="Cleaning" ? "清扫中" : "${status}"))'
