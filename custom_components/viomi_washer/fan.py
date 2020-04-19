@@ -10,11 +10,34 @@ from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED, PLATFORM_
 _LOGGER = logging.getLogger(__name__)
 
 
-APPOINT_MIN = 1 #3
-APPOINT_MAX = 23 #19
+APPOINT_MIN = 1  # 3
+APPOINT_MAX = 23  # 19
 APPOINT_CLOCK = 8
 WASH_MODES = ['立即洗衣', '立即洗烘', '预约洗衣', '预约洗烘']
 DEFAULT_WASH_MODE = '预约洗衣'
+
+WASH_PROGRAMS = {
+    'goldenwash': '黄金洗',
+    'quick': '快洗',
+    'super_quick': '超快洗',
+
+    'antibacterial': '除菌洗',
+    'refresh': '空气洗',
+
+    'dry': '黄金烘',
+    'weak_dry': '低温烘',
+
+    'rinse_spin': '漂+脱',
+    'spin': '单脱水',
+    'drumclean': '筒清洁',
+
+    'cottons': '棉织物',
+    'down': '羽绒服',
+    'wool': '羊毛',
+    'shirt': '衬衣',
+    'jeans': '牛仔',
+    'underwears': '内衣',
+}
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -23,6 +46,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         vol.Optional(CONF_NAME): cv.string,
     }
 )
+
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the light from config."""
@@ -88,12 +112,13 @@ class VioMiWasher(FanEntity):
             return
 
         attrs = await self.try_command(self.status)
-        self._state = attrs is not None and attrs['wash_status'] == 1 and ((attrs['wash_process'] > 0 and attrs['wash_process'] < 7) or attrs['appoint_time'])
+        self._state = attrs is not None and attrs['wash_status'] == 1 and (
+            (attrs['wash_process'] > 0 and attrs['wash_process'] < 7) or attrs['appoint_time'])
         self._attrs = attrs
-        if self._state: # 仅做开启状态时获取模式
-            program = attrs['program']
-            dry_mode = program == 'dry' or program == 'weak_dry' or attrs['DryMode'] != 0
-            self._mode = ('预约' if attrs['appoint_time'] else '立即') + ('洗烘' if dry_mode else '洗衣')
+        # if self._state: # 仅做开启状态时获取模式
+        #     program = attrs['program']
+        #     dry_mode = program == 'dry' or program == 'weak_dry' or attrs['DryMode'] != 0
+        #     self._mode = ('预约' if attrs['appoint_time'] else '立即') + ('洗烘' if dry_mode else '洗衣')
 
     async def async_turn_on(self, speed=None, **kwargs):
         """Turn the device on."""
@@ -115,7 +140,7 @@ class VioMiWasher(FanEntity):
     async def async_set_speed(self, speed):
         """Set the speed of the fan."""
         _LOGGER.debug("Setting washer mode to: %s", speed)
-        self._mode = speed # if speed in WASH_MODES else DEFAULT_WASH_MODE
+        self._mode = speed  # if speed in WASH_MODES else DEFAULT_WASH_MODE
 
     async def try_command(self, func):
         """Call a miio device command handling error messages."""
@@ -125,7 +150,7 @@ class VioMiWasher(FanEntity):
             return result
         except Exception as exc:
             #import traceback
-            #_LOGGER.error(traceback.format_exc())
+            # _LOGGER.error(traceback.format_exc())
             _LOGGER.error("Error on command: %s", exc)
             return None
 
@@ -138,7 +163,7 @@ class VioMiWasher(FanEntity):
             # "water_temp",
             # "rinse_status",
             # "spin_level",
-            # "remain_time",
+            "remain_time",
             "appoint_time",
             # "be_status",
             # "run_status",
@@ -149,6 +174,18 @@ class VioMiWasher(FanEntity):
         for prop in props:
             value = self._device.send("get_prop", [prop])
             attrs[prop] = value[0] if len(value) else None
+
+        dash_name = WASH_PROGRAMS[attrs['program']]
+        if attrs['DryMode']:
+            dash_name += '+烘'
+        remain_time = attrs['remain_time']
+        if remain_time:
+            dash_name += ' ' + str(remain_time)
+        appoint_time = attrs['appoint_time']
+        if appoint_time:
+            dash_name += '/' + str(appoint_time)
+        attrs['dash_name'] = dash_name
+
         return attrs
 
     def on(self):
