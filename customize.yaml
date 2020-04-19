@@ -27,7 +27,7 @@ cover.tou_ying_mu_bu:
   hagenie_zone: 影音室
   icon: mdi:projector-screen
 fan.can_ting_jing_hua_qi:
-  dash_value: ${sensor.can_ting_ke_li_wu}
+  dash_icon: ${sensor.can_ting_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.ci_wo_jing_hua_qi:
@@ -35,7 +35,7 @@ fan.ci_wo_jing_hua_qi:
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.er_tong_fang_jing_hua_qi:
-  dash_value: ${sensor.er_tong_fang_ke_li_wu}
+  dash_icon: ${sensor.er_tong_fang_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.ke_ting_xin_feng_ji:
@@ -43,11 +43,11 @@ fan.ke_ting_xin_feng_ji:
   hagenie_deviceType: VMC
   icon: mdi:leaf
 fan.shu_fang_jing_hua_qi:
-  dash_value: ${sensor.shu_fang_ke_li_wu}
+  dash_icon: ${sensor.shu_fang_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.zhu_wo_jing_hua_qi:
-  dash_value: ${sensor.zhu_wo_ke_li_wu}
+  dash_icon: ${sensor.zhu_wo_ke_li_wu}
   hagenie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.zhu_wo_xin_feng_ji:

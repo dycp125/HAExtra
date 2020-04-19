@@ -637,20 +637,11 @@
 				var state = entity.state
 				var attributes = entity.attributes
 
-				var name = attributes.hasOwnProperty('dash_name') ? renderTemplate(attributes.dash_name, state, attributes) : attributes.friendly_name
+				var name = attributes.hasOwnProperty('dash_name') ? renderTemplate(attributes.dash_name, state, attributes, true) : attributes.friendly_name
 				var html = '<div class="name">' + name + '</div>'
 
 				var has_dash_value = attributes.hasOwnProperty('dash_value')
-				if (has_dash_value) {
-					var value = renderTemplate(attributes.dash_value, state, attributes, true)
-					if (value == '' || value == 'unavailable' || value == 'unknown' || value == 'None') {
-						value = state
-						has_dash_value = false
-					}
-				} else {
-					var value = state
-				}
-
+				var value = has_dash_value ? renderTemplate(attributes.dash_value, state, attributes, true) : state
 				var na = value == '' || value == 'unavailable' || value == 'unknown' || value == 'None'
 				var off = value == 'off' || value == 'not_home' || value == 'open' || value == 'opening' || value == 'docked' || value == 'idle' || value == 'low' || na ? ' off' : ''
 
@@ -682,6 +673,8 @@
 					if (icon) {
 						if (icon.startsWith('mdi:')) {
 							icon = icon.slice(4)
+						} else if (icon == '' || icon == 'unavailable' || icon == 'unknown' || icon == 'None') {
+							icon = attributes.icon
 						} else {
 							html += icon
 							icon = null
@@ -709,7 +702,7 @@
 				if (!off || (selected && selected != 'off') || dash_extra_forced) {
 					var dash_extra = attributes.dash_extra || dash_extra_forced
 					if (dash_extra) {
-						var extra = renderTemplate(dash_extra, state, attributes)
+						var extra = renderTemplate(dash_extra, state, attributes, true)
 						if (extra.length > 8) {
 							extra = '<marquee scrollamount="3">' + extra + '</marquee>'
 						}
@@ -778,7 +771,7 @@
 				return ''
 			}
 
-			function renderTemplate(template, state, attributes, disable_trans) {
+			function renderTemplate(template, state, attributes, trans) {
 				if (attributes.hasOwnProperty(template)) {
 					return attributes[template]
 				}
@@ -812,7 +805,7 @@
 							return '错误'
 						}
 					}
-					return disable_trans ? result : _TRANS[result] || result
+					return trans ? _TRANS[result] || result : result
 				}
 			}
 
