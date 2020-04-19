@@ -292,7 +292,7 @@
 					if (_retryCount == 1) {
 						return
 					}
-					retry = timeout + ' 秒后尝试'
+					retry = timeout + ' 秒后尝试 '
 				}
 				if (!document.getElementById('error')) {
 					floater('error', '连接关闭，' + retry + '<a href="javascript:connect()">重新连接</a>')
@@ -325,7 +325,7 @@
 								break
 							}
 						}
-						floater('error', '未知结果 ' + (json.error ? json.error.message : message.data) + '，<a href="javascript:connect()">重新连接</a>')
+						floater('error', '未知结果 ' + (json.error ? json.error.message : message.data) + '，请<a href="javascript:connect()">重新连接</a>')
 						break
 					case 'event':
 						var entity = json.event.data.new_state
@@ -339,7 +339,7 @@
 							}
 							updateGrid(entity)
 						} else {
-							floater('error', '事件错误 ' + (json.error.message || message.data) + '，<a href="javascript:connect()">重新连接</a>')
+							floater('error', '事件错误 ' + (json.error.message || message.data) + '，请<a href="javascript:connect()">重新连接</a>')
 						}
 						break
 					case 'auth_invalid':
@@ -640,12 +640,23 @@
 				var name = attributes.hasOwnProperty('dash_name') ? renderTemplate(attributes.dash_name, state, attributes) : attributes.friendly_name
 				var html = '<div class="name">' + name + '</div>'
 
-				var na = state == '' || state == 'unavailable' || state == 'unknown' || state == 'None'
-				var off = state == 'off' || state == 'not_home' || state == 'open' || state == 'opening' || state == 'docked' || state == 'idle' || state == 'low' || na ? ' off' : ''
+				var has_dash_value = attributes.hasOwnProperty('dash_value')
+				if (has_dash_value) {
+					var value = renderTemplate(attributes.dash_value, state, attributes, true)
+					if (value == '' || value == 'unavailable' || value == 'unknown' || value == 'None') {
+						value = state
+						has_dash_value = false
+					}
+				} else {
+					var value = state
+				}
+
+				var na = value == '' || value == 'unavailable' || value == 'unknown' || value == 'None'
+				var off = value == 'off' || value == 'not_home' || value == 'open' || value == 'opening' || value == 'docked' || value == 'idle' || value == 'low' || na ? ' off' : ''
 
 				var has_dash_icon = attributes.hasOwnProperty('dash_icon')
-				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
-					var value = !na && domain == 'climate' ? attributes.current_temperature : _TRANS[state] || state || '无'
+				if (has_dash_value || (!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
+					value = !has_dash_value && !na && domain == 'climate' ? attributes.current_temperature : _TRANS[value] || value || '无'
 					var nan = isNaN(value)
 					var type = domain == 'climate' ? 'temperature' : attributes.device_class
 					var overflow = nan ? '' : sensorOverflow(type, value)
@@ -767,7 +778,7 @@
 				return ''
 			}
 
-			function renderTemplate(template, state, attributes) {
+			function renderTemplate(template, state, attributes, disable_trans) {
 				if (attributes.hasOwnProperty(template)) {
 					return attributes[template]
 				}
@@ -801,7 +812,7 @@
 							return '错误'
 						}
 					}
-					return _TRANS[result] || result
+					return disable_trans ? result : _TRANS[result] || result
 				}
 			}
 
