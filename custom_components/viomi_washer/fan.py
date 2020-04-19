@@ -10,8 +10,8 @@ from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED, PLATFORM_
 _LOGGER = logging.getLogger(__name__)
 
 
-APPOINT_MIN = 3
-APPOINT_MAX = 19
+APPOINT_MIN = 1 #3
+APPOINT_MAX = 23 #19
 APPOINT_CLOCK = 8
 WASH_MODES = ['立即洗衣', '立即洗烘', '预约洗衣', '预约洗烘']
 DEFAULT_WASH_MODE = '预约洗衣'
