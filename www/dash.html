@@ -641,7 +641,7 @@
 				var html = '<div class="name">' + name + '</div>'
 
 				var na = state == '' || state == 'unavailable' || state == 'unknown' || state == 'None'
-				var off = na || state == 'off' || state == 'not_home' || state == 'open' || state == 'opening' || state == 'docked' || value == 'idle' || value == 'low' ? ' off' : ''
+				var off = na || state == 'off' || state == 'not_home' || state == 'open' || state == 'opening' || state == 'docked' || state == 'idle' ? ' off' : ''
 
 				var has_dash_icon = attributes.hasOwnProperty('dash_icon')
 				if ((!has_dash_icon && (domain == 'sensor' || domain == 'climate')) || na) {
@@ -722,7 +722,7 @@
 						}
 
 						extra += '<select class="moder" onclick="event.stopPropagation()" onchange="onMode(this)">'
-						
+
 						var mode_list = domain == 'climate' ? attributes.hvac_modes : attributes.speed_list
 						var selected = domain == 'climate' ? state : attributes.speed_level || attributes.speed
 						for (var i in mode_list) {
