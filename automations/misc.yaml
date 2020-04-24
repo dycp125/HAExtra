@@ -8,28 +8,3 @@
     - service: zhimsg.miai
       data_template:
         message: '{{ states("input_text.xiao_ai_yin_xiang") }}'
-
-- alias: 投影仪开启
-  trigger:
-    - platform: state
-      entity_id: device_tracker.projector
-      from: not_home
-      to: home
-  action:
-    - service_template: cover.close_cover
-      entity_id: cover.tou_ying_mu_bu
-    - service_template: cover.close_cover
-      entity_id: cover.shu_fang_chuang_lian
-
-- alias: 投影仪关闭
-  trigger:
-    - platform: state
-      entity_id: device_tracker.projector
-      from: home
-      to: not_home
-  action:
-    - service_template: cover.open_cover
-      entity_id: cover.tou_ying_mu_bu
-    - service_template: cover.open_cover
-      entity_id: cover.shu_fang_chuang_lian
-

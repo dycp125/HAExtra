@@ -10,7 +10,7 @@
       data_template:
         message: '阳台PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，餐厅PM2.5为{{ states("sensor.can_ting_ke_li_wu") }}，主卧PM2.5为{{ states("sensor.zhu_wo_ke_li_wu") }}。客厅二氧化碳浓度为{{ states("sensor.ke_ting_er_yang_hua_tan") }}，主卧二氧化碳浓度为{{ states("sensor.zhu_wo_er_yang_hua_tan") }}，儿童房二氧化碳浓度为{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}'
 
-- alias: 过道按钮双击—启用烘干
+- alias: 过道按钮双击—预约洗衣
   trigger:
     - platform: event
       event_type: xiaomi_aqara.click
@@ -18,9 +18,15 @@
         entity_id: binary_sensor.switch_158d0001e59b33
         click_type: double
   action:
+    - service: fan.set_speed
+      data:
+        entity_id: fan.washer
+        speed: 预约洗衣
+    - service: fan.turn_on
+      entity_id: fan.washer
     - service: zhimsg.miai
       data:
-        message: 晾衣机将于今晚定时开启烘干功能
+        message: 洗衣机已预约早晨洗衣
 
 - alias: 过道按钮长按—开关过道灯感应
   trigger:
@@ -66,41 +72,3 @@
     - delay: '00:00:10'
     - service: automation.turn_off
       entity_id: automation.guo_dao_deng_gan_ying_zhong_qi
-
-# - alias: 书房按钮单击—切换音箱
-#   trigger:
-#     - platform: event
-#       event_type: xiaomi_aqara.click
-#       event_data:
-#         entity_id: binary_sensor.switch_158d000201a73f
-#         click_type: single
-#   action:
-#     - service: mqtt.publish
-#       data:
-#         topic: NodeMCU3/relay/0/set
-#         payload: toggle
-
-- alias: 书房按钮双击—开关投影仪
-  trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.switch_158d000201a73f
-        click_type: double
-  action:
-    - service: zhimsg.miai
-      data_template:
-        message: '正在{% if is_state("switch.tou_ying_yi", "on") %}关闭{% else %}打开{% endif %}投影仪'
-    - service: switch.toggle
-      entity_id: switch.tou_ying_yi
-
-- alias: 书房按钮长按—关闭音箱
-  trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.switch_158d000201a73f
-        click_type: long_click_press
-  action:
-    - service: switch.turn_off
-      entity_id: switch.yin_xiang

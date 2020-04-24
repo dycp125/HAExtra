@@ -22,6 +22,8 @@ binary_sensor.switch_158d000201a73f:
   hidden: true
 cover.curtain_158d0003f7951d:
   friendly_name: 过道卷帘
+cover.curtain_158d000405d535:
+  friendly_name: 主卧窗帘
 cover.tou_ying_mu_bu:
   genie_deviceName: 布帘
   genie_zone: 影音室
@@ -120,7 +122,6 @@ switch.plug_158d0003a58422:
 switch.tou_ying_yi:
   genie_deviceName: 电视
   genie_deviceType: television
-  icon: mdi:projector
 switch.wang_luo_cun_chu:
   genie_deviceName: 网关
   genie_deviceType: gateway

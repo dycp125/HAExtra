@@ -158,9 +158,11 @@ default_view:
     #- fan.shu_fang_feng_shan
     #- fan.shu_fang_jing_hua_qi
     - climate.shu_fang_kong_diao
-    - automation.shu_fang_an_niu_chang_an_guan_bi_yin_xiang
     #- automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
     - automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
+    - automation.shu_fang_an_niu_chang_an_kai_guan_bo_fang_qi
+    - automation.da_kai_tou_ying_yi_pei_tao
+    - automation.guan_bi_tou_ying_yi_pei_tao
     - automation.shu_fang_chuang_lian_guan
     - automation.shu_fang_chuang_lian_kai
     - automation.shu_fang_feng_shan_diao_jie
