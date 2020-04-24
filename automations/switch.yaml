@@ -20,10 +20,10 @@
   action:
     - service: fan.set_speed
       data:
-        entity_id: fan.washer
+        entity_id: fan.xi_yi_ji
         speed: 预约洗衣
     - service: fan.turn_on
-      entity_id: fan.washer
+      entity_id: fan.xi_yi_ji
     - service: zhimsg.miai
       data:
         message: 洗衣机已预约早晨洗衣

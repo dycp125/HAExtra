@@ -189,8 +189,8 @@ class VioMiWasher(FanEntity):
         return attrs
 
     def on(self):
-        if self._attrs['program'] != 'goldenwash' or self._attrs['wash_process'] == 7:
-            self.send("set_wash_program", 'goldenwash')
+        # if self._attrs['program'] != 'goldenwash' or self._attrs['wash_process'] == 7:
+        self.send("set_wash_program", 'goldenwash')
 
         dry_mode = 30721 if self._mode.endswith('烘') else 0
         if self._attrs['DryMode'] != dry_mode:

@@ -8,3 +8,20 @@
     - service: zhimsg.miai
       data_template:
         message: '{{ states("input_text.xiao_ai_yin_xiang") }}'
+
+- alias: 开合过道卷帘
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d00041c74da
+      from: 'off'
+      to: 'on'
+      for: 
+        seconds: 10
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d00041c74da
+      from: 'on'
+      to: 'off'
+  action:
+    - service_template: 'cover.{% if is_state("binary_sensor.door_window_sensor_158d00041c74da", "off") %}open{% else %}close{% endif %}_cover'
+      entity_id: cover.curtain_158d0003f7951d
+

@@ -72,6 +72,7 @@ default_view:
     - automation.guo_dao_bei_jing_deng_gan_ying
     - automation.guo_dao_deng_gan_ying_zhong_qi
     - automation.xiao_ai_yin_bo_bao
+    - automation.kai_he_guo_dao_juan_lian
 
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
