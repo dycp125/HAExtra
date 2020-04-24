@@ -9,7 +9,7 @@ binary_sensor.door_window_sensor_158d000228a52b:
 binary_sensor.door_window_sensor_158d0003cf4735:
   friendly_name: 洗手间门
 binary_sensor.door_window_sensor_158d00041c74da:
-  friendly_name: 浴室门
+  friendly_name: 过道门
 binary_sensor.motion_sensor_158d0001d66ce9:
   friendly_name: 过道感应
 binary_sensor.motion_sensor_158d0001f4a238:

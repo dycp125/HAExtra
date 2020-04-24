@@ -60,6 +60,7 @@ default_view:
   icon: mdi:road
   entities:
     - binary_sensor.motion_sensor_158d0001d66ce9
+    - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.cube_158d0002a66db1
     - light.guo_dao_bei_jing_deng
     - switch.plug_158d0003a58422
@@ -87,12 +88,12 @@ default_view:
     - sensor.zhu_wo_ke_li_wu
     - sensor.zhu_wo_er_yang_hua_tan
     - sensor.zhu_wo_liang_du
-    - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.zhu_wo_gan_ying
     - light.zhu_wo_deng
     #- switch.zhu_wo_dian_shi
     #- switch.yi_gui_chu_shi_ji
     - media_player.zhu_wo_dian_shi
+    - cover.curtain_158d000405d535
     - fan.zhu_wo_xin_feng_ji
     - fan.zhu_wo_jing_hua_qi
     - fan.zhu_wo_bi_shan

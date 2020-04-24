@@ -47,8 +47,8 @@ turn_off_projector:
       entity_id: cover.shu_fang_chuang_lian
     - service: cover.open_cover
       entity_id: cover.tou_ying_mu_bu
-    - service_template: '{% if is_state("sun.sun", "below_horizon") %}light.turn_on{% else %}light.turn_off{% endif %}'
-      entity_id: light.liang_yi_deng
+    # - service_template: '{% if is_state("sun.sun", "below_horizon") %}light.turn_on{% else %}light.turn_off{% endif %}'
+    #   entity_id: light.liang_yi_deng
     - service: climate.turn_off
       entity_id: climate.shu_fang_kong_diao
     - service: automation.turn_on
