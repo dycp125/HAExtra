@@ -3,13 +3,13 @@
     - platform: time
       at: '12:30:00'
     - platform: numeric_state
-      entity_id: sensor.study_lightness
+      entity_id: sensor.shu_fang_liang_du
       above: 180
       for:
         minutes: 10
   condition:
     - condition: numeric_state
-      entity_id: sensor.study_lightness
+      entity_id: sensor.shu_fang_liang_du
       above: 180
     - condition: time
       after: '12:00'
