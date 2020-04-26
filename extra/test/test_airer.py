@@ -14,3 +14,6 @@ ret = device.send("get_prop", [
             # "airer_location",
         ])
 print('%s' % ret)
+
+device.send("set_motor", [1]) # 1-Up/0=Pause/2=Down
+
