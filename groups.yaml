@@ -9,6 +9,9 @@ default_view:
     - group.er_tong_fang
     - group.shu_fang
     - group.yang_tai
+    - person.ba_ba
+    - person.ma_ma
+    - person.a_yi
 
 客厅:
   icon: mdi:seat
