@@ -1,4 +1,4 @@
-"""Support for Xiaomi MiIO Lights."""
+"""Support for MrBond Airer's Light."""
 import logging
 
 from miio import Device
