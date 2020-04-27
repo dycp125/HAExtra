@@ -15,10 +15,10 @@ binary_sensor.motion_sensor_158d0001d66ce9:
 binary_sensor.motion_sensor_158d0001f4a238:
   friendly_name: 洗手间感应
 binary_sensor.switch_158d0001e59b33:
-  friendly_name: 过道开关
+  friendly_name: 浴室按钮
   hidden: true
 binary_sensor.switch_158d000201a73f:
-  friendly_name: 书房开关
+  friendly_name: 书房按钮
   hidden: true
 cover.curtain_158d0003f7951d:
   friendly_name: 过道卷帘
