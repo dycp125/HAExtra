@@ -69,9 +69,6 @@ default_view:
     - switch.plug_158d0003a58422
     - cover.curtain_158d0003f7951d
     - input_text.xiao_ai_yin_xiang
-    - automation.guo_dao_an_niu_chang_an_kai_guan_guo_dao_deng_gan_ying
-    - automation.guo_dao_an_niu_dan_ji_bo_bao_kong_qi
-    - automation.guo_dao_an_niu_shuang_ji_yu_yue_xi_yi
     - automation.guo_dao_bei_jing_deng_gan_ying
     - automation.guo_dao_deng_gan_ying_zhong_qi
     - automation.xiao_ai_yin_bo_bao
@@ -112,6 +109,9 @@ default_view:
     - automation.zhu_wo_jing_hua_qi_diao_jie
     - automation.zhu_wo_kong_diao_diao_jie
     - automation.zhu_wo_xin_feng_ji_diao_jie
+    - automation.yu_shi_an_niu_dan_ji_yu_yue_xi_yi
+    - automation.yu_shi_an_niu_shuang_ji_yu_yue_xi_hong
+    - automation.yu_shi_an_niu_chang_an_yu_yue_qu_xiao
 
 次卧:
   icon: mdi:bed-double

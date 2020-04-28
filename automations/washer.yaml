@@ -6,10 +6,14 @@
         entity_id: binary_sensor.switch_158d0001e59b33
         click_type: single
   action:
-    - service: fan.set_speed
+    - service: fan.oscillate
       data:
         entity_id: fan.xi_yi_ji
-        speed: 预约洗烘
+        oscillating: false
+    - service: fan.set_direction
+      data:
+        entity_id: fan.xi_yi_ji
+        direction: reverse
     - service: fan.turn_on
       entity_id: fan.xi_yi_ji
 
@@ -21,15 +25,16 @@
         entity_id: binary_sensor.switch_158d0001e59b33
         click_type: double
   action:
-    - service: fan.set_speed
+    - service: fan.oscillate
       data:
         entity_id: fan.xi_yi_ji
-        speed: 预约洗衣
+        oscillating: true
+    - service: fan.set_direction
+      data:
+        entity_id: fan.xi_yi_ji
+        direction: reverse
     - service: fan.turn_on
       entity_id: fan.xi_yi_ji
-    - service: zhimsg.miai
-      data:
-        message: 洗衣机已预约早晨洗烘
 
 - alias: 浴室按钮长按—预约取消
   trigger:

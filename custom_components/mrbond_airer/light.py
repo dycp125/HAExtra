@@ -68,7 +68,7 @@ class MrBondLight(Light):
     async def try_command(self, func):
         """Call a miio device command handling error messages."""
         try:
-            result = await self.hass.async_add_job(func)
+            result = await self.hass.async_add_executor_job(func)
             _LOGGER.debug("Response received from miio device: %s", result)
             return result
         except Exception as exc:
