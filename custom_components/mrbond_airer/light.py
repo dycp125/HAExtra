@@ -19,12 +19,12 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 
 
-async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
+def setup_platform(hass, config, add_entities, discovery_info=None):
     """Set up the light from config."""
     host = config[CONF_HOST]
     token = config[CONF_TOKEN]
     name = config.get(CONF_NAME)
-    async_add_entities([MrBondLight(name, host, token)], True)
+    add_entities([MrBondLight(name, host, token)], True)
 
 
 class MrBondLight(Light):
@@ -51,37 +51,27 @@ class MrBondLight(Light):
         """Return true if light is on."""
         return self._state
 
-    async def async_turn_on(self, **kwargs):
+    def turn_on(self, **kwargs):
         """Turn the light on."""
-        if await self.try_command(self.on):
+        if self.send('set_led', 1):
             self._state = True
 
-    async def async_turn_off(self, **kwargs):
+    def turn_off(self, **kwargs):
         """Turn the light off."""
-        if await self.try_command(self.off):
+        if self.send('set_led', 0):
             self._state = False
 
-    async def async_update(self):
+    def update(self):
         """Fetch state from the device."""
-        self._state = await self.try_command(self.status)
+        self._state = self.send('get_prop', 'led', ['1'])
 
-    async def try_command(self, func):
-        """Call a miio device command handling error messages."""
+    def send(self, name, value, success=['ok']):
         try:
-            result = await self.hass.async_add_executor_job(func)
+            result = self._device.send(name, [value])
             _LOGGER.debug("Response received from miio device: %s", result)
-            return result
+            return result == success
         except Exception as exc:
             #import traceback
             # _LOGGER.error(traceback.format_exc())
-            _LOGGER.error("Error on command: %s", exc)
+            _LOGGER.error("Error on miio: %s", exc)
             return None
-
-    def status(self):
-        return self._device.send('get_prop', 'led') == ['1']
-
-    def on(self):
-        return self._device.send('set_led', [1]) == ['ok']
-
-    def off(self):
-        return self._device.send('set_led', [0]) == ['ok']
