@@ -11,13 +11,27 @@ from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED, SUPPORT_O
 _LOGGER = logging.getLogger(__name__)
 
 
-APPOINT_MIN = 1  # 3
-APPOINT_MAX = 23  # 19
-APPOINT_CLOCK = 8
-WASH_MODES = ['立即洗衣', '立即洗烘', '预约洗衣', '预约洗烘']
-DEFAULT_WASH_MODE = '预约洗衣'
+APPOINT_MIN = 1  # 3 in app default
+APPOINT_MAX = 23  # 19 in app default
 
-WASH_PROGRAMS = {
+
+WASHER_PROPS = [
+    "program",
+    "wash_process",
+    "wash_status",
+    # "water_temp",
+    # "rinse_status",
+    # "spin_level",
+    "remain_time",
+    "appoint_time",
+    # "be_status",
+    # "run_status",
+    "DryMode",
+    # "child_lock"
+]
+
+
+WASHER_PROGS = {
     'goldenwash': '黄金洗',
     'quick': '快洗',
     'super_quick': '超快洗',
@@ -49,55 +63,18 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 
 
-def setup_platform(hass, config, async_add_entities, discovery_info=None):
+def setup_platform(hass, config, add_entities, discovery_info=None):
     """Set up the light from config."""
     host = config[CONF_HOST]
     token = config[CONF_TOKEN]
     name = config.get(CONF_NAME)
-    async_add_entities([VioMiWasher(name, host, token)], True)
-
-
-class VioMiDevice(Device):
-
-    def update(self, status):
-        """Retrieve properties."""
-        props = [
-            "program",
-            "wash_process",
-            "wash_status",
-            # "water_temp",
-            # "rinse_status",
-            # "spin_level",
-            "remain_time",
-            "appoint_time",
-            # "be_status",
-            # "run_status",
-            "DryMode",
-            # "child_lock"
-        ]
-
-        try:
-            for prop in props:
-                status[prop] = self.send('get_prop', [prop])[0]
-        except Exception as exc:
-            _LOGGER.error("Error on update: %s", exc)
-            return None
-
-        return status['wash_status'] == 1 and ((status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'])
-
-    def control(self, name, value):
-        _LOGGER.debug('Waher control: %s=%s', name, value)
-        try:
-            return self.send(name, [value]) == ['ok']
-        except Exception as exc:
-            _LOGGER.error("Error on control: %s", exc)
-            return None
+    add_entities([VioMiWasher(name, host, token)], True)
 
 
 class VioMiWasher(FanEntity):
     def __init__(self, name, host, token):
         self._name = name or host
-        self._device = VioMiDevice(host, token)
+        self._device = Device(host, token)
         self._status = {'dash_extra_forced': True, 'genie_deviceType': 'washmachine'}
         self._state = None
         self._skip_update = False
@@ -135,17 +112,26 @@ class VioMiWasher(FanEntity):
             self._skip_update = False
             return
 
-        self._state = self._device.update(self._status)
+        status = self._status
+        try:
+            for prop in WASHER_PROPS:
+                status[prop] = self._device.send('get_prop', [prop])[0]
+        except Exception as exc:
+            _LOGGER.error("Error on update: %s", exc)
+            return None
+
+        self._state = status['wash_status'] == 1 and ((status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'])
+
         if self._state: # Update dash name for status
-            dash_name = '剩' + str(self._status['remain_time']) + '分'
-            appoint_time = self._status['appoint_time']
+            dash_name = '剩' + str(status['remain_time']) + '分'
+            appoint_time = status['appoint_time']
             if appoint_time:
                 dash_name += '/' + str(appoint_time) + '时'
-            if self._status['DryMode']:
+            if status['DryMode']:
                 dash_name += '+烘'
             self._status['dash_name'] = dash_name
-        elif 'dash_name' in self._status:
-            del self._status['dash_name']
+        elif 'dash_name' in status:
+            del status['dash_name']
 
     @property
     def is_on(self):
@@ -159,11 +145,11 @@ class VioMiWasher(FanEntity):
         if speed:
             self.set_speed(speed)
         else:
-            self._device.control('set_wash_program', self._status.get('program') or 'goldenwash')
+            self.control('set_wash_program', self._status.get('program') or 'goldenwash')
         time.sleep(1)
 
         if self._status.get('DryMode') != dry_mode:
-            if not self._device.control("SetDryMode", dry_mode):
+            if not self.control("SetDryMode", dry_mode):
                 return
             time.sleep(1)
 
@@ -180,25 +166,25 @@ class VioMiWasher(FanEntity):
             else:
                 appoint_time = 0
 
-        if self._device.control('set_appoint_time' if appoint_time else 'set_wash_action', appoint_time or 1):
+        if self.control('set_appoint_time' if appoint_time else 'set_wash_action', appoint_time or 1):
             self._state = True
             self._skip_update = True
 
     def turn_off(self, **kwargs):
         """Turn the device off."""
-        if self._device.control('set_wash_action', 2):
+        if self.control('set_wash_action', 2):
             self._state = False
             self._skip_update = True
 
     @property
     def speed_list(self):
         """Get the list of available speeds."""
-        return list(WASH_PROGRAMS.values())
+        return list(WASHER_PROGS.values())
 
     @property
     def speed(self):
         """Return the current speed."""
-        return WASH_PROGRAMS.get(self._status.get('program'))
+        return WASHER_PROGS.get(self._status.get('program'))
 
     def set_speed(self, speed):
         """Set the speed of the fan."""
@@ -206,9 +192,9 @@ class VioMiWasher(FanEntity):
         if speed == None or speed == 'off':
             return self.turn_off()
 
-        for program in WASH_PROGRAMS:
-            if WASH_PROGRAMS[program] == speed:
-                if self._device.control('set_wash_program', program):
+        for program in WASHER_PROGS:
+            if WASHER_PROGS[program] == speed:
+                if self.control('set_wash_program', program):
                     self._status['program'] = program
                     self._skip_update = True
                 return
@@ -216,7 +202,7 @@ class VioMiWasher(FanEntity):
         for control in speed.split(','):
             params = control.split('=')
             if len(params) == 2:
-                if not self._device.control(params[0], params[1]):
+                if not self.control(params[0], params[1]):
                     return
 
     @property
@@ -241,3 +227,10 @@ class VioMiWasher(FanEntity):
         self._appoint_time = direction if type(direction) is int else (-8 if direction == 'reverse' or direction == True else 0)
         _LOGGER.debug("set_direction: appoint_time=%s", self._appoint_time)
 
+    def control(self, name, value):
+        _LOGGER.debug('Waher control: %s=%s', name, value)
+        try:
+            return self._device.send(name, [value]) == ['ok']
+        except Exception as exc:
+            _LOGGER.error("Error on control: %s", exc)
+            return None
