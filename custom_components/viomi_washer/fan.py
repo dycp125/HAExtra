@@ -27,7 +27,7 @@ WASHER_PROPS = [
     # "be_status",
     # "run_status",
     "DryMode",
-    # "child_lock"
+    # "child_lock",
 ]
 
 
@@ -75,7 +75,8 @@ class VioMiWasher(FanEntity):
     def __init__(self, name, host, token):
         self._name = name or host
         self._device = Device(host, token)
-        self._status = {'dash_extra_forced': True, 'genie_deviceType': 'washmachine'}
+        self._status = {'dash_extra_forced': True,
+                        'genie_deviceType': 'washmachine'}
         self._state = None
         self._skip_update = False
         self._dry_mode = 0
@@ -116,12 +117,13 @@ class VioMiWasher(FanEntity):
         try:
             for prop in WASHER_PROPS:
                 status[prop] = self._device.send('get_prop', [prop])[0]
-            self._state = status['wash_status'] == 1 and ((status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'])
+            self._state = status['wash_status'] == 1 and (
+                (status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'])
         except Exception as exc:
             _LOGGER.error("Error on update: %s", exc)
             self._state = None
 
-        if self._state: # Update dash name for status
+        if self._state:  # Update dash name for status
             dash_name = '剩' + str(status['remain_time']) + '分'
             appoint_time = status['appoint_time']
             if appoint_time:
@@ -206,12 +208,15 @@ class VioMiWasher(FanEntity):
                     if not self.set_wash_program(params[1]):
                         return
                 elif params[0] == 'dry_mode':
-                    self._dry_mode = int(params[1]) # self.oscillate(params[1])
+                    # self.oscillate(params[1])
+                    self._dry_mode = int(params[1])
                 elif params[0] == 'appoint_time':
-                    self._appoint_time = int(params[1]) # self.set_direction(params[1])
+                    # self.set_direction(params[1])
+                    self._appoint_time = int(params[1])
                 elif params[0] == 'appoint_clock':
-                    self._appoint_time = -int(params[1]) # self.set_direction('-' + params[1])
-                elif not self.control(params[0], params[1]): # Custom command
+                    # self.set_direction('-' + params[1])
+                    self._appoint_time = -int(params[1])
+                elif not self.control(params[0], params[1]):  # Custom command
                     return
             else:
                 _LOGGER.error("Invalid speed format:%s", params)
@@ -233,7 +238,7 @@ class VioMiWasher(FanEntity):
 
     def set_direction(self, direction):
         """Set the direction of the fan."""
-        self._appoint_time = -8 if direction == 'reverse' or direction == True else int(direction)
+        self._appoint_time = -8 if direction == 'reverse' else int(direction)
         _LOGGER.debug("set_direction: appoint_time=%s", self._appoint_time)
 
     def control(self, name, value):
