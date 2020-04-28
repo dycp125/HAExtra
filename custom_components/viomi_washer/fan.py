@@ -118,7 +118,7 @@ class VioMiWasher(FanEntity):
             for prop in WASHER_PROPS:
                 status[prop] = self._device.send('get_prop', [prop])[0]
             self._state = status['wash_status'] == 1 and (
-                (status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'])
+                (status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'] != 0)
         except Exception as exc:
             _LOGGER.error("Error on update: %s", exc)
             self._state = None
@@ -137,7 +137,7 @@ class VioMiWasher(FanEntity):
     @property
     def is_on(self):
         """Return true if device is on."""
-        return self._state == True
+        return self._state
 
     def turn_on(self, speed=None, **kwargs):
         """Turn the device on."""
