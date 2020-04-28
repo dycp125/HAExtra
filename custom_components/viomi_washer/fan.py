@@ -116,11 +116,10 @@ class VioMiWasher(FanEntity):
         try:
             for prop in WASHER_PROPS:
                 status[prop] = self._device.send('get_prop', [prop])[0]
+            self._state = status['wash_status'] == 1 and ((status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'])
         except Exception as exc:
             _LOGGER.error("Error on update: %s", exc)
-            return None
-
-        self._state = status['wash_status'] == 1 and ((status['wash_process'] > 0 and status['wash_process'] < 7) or status['appoint_time'])
+            self._state = None
 
         if self._state: # Update dash name for status
             dash_name = '剩' + str(status['remain_time']) + '分'
@@ -142,17 +141,22 @@ class VioMiWasher(FanEntity):
         """Turn the device on."""
         _LOGGER.debug('turn_on: speed=%s, kwargs=%s', speed, kwargs)
 
+        # Turn up
         if speed:
             self.set_speed(speed)
         else:
-            self.control('set_wash_program', self._status.get('program') or 'goldenwash')
+            self.set_wash_program(self._status.get('program') or 'goldenwash')
         time.sleep(1)
 
+        # Set dry mode
+        dry_mode = 30721 if self._dry_mode == 1 else self._dry_mode
         if self._status.get('DryMode') != dry_mode:
             if not self.control("SetDryMode", dry_mode):
                 return
             time.sleep(1)
 
+        # Calc appoint time
+        appoint_time = self._appoint_time
         if appoint_time < 0:
             appoint_clock = -appoint_time
             now = datetime.datetime.now()
@@ -188,22 +192,29 @@ class VioMiWasher(FanEntity):
 
     def set_speed(self, speed):
         """Set the speed of the fan."""
-        _LOGGER.debug('set_speed: speed=%s', speed)
-        if speed == None or speed == 'off':
-            return self.turn_off()
+        _LOGGER.debug('set_speed: %s', speed)
 
         for program in WASHER_PROGS:
-            if WASHER_PROGS[program] == speed:
-                if self.control('set_wash_program', program):
-                    self._status['program'] = program
-                    self._skip_update = True
+            if program == speed or WASHER_PROGS[program] == speed:
+                self.set_wash_program(program)
                 return
 
         for control in speed.split(','):
             params = control.split('=')
             if len(params) == 2:
-                if not self.control(params[0], params[1]):
+                if params[0] == 'program' or params[0] == 'set_wash_program':
+                    if not self.set_wash_program(params[1]):
+                        return
+                elif params[0] == 'dry_mode':
+                    self._dry_mode = int(params[1]) # self.oscillate(params[1])
+                elif params[0] == 'appoint_time':
+                    self._appoint_time = int(params[1]) # self.set_direction(params[1])
+                elif params[0] == 'appoint_clock':
+                    self._appoint_time = -int(params[1]) # self.set_direction('-' + params[1])
+                elif not self.control(params[0], params[1]): # Custom command
                     return
+            else:
+                _LOGGER.error("Invalid speed format:%s", params)
 
     @property
     def oscillating(self):
@@ -213,8 +224,6 @@ class VioMiWasher(FanEntity):
     def oscillate(self, oscillating):
         """Oscillate the fan."""
         self._dry_mode = int(oscillating)
-        if self._dry_mode == 1:
-            self._dry_mode = 30721
         _LOGGER.debug("oscillate: dry_mode=%s", self._dry_mode)
 
     @property
@@ -224,7 +233,7 @@ class VioMiWasher(FanEntity):
 
     def set_direction(self, direction):
         """Set the direction of the fan."""
-        self._appoint_time = direction if type(direction) is int else (-8 if direction == 'reverse' or direction == True else 0)
+        self._appoint_time = -8 if direction == 'reverse' or direction == True else int(direction)
         _LOGGER.debug("set_direction: appoint_time=%s", self._appoint_time)
 
     def control(self, name, value):
@@ -234,3 +243,10 @@ class VioMiWasher(FanEntity):
         except Exception as exc:
             _LOGGER.error("Error on control: %s", exc)
             return None
+
+    def set_wash_program(self, program):
+        if self.control('set_wash_program', program):
+            self._status['program'] = program
+            self._skip_update = True
+            return True
+        return False
