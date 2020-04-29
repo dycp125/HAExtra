@@ -5,8 +5,9 @@ from miio import Device
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 
-from homeassistant.components.cover import CoverDevice, PLATFORM_SCHEMA
+from homeassistant.components.cover import CoverDevice, PLATFORM_SCHEMA, ATTR_POSITION
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_TOKEN
+from homeassistant.helpers.event import async_call_later
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -18,17 +19,76 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     }
 )
 
+AIRER_PROPS = [
+            "dry",
+            "led",
+            "motor",
+            "drytime",
+            "airer_location",
+]
 
-async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
+def setup_platform(hass, config, add_entities, discovery_info=None):
     """Set up the light from config."""
     host = config[CONF_HOST]
     token = config[CONF_TOKEN]
     name = config.get(CONF_NAME)
-    async_add_entities([MrBondAirer(name, host, token)], True)
+    add_entities([MrBondAirer(name, host, token)], True)
 
 
 class MrBondAirer(CoverDevice):
     """Representation of a cover."""
+
+    def __init__(self, name, host, token):
+        """Initialize the light device."""
+        self._name = name or host
+        self._device = Device(host, token)
+        self._state = None
+        self._status = {}
+        self._skip_update = False
+
+    @property
+    def name(self):
+        """Return the name of the device if any."""
+        return self._name
+
+    @property
+    def icon(self):
+        """Return the name of the device if any."""
+        return 'mdi:hanger'
+
+    # @property
+    # def available(self):
+    #     """Return true when state is known."""
+    #     return self._state is not None
+
+    @property
+    def device_state_attributes(self):
+        """Return the state attributes of the device."""
+        return self._status
+
+    def update(self):
+        """Fetch state from the device."""
+        if self._skip_update:
+            self._skip_update = False
+            return
+
+        try:
+            for prop in AIRER_PROPS:
+                self._status[prop] = self._device.send('get_prop', [prop])[0]
+        except Exception as exc:
+            _LOGGER.error("Error on update: %s", exc)
+            self._status = {}
+
+    def send(self, name, value, success=['ok']):
+        try:
+            result = self._device.send(name, [value])
+            _LOGGER.debug("Response received from miio device: %s", result)
+            return result == success
+        except Exception as exc:
+            #import traceback
+            # _LOGGER.error(traceback.format_exc())
+            _LOGGER.error("Error on miio: %s", exc)
+            return None
 
     @property
     def current_cover_position(self):
@@ -36,169 +96,48 @@ class MrBondAirer(CoverDevice):
 
         None is unknown, 0 is closed, 100 is fully open.
         """
-        pass
-
-    @property
-    def current_cover_tilt_position(self):
-        """Return current position of cover tilt.
-
-        None is unknown, 0 is closed, 100 is fully open.
-        """
-        pass
-
-    @property
-    def state(self):
-        """Return the state of the cover."""
-        if self.is_opening:
-            return STATE_OPENING
-        if self.is_closing:
-            return STATE_CLOSING
-
-        closed = self.is_closed
-
-        if closed is None:
-            return None
-
-        return STATE_CLOSED if closed else STATE_OPEN
-
-    @property
-    def state_attributes(self):
-        """Return the state attributes."""
-        data = {}
-
-        current = self.current_cover_position
-        if current is not None:
-            data[ATTR_CURRENT_POSITION] = self.current_cover_position
-
-        current_tilt = self.current_cover_tilt_position
-        if current_tilt is not None:
-            data[ATTR_CURRENT_TILT_POSITION] = self.current_cover_tilt_position
-
-        return data
-
-    @property
-    def supported_features(self):
-        """Flag supported features."""
-        supported_features = SUPPORT_OPEN | SUPPORT_CLOSE | SUPPORT_STOP
-
-        if self.current_cover_position is not None:
-            supported_features |= SUPPORT_SET_POSITION
-
-        if self.current_cover_tilt_position is not None:
-            supported_features |= (
-                SUPPORT_OPEN_TILT
-                | SUPPORT_CLOSE_TILT
-                | SUPPORT_STOP_TILT
-                | SUPPORT_SET_TILT_POSITION
-            )
-
-        return supported_features
+        return self._status.get('airer_location') or 10
 
     @property
     def is_opening(self):
         """Return if the cover is opening or not."""
-        pass
+        return self._status.get('motor') == '1'
 
     @property
     def is_closing(self):
         """Return if the cover is closing or not."""
-        pass
+        return self._status.get('motor') == '2'
 
     @property
     def is_closed(self):
         """Return if the cover is closed or not."""
-        raise NotImplementedError()
+        return self._status.get('airer_location')
 
-    def open_cover(self, **kwargs: Any) -> None:
+    def open_cover(self, **kwargs):
         """Open the cover."""
-        raise NotImplementedError()
-
-    async def async_open_cover(self, **kwargs):
-        """Open the cover."""
-        await self.hass.async_add_job(ft.partial(self.open_cover, **kwargs))
-
-    def close_cover(self, **kwargs: Any) -> None:
-        """Close cover."""
-        raise NotImplementedError()
-
-    async def async_close_cover(self, **kwargs):
-        """Close cover."""
-        await self.hass.async_add_job(ft.partial(self.close_cover, **kwargs))
-
-    def toggle(self, **kwargs: Any) -> None:
-        """Toggle the entity."""
-        if self.is_closed:
-            self.open_cover(**kwargs)
-        else:
-            self.close_cover(**kwargs)
-
-    async def async_toggle(self, **kwargs):
-        """Toggle the entity."""
-        if self.is_closed:
-            await self.async_open_cover(**kwargs)
-        else:
-            await self.async_close_cover(**kwargs)
-
-    def set_cover_position(self, **kwargs):
-        """Move the cover to a specific position."""
+        _LOGGER.warn("open_cover: %s", kwargs)
+        self.send('set_motor', 1)
         pass
 
-    async def async_set_cover_position(self, **kwargs):
-        """Move the cover to a specific position."""
-        await self.hass.async_add_job(ft.partial(self.set_cover_position, **kwargs))
+    def close_cover(self, **kwargs):
+        """Close cover."""
+        _LOGGER.warn("close_cover: %s", kwargs)
+        self.send('set_motor', 2)
+        pass
 
     def stop_cover(self, **kwargs):
         """Stop the cover."""
-        pass
+        self.send('set_motor', 0)
 
-    async def async_stop_cover(self, **kwargs):
-        """Stop the cover."""
-        await self.hass.async_add_job(ft.partial(self.stop_cover, **kwargs))
-
-    def open_cover_tilt(self, **kwargs: Any) -> None:
-        """Open the cover tilt."""
-        pass
-
-    async def async_open_cover_tilt(self, **kwargs):
-        """Open the cover tilt."""
-        await self.hass.async_add_job(ft.partial(self.open_cover_tilt, **kwargs))
-
-    def close_cover_tilt(self, **kwargs: Any) -> None:
-        """Close the cover tilt."""
-        pass
-
-    async def async_close_cover_tilt(self, **kwargs):
-        """Close the cover tilt."""
-        await self.hass.async_add_job(ft.partial(self.close_cover_tilt, **kwargs))
-
-    def set_cover_tilt_position(self, **kwargs):
-        """Move the cover tilt to a specific position."""
-        pass
-
-    async def async_set_cover_tilt_position(self, **kwargs):
-        """Move the cover tilt to a specific position."""
-        await self.hass.async_add_job(
-            ft.partial(self.set_cover_tilt_position, **kwargs)
-        )
-
-    def stop_cover_tilt(self, **kwargs):
-        """Stop the cover."""
-        pass
-
-    async def async_stop_cover_tilt(self, **kwargs):
-        """Stop the cover."""
-        await self.hass.async_add_job(ft.partial(self.stop_cover_tilt, **kwargs))
-
-    def toggle_tilt(self, **kwargs: Any) -> None:
-        """Toggle the entity."""
-        if self.current_cover_tilt_position == 0:
-            self.open_cover_tilt(**kwargs)
+    def set_cover_position(self, **kwargs):
+        """Move the cover to a specific position."""
+        _LOGGER.warn("set_cover_position: %s", kwargs)
+        location = self._status.get('airer_location')
+        position = kwargs.get(ATTR_POSITION)
+        if location > position:
+            delay = location - position / 10
+            open_cover()
         else:
-            self.close_cover_tilt(**kwargs)
-
-    async def async_toggle_tilt(self, **kwargs):
-        """Toggle the entity."""
-        if self.current_cover_tilt_position == 0:
-            await self.async_open_cover_tilt(**kwargs)
-        else:
-            await self.async_close_cover_tilt(**kwargs)
+            delay = position - location / 10
+            close_cover()
+        async_call_later(self._hass, delay, self.stop_cover)
