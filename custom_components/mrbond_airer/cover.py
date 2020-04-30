@@ -6,6 +6,7 @@ import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 
 from homeassistant.components.cover import CoverDevice, PLATFORM_SCHEMA, ATTR_POSITION
+from homeassistant.components.light import Light
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_TOKEN
 from homeassistant.helpers.event import async_call_later
 
@@ -35,11 +36,11 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     token = config[CONF_TOKEN]
     name = config.get(CONF_NAME) or host
 
-    device = MrBondDevice(host, token)
+    device = Device(host, token)
 
     add_entities([
         MrBondAirer(hass, name, device),
-        MrBondLight(hass, name, device),
+        MrBondLight(hass, name + '灯', device),
         ], True)
 
 
@@ -74,7 +75,7 @@ class MiioEntity():
         """Fetch state from the device."""
         try:
             for prop in AIRER_PROPS:
-                self._status[prop] = self.control('get_prop', [prop])[0]
+                self._status[prop] = self._device.send('get_prop', [prop])[0]
             self._available = True
         except Exception as exc:
             _LOGGER.error("Error on update: %s", exc)
@@ -82,7 +83,7 @@ class MiioEntity():
 
     def control(self, name, value):
         try:
-            result = self.control(name, [value])
+            result = self._device.send(name, [value])
             _LOGGER.debug("Response from miio control: %s", result)
             return result == ['ok']
         except Exception as exc:
@@ -93,7 +94,7 @@ class MiioEntity():
             return None
 
 
-class MrBondLight(Light, MiioEntity):
+class MrBondLight(MiioEntity, Light):
     """Representation of MrBond Airer Light."""
 
     @property
@@ -112,13 +113,13 @@ class MrBondLight(Light, MiioEntity):
             self._status['led'] = '0'
 
 
-class MrBondAirer(CoverDevice, MiioEntity):
+class MrBondAirer(MiioEntity, CoverDevice):
     """Representation of a cover."""
 
-    def __init__(self, name, device):
+    def __init__(self, hass, name, device):
         """Initialize the light device."""
-        super().__init__(name ,device)
-        self._status['airer_location'] == '1'
+        super().__init__(hass, name ,device)
+        self._status['airer_location'] = '1'
 
     @property
     def icon(self):
@@ -155,7 +156,7 @@ class MrBondAirer(CoverDevice, MiioEntity):
     @property
     def is_closed(self):
         """Return if the cover is closed or not."""
-        return location = self._status.get('airer_location') == '2'
+        return self._status.get('airer_location') == '2'
 
     def open_cover(self, **kwargs):
         """Open the cover."""
