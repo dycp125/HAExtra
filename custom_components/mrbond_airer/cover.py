@@ -1,55 +1,18 @@
 """Support for MrBond Airer."""
 import logging
-
-import voluptuous as vol
-import homeassistant.helpers.config_validation as cv
-
-from homeassistant.components.cover import CoverDevice, PLATFORM_SCHEMA, ATTR_POSITION
-from homeassistant.const import CONF_HOST, CONF_NAME, CONF_TOKEN
-from homeassistant.helpers.event import async_call_later
-
 from . import MiioEntity, DOMAIN
+
+from homeassistant.components.cover import CoverDevice, ATTR_POSITION
+from homeassistant.helpers.event import async_call_later
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
-    {
-        vol.Required(CONF_HOST): cv.string,
-        vol.Required(CONF_TOKEN): vol.All(cv.string, vol.Length(min=32, max=32)),
-        vol.Optional(CONF_NAME): cv.string,
-    }
-)
-
 AIRER_DURATION = 10
 
-def setup_platform(hass, config, add_entities, discovery_info=None):
+
+async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the light from config."""
-    host = config[CONF_HOST]
-    token = config[CONF_TOKEN]
-    name = config.get(CONF_NAME) or host
-
-    device = Device(host, token)
-
-    add_entities([MrBondAirer(hass, name, device)], True)
-
-
-# class MrBondLight(MiioEntity, Light):
-#     """Representation of MrBond Airer Light."""
-
-#     @property
-#     def is_on(self):
-#         """Return true if light is on."""
-#         return self._device.status.get('led') == '1'
-
-#     def turn_on(self, **kwargs):
-#         """Turn the light on."""
-#         if self._device.control('set_led', 1):
-#             self._device.status['led'] = '1'
-
-#     def turn_off(self, **kwargs):
-#         """Turn the light off."""
-#         if self._device.control('set_led', 0):
-#             self._device.status['led'] = '0'
+    async_add_entities([MrBondAirer(hass, discovery_info, hass.data[DOMAIN])], True)
 
 
 class MrBondAirer(MiioEntity, CoverDevice):
@@ -57,21 +20,13 @@ class MrBondAirer(MiioEntity, CoverDevice):
 
     def __init__(self, hass, name, device):
         """Initialize the light device."""
-        super().__init__(hass, name ,device)
+        super().__init__(hass, name ,device, True)
         self._device.status['airer_location'] = '1'
 
     @property
     def icon(self):
         """Return the name of the device if any."""
         return 'mdi:hanger'
-
-    @property
-    def should_poll(self):
-        """Return True if entity has to be polled for state.
-
-        False if entity pushes its state to HA.
-        """
-        return False
 
     @property
     def current_cover_position(self):
@@ -133,4 +88,4 @@ class MrBondAirer(MiioEntity, CoverDevice):
                 self._device.status['motor'] == '1'
             else:
                 return
-            async_call_later(self._hass, 5, self.stop_cover)
+            async_call_later(self._hass, AIRER_DURATION/2, self.stop_cover)
