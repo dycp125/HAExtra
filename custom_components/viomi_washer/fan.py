@@ -3,10 +3,13 @@ import time
 import datetime
 
 from miio import Device
+
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
+
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_TOKEN
 from homeassistant.components.fan import FanEntity, SUPPORT_SET_SPEED, SUPPORT_OSCILLATE, SUPPORT_DIRECTION, PLATFORM_SCHEMA
+from homeassistant.helpers.restore_state import RestoreEntity
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -71,7 +74,8 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     add_entities([VioMiWasher(name, host, token)], True)
 
 
-class VioMiWasher(FanEntity):
+class VioMiWasher(FanEntity, RestoreEntity):
+
     def __init__(self, name, host, token):
         self._name = name or host
         self._device = Device(host, token)
@@ -81,6 +85,15 @@ class VioMiWasher(FanEntity):
         self._skip_update = False
         self._dry_mode = 0
         self._appoint_time = 0
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+        last_state = await self.async_get_last_state()
+        _LOGGER.debug("async_added_to_hass: %s", last_state)
+        if last_state:
+            pass
+            #TODO: self._dry_mode= self._appoint_time = 
+            #     _LOGGER.debug("Restore from speed: %s", location)
 
     @property
     def supported_features(self):

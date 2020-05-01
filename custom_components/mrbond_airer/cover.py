@@ -24,6 +24,16 @@ class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
         super().__init__(hass, name ,device, True)
         self._device.status['airer_location'] = '1'
 
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+        last_state = await self.async_get_last_state()
+        _LOGGER.debug("async_added_to_hass: %s", last_state)
+        if last_state:
+            location = last_state.attributes.get('airer_location')
+            if location is not None:
+                self._device.status['airer_location'] = location
+                _LOGGER.debug("Restore location: %s", location)
+
     @property
     def icon(self):
         """Return the name of the device if any."""
@@ -55,20 +65,20 @@ class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
 
     def open_cover(self, **kwargs):
         """Open the cover."""
-        _LOGGER.warn("open_cover: %s", kwargs)
+        _LOGGER.debug("open_cover: %s", kwargs)
         if self._device.control('set_motor', 1):
             self._device.status['airer_location'] = '1'
-            _LOGGER.warn("open_cover success: %s", self._device.status)
+            _LOGGER.debug("open_cover success: %s", self._device.status)
 
     def close_cover(self, **kwargs):
         """Close cover."""
-        _LOGGER.warn("close_cover: %s", kwargs)
+        _LOGGER.debug("close_cover: %s", kwargs)
         if self._device.control('set_motor', 2):
             self._device.status['airer_location'] = '2'
 
     def stop_cover(self, **kwargs):
         """Stop the cover."""
-        _LOGGER.warn("stop_cover: %s", kwargs)
+        _LOGGER.debug("stop_cover: %s", kwargs)
         self.pause_cover()
 
     def pause_cover(self):
@@ -79,7 +89,7 @@ class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
 
     def set_cover_position(self, **kwargs):
         """Move the cover to a specific position."""
-        _LOGGER.warn("set_cover_position: %s", kwargs)
+        _LOGGER.debug("set_cover_position: %s", kwargs)
         position = kwargs.get(ATTR_POSITION)
         if position <= 0:
             self.close_cover()
@@ -96,13 +106,3 @@ class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
             else:
                 return
             async_call_later(self._hass, AIRER_DURATION/2, self.pause_cover)
-
-    async def async_added_to_hass(self):
-        await super().async_added_to_hass()
-        last_state = await self.async_get_last_state()
-        _LOGGER.debug("async_added_to_hass: %s", last_state)
-        if last_state:
-            location = last_state.attributes.get('airer_location')
-            if location is not None:
-                self._device.status['airer_location'] = location
-                _LOGGER.debug("Restore location: %s", location)
