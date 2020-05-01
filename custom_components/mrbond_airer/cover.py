@@ -3,6 +3,7 @@ import logging
 from . import MiioEntity, DOMAIN
 
 from homeassistant.components.cover import CoverDevice, ATTR_POSITION
+from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.event import async_call_later
 
 _LOGGER = logging.getLogger(__name__)
@@ -15,7 +16,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_add_entities([MrBondAirer(hass, discovery_info, hass.data[DOMAIN])], True)
 
 
-class MrBondAirer(MiioEntity, CoverDevice):
+class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
     """Representation of a cover."""
 
     def __init__(self, hass, name, device):
@@ -56,19 +57,25 @@ class MrBondAirer(MiioEntity, CoverDevice):
         """Open the cover."""
         _LOGGER.warn("open_cover: %s", kwargs)
         if self._device.control('set_motor', 1):
-            self._device.status['airer_location'] == '1'
+            self._device.status['airer_location'] = '1'
+            _LOGGER.warn("open_cover success: %s", self._device.status)
 
     def close_cover(self, **kwargs):
         """Close cover."""
         _LOGGER.warn("close_cover: %s", kwargs)
         if self._device.control('set_motor', 2):
-            self._device.status['airer_location'] == '2'
+            self._device.status['airer_location'] = '2'
 
     def stop_cover(self, **kwargs):
         """Stop the cover."""
+        _LOGGER.warn("stop_cover: %s", kwargs)
+        self.pause_cover()
+
+    def pause_cover(self):
+        """Stop the cover."""
         if self._device.control('set_motor', 0):
             self._device.status['motor'] == '0'
-            self._device.status['airer_location'] == '0'
+            self._device.status['airer_location'] = '0'
 
     def set_cover_position(self, **kwargs):
         """Move the cover to a specific position."""
@@ -88,4 +95,14 @@ class MrBondAirer(MiioEntity, CoverDevice):
                 self._device.status['motor'] == '1'
             else:
                 return
-            async_call_later(self._hass, AIRER_DURATION/2, self.stop_cover)
+            async_call_later(self._hass, AIRER_DURATION/2, self.pause_cover)
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+        last_state = await self.async_get_last_state()
+        _LOGGER.debug("async_added_to_hass: %s", last_state)
+        if last_state:
+            location = last_state.attributes.get('airer_location')
+            if location is not None:
+                self._device.status['airer_location'] = location
+                _LOGGER.debug("Restore location: %s", location)

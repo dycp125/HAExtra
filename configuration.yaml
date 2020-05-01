@@ -11,7 +11,7 @@ logger:
   default: warning
   logs:
     #custom_components.zhibot: debug
-    custom_components.viomi_washer: debug
+    custom_components.mrbond_airer: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
     #homeassistant.components.braviatv: debug
@@ -407,10 +407,6 @@ yeelight:
       model: mono1
 
 light:
-  - platform: mrbond_airer
-    name: 晾衣灯
-    host: Airer
-    token: !secret airer_token
   - platform: mqtt
     name: 客厅筒灯
     state_topic: Hassmart1/relay/0
@@ -608,10 +604,12 @@ climate:
     temperature_sensor: sensor.shu_fang_wen_du
     humidity_sensor: sensor.aircat2_humidity
 
+mrbond_airer:
+  name: 晾衣架
+  host: Airer
+  token: !secret airer_token
+
 cover:
-  # - platform: mrbond_airer
-  #   host: Airer
-  #   token: !secret airer_token
   - platform: broadlink2
     host: Remote
     mac: 34:EA:34:58:73:5D

@@ -21,19 +21,29 @@ class MiioDevice(Device):
     def __init__(self, host, token):
         """Initialize the light device."""
         super().__init__(host, token)
-        self.status = {}
+        self.status = {'genie_deviceType': 'hanger'}
         self.available = False
         self.update_entities = []
+        self._skip_update = False
+        self._retry = 0
 
     def update(self):
         """Fetch state from the device."""
+        if self._skip_update:
+            self._skip_update = False
+            return
+
         try:
             for prop in AIRER_PROPS:
                 self.status[prop] = self.send('get_prop', [prop])[0]
+            _LOGGER.debug("MiioDevice update: %s", self.status)
             self.available = True
+            self._retry = 0
         except Exception as exc:
             _LOGGER.error("Error on update: %s", exc)
-            self.available = False
+            self._retry += 1
+            if self._retry > 3:
+                self.available = False
 
         for entity in self.update_entities:
             entity.async_schedule_update_ha_state()
@@ -42,6 +52,7 @@ class MiioDevice(Device):
         try:
             result = self.send(name, [value])
             _LOGGER.debug("Response from miio control: %s", result)
+            self._skip_update = True
             return result == ['ok']
         except Exception as exc:
             #import traceback
