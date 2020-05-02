@@ -223,13 +223,13 @@ class VioMiWasher(FanEntity, RestoreEntity):
                         return
                 elif params[0] == 'dry_mode':
                     # self.oscillate(params[1])
-                    self._dry_mode = params[1]
+                    self._dry_mode = int(params[1])
                 elif params[0] == 'appoint_time':
                     # self.set_direction(params[1])
-                    self._appoint_time = params[1]
+                    self._appoint_time = int(params[1])
                 elif params[0] == 'appoint_clock':
                     # self.set_direction('-' + params[1])
-                    self._appoint_time = '-' + params[1]
+                    self._appoint_time = -int(params[1])
                 elif not self.control(params[0], params[1]):  # Custom command
                     return
             else:
