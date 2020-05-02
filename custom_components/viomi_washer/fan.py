@@ -16,7 +16,8 @@ _LOGGER = logging.getLogger(__name__)
 
 APPOINT_MIN = 1  # 3 in app default
 APPOINT_MAX = 23  # 19 in app default
-
+DEFAULT_DRY_MODE = 30721 # 
+DEFAULT_APPOINT_TIME = -8 # -8 means 8 o'clock, 8 means 8 hours later
 
 WASHER_PROPS = [
     "program",
@@ -91,9 +92,9 @@ class VioMiWasher(FanEntity, RestoreEntity):
         last_state = await self.async_get_last_state()
         _LOGGER.debug("async_added_to_hass: %s", last_state)
         if last_state:
-            pass
-            #TODO: self._dry_mode= self._appoint_time = 
-            #     _LOGGER.debug("Restore from speed: %s", location)
+            self._appoint_time = int(last_state.attributes.get('direction') == 'reverse')
+            self._dry_mode = int(last_state.attributes.get('oscillating'))
+            _LOGGER.debug("Restore state: dry_mode=%s, appoint_time=%s", self._dry_mode, self._appoint_time)
 
     @property
     def supported_features(self):
@@ -164,7 +165,7 @@ class VioMiWasher(FanEntity, RestoreEntity):
         time.sleep(1)
 
         # Set dry mode
-        dry_mode = 30721 if self._dry_mode == 1 else self._dry_mode
+        dry_mode = DEFAULT_DRY_MODE if self._dry_mode == 1 else self._dry_mode
         if self._status.get('DryMode') != dry_mode:
             if not self.control("SetDryMode", dry_mode):
                 return
@@ -222,13 +223,13 @@ class VioMiWasher(FanEntity, RestoreEntity):
                         return
                 elif params[0] == 'dry_mode':
                     # self.oscillate(params[1])
-                    self._dry_mode = int(params[1])
+                    self._dry_mode = params[1]
                 elif params[0] == 'appoint_time':
                     # self.set_direction(params[1])
-                    self._appoint_time = int(params[1])
+                    self._appoint_time = params[1]
                 elif params[0] == 'appoint_clock':
                     # self.set_direction('-' + params[1])
-                    self._appoint_time = -int(params[1])
+                    self._appoint_time = '-' + params[1]
                 elif not self.control(params[0], params[1]):  # Custom command
                     return
             else:
@@ -251,7 +252,7 @@ class VioMiWasher(FanEntity, RestoreEntity):
 
     def set_direction(self, direction):
         """Set the direction of the fan."""
-        self._appoint_time = -8 if direction == 'reverse' else int(direction)
+        self._appoint_time = DEFAULT_APPOINT_TIME if direction == 'reverse' else int(direction)
         _LOGGER.debug("set_direction: appoint_time=%s", self._appoint_time)
 
     def control(self, name, value):
