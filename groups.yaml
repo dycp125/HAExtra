@@ -22,14 +22,10 @@ default_view:
     - sensor.ke_ting_er_yang_hua_tan
     - light.ke_ting_tong_deng
     - media_player.ke_ting_dian_shi
-    #- fan.ke_ting_bi_shan
+    - fan.ke_ting_bi_shan
     - fan.ke_ting_xin_feng_ji
     - climate.ke_ting_kong_diao
     - climate.ke_ting_di_nuan
-    - automation.ke_ting_tong_deng_tong_bu
-    - automation.ke_ting_kong_diao_guan
-    - automation.ke_ting_kong_diao_kai
-    - automation.ke_ting_xin_feng_ji_diao_jie
 
 餐厅:
   icon: mdi:silverware-fork-knife
@@ -46,18 +42,6 @@ default_view:
     - switch.can_ting_chu_shi_ji
     - fan.can_ting_jing_hua_qi
     - climate.can_ting_kong_diao
-    - automation.can_ting_tong_deng_tong_bu
-    - automation.can_ting_chu_shi_ji_guan
-    - automation.can_ting_chu_shi_ji_kai
-    - automation.can_ting_jia_shi_qi_guan
-    - automation.can_ting_jia_shi_qi_kai
-    - automation.can_ting_jing_hua_qi_diao_jie
-    - automation.chu_fang_men_ti_xing
-
-    - automation.ru_hu_men_huan_ying
-    - automation.ru_hu_men_ti_xing
-    - automation.shi_nei_kong_qi_chai
-    - automation.huan_jing_zhuang_kuang
 
 过道:
   icon: mdi:road
@@ -69,17 +53,10 @@ default_view:
     - switch.plug_158d0003a58422
     - cover.curtain_158d0003f7951d
     - input_text.xiao_ai_yin_xiang
-    - automation.guo_dao_bei_jing_deng_gan_ying
-    - automation.guo_dao_deng_gan_ying_zhong_qi
-    - automation.xiao_ai_yin_bo_bao
-    - automation.kai_he_guo_dao_juan_lian
-
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
     - light.xi_shou_jian_deng
     - switch.xi_shou_jian_pai_qi_shan
-    - automation.xi_shou_jian_deng_yan_shi_guan
-    - automation.xi_shou_jian_deng_gan_ying_kai
 
 主卧:
   icon: mdi:bed-king
@@ -101,17 +78,6 @@ default_view:
     - fan.xi_yi_ji
     - climate.zhu_wo_kong_diao
     - climate.zhu_wo_di_nuan
-    - automation.shui_mian_jie_shu
-    - automation.shui_mian_shen_ru
-    - automation.shui_mian_zhun_bei
-    - automation.zhu_wo_jia_shi_qi_guan
-    - automation.zhu_wo_jia_shi_qi_kai
-    - automation.zhu_wo_jing_hua_qi_diao_jie
-    - automation.zhu_wo_kong_diao_diao_jie
-    - automation.zhu_wo_xin_feng_ji_diao_jie
-    - automation.yu_shi_an_niu_dan_ji_yu_yue_xi_yi
-    - automation.yu_shi_an_niu_shuang_ji_yu_yue_xi_hong
-    - automation.yu_shi_an_niu_chang_an_yu_yue_qu_xiao
 
 次卧:
   icon: mdi:bed-double
@@ -120,7 +86,6 @@ default_view:
     - sensor.ci_wo_shi_du
     - sensor.ci_wo_ke_li_wu
     - fan.ci_wo_jing_hua_qi
-    - automation.ci_wo_jing_hua_qi_diao_jie
 
 儿童房:
   icon: mdi:car-child-seat
@@ -129,19 +94,12 @@ default_view:
     - sensor.er_tong_fang_shi_du
     - sensor.er_tong_fang_ke_li_wu
     - sensor.er_tong_fang_er_yang_hua_tan
-    # - sensor.feng_shan_wen_du
+    - sensor.feng_shan_wen_du
     - light.er_tong_fang_deng
     - light.er_tong_fang_tai_deng
     - fan.er_tong_fang_jing_hua_qi
-    #- fan.er_tong_fang_feng_shan
+    - fan.er_tong_fang_feng_shan
     - climate.er_tong_fang_kong_diao
-    - automation.er_tong_fang_chu_shi_ji_guan
-    - automation.er_tong_fang_chu_shi_ji_kai
-    - automation.er_tong_fang_feng_shan_diao_jie
-    - automation.er_tong_fang_jia_shi_qi_guan
-    - automation.er_tong_fang_jia_shi_qi_kai
-    - automation.er_tong_fang_jing_hua_qi_diao_jie
-    - automation.er_tong_fang_kong_diao_diao_jie
 
 书房:
   icon: mdi:bookshelf
@@ -159,19 +117,9 @@ default_view:
     - cover.shu_fang_chuang_lian
     - cover.liang_yi_jia
     - vacuum.sao_di_ji
-    #- fan.shu_fang_feng_shan
-    #- fan.shu_fang_jing_hua_qi
+    - fan.shu_fang_feng_shan
+    - fan.shu_fang_jing_hua_qi
     - climate.shu_fang_kong_diao
-    #- automation.shu_fang_an_niu_dan_ji_qie_huan_yin_xiang
-    - automation.shu_fang_an_niu_shuang_ji_kai_guan_tou_ying_yi
-    - automation.shu_fang_an_niu_chang_an_kai_guan_bo_fang_qi
-    - automation.da_kai_tou_ying_yi_pei_tao
-    - automation.guan_bi_tou_ying_yi_pei_tao
-    - automation.shu_fang_chuang_lian_guan
-    - automation.shu_fang_chuang_lian_kai
-    - automation.shu_fang_feng_shan_diao_jie
-    - automation.shu_fang_jing_hua_qi_diao_jie
-    - automation.shu_fang_kong_diao_diao_jie
 
 阳台:
   icon: mdi:home-minus
@@ -182,5 +130,3 @@ default_view:
     - sensor.yang_tai_ke_li_wu
     - binary_sensor.door_window_sensor_158d000228a52b
     - sun.sun
-    - automation.yang_tai_men_ti_xing
-    - automation.shi_wai_kong_qi_hao

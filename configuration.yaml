@@ -365,11 +365,11 @@ switch:
     host: Remote
     mac: 34:EA:34:58:73:5D
     type: rm2_pro_plus
-  # - platform: broadlink
-  #   friendly_name: 红外遥控
-  #   host: Remote2
-  #   mac: 78:0F:77:47:AA:8F
-  #   type: rm_mini
+  - platform: broadlink
+    friendly_name: 红外遥控
+    host: Remote2
+    mac: 78:0F:77:47:AA:8F
+    type: rm_mini
   - platform: template
     switches:
       tou_ying_yi:
@@ -483,16 +483,16 @@ fan:
     host: Purifier
     model: zhimi.airpurifier.m1
     token: !secret purifier_token
-  # - platform: xiaomi_fan
-  #   name: 儿童房风扇
-  #   host: Fan
-  #   model: zhimi.fan.v3
-  #   token: !secret fan_token
-  # - platform: xiaomi_fan
-  #   name: 书房风扇
-  #   host: Fan2
-  #   model: zhimi.fan.sa1
-  #   token: !secret fan2_token
+  - platform: xiaomi_fan
+    name: 儿童房风扇
+    host: Fan
+    model: zhimi.fan.v3
+    token: !secret fan_token
+  - platform: xiaomi_fan
+    name: 书房风扇
+    host: Fan2
+    model: zhimi.fan.sa1
+    token: !secret fan2_token
   - platform: xiaomi_miio
     name: 客厅新风机
     host: Fresher
@@ -503,21 +503,21 @@ fan:
     host: Fresher2
     model: zhimi.airfresh.va2
     token: !secret fresher2_token
-  # - platform: mqtt
-  #   name: 书房净化器
-  #   state_topic: NodeMCU4/relay/0
-  #   command_topic: NodeMCU4/relay/0/set
-  #   availability_topic: NodeMCU4/status
-  #   oscillation_state_topic: NodeMCU4/relay/1
-  #   oscillation_command_topic: NodeMCU4/relay/1/set
-  #   speed_state_topic: NodeMCU4/relay/0
-  #   speed_command_topic: NodeMCU4/relay/0/set
-  #   state_value_template: '{% if value == "0" %}OFF{% else %}ON{% endif %}'
-  #   payload_low_speed: '1'
-  #   payload_medium_speed: '2'
-  #   payload_high_speed: '3'
-  #   payload_oscillation_on: 'ON'
-  #   payload_oscillation_off: 'OFF'
+  - platform: mqtt
+    name: 书房净化器
+    state_topic: NodeMCU4/relay/0
+    command_topic: NodeMCU4/relay/0/set
+    availability_topic: NodeMCU4/status
+    oscillation_state_topic: NodeMCU4/relay/1
+    oscillation_command_topic: NodeMCU4/relay/1/set
+    speed_state_topic: NodeMCU4/relay/0
+    speed_command_topic: NodeMCU4/relay/0/set
+    state_value_template: '{% if value == "0" %}OFF{% else %}ON{% endif %}'
+    payload_low_speed: '1'
+    payload_medium_speed: '2'
+    payload_high_speed: '3'
+    payload_oscillation_on: 'ON'
+    payload_oscillation_off: 'OFF'
   - platform: mqtt
     name: 餐厅净化器
     state_topic: NodeMCU5/relay/0
@@ -577,10 +577,10 @@ fan:
     payload_low_speed: 9126,4798,380,784,438,754,412,780,436,754,438,754,810,382,810,382,810,382,436,756,810,382,412,778,812,380,812,380,810,380,812,382,810,382,408,786,412,778,436,758,434,756,410,780,810,382,434,756,412,780,808,386,806,384,832,360,808,384,832,358,410,778,812,384,808,384,1230,8294,9148,4772,406,786,412,778,418,774,412,780,412,780,812,380,812,380,810,382,412,778,812,382,412,780,810,382,810,382,810,382,810,382,810,382,382,810,412,780,412,780,412,780,410,780,812,382,410,780,412,780,810,384,808,382,808,382,810,382,808,384,412,780,810,384,808,382,1208,8316,9152,4776,378,810,412,778,412,778,412,780,412,780,810,382,810,382,810,382,412,780,810,384,410,780,810,382,810,382,810,382,808,384,810,382,384,810,412,780,412,780,412,780,412,780,812,382,412,780,410,780,810,382,808,382,810,382,810,382,810,380,412,782,808,384,808,382,1208,1,2,38
     payload_medium_speed: 9126,4798,380,784,438,754,412,780,436,754,438,754,810,382,810,382,810,382,436,756,810,382,412,778,812,380,812,380,810,380,812,382,810,382,408,786,412,778,436,758,434,756,410,780,810,382,434,756,412,780,808,386,806,384,832,360,808,384,832,358,410,778,812,384,808,384,1230,8294,9148,4772,406,786,412,778,418,774,412,780,412,780,812,380,812,380,810,382,412,778,812,382,412,780,810,382,810,382,810,382,810,382,810,382,382,810,412,780,412,780,412,780,410,780,812,382,410,780,412,780,810,384,808,382,808,382,810,382,808,384,412,780,810,384,808,382,1208,8316,9152,4776,378,810,412,778,412,778,412,780,412,780,810,382,810,382,810,382,412,780,810,384,410,780,810,382,810,382,810,382,808,384,810,382,384,810,412,780,412,780,412,780,412,780,812,382,412,780,410,780,810,382,808,382,810,382,810,382,810,380,412,782,808,384,808,382,1208,1,2,38
     payload_high_speed: 9126,4798,380,784,438,754,412,780,436,754,438,754,810,382,810,382,810,382,436,756,810,382,412,778,812,380,812,380,810,380,812,382,810,382,408,786,412,778,436,758,434,756,410,780,810,382,434,756,412,780,808,386,806,384,832,360,808,384,832,358,410,778,812,384,808,384,1230,8294,9148,4772,406,786,412,778,418,774,412,780,412,780,812,380,812,380,810,382,412,778,812,382,412,780,810,382,810,382,810,382,810,382,810,382,382,810,412,780,412,780,412,780,410,780,812,382,410,780,412,780,810,384,808,382,808,382,810,382,808,384,412,780,810,384,808,382,1208,8316,9152,4776,378,810,412,778,412,778,412,780,412,780,810,382,810,382,810,382,412,780,810,384,410,780,810,382,810,382,810,382,808,384,810,382,384,810,412,780,412,780,412,780,412,780,812,382,412,780,410,780,810,382,808,382,810,382,810,382,810,380,412,782,808,384,808,382,1208,1,2,38
-  # - platform: smartir
-  #   name: 客厅壁扇
-  #   device_code: 1044
-  #   controller_data: Remote2
+  - platform: smartir
+    name: 客厅壁扇
+    device_code: 1044
+    controller_data: Remote2
 
 smartir:
 

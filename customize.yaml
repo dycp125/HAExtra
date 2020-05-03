@@ -88,6 +88,8 @@ light.xi_shou_jian_deng:
   icon: mdi:ceiling-light
 light.zhu_wo_deng:
   icon: mdi:ceiling-light
+person.a_yi:
+  dash_click: /config/automation
 person.ba_ba:
   dash_click: /config/server_control
 sensor.can_ting_ke_li_wu:
