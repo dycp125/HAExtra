@@ -76,7 +76,7 @@ light.ke_ting_tong_deng:
 light.ke_ting_tong_deng_2:
   hidden: true
   icon: mdi:track-light
-light.liang_yi_deng:
+light.liang_yi_jia_deng:
   genie_deviceName: 吊灯
   icon: mdi:spotlight
 light.shu_fang_tai_deng:

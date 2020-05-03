@@ -21,7 +21,7 @@ class MiioDevice(Device):
     def __init__(self, host, token):
         """Initialize the light device."""
         super().__init__(host, token)
-        self.status = {'genie_deviceType': 'hanger'}
+        self.status = {}
         self.available = False
         self.update_entities = []
         self._skip_update = False

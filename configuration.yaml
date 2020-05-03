@@ -10,7 +10,7 @@ homeassistant:
 logger:
   default: warning
   logs:
-    #custom_components.zhibot: debug
+    custom_components.zhibot: debug
     custom_components.mrbond_airer: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
