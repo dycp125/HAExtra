@@ -98,7 +98,7 @@ async def handleRequest(data):
         payload = data['payload']
         properties = None
         name = header['name']
-        _LOGGER.info("Handle Request: %s", data)
+        _LOGGER.debug("Handle Request: %s", data)
 
         if await validateToken(payload):
             namespace = header['namespace']
