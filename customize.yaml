@@ -48,7 +48,6 @@ fan.ke_ting_xin_feng_ji:
   genie_deviceType: VMC
   icon: mdi:leaf
 fan.shu_fang_jing_hua_qi:
-  dash_icon: ${sensor.shu_fang_ke_li_wu}
   genie_deviceType: airpurifier
   icon: mdi:cupcake
 fan.zhu_wo_jing_hua_qi:

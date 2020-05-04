@@ -4,7 +4,7 @@
       at: '12:30:00'
     - platform: numeric_state
       entity_id: sensor.shu_fang_liang_du
-      above: 280
+      above: 200
       for:
         minutes: 10
   condition:
