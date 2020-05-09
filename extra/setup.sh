@@ -123,7 +123,16 @@ EOF
 # Install on CoreElec
 installentware
 opkg update
-opkg install gcc python3-pip python3-setuptools
+opkg install gcc make coreutils-expr
+opkg install python3-pip python3-setuptools
+
+# libffi-dev
+# wget ftp://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz  # 下载包
+# tar -zxvf libffi-3.2.1.tar.gz
+# cd libffi-3.2.1
+# ./configure
+# make
+# cp armv7l-unknown-linux-gnueabi/include/*.h /opt/include
 
 # Install cryptography
 wget http://launchpadlibrarian.net/230019290/libffi-dev_3.2.1-4_arm64.deb # https://launchpad.net/ubuntu/xenial/arm64/libffi-dev/3.2.1-4
