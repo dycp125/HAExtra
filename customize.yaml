@@ -122,8 +122,10 @@ sensor.yang_tai_ke_li_wu:
   dash_order: '3'
   device_class: pm25
 sensor.yang_tai_shi_du:
+  dash_click: https://m.weathercn.com/zh/cn/hangzhou/
   dash_order: '2'
 sensor.yang_tai_wen_du:
+  dash_click: http://m.nmc.cn/publish/forecast/AZJ/hangzhou.html
   dash_order: '1'
 sensor.zhu_wo_er_yang_hua_tan:
   device_class: co2
