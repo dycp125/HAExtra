@@ -119,7 +119,12 @@ sensor.shu_fang_wen_du:
   dash_relation: fan.shu_fang_feng_shan
 sensor.yang_tai_ke_li_wu:
   dash_click: https://www.lewei50.com/u/g/34131
+  dash_order: '3'
   device_class: pm25
+sensor.yang_tai_shi_du:
+  dash_order: '2'
+sensor.yang_tai_wen_du:
+  dash_order: '1'
 sensor.zhu_wo_er_yang_hua_tan:
   device_class: co2
 sensor.zhu_wo_ke_li_wu:

@@ -639,7 +639,7 @@ panel_iframe:
   dash:
     title: 面板
     icon: mdi:microsoft
-    url: !secret dash_url
+    url: /local/dash.html
 
 actuator:
 

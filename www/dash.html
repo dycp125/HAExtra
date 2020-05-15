@@ -824,6 +824,18 @@
 				var index1 = _sorted_domains.indexOf(domain1)
 				var index2 = _sorted_domains.indexOf(domain2)
 				if (index1 == index2) {
+					var order1 = entity1.attributes.dash_order
+					var order2 = entity2.attributes.dash_order
+					if (order1) {
+						if (order2) {
+							return order1 - order2
+						} else {
+							return -1
+						}
+					} else if (order2) {
+						return 1
+					}
+
 					if (domain1 == 'sensor') {
 						var unit1 = entity1.attributes.unit_of_measurement
 						var unit2 = entity2.attributes.unit_of_measurement
