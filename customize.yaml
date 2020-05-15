@@ -166,6 +166,6 @@ vacuum.sao_di_ji:
   genie_deviceType: fan
   genie_zone: 工作间
 weather.tian_qi:
-  dash_click: https://m.tianqi.com/hangzhou
+  dash_click: http://caiyunapp.com/map
   dash_extra: attribution
   dash_name: ${temperature}℃ ${humidity}% ${pm25}μg
