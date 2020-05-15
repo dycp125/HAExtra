@@ -1,6 +1,7 @@
 default_view:
   icon: mdi:home-assistant
   entities:
+    - group.yang_tai
     - group.ke_ting
     - group.can_ting
     - group.guo_dao
@@ -8,7 +9,6 @@ default_view:
     - group.ci_wo 
     - group.er_tong_fang
     - group.shu_fang
-    - group.yang_tai
     - person.ba_ba
     - person.ma_ma
     - person.a_yi
