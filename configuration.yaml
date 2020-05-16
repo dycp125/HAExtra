@@ -9,9 +9,9 @@ homeassistant:
 
 logger:
   default: warning
-  logs:
-    custom_components.zhibot: debug
-    custom_components.mrbond_airer: debug
+  # logs:
+    # custom_components.zhibot: debug
+    # custom_components.mrbond_airer: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
     #homeassistant.components.braviatv: debug
@@ -662,7 +662,7 @@ zhimsg:
     password: !secret miai_password
 
 input_text:
-  xiao_ai_yin_xiang:
-    name: 小爱音箱
+  yu_yin_bo_bao:
+    name: 语音播报
     icon: mdi:account-tie-voice
-    initial: 小爱播报
+    initial: 您好

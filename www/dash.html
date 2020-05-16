@@ -829,7 +829,7 @@
 					var order2 = entity2.attributes.dash_order
 					if (order1) {
 						if (order2) {
-							return order1 - order2
+							return parseInt(order1) - parseInt(order2)
 						} else {
 							return -1
 						}

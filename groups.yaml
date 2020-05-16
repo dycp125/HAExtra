@@ -52,7 +52,7 @@ default_view:
     - light.guo_dao_bei_jing_deng
     - switch.plug_158d0003a58422
     - cover.curtain_158d0003f7951d
-    - input_text.xiao_ai_yin_xiang
+    - input_text.yu_yin_bo_bao
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
     - light.xi_shou_jian_deng

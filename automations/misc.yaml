@@ -1,13 +1,13 @@
-- alias: 小爱音播报
+- alias: 语音播报
   trigger:
     - platform: state
-      entity_id: input_text.xiao_ai_yin_xiang
+      entity_id: input_text.yu_yin_bo_bao
   action:
     - condition: template
-      value_template: '{{ states("input_text.xiao_ai_yin_xiang") != "unknown" and states("input_text.xiao_ai_yin_xiang") != "" }}'
-    - service: zhimsg.miai
+      value_template: '{{ states("input_text.yu_yin_bo_bao") != "unknown" and states("input_text.yu_yin_bo_bao") != "" }}'
+    - service: tts.baidu_say
       data_template:
-        message: '{{ states("input_text.xiao_ai_yin_xiang") }}'
+        message: '{{ states("input_text.yu_yin_bo_bao") }}'
 
 - alias: 开合过道卷帘
   trigger:
