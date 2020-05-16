@@ -112,6 +112,7 @@ sensor.illumination_34ce0090901a:
 sensor.ke_ting_er_yang_hua_tan:
   device_class: co2
 sensor.ke_ting_ke_li_wu:
+  dash_click: https://www.hao123.com/rili
   device_class: pm25
 sensor.shu_fang_er_yang_hua_tan:
   device_class: co2
@@ -122,7 +123,7 @@ sensor.yang_tai_ke_li_wu:
   dash_order: '3'
   device_class: pm25
 sensor.yang_tai_shi_du:
-  dash_click: https://m.weathercn.com/zh/cn/hangzhou/
+  dash_click: https://m.weathercn.com/index.do?id=106832
   dash_order: '2'
 sensor.yang_tai_wen_du:
   dash_click: http://m.nmc.cn/publish/forecast/AZJ/hangzhou.html
@@ -166,6 +167,6 @@ vacuum.sao_di_ji:
   genie_deviceType: fan
   genie_zone: 工作间
 weather.tian_qi:
-  dash_click: http://caiyunapp.com/map
+  dash_click: https://caiyunapp.com/weather
   dash_extra: attribution
   dash_name: ${temperature}℃ ${humidity}% ${pm25}μg
