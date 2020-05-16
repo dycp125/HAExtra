@@ -7,8 +7,8 @@ homeassistant:
   time_zone: Asia/Shanghai
   customize: !include customize.yaml
 
-logger:
-  default: warning
+# logger:
+#   default: warning
   # logs:
     # custom_components.zhibot: debug
     # custom_components.mrbond_airer: debug

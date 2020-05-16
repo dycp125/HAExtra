@@ -60,6 +60,9 @@ apt install mosquitto mosquitto-clients libavahi-compat-libdnssd-dev adb
 apt install python3-pip python3-dev python3-setuptools libffi-dev
 ln -sf /usr/bin/python3 /usr/bin/python
 
+# Baidy TTS: pip3 install baidu-aip==1.6.6
+apt install libjpeg-dev zlib1g-dev
+
 # Speedtest
 cd /usr/local/bin
 wget -O speedtest https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py; chmod +x speedtest; ./speedtest
