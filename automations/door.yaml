@@ -76,8 +76,9 @@
       after: '06:00'
       before: '23:00'
   action:
-    - service: zhimsg.miai
+    - service: tts.baidu_say
       data_template:
+        entity_id: media_player.tian_mao_jing_ling
         message: >
           {% if now().hour >= 21 %}
             晚上请关好阳台门

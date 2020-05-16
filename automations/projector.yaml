@@ -94,8 +94,9 @@
   action:
     - service: automation.turn_off
       entity_id: automation.shu_fang_an_niu_chang_an_kai_guan_bo_fang_qi
-    - service: zhimsg.miai
+    - service: tts.baidu_say
       data_template:
+        entity_id: media_player.tian_mao_jing_ling
         message: '正在{% if is_state("switch.tou_ying_yi", "on") %}关闭{% else %}打开{% endif %}播放器'
     - service_template: 'switch.turn_{% if is_state("switch.tou_ying_yi", "on") %}off{% else %}on{% endif %}'
       entity_id: switch.yin_xiang
