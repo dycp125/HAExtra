@@ -46,12 +46,11 @@ logbook:
 
 sun:
 
-# tts:
-#   - platform: google
-#   - platform: baidu
-#     app_id: !secret baidu_app_id
-#     api_key: !secret baidu_api_key
-#     secret_key: !secret baidu_secret_key
+tts:
+  - platform: baidu
+    app_id: !secret baidu_app_id
+    api_key: !secret baidu_api_key
+    secret_key: !secret baidu_secret_key
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations
@@ -634,6 +633,9 @@ media_player:
   - platform: braviatv
     host: X9400e
     name: 客厅电视
+  - platform: dlna_dmr
+    name: 天猫精灵
+    url: http://Magic:49153/description.xml
 
 panel_iframe:
   dash:
