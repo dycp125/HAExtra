@@ -661,8 +661,8 @@ zhimsg:
     miid: !secret miai_miid
     password: !secret miai_password
 
-input_text:
-  yu_yin_bo_bao:
-    name: 语音播报
-    icon: mdi:account-tie-voice
-    initial: 您好
+# input_text:
+#   yu_yin_bo_bao:
+#     name: 语音播报
+#     icon: mdi:account-tie-voice
+#     initial: 您好
