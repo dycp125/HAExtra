@@ -122,6 +122,27 @@ alias hassup='systemctl stop homeassistant; pip3 install homeassistant --upgrade
 alias hasslog='tail -f ~/.homeassistant/home-assistant.log'
 EOF
 
+# Trojan
+scp trojan root@hass:/usr/local/bin
+echo '{"run_type":"client","local_addr":"0.0.0.0","local_port":1080,"remote_addr":"xxx","remote_port":443,"password":["***"],"ssl":{"verify":false}}' >> ~/trojan.conf
+cat <<EOF > /etc/systemd/system/trojan.service
+[Unit]
+Description=Trojan Proxy
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/trojan -c /root/trojan.conf
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+
+systemctl --system daemon-reload
+systemctl enable trojan
+
 
 # Install on CoreElec
 installentware
