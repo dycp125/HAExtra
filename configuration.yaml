@@ -394,7 +394,7 @@ switch:
       #       topic: NodeMCU6/irout/set
       #       payload: '2416,592,1210,594,608,618,1186,616,586,592,1210,618,584,618,586,616,1186,618,584,618,584,616,586,592,608,1,2,38'
       #   turn_off:
-      #     service: shell_command.turn_off_x9300d
+      #     service: shell_command.power_off_x9300d
 
 yeelight:
   devices:
@@ -455,9 +455,9 @@ light:
     payload_off: 3528,1658,426,418,426,1292,380,462,382,1334,382,464,382,1338,380,462,382,1336,382,462,382,462,382,462,382,1336,382,462,382,1336,380,1336,382,464,382,1338,378,462,384,462,382,464,380,1336,382,1336,382,1336,382,462,382,1334,384,464,382,1336,382,462,382,1336,382,1336,382,464,382,462,382,464,382,464,380,462,382,462,382,464,382,464,380,464,382,464,382,464,380,1338,380,462,382,464,382,462,380,464,380,464,380,464,380,1334,382,464,380,464,380,464,380,464,382,1336,382,464,382,462,382,1334,382,464,382,464,382,464,380,1336,382,1336,382,464,382,1338,380,1,2,38
 
 shell_command:
-  turn_off_station: 'ssh root@Station shutdown -h now'
-  turn_off_x9300d: 'adb connect x9300d; adb -s x9300d shell reboot -p'
-  turn_off_x9400d: 'adb connect x9400e; adb -s x9400e shell reboot -p'
+  shutdown_station: 'ssh root@Station shutdown -h now'
+  # power_off_x9300d: 'adb connect x9300d; adb -s x9300d shell reboot -p'
+  # power_off_x9400d: 'adb connect x9400e; adb -s x9400e shell reboot -p'
 
 xiaomi_aqara:
   #interface: 192.168.2.40
