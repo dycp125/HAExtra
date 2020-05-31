@@ -27,8 +27,8 @@ config:
 
 http:
   base_url: !secret http_base_url
-  ssl_key: ~/.homeassistant/privkey.pem
-  ssl_certificate: ~/.homeassistant/fullchain.cer
+  ssl_key: ~/.homeassistant/private.key
+  ssl_certificate: ~/.homeassistant/fullchain.pem
 
 history:
   exclude:
@@ -336,7 +336,7 @@ switch:
     #broadcast_address: 192.168.1.255
     host: Station
     turn_off:
-      service: shell_command.turn_off_station
+      service: shell_command.shutdown_station
   - platform: mqtt
     name: 洗手间排气扇
     state_topic: Hassmart2/relay/1
