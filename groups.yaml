@@ -96,6 +96,7 @@ default_view:
     - sensor.feng_shan_wen_du
     - light.er_tong_fang_deng
     - light.er_tong_fang_tai_deng
+    - cover.curtain_158d00042cf265
     - fan.er_tong_fang_jing_hua_qi
     - fan.er_tong_fang_feng_shan
     - climate.er_tong_fang_kong_diao

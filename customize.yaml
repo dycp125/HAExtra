@@ -24,6 +24,8 @@ cover.curtain_158d0003f7951d:
   friendly_name: 过道卷帘
 cover.curtain_158d000405d535:
   friendly_name: 主卧窗帘
+cover.curtain_158d00042cf265:
+  friendly_name: 儿童房窗帘
 cover.liang_yi_jia:
   genie_deviceName: 窗帘
   genie_zone: 工作间
