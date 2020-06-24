@@ -98,6 +98,8 @@ asuswrt:
   host: Router
   username: admin
   password: !secret http_password
+  dnsmasq: /tmp
+  interface: ppp0
 
 device_tracker:
   - platform: asuswrt
