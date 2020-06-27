@@ -338,7 +338,7 @@ switch:
     #broadcast_address: 192.168.1.255
     host: Station
     turn_off:
-      service: shell_command.shutdown_station
+      service: shell_command.station_off
   - platform: mqtt
     name: 洗手间排气扇
     state_topic: Hassmart2/relay/1
@@ -457,9 +457,11 @@ light:
     payload_off: 3528,1658,426,418,426,1292,380,462,382,1334,382,464,382,1338,380,462,382,1336,382,462,382,462,382,462,382,1336,382,462,382,1336,380,1336,382,464,382,1338,378,462,384,462,382,464,380,1336,382,1336,382,1336,382,462,382,1334,384,464,382,1336,382,462,382,1336,382,1336,382,464,382,462,382,464,382,464,380,462,382,462,382,464,382,464,380,464,382,464,382,464,380,1338,380,462,382,464,382,462,380,464,380,464,380,464,380,1334,382,464,380,464,380,464,380,464,382,1336,382,464,382,462,382,1334,382,464,382,464,382,464,380,1336,382,1336,382,464,382,1338,380,1,2,38
 
 shell_command:
-  shutdown_station: 'ssh root@Station shutdown -h now'
-  # power_off_x9300d: 'adb connect x9300d; adb -s x9300d shell reboot -p'
-  # power_off_x9400d: 'adb connect x9400e; adb -s x9400e shell reboot -p'
+  station_off: 'ssh root@Station shutdown -h now'
+  magic_on: "adb connect magic; adb -s magic shell 'input keyevent 82; am start -n com.thanksmister.iot.wallpanel/.ui.activities.WelcomeActivity'"
+  magic_off: "adb connect magic; adb -s magic shell 'input keyevent 82; input keyevent 26'"
+  # x9300d_off: 'adb connect x9300d; adb -s x9300d shell reboot -p'
+  # x9400d_off: 'adb connect x9400e; adb -s x9400e shell reboot -p'
 
 xiaomi_aqara:
   #interface: 192.168.2.40

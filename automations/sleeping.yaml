@@ -31,11 +31,12 @@
         temperature: 25
         #hvac_mode: cool
 
-# - alias: 睡眠开始
-#   trigger:
-#     - platform: time
-#       at: '21:30:00'
-#   action:
+- alias: 睡眠开始
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  action:
+    - service: shell_command.magic_off
 
 - alias: 睡眠深入
   trigger:
@@ -53,13 +54,12 @@
         temperature: 26
         #hvac_mode: cool
 
-- alias: 睡眠结束
+- alias: 睡眠早起
   trigger:
     - platform: time
-      at: '07:30:00'
+      at: '06:00:00'
   action:
-    - service: cover.open_cover
-      entity_id: cover.shu_fang_chuang_lian
+    - service: shell_command.magic_on
     - service: xiaomi_miio.fan_set_led_brightness
       data:
         entity_id: fan.ke_ting_xin_feng_ji
@@ -68,6 +68,14 @@
       data:
         entity_id: fan.zhu_wo_xin_feng_ji
         brightness: 0
+
+- alias: 睡眠完成
+  trigger:
+    - platform: time
+      at: '07:30:00'
+  action:
+    - service: cover.open_cover
+      entity_id: cover.shu_fang_chuang_lian
     - service: zhimsg.miai
       data:
         volume: 60
