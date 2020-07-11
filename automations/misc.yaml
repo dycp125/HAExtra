@@ -1,14 +1,13 @@
-# - alias: 语音播报
-#   trigger:
-#     - platform: state
-#       entity_id: input_text.yu_yin_bo_bao
-#   action:
-#     - condition: template
-#       value_template: '{{ states("input_text.yu_yin_bo_bao") != "unknown" and states("input_text.yu_yin_bo_bao") != "" }}'
-#     - service: tts.baidu_say
-#       data_template:
-#         entity_id: media_player.tian_mao_jing_ling
-#         message: '{{ states("input_text.yu_yin_bo_bao") }}'
+- alias: 语音播报
+  trigger:
+    - platform: state
+      entity_id: input_text.yu_yin_bo_bao
+  action:
+    - condition: template
+      value_template: '{{ states("input_text.yu_yin_bo_bao") != "unknown" and states("input_text.yu_yin_bo_bao") != "" }}'
+    - service: zhimsg.miai
+      data_template:
+        message: '{{ states("input_text.yu_yin_bo_bao") }}'
 
 - alias: 开合过道卷帘
   trigger:

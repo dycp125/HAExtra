@@ -56,6 +56,7 @@ default_view:
     - binary_sensor.door_window_sensor_158d0003cf4735
     - light.xi_shou_jian_deng
     - switch.xi_shou_jian_pai_qi_shan
+    - input_text.yu_yin_bo_bao
 
 主卧:
   icon: mdi:bed-king

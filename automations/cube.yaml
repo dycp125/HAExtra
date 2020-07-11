@@ -6,9 +6,8 @@
         entity_id: binary_sensor.cube_158d0002a66db1
         action_type: flip90
   action:
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: 魔方翻转九十度
 
 - alias: 魔方翻转一百八十度
@@ -19,9 +18,8 @@
         entity_id: binary_sensor.cube_158d0002a66db1
         action_type: flip180
   action:
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: 魔方翻转一百八十度
 
 - alias: 魔方移动
@@ -32,9 +30,8 @@
         entity_id: binary_sensor.cube_158d0002a66db1
         action_type: move
   action:
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: 魔方移动
 
 - alias: 魔方敲击两下
@@ -45,9 +42,8 @@
         entity_id: binary_sensor.cube_158d0002a66db1
         action_type: tap_twice
   action:
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: '阳台PM2.5为{{ states("sensor.yang_tai_ke_li_wu") }}，餐厅PM2.5为{{ states("sensor.can_ting_ke_li_wu") }}，主卧PM2.5为{{ states("sensor.zhu_wo_ke_li_wu") }}。客厅二氧化碳浓度为{{ states("sensor.ke_ting_er_yang_hua_tan") }}，主卧二氧化碳浓度为{{ states("sensor.zhu_wo_er_yang_hua_tan") }}，儿童房二氧化碳浓度为{{ states("sensor.er_tong_fang_er_yang_hua_tan") }}'
 
 - alias: 魔方摇一摇-召唤神龙爸爸
@@ -75,9 +71,8 @@
         entity_id: binary_sensor.cube_158d0002a66db1
         action_type: swing
   action:
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: 魔方摇摆
 
 - alias: 魔方警告
@@ -88,9 +83,8 @@
         entity_id: binary_sensor.cube_158d0002a66db1
         action_type: alert
   action:
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: 魔方警告
 
 - alias: 魔方下落
@@ -101,9 +95,8 @@
         entity_id: binary_sensor.cube_158d0002a66db1
         action_type: free_fall
   action:
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: 魔方下落
 
 - alias: 魔方旋转
@@ -123,9 +116,8 @@
       entity_id: automation.guo_dao_deng_wan_shang_kai
     - service: automation.toggle
       entity_id: automation.guo_dao_bei_jing_deng_gan_ying
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: '过道灯自动感应功能已{% if is_state("automation.guo_dao_bei_jing_deng_gan_ying", "on") %}启用{% else %}暂停，所有灯光将在10秒后关闭{% endif %}'
     - delay: '00:00:10'
     - condition: state
@@ -148,9 +140,8 @@
       entity_id: automation.guo_dao_deng_wan_shang_kai
     - service: automation.turn_on
       entity_id: automation.guo_dao_bei_jing_deng_gan_ying
-    - service: tts.baidu_say
+    - service: zhimsg.miai
       data_template:
-        entity_id: media_player.tian_mao_jing_ling
         message: 过道灯自动感应功能已重新启用
     - delay: '00:00:10'
     - service: automation.turn_off
