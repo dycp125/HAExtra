@@ -22,7 +22,6 @@
         entity_values: [一档, 二档, 三档, 四档, 五档]
 
 - alias: 儿童房空调调节
-  initial_state: false
   trigger:
     - platform: time
       at: '20:00:01'
@@ -70,7 +69,6 @@
         delay: 0
 
 - alias: 书房风扇调节
-  initial_state: false
   trigger:
     - platform: time
       at: '20:30:01'
