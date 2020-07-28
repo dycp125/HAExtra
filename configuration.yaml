@@ -302,10 +302,10 @@ sensor:
 
       er_tong_fang_feng_shan_mo_shi:
         friendly_name: 儿童房风扇模式
-        value_template: '{% set mode = state_attr("fan.er_tong_fang_feng_shan", "speed_level") %}{% if is_state("fan.er_tong_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+        value_template: '{% set mode = state_attr("fan.er_tong_fang_feng_shan", "speed") %}{% if is_state("fan.er_tong_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
       shu_fang_feng_shan_mo_shi:
         friendly_name: 书房风扇模式
-        value_template: '{% set mode = state_attr("fan.shu_fang_feng_shan", "speed_level") %}{% if is_state("fan.shu_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+        value_template: '{% set mode = state_attr("fan.shu_fang_feng_shan", "speed") %}{% if is_state("fan.shu_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
 
       ke_ting_xin_feng_ji_mo_shi:
         friendly_name: 客厅新风机模式
