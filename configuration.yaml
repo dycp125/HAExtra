@@ -365,6 +365,15 @@ switch:
     host: Remote
     mac: 34:EA:34:58:73:5D
     type: rm2_pro_plus
+    switches:
+      shu_fang_chuang_lian:
+        friendly_name: 书房窗帘
+        command_on: 'sgD8AJ8wGAwNFxgMGAwYDAwYFwwYDQwYGAsNFw0XDRcYDAwYDBgNFxkMDBgYDBgMDBcNFw0XGQsNFxgMGAwMGAwYDBgXDQwYDBcNFxgMDRcMGAwXGAABIZ4xGQwNFxgMGAwYDAwXGAwYDQwXGAwNFw0XDBgYDAwYDBgMGBgMDBcYDBgMDRcMGAwYGAwMGBgMGAwMFw0XDRcYDA0XDBgMGBgMDBkMFw0XGAABIZ4xFwwNFxgMGAwYDAwYGAwYDAwYGAwMFw0XDRcYDAwYDBgNFxgMDBgYDRgMDBgMFw0YGAsNFxgMGAwMGAwYDBcYDQwYDBcNFxgMDBgMGAwYFwAF3AAAAAAAAAAAAAAAAA=='
+        command_off: 'sgD8AJ0xGAwMGBcNFw0XDQsYGAwYDAwZFwwMGAwYDBgXDQwXDBkMGBcNCxkXDBgMDBkMGAwYGAwMGBcNFw0MGAsZCxgYDQsYDBgXDRcNDBgMGBcNFwABIZ4xFw0MGBcNFwwYDA0YGAwYDAwYGAwMGAwYDBgXDQsYDBgMGBgMDBgXDRcNDBgMGAwYFw0MGBcMGAwMGAwYDBgXDQwYDBgXDRcMDBgMGBgMFwABI50yFw0LGBgMGAwXDQwYFw0XDQwYFw0MGAwYDBcYDAwYDBgMGBgMDBgXDRcNCxkLGAwYGA4MFxgMGAwMGAwYDBgXDQwYDBgXDBgNCxgMGBcNFwAF3AAAAAAAAAAAAAAAAA=='
+      tou_ying_mu_bu:
+        friendly_name: 投影幕布
+        command_on: 'JgDGACoPKQ8pDykQDikOKg4qDykPKA4qKQ8PKQ8pKA8QKSgQKQ8pDw8pKBApDykPDykpDykPDykpDw8pKQ8PKQ8pKAAD0igQKBAoECgQDykPKQ8oDykPKQ8pKBAPKQ8oKRAPKCkQKBAoEA8oKBEoECgQDykoECgQDykoEA8pKBAPKA8pKQAD0SkPKRAoECgQDygQKA8pDykPKQ8oKRAPKA4qKQ8PKSkPKQ8pDw8pKQ8pDykQDygpECgQDikqDw8oKQ8PKQ8pKQANBQAA'
+        command_off: 'JgDGACoPKRAoECgQDykPKBAoDykPKSgQDykPKA8pKQ8PKSkPKQ4qECgQDygpECgQKBAPKSgQKBAPKQ8oKRAPKA8pKQAD0SgQKQ8pDykPECgPKQ8pDykPKCkQDygPKQ8pKBAPKSgQKQ8pDykPDykoECkPKQ8PKSkOKg8PKQ8pKQwSKQ8pKAAD0igQKBAoECkPDykPKQ8oDykPKSkPDykPKQ8oKRAPKCkQKBAoECgQDykoECgQKA8QKSgQKQ8PKQ8pKBAPKBAoKQANBQAA'
   - platform: broadlink
     friendly_name: 红外遥控
     host: Remote2
@@ -495,6 +504,11 @@ fan:
     host: Fan2
     model: zhimi.fan.sa1
     token: !secret fan2_token
+  - platform: xiaomi_fan
+    name: 主卧风扇
+    host: Fan3
+    model: zhimi.fan.fa1
+    token: !secret fan3_token
   - platform: xiaomi_miio
     name: 客厅新风机
     host: Fresher

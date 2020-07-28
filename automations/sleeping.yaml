@@ -5,6 +5,8 @@
   action:
     - service: cover.close_cover
       entity_id: cover.shu_fang_chuang_lian
+    - service: switch.turn_off
+      entity_id: switch.shu_fang_chuang_lian
     - service: xiaomi_miio.fan_set_led_brightness
       data:
         entity_id: fan.ke_ting_xin_feng_ji
@@ -76,6 +78,8 @@
   action:
     - service: cover.open_cover
       entity_id: cover.shu_fang_chuang_lian
+    - service: switch.turn_on
+      entity_id: switch.shu_fang_chuang_lian
     - service: zhimsg.miai
       data:
         volume: 60

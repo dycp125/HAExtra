@@ -17,6 +17,8 @@
   action:
     - service: cover.close_cover
       entity_id: cover.shu_fang_chuang_lian
+    - service: switch.turn_off
+      entity_id: switch.shu_fang_chuang_lian
 
 - alias: 书房窗帘开
   trigger:
@@ -33,3 +35,5 @@
   action:
     - service: cover.open_cover
       entity_id: cover.shu_fang_chuang_lian
+    - service: switch.turn_on
+      entity_id: switch.shu_fang_chuang_lian
