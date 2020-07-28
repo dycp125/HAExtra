@@ -509,6 +509,11 @@ fan:
     host: Fan3
     model: zhimi.fan.fa1
     token: !secret fan3_token
+  - platform: xiaomi_fan
+    name: 次卧风扇
+    host: Fan4
+    model: zhimi.fan.fa1
+    token: !secret fan4_token
   - platform: xiaomi_miio
     name: 客厅新风机
     host: Fresher
