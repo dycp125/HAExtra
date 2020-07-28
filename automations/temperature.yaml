@@ -95,7 +95,6 @@
         delay: 0
 
 - alias: 儿童房风扇调节
-  initial_state: false
   trigger:
     - platform: time
       at: '20:00:01'
