@@ -263,13 +263,12 @@ async def async_setup_platform(hass, config, async_add_devices, discovery_info=N
         MODEL_FAN_ZA1,
         MODEL_FAN_ZA3,
         MODEL_FAN_ZA4,
-        MODEL_FAN_FA1,
     ]:
         from miio import Fan
 
         fan = Fan(host, token, model=model)
         device = XiaomiFan(name, fan, model, unique_id, retries)
-    elif model == MODEL_FAN_P5:
+    elif model == MODEL_FAN_P5 or model == MODEL_FAN_FA1:
         from miio import FanP5
 
         fan = FanP5(host, token, model=model)
