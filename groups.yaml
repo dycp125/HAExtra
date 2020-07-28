@@ -117,7 +117,9 @@ default_view:
     - switch.wang_luo_cun_chu
     - switch.yin_xiang
     - cover.tou_ying_mu_bu
+    - switch.tou_ying_mu_bu
     - cover.shu_fang_chuang_lian
+    - switch.shu_fang_chuang_lian
     - cover.liang_yi_jia
     - vacuum.sao_di_ji
     - fan.shu_fang_feng_shan
