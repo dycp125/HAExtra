@@ -88,7 +88,6 @@ default_view:
     - sensor.ci_wo_shi_du
     - sensor.ci_wo_ke_li_wu
     - fan.ci_wo_jing_hua_qi
-    - fan.ci_wo_feng_shan
 
 儿童房:
   icon: mdi:car-child-seat
