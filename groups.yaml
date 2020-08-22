@@ -76,7 +76,7 @@ default_view:
     - fan.zhu_wo_xin_feng_ji
     - fan.zhu_wo_jing_hua_qi
     - fan.zhu_wo_bi_shan
-    - fan.zhu_wo_feng_shan
+    # - fan.zhu_wo_feng_shan
     - fan.xi_yi_ji
     - climate.zhu_wo_kong_diao
     - climate.zhu_wo_di_nuan
