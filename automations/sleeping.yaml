@@ -83,14 +83,14 @@
     - service: zhimsg.miai
       data:
         volume: 60
-    - service: climate.set_fan_mode
-      data:
-        entity_id: climate.zhu_wo_kong_diao
-        fan_mode: 自动
-    - service: climate.set_fan_mode
-      data:
-        entity_id: climate.er_tong_fang_kong_diao
-        fan_mode: 自动
+    # - service: climate.set_fan_mode
+    #   data:
+    #     entity_id: climate.zhu_wo_kong_diao
+    #     fan_mode: 自动
+    # - service: climate.set_fan_mode
+    #   data:
+    #     entity_id: climate.er_tong_fang_kong_diao
+    #     fan_mode: 自动
     - service: climate.turn_off
       entity_id: climate.zhu_wo_kong_diao
     - service: climate.turn_off
