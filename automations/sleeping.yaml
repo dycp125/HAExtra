@@ -76,10 +76,6 @@
     - platform: time
       at: '07:30:00'
   action:
-    - service: cover.open_cover
-      entity_id: cover.shu_fang_chuang_lian
-    - service: switch.turn_on
-      entity_id: switch.shu_fang_chuang_lian
     - service: zhimsg.miai
       data:
         volume: 60
@@ -101,3 +97,29 @@
       entity_id: fan.er_tong_fang_feng_shan
     - service: fan.turn_off
       entity_id: fan.shu_fang_feng_shan
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sun
+    - service: cover.open_cover
+      entity_id: cover.shu_fang_chuang_lian
+    - service: switch.turn_on
+      entity_id: switch.shu_fang_chuang_lian
+
+- alias: 睡眠延长
+  trigger:
+    - platform: time
+      at: '10:30:00'
+  condition:
+    - condition: time
+      weekday:
+        - sat
+  action:
+    - service: cover.open_cover
+      entity_id: cover.shu_fang_chuang_lian
+    - service: switch.turn_on
+      entity_id: switch.shu_fang_chuang_lian

@@ -1,11 +1,8 @@
 __pycache__
 .*
-*.cer
+*.crt
 *.key
-*.pem
-Secrets.yaml
+secrets.yaml
 known_devices.yaml
 www/*.jpg
-entity_registry.yaml
 bravia.conf
-iptv.m3u8
