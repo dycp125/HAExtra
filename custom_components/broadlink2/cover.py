@@ -84,7 +84,7 @@ def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     return True
 
 
-class RMCover(CoverDevice,RestoreEntity):
+class RMCover(CoverEntity,RestoreEntity):
     """Representation of a cover."""
 
     # pylint: disable=no-self-use

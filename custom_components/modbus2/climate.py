@@ -21,8 +21,8 @@ from homeassistant.components.climate.const import (
 )
 from homeassistant.const import (
     CONF_NAME, CONF_SLAVE, CONF_OFFSET, CONF_STRUCTURE, ATTR_TEMPERATURE)
-from homeassistant.components.modbus import (
-    CONF_HUB, DEFAULT_HUB, DOMAIN as MODBUS_DOMAIN)
+from homeassistant.components.modbus.const import (
+    CONF_HUB, DEFAULT_HUB, MODBUS_DOMAIN)
 from homeassistant.helpers.event import async_call_later
 import homeassistant.components.modbus as modbus
 import homeassistant.helpers.config_validation as cv
@@ -197,7 +197,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     add_devices(devices, True)
 
 
-class ModbusClimate(ClimateDevice):
+class ModbusClimate(ClimateEntity):
     """Representation of a Modbus climate device."""
 
     _exception = 0

@@ -16,7 +16,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_add_entities([MrBondAirer(hass, discovery_info, hass.data[DOMAIN])], True)
 
 
-class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
+class MrBondAirer(MiioEntity, CoverEntity, RestoreEntity):
     """Representation of a cover."""
 
     def __init__(self, hass, name, device):

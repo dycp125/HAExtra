@@ -68,7 +68,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_track_time_interval(hass, saswell.async_update, scan_interval)
 
 
-class SaswellClimate(ClimateDevice):
+class SaswellClimate(ClimateEntity):
     """Representation of a Saswell climate device."""
 
     def __init__(self, saswell, index):
