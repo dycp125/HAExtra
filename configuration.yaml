@@ -23,6 +23,8 @@ frontend:
 
 #mobile_app:
 
+#discovery:
+
 config:
 
 http:
@@ -45,11 +47,11 @@ logbook:
 
 sun:
 
-tts:
-  - platform: baidu
-    app_id: !secret baidu_app_id
-    api_key: !secret baidu_api_key
-    secret_key: !secret baidu_secret_key
+# tts:
+#   - platform: baidu
+#     app_id: !secret baidu_app_id
+#     api_key: !secret baidu_api_key
+#     secret_key: !secret baidu_secret_key
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations
