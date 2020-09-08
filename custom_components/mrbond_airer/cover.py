@@ -2,7 +2,7 @@
 import logging
 from . import MiioEntity, DOMAIN
 
-from homeassistant.components.cover import CoverDevice, ATTR_POSITION
+from homeassistant.components.cover import CoverEntity, ATTR_POSITION
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.event import async_call_later
 

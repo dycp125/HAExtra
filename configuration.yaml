@@ -26,7 +26,6 @@ frontend:
 config:
 
 http:
-  base_url: !secret http_base_url
   ssl_key: ~/.homeassistant/h.yonsm.tk.key
   ssl_certificate: ~/.homeassistant/h.yonsm.tk.crt
 
