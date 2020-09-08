@@ -6,3 +6,4 @@ secrets.yaml
 known_devices.yaml
 www/*.jpg
 bravia.conf
+*.pem
