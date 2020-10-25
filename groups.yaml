@@ -46,6 +46,10 @@ default_view:
 过道:
   icon: mdi:road
   entities:
+    - sensor.guo_dao_wen_du
+    - sensor.guo_dao_shi_du
+    - sensor.guo_dao_ke_li_wu
+    - sensor.guo_dao_jia_quan
     - binary_sensor.motion_sensor_158d0001d66ce9
     - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.cube_158d0002a66db1
@@ -111,6 +115,7 @@ default_view:
     - sensor.shu_fang_shi_du
     - sensor.shu_fang_er_yang_hua_tan
     - sensor.shu_fang_liang_du
+    - binary_sensor.motion_sensor_158d0003d0d46e
     - light.shu_fang_tai_deng
     - light.liang_yi_jia_deng
     - switch.tou_ying_yi
