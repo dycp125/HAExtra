@@ -17,6 +17,9 @@ homeassistant:
     #homeassistant.components.braviatv: debug
     #braviarc.braviarc: debug
 
+recorder:
+  purge_keep_days: 2
+
 system_health:
 
 frontend:
