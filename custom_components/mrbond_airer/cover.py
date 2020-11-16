@@ -105,4 +105,4 @@ class MrBondAirer(MiioEntity, CoverEntity, RestoreEntity):
                 self._device.status['motor'] == '1'
             else:
                 return
-            async_call_later(self._hass, AIRER_DURATION/2, self.pause_cover)
+            async_call_later(self.hass, AIRER_DURATION/2, self.pause_cover)

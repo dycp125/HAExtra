@@ -63,10 +63,10 @@ automation: !include_dir_merge_list automations
 mqtt:
   broker: localhost
 
-modbus:
-  type: rtuovertcp
-  host: ModBus
-  port: 8899
+# modbus:
+#   type: rtuovertcp
+#   host: ModBus
+#   port: 8899
 
 homekit:
   filter:
@@ -290,25 +290,28 @@ sensor:
         value_template: '{{ state_attr("fan.er_tong_fang_feng_shan", "temperature") }}'
         unit_of_measurement: °C
 
-      ke_ting_kong_diao_mo_shi:
-        friendly_name: 客厅空调模式
-        value_template: '{% set mode = state_attr("climate.ke_ting_kong_diao", "fan_mode") %}{% if is_state("climate.ke_ting_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      zhu_wo_kong_diao_mo_shi:
-        friendly_name: 主卧空调模式
-        value_template: '{% set mode = state_attr("climate.zhu_wo_kong_diao", "fan_mode") %}{% if is_state("climate.zhu_wo_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      er_tong_fang_kong_diao_mo_shi:
-        friendly_name: 儿童房空调模式
-        value_template: '{% set mode = state_attr("climate.er_tong_fang_kong_diao", "fan_mode") %}{% if is_state("climate.er_tong_fang_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
-      shu_fang_kong_diao_mo_shi:
-        friendly_name: 书房空调模式
-        value_template: '{% set mode = state_attr("climate.shu_fang_kong_diao", "fan_mode") %}{% if is_state("climate.shu_fang_kong_diao", "off") %}off{% elif mode == "low" %}一{% elif mode == "mid" %}二{% elif mode == "high" %}三{% elif mode == "highest" %}四{% else %}{{ mode }}{% endif %}'
+      # ke_ting_kong_diao_mo_shi:
+      #   friendly_name: 客厅空调模式
+      #   value_template: '{% set mode = state_attr("climate.ke_ting_kong_diao", "fan_mode") %}{% if is_state("climate.ke_ting_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # can_ting_kong_diao_mo_shi:
+      #   friendly_name: 餐厅空调模式
+      #   value_template: '{% set mode = state_attr("climate.can_ting_kong_diao", "fan_mode") %}{% if is_state("climate.can_ting_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # zhu_wo_kong_diao_mo_shi:
+      #   friendly_name: 主卧空调模式
+      #   value_template: '{% set mode = state_attr("climate.zhu_wo_kong_diao", "fan_mode") %}{% if is_state("climate.zhu_wo_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # er_tong_fang_kong_diao_mo_shi:
+      #   friendly_name: 儿童房空调模式
+      #   value_template: '{% set mode = state_attr("climate.er_tong_fang_kong_diao", "fan_mode") %}{% if is_state("climate.er_tong_fang_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # shu_fang_kong_diao_mo_shi:
+      #   friendly_name: 书房空调模式
+      #   value_template: '{% set mode = state_attr("climate.shu_fang_kong_diao", "fan_mode") %}{% if is_state("climate.shu_fang_kong_diao", "off") %}off{% elif mode == "low" %}一{% elif mode == "mid" %}二{% elif mode == "high" %}三{% elif mode == "highest" %}四{% else %}{{ mode }}{% endif %}'
 
-      er_tong_fang_feng_shan_mo_shi:
-        friendly_name: 儿童房风扇模式
-        value_template: '{% set mode = state_attr("fan.er_tong_fang_feng_shan", "speed") %}{% if is_state("fan.er_tong_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
-      shu_fang_feng_shan_mo_shi:
-        friendly_name: 书房风扇模式
-        value_template: '{% set mode = state_attr("fan.shu_fang_feng_shan", "speed") %}{% if is_state("fan.shu_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+      # er_tong_fang_feng_shan_mo_shi:
+      #   friendly_name: 儿童房风扇模式
+      #   value_template: '{% set mode = state_attr("fan.er_tong_fang_feng_shan", "speed") %}{% if is_state("fan.er_tong_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+      # shu_fang_feng_shan_mo_shi:
+      #   friendly_name: 书房风扇模式
+      #   value_template: '{% set mode = state_attr("fan.shu_fang_feng_shan", "speed") %}{% if is_state("fan.shu_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
 
       ke_ting_xin_feng_ji_mo_shi:
         friendly_name: 客厅新风机模式
@@ -354,20 +357,20 @@ switch:
     value_template: '{% if value == "关闭" %}OFF{% else %}ON{% endif %}'
     icon_template: '{% if value == "关闭" %}mdi:speaker-off{% elif value == "蓝牙" %}mdi:speaker-bluetooth{% elif value == "光纤" %}mdi:speaker-wireless{% elif value == "优盘" %}mdi:usb{% elif value == "辅助" %}mdi:video-input-component{% else %}mdi:speaker{% endif %}'
   - platform: broadlink
-    host: Outlet
+    #host: Outlet
     mac: 34:EA:34:B8:36:AC
-    friendly_name: 餐厅除湿机
-    type: spmini2
+    #friendly_name: 餐厅除湿机
+    #type: spmini2
   # - platform: broadlink
   #   host: Outlet2
   #   mac: 78:0f:77:cc:cc:be
   #   friendly_name: 衣柜除湿机
   #   type: spmini2
   - platform: broadlink
-    friendly_name: 万能遥控
-    host: Remote
+    #friendly_name: 万能遥控
+    #host: Remote
     mac: 34:EA:34:58:73:5D
-    type: rm2_pro_plus
+    #type: rm2_pro_plus
     switches:
       shu_fang_chuang_lian:
         friendly_name: 书房窗帘
@@ -378,10 +381,10 @@ switch:
         command_on: 'JgDGACoPKQ8pDykQDikOKg4qDykPKA4qKQ8PKQ8pKA8QKSgQKQ8pDw8pKBApDykPDykpDykPDykpDw8pKQ8PKQ8pKAAD0igQKBAoECgQDykPKQ8oDykPKQ8pKBAPKQ8oKRAPKCkQKBAoEA8oKBEoECgQDykoECgQDykoEA8pKBAPKA8pKQAD0SkPKRAoECgQDygQKA8pDykPKQ8oKRAPKA4qKQ8PKSkPKQ8pDw8pKQ8pDykQDygpECgQDikqDw8oKQ8PKQ8pKQANBQAA'
         command_off: 'JgDGACoPKRAoECgQDykPKBAoDykPKSgQDykPKA8pKQ8PKSkPKQ4qECgQDygpECgQKBAPKSgQKBAPKQ8oKRAPKA8pKQAD0SgQKQ8pDykPECgPKQ8pDykPKCkQDygPKQ8pKBAPKSgQKQ8pDykPDykoECkPKQ8PKSkOKg8PKQ8pKQwSKQ8pKAAD0igQKBAoECkPDykPKQ8oDykPKSkPDykPKQ8oKRAPKCkQKBAoECgQDykoECgQKA8QKSgQKQ8PKQ8pKBAPKBAoKQANBQAA'
   - platform: broadlink
-    friendly_name: 红外遥控
-    host: Remote2
+    #friendly_name: 红外遥控
+    #host: Remote2
     mac: 78:0F:77:47:AA:8F
-    type: rm_mini
+    #type: rm_mini
   - platform: template
     switches:
       tou_ying_yi:
@@ -481,11 +484,11 @@ xiaomi_aqara:
       #mac: 34CE0090901A
       #host: ZigBee
 
-vacuum:
-  - platform: xiaomi_miio
-    name: 扫地机
-    host: Vacuum
-    token: !secret vacuum_token
+# vacuum:
+#   - platform: xiaomi_miio
+#     name: 扫地机
+#     host: Vacuum
+#     token: !secret vacuum_token
 
 fan:
   - platform: viomi_washer
@@ -497,16 +500,16 @@ fan:
     host: Purifier
     model: zhimi.airpurifier.m1
     token: !secret purifier_token
-  - platform: xiaomi_miio_fan
-    name: 儿童房风扇
-    host: Fan
-    model: zhimi.fan.v3
-    token: !secret fan_token
-  - platform: xiaomi_miio_fan
-    name: 书房风扇
-    host: Fan2
-    model: zhimi.fan.sa1
-    token: !secret fan2_token
+  # - platform: xiaomi_miio_fan
+  #   name: 儿童房风扇
+  #   host: Fan
+  #   model: zhimi.fan.v3
+  #   token: !secret fan_token
+  # - platform: xiaomi_miio_fan
+  #   name: 书房风扇
+  #   host: Fan2
+  #   model: zhimi.fan.sa1
+  #   token: !secret fan2_token
   # - platform: xiaomi_miot_fan
   #   name: 主卧风扇
   #   host: Fan3
@@ -607,15 +610,15 @@ climate:
   - platform: saswell
     username: !secret saswell_username
     password: !secret saswell_password
-  - platform: modbus2
-    name: [餐厅空调, 客厅空调, 主卧空调, 儿童房空调]
-    fan_mode: { registers: [6, 10, 14, 18] }
-    fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5 }
-    hvac_mode: { registers: [5, 9, 13, 17] }
-    hvac_modes: { 'off': 0, cool: 1, heat: 2, dry: 3, fan_only: 4 }
-    hvac_off: { registers: [1, 2, 3, 4], register_type: coil }
-    target_temperature: { registers: [4, 8, 12, 16] }
-    temperature: { registers: [3, 6, 9, 12], register_type: input, scale: 0.1 }
+  # - platform: modbus2
+  #   name: [餐厅空调, 客厅空调, 主卧空调, 儿童房空调]
+  #   fan_mode: { registers: [6, 10, 14, 18] }
+  #   fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5 }
+  #   hvac_mode: { registers: [5, 9, 13, 17] }
+  #   hvac_modes: { 'off': 0, cool: 1, heat: 2, dry: 3, fan_only: 4 }
+  #   hvac_off: { registers: [1, 2, 3, 4], register_type: coil }
+  #   target_temperature: { registers: [4, 8, 12, 16] }
+  #   temperature: { registers: [3, 6, 9, 12], register_type: input, scale: 0.1 }
   - platform: smartir
     name: 书房空调
     device_code: 1120

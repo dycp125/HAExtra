@@ -47,9 +47,9 @@ from homeassistant.const import (
     ATTR_ENTITY_ID,
     ATTR_SUPPORTED_FEATURES,
     ATTR_TEMPERATURE,
+    PERCENTAGE,
     TEMP_CELSIUS,
     TEMP_FAHRENHEIT,
-    UNIT_PERCENTAGE,
     STATE_ON, SERVICE_TURN_OFF, SERVICE_TURN_ON, STATE_OFF,
 )
 from homeassistant.core import callback
@@ -327,7 +327,10 @@ class Thermostat0(HomeAccessory):
         if service:
             params[ATTR_ENTITY_ID] = self.entity_id
             self.call_service(
-                DOMAIN_CLIMATE, service, params, ", ".join(events),
+                DOMAIN_CLIMATE,
+                service,
+                params,
+                ", ".join(events),
             )
 
         if CHAR_TARGET_HUMIDITY in char_values:
@@ -375,7 +378,7 @@ class Thermostat0(HomeAccessory):
         _LOGGER.debug("%s: Set target humidity to %d", self.entity_id, value)
         params = {ATTR_ENTITY_ID: self.entity_id, ATTR_HUMIDITY: value}
         self.call_service(
-            DOMAIN_CLIMATE, SERVICE_SET_HUMIDITY, params, f"{value}{UNIT_PERCENTAGE}"
+            DOMAIN_CLIMATE, SERVICE_SET_HUMIDITY, params, f"{value}{PERCENTAGE}"
         )
 
     @callback

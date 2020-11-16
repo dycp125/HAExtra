@@ -67,7 +67,7 @@ class MiioEntity():
 
     def __init__(self, hass, name, device, should_poll=False):
         """Initialize the light device."""
-        self._hass = hass
+        self.hass = hass
         self._name = name
         self._device = device
         self._should_poll = should_poll

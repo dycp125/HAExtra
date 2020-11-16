@@ -34,8 +34,6 @@
       entity_id: cover.curtain_158d000405d535
       to: open
   action:
-    - service: 
-      entity_id: cover.curtain_158d0003f7951d
     - service: fan.set_speed
       data_template:
         entity_id: fan.zhu_wo_xin_feng_ji
