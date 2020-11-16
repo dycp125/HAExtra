@@ -25,3 +25,18 @@
     - service_template: 'cover.{% if is_state("binary_sensor.door_window_sensor_158d00041c74da", "off") %}open{% else %}close{% endif %}_cover'
       entity_id: cover.curtain_158d0003f7951d
 
+- alias: 开合主卧窗帘
+  trigger:
+    - platform: state
+      entity_id: cover.curtain_158d000405d535
+      to: closed
+    - platform: state
+      entity_id: cover.curtain_158d000405d535
+      to: open
+  action:
+    - service: 
+      entity_id: cover.curtain_158d0003f7951d
+    - service: fan.set_speed
+      data_template:
+        entity_id: fan.zhu_wo_xin_feng_ji
+        speed: '{% if is_state("cover.curtain_158d0003f7951d", "closed") %}Auto{% else %}Middle{% endif %}'
