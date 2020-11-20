@@ -6,7 +6,7 @@
     - service: actuator.actuate
       data:
         sensor_id: sensor.ke_ting_er_yang_hua_tan
-        sensor_values: [500, 580, 680, 730]
+        sensor_values: [490, 540, 650, 720]
         entity_id: fan.ke_ting_xin_feng_ji
         entity_attr: speed
         entity_values: [Silent, Low, Middle, Strong]
@@ -21,8 +21,8 @@
     - service: actuator.actuate
       data:
         sensor_id: sensor.zhu_wo_er_yang_hua_tan
-        sensor_values: [500, 650, 750, 900]
-        alt_sensor_values: [500, 720, 900, 1500]
+        sensor_values: [500, 600, 700, 800]
+        alt_sensor_values: [500, 700, 900, 1300]
         entity_id: fan.zhu_wo_xin_feng_ji
         entity_attr: speed
         entity_values: [Silent, Low, Middle, Strong]

@@ -37,4 +37,4 @@
     - service: fan.set_speed
       data_template:
         entity_id: fan.zhu_wo_xin_feng_ji
-        speed: '{% if is_state("cover.curtain_158d0003f7951d", "closed") %}Auto{% else %}Middle{% endif %}'
+        speed: '{% if is_state("cover.curtain_158d000405d535", "closed") %}Auto{% else %}Middle{% endif %}'
