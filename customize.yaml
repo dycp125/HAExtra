@@ -146,10 +146,6 @@ switch.can_ting_chu_shi_ji:
   icon: mdi:power-socket-uk
 switch.plug_158d0003a58422:
   friendly_name: 米家插座
-switch.shu_fang_chuang_lian:
-  icon: mdi:window-closed
-switch.tou_ying_mu_bu:
-  icon: mdi:projector-screen
 switch.tou_ying_yi:
   genie_deviceName: 电视
   genie_deviceType: television

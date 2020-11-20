@@ -63,10 +63,10 @@ automation: !include_dir_merge_list automations
 mqtt:
   broker: localhost
 
-# modbus:
-#   type: rtuovertcp
-#   host: ModBus
-#   port: 8899
+modbus:
+  type: rtuovertcp
+  host: ModBus
+  port: 8899
 
 homekit:
   filter:
@@ -371,15 +371,6 @@ switch:
     #host: Remote
     mac: 34:EA:34:58:73:5D
     #type: rm2_pro_plus
-    switches:
-      shu_fang_chuang_lian:
-        friendly_name: 书房窗帘
-        command_on: 'sgD8AJ8wGAwNFxgMGAwYDAwYFwwYDQwYGAsNFw0XDRcYDAwYDBgNFxkMDBgYDBgMDBcNFw0XGQsNFxgMGAwMGAwYDBgXDQwYDBcNFxgMDRcMGAwXGAABIZ4xGQwNFxgMGAwYDAwXGAwYDQwXGAwNFw0XDBgYDAwYDBgMGBgMDBcYDBgMDRcMGAwYGAwMGBgMGAwMFw0XDRcYDA0XDBgMGBgMDBkMFw0XGAABIZ4xFwwNFxgMGAwYDAwYGAwYDAwYGAwMFw0XDRcYDAwYDBgNFxgMDBgYDRgMDBgMFw0YGAsNFxgMGAwMGAwYDBcYDQwYDBcNFxgMDBgMGAwYFwAF3AAAAAAAAAAAAAAAAA=='
-        command_off: 'sgD8AJ0xGAwMGBcNFw0XDQsYGAwYDAwZFwwMGAwYDBgXDQwXDBkMGBcNCxkXDBgMDBkMGAwYGAwMGBcNFw0MGAsZCxgYDQsYDBgXDRcNDBgMGBcNFwABIZ4xFw0MGBcNFwwYDA0YGAwYDAwYGAwMGAwYDBgXDQsYDBgMGBgMDBgXDRcNDBgMGAwYFw0MGBcMGAwMGAwYDBgXDQwYDBgXDRcMDBgMGBgMFwABI50yFw0LGBgMGAwXDQwYFw0XDQwYFw0MGAwYDBcYDAwYDBgMGBgMDBgXDRcNCxkLGAwYGA4MFxgMGAwMGAwYDBgXDQwYDBgXDBgNCxgMGBcNFwAF3AAAAAAAAAAAAAAAAA=='
-      tou_ying_mu_bu:
-        friendly_name: 投影幕布
-        command_on: 'JgDGACoPKQ8pDykQDikOKg4qDykPKA4qKQ8PKQ8pKA8QKSgQKQ8pDw8pKBApDykPDykpDykPDykpDw8pKQ8PKQ8pKAAD0igQKBAoECgQDykPKQ8oDykPKQ8pKBAPKQ8oKRAPKCkQKBAoEA8oKBEoECgQDykoECgQDykoEA8pKBAPKA8pKQAD0SkPKRAoECgQDygQKA8pDykPKQ8oKRAPKA4qKQ8PKSkPKQ8pDw8pKQ8pDykQDygpECgQDikqDw8oKQ8PKQ8pKQANBQAA'
-        command_off: 'JgDGACoPKRAoECgQDykPKBAoDykPKSgQDykPKA8pKQ8PKSkPKQ4qECgQDygpECgQKBAPKSgQKBAPKQ8oKRAPKA8pKQAD0SgQKQ8pDykPECgPKQ8pDykPKCkQDygPKQ8pKBAPKSgQKQ8pDykPDykoECkPKQ8PKSkOKg8PKQ8pKQwSKQ8pKAAD0igQKBAoECkPDykPKQ8oDykPKSkPDykPKQ8oKRAPKCkQKBAoECgQDykoECgQKA8QKSgQKQ8PKQ8pKBAPKBAoKQANBQAA'
   - platform: broadlink
     #friendly_name: 红外遥控
     #host: Remote2
@@ -610,15 +601,15 @@ climate:
   - platform: saswell
     username: !secret saswell_username
     password: !secret saswell_password
-  # - platform: modbus2
-  #   name: [餐厅空调, 客厅空调, 主卧空调, 儿童房空调]
-  #   fan_mode: { registers: [6, 10, 14, 18] }
-  #   fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5 }
-  #   hvac_mode: { registers: [5, 9, 13, 17] }
-  #   hvac_modes: { 'off': 0, cool: 1, heat: 2, dry: 3, fan_only: 4 }
-  #   hvac_off: { registers: [1, 2, 3, 4], register_type: coil }
-  #   target_temperature: { registers: [4, 8, 12, 16] }
-  #   temperature: { registers: [3, 6, 9, 12], register_type: input, scale: 0.1 }
+  - platform: modbus2
+    name: [餐厅空调, 客厅空调, 主卧空调, 儿童房空调]
+    fan_mode: { registers: [6, 10, 14, 18] }
+    fan_modes: { 自动: 0, 一档: 1, 二档: 2, 三档: 3, 四档: 4, 五档: 5 }
+    hvac_mode: { registers: [5, 9, 13, 17] }
+    hvac_modes: { 'off': 0, cool: 1, heat: 2, dry: 3, fan_only: 4 }
+    hvac_off: { registers: [1, 2, 3, 4], register_type: coil }
+    target_temperature: { registers: [4, 8, 12, 16] }
+    temperature: { registers: [3, 6, 9, 12], register_type: input, scale: 0.1 }
   - platform: smartir
     name: 书房空调
     device_code: 1120
