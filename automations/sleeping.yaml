@@ -9,10 +9,6 @@
       data:
         entity_id: fan.ke_ting_xin_feng_ji
         brightness: 2
-    - service: xiaomi_miio.fan_set_led_brightness
-      data:
-        entity_id: fan.zhu_wo_xin_feng_ji
-        brightness: 2
     # - service: fan.set_speed
     #   data:
     #     entity_id: fan.ci_wo_jing_hua_qi
@@ -63,10 +59,6 @@
     - service: xiaomi_miio.fan_set_led_brightness
       data:
         entity_id: fan.ke_ting_xin_feng_ji
-        brightness: 0
-    - service: xiaomi_miio.fan_set_led_brightness
-      data:
-        entity_id: fan.zhu_wo_xin_feng_ji
         brightness: 0
 
 - alias: 睡眠完成
