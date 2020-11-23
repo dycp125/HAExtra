@@ -1,7 +1,7 @@
 
 from homeassistant.components.http import HomeAssistantView
 from homeassistant.util.json import load_json, save_json
-from homeassistant.components.http import KEY_HASS
+# from homeassistant.components.http import KEY_HASS
 
 # Logging
 import logging

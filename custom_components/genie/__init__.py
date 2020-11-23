@@ -423,17 +423,18 @@ def guessPropertyAndAction(entity_id, attributes, state):
 
     elif entity_id.startswith('sensor.'):
         unit = attributes['unit_of_measurement'] if 'unit_of_measurement' in attributes else ''
-        if unit == u'°C' or unit == u'℃':
+        device_class = attributes['device_class'] if 'device_class' in attributes else ''
+        if unit == u'°C' or unit == u'℃' or device_class == 'temperature':
             name = 'Temperature'
-        elif unit == 'lx' or unit == 'lm':
+        elif unit == 'lx' or unit == 'lm' or device_class == 'illuminance':
             name = 'Brightness'
-        elif ('hcho' in entity_id):
+        elif ('hcho' in entity_id) or device_class == 'hcho':
             name = 'Fog'
-        elif ('humidity' in entity_id):
+        elif ('humidity' in entity_id) or device_class == 'humidity':
             name = 'Humidity'
-        elif ('pm25' in entity_id):
+        elif ('pm25' in entity_id) or device_class == 'pm25':
             name = 'PM2.5'
-        elif ('co2' in entity_id):
+        elif ('co2' in entity_id) or device_class == 'co2':
             name = 'WindSpeed'
         else:
             return (None, None)

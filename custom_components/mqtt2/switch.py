@@ -26,16 +26,16 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 async def async_setup_platform(hass: HomeAssistantType, config: ConfigType,
                                async_add_entities, discovery_info=None):
     """Set up MQTT switch through configuration.yaml."""
-    async_add_entities([MqttSwitch2(config, discovery_info)])
+    async_add_entities([MqttSwitch2(hass, config, None, discovery_info)])
 # pylint: disable=too-many-ancestors
 
 
 class MqttSwitch2(MqttSwitch):
     """Representation of a switch that can be toggled using MQTT."""
 
-    def __init__(self, config, discovery_hash):
+    def __init__(self, hass, config, config_entry, discovery_data):
         """Initialize the MQTT switch."""
-        super().__init__(config, None, discovery_hash)
+        super().__init__(hass, config, config_entry, discovery_data)
         self._attributes = None
         self._icon = None
 

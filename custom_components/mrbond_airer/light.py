@@ -1,13 +1,13 @@
 """Support for MrBond Airer's Light."""
 from . import MiioEntity, DOMAIN
-from homeassistant.components.light import Light
+from homeassistant.components.light import LightEntity
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the light from config."""
     async_add_entities([MrBondLight(hass, discovery_info + '灯', hass.data[DOMAIN])])
 
 
-class MrBondLight(MiioEntity, Light):
+class MrBondLight(MiioEntity, LightEntity):
     """Representation of MrBond Airer Light."""
 
     @property

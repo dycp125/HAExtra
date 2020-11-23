@@ -7,7 +7,7 @@
         action_type: flip90
   action:
     - service: zhimsg.miai
-      data:
+      data_template:
         message: 魔方翻转九十度
 
 - alias: 魔方翻转一百八十度
@@ -19,7 +19,7 @@
         action_type: flip180
   action:
     - service: zhimsg.miai
-      data:
+      data_template:
         message: 魔方翻转一百八十度
 
 - alias: 魔方移动
@@ -31,7 +31,7 @@
         action_type: move
   action:
     - service: zhimsg.miai
-      data:
+      data_template:
         message: 魔方移动
 
 - alias: 魔方敲击两下
@@ -72,7 +72,7 @@
         action_type: swing
   action:
     - service: zhimsg.miai
-      data:
+      data_template:
         message: 魔方摇摆
 
 - alias: 魔方警告
@@ -84,7 +84,7 @@
         action_type: alert
   action:
     - service: zhimsg.miai
-      data:
+      data_template:
         message: 魔方警告
 
 - alias: 魔方下落
@@ -96,7 +96,7 @@
         action_type: free_fall
   action:
     - service: zhimsg.miai
-      data:
+      data_template:
         message: 魔方下落
 
 - alias: 魔方旋转
@@ -141,7 +141,7 @@
     - service: automation.turn_on
       entity_id: automation.guo_dao_bei_jing_deng_gan_ying
     - service: zhimsg.miai
-      data:
+      data_template:
         message: 过道灯自动感应功能已重新启用
     - delay: '00:00:10'
     - service: automation.turn_off

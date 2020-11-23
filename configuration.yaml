@@ -9,13 +9,15 @@ homeassistant:
 
 logger:
   default: warning
-  logs:
-    custom_components.zhibot: debug
-    custom_components.mrbond_airer: debug
+  # logs:
+    # custom_components.zhibot: debug
     #homeassistant.components.homekit: debug
     #pyhap: debug
     #homeassistant.components.braviatv: debug
     #braviarc.braviarc: debug
+
+recorder:
+  purge_keep_days: 2
 
 system_health:
 
@@ -23,12 +25,13 @@ frontend:
 
 #mobile_app:
 
+#discovery:
+
 config:
 
 http:
-  base_url: !secret http_base_url
-  ssl_key: ~/.homeassistant/privkey.pem
-  ssl_certificate: ~/.homeassistant/fullchain.cer
+  ssl_key: ~/.homeassistant/h.yonsm.tk.key
+  ssl_certificate: ~/.homeassistant/h.yonsm.tk.crt
 
 history:
   exclude:
@@ -47,7 +50,6 @@ logbook:
 sun:
 
 # tts:
-#   - platform: google
 #   - platform: baidu
 #     app_id: !secret baidu_app_id
 #     api_key: !secret baidu_api_key
@@ -99,6 +101,8 @@ asuswrt:
   host: Router
   username: admin
   password: !secret http_password
+  dnsmasq: /tmp
+  interface: ppp0
 
 device_tracker:
   - platform: asuswrt
@@ -113,8 +117,7 @@ person:
   - name: 爸爸
     id: baba
     device_trackers:
-      - device_tracker.aphone
-      #- device_tracker.yphone
+      - device_tracker.yphone
   - name: 妈妈
     id: mama
     device_trackers:
@@ -219,8 +222,8 @@ sensor:
   #   username: !secret phicomm_username
   #   password: !secret phicomm_password
   - platform: aircat
-    name: [['餐厅颗粒物', '餐厅甲醛', '餐厅温度', '餐厅湿度']]
-    mac: ['B0F8931EA148'] ##, 'B0F893249132']
+    name: [['餐厅颗粒物', '餐厅甲醛', '餐厅温度', '餐厅湿度'], ['过道颗粒物', '过道甲醛', '过道温度', '过道湿度']]
+    mac: ['B0F8931EA148', 'B0F893249132']
   - platform: template
     sensors:
       ci_wo_wen_du:
@@ -290,6 +293,9 @@ sensor:
       # ke_ting_kong_diao_mo_shi:
       #   friendly_name: 客厅空调模式
       #   value_template: '{% set mode = state_attr("climate.ke_ting_kong_diao", "fan_mode") %}{% if is_state("climate.ke_ting_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
+      # can_ting_kong_diao_mo_shi:
+      #   friendly_name: 餐厅空调模式
+      #   value_template: '{% set mode = state_attr("climate.can_ting_kong_diao", "fan_mode") %}{% if is_state("climate.can_ting_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
       # zhu_wo_kong_diao_mo_shi:
       #   friendly_name: 主卧空调模式
       #   value_template: '{% set mode = state_attr("climate.zhu_wo_kong_diao", "fan_mode") %}{% if is_state("climate.zhu_wo_kong_diao", "off") %}off{% elif mode == "自动" %}自{% elif mode == "一档" %}一{% elif mode == "二档" %}二{% elif mode == "三档" %}三{% elif mode == "四档" %}四{% elif mode == "五档" %}五{% else %}{{ mode }}{% endif %}'
@@ -302,33 +308,33 @@ sensor:
 
       # er_tong_fang_feng_shan_mo_shi:
       #   friendly_name: 儿童房风扇模式
-      #   value_template: '{% set mode = state_attr("fan.er_tong_fang_feng_shan", "speed_level") %}{% if is_state("fan.er_tong_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+      #   value_template: '{% set mode = state_attr("fan.er_tong_fang_feng_shan", "speed") %}{% if is_state("fan.er_tong_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
       # shu_fang_feng_shan_mo_shi:
       #   friendly_name: 书房风扇模式
-      #   value_template: '{% set mode = state_attr("fan.shu_fang_feng_shan", "speed_level") %}{% if is_state("fan.shu_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
+      #   value_template: '{% set mode = state_attr("fan.shu_fang_feng_shan", "speed") %}{% if is_state("fan.shu_fang_feng_shan", "off") %}off{% elif mode == "Level 1" %}一{% elif mode == "Level 2" %}二{% elif mode == "Level 3" %}三{% elif mode == "Level 4" %}四{% else %}{{ mode }}{% endif %}'
 
-      # ke_ting_xin_feng_ji_mo_shi:
-      #   friendly_name: 客厅新风机模式
-      #   value_template: '{% set mode = state_attr("fan.ke_ting_xin_feng_ji", "speed") %}{% if is_state("fan.ke_ting_xin_feng_ji", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
-      # zhu_wo_xin_feng_ji_mo_shi:
-      #   friendly_name: 主卧新风机模式
-      #   value_template: '{% set mode = state_attr("fan.zhu_wo_xin_feng_ji", "speed") %}{% if is_state("fan.zhu_wo_xin_feng_ji", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
+      ke_ting_xin_feng_ji_mo_shi:
+        friendly_name: 客厅新风机模式
+        value_template: '{% set mode = state_attr("fan.ke_ting_xin_feng_ji", "speed") %}{% if is_state("fan.ke_ting_xin_feng_ji", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
+      zhu_wo_xin_feng_ji_mo_shi:
+        friendly_name: 主卧新风机模式
+        value_template: '{% set mode = state_attr("fan.zhu_wo_xin_feng_ji", "speed") %}{% if is_state("fan.zhu_wo_xin_feng_ji", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Interval" %}间{% elif mode == "Low" %}一{% elif mode == "Middle" %}二{% elif mode == "Strong" %}三{% else %}{{ mode }}{% endif %}'
 
-      # ci_wo_jing_hua_qi_mo_shi:
-      #   friendly_name: 次卧净化器模式
-      #   value_template: '{% set mode = state_attr("fan.ci_wo_jing_hua_qi", "speed") %}{% if is_state("fan.ci_wo_jing_hua_qi", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Favorite" %}{{ state_attr("fan.ci_wo_jing_hua_qi", "favorite_level") }}{% else %}{{ mode }}{% endif %}'
-      # shu_fang_jing_hua_qi_mo_shi:
-      #   friendly_name: 书房净化器模式
-      #   value_template: '{% set mode = state_attr("fan.shu_fang_jing_hua_qi", "speed") %}{% if is_state("fan.shu_fang_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      # can_ting_jing_hua_qi_mo_shi:
-      #   friendly_name: 餐厅净化器模式
-      #   value_template: '{% set mode = state_attr("fan.can_ting_jing_hua_qi", "speed") %}{% if is_state("fan.can_ting_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      # zhu_wo_jing_hua_qi_mo_shi:
-      #   friendly_name: 主卧净化器模式
-      #   value_template: '{% set mode = state_attr("fan.zhu_wo_jing_hua_qi", "speed") %}{% if is_state("fan.zhu_wo_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
-      # er_tong_fang_jing_hua_qi_mo_shi:
-      #   friendly_name: 儿童房净化器模式
-      #   value_template: '{% set mode = state_attr("fan.er_tong_fang_jing_hua_qi", "speed") %}{% if is_state("fan.er_tong_fang_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      ci_wo_jing_hua_qi_mo_shi:
+        friendly_name: 次卧净化器模式
+        value_template: '{% set mode = state_attr("fan.ci_wo_jing_hua_qi", "speed") %}{% if is_state("fan.ci_wo_jing_hua_qi", "off") %}off{% elif mode == "Auto" %}自{% elif mode == "Silent" %}静{% elif mode == "Favorite" %}{{ state_attr("fan.ci_wo_jing_hua_qi", "favorite_level") }}{% else %}{{ mode }}{% endif %}'
+      shu_fang_jing_hua_qi_mo_shi:
+        friendly_name: 书房净化器模式
+        value_template: '{% set mode = state_attr("fan.shu_fang_jing_hua_qi", "speed") %}{% if is_state("fan.shu_fang_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      can_ting_jing_hua_qi_mo_shi:
+        friendly_name: 餐厅净化器模式
+        value_template: '{% set mode = state_attr("fan.can_ting_jing_hua_qi", "speed") %}{% if is_state("fan.can_ting_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      zhu_wo_jing_hua_qi_mo_shi:
+        friendly_name: 主卧净化器模式
+        value_template: '{% set mode = state_attr("fan.zhu_wo_jing_hua_qi", "speed") %}{% if is_state("fan.zhu_wo_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
+      er_tong_fang_jing_hua_qi_mo_shi:
+        friendly_name: 儿童房净化器模式
+        value_template: '{% set mode = state_attr("fan.er_tong_fang_jing_hua_qi", "speed") %}{% if is_state("fan.er_tong_fang_jing_hua_qi", "off") %}off{% elif mode == "low" %}一{% elif mode == "medium" %}二{% elif mode == "high" %}三{% else %}{{ mode }}{% endif %}'
 
 switch:
   - platform: wake_on_lan
@@ -337,7 +343,7 @@ switch:
     #broadcast_address: 192.168.1.255
     host: Station
     turn_off:
-      service: shell_command.turn_off_station
+      service: shell_command.station_off
   - platform: mqtt
     name: 洗手间排气扇
     state_topic: Hassmart2/relay/1
@@ -351,25 +357,25 @@ switch:
     value_template: '{% if value == "关闭" %}OFF{% else %}ON{% endif %}'
     icon_template: '{% if value == "关闭" %}mdi:speaker-off{% elif value == "蓝牙" %}mdi:speaker-bluetooth{% elif value == "光纤" %}mdi:speaker-wireless{% elif value == "优盘" %}mdi:usb{% elif value == "辅助" %}mdi:video-input-component{% else %}mdi:speaker{% endif %}'
   - platform: broadlink
-    host: Outlet
+    #host: Outlet
     mac: 34:EA:34:B8:36:AC
-    friendly_name: 餐厅除湿机
-    type: spmini2
+    #friendly_name: 餐厅除湿机
+    #type: spmini2
   # - platform: broadlink
   #   host: Outlet2
   #   mac: 78:0f:77:cc:cc:be
   #   friendly_name: 衣柜除湿机
   #   type: spmini2
   - platform: broadlink
-    friendly_name: 万能遥控
-    host: Remote
+    #friendly_name: 万能遥控
+    #host: Remote
     mac: 34:EA:34:58:73:5D
-    type: rm2_pro_plus
+    #type: rm2_pro_plus
   - platform: broadlink
-    friendly_name: 红外遥控
-    host: Remote2
+    #friendly_name: 红外遥控
+    #host: Remote2
     mac: 78:0F:77:47:AA:8F
-    type: rm_mini
+    #type: rm_mini
   - platform: template
     switches:
       tou_ying_yi:
@@ -395,7 +401,7 @@ switch:
       #       topic: NodeMCU6/irout/set
       #       payload: '2416,592,1210,594,608,618,1186,616,586,592,1210,618,584,618,586,616,1186,618,584,618,584,616,586,592,608,1,2,38'
       #   turn_off:
-      #     service: shell_command.turn_off_x9300d
+      #     service: shell_command.power_off_x9300d
 
 yeelight:
   devices:
@@ -456,9 +462,11 @@ light:
     payload_off: 3528,1658,426,418,426,1292,380,462,382,1334,382,464,382,1338,380,462,382,1336,382,462,382,462,382,462,382,1336,382,462,382,1336,380,1336,382,464,382,1338,378,462,384,462,382,464,380,1336,382,1336,382,1336,382,462,382,1334,384,464,382,1336,382,462,382,1336,382,1336,382,464,382,462,382,464,382,464,380,462,382,462,382,464,382,464,380,464,382,464,382,464,380,1338,380,462,382,464,382,462,380,464,380,464,380,464,380,1334,382,464,380,464,380,464,380,464,382,1336,382,464,382,462,382,1334,382,464,382,464,382,464,380,1336,382,1336,382,464,382,1338,380,1,2,38
 
 shell_command:
-  turn_off_station: 'ssh root@Station shutdown -h now'
-  turn_off_x9300d: 'adb connect x9300d; adb -s x9300d shell reboot -p'
-  turn_off_x9400d: 'adb connect x9400e; adb -s x9400e shell reboot -p'
+  station_off: 'ssh root@Station shutdown -h now'
+  magic_on: "adb connect magic; adb -s magic shell 'input keyevent 82; am start -n com.thanksmister.iot.wallpanel/.ui.activities.WelcomeActivity'"
+  magic_off: "adb connect magic; adb -s magic shell 'input keyevent 82; input keyevent 26'"
+  # x9300d_off: 'adb connect x9300d; adb -s x9300d shell reboot -p'
+  # x9400d_off: 'adb connect x9400e; adb -s x9400e shell reboot -p'
 
 xiaomi_aqara:
   #interface: 192.168.2.40
@@ -467,11 +475,11 @@ xiaomi_aqara:
       #mac: 34CE0090901A
       #host: ZigBee
 
-vacuum:
-  - platform: xiaomi_miio
-    name: 扫地机
-    host: Vacuum
-    token: !secret vacuum_token
+# vacuum:
+#   - platform: xiaomi_miio
+#     name: 扫地机
+#     host: Vacuum
+#     token: !secret vacuum_token
 
 fan:
   - platform: viomi_washer
@@ -483,16 +491,21 @@ fan:
     host: Purifier
     model: zhimi.airpurifier.m1
     token: !secret purifier_token
-  - platform: xiaomi_fan
-    name: 儿童房风扇
-    host: Fan
-    model: zhimi.fan.v3
-    token: !secret fan_token
-  - platform: xiaomi_fan
-    name: 书房风扇
-    host: Fan2
-    model: zhimi.fan.sa1
-    token: !secret fan2_token
+  # - platform: xiaomi_miio_fan
+  #   name: 儿童房风扇
+  #   host: Fan
+  #   model: zhimi.fan.v3
+  #   token: !secret fan_token
+  # - platform: xiaomi_miio_fan
+  #   name: 书房风扇
+  #   host: Fan2
+  #   model: zhimi.fan.sa1
+  #   token: !secret fan2_token
+  # - platform: xiaomi_miot_fan
+  #   name: 主卧风扇
+  #   host: Fan3
+  #   model: zhimi.fan.fa1
+  #   token: !secret fan3_token
   - platform: xiaomi_miio
     name: 客厅新风机
     host: Fresher
@@ -634,12 +647,15 @@ media_player:
   - platform: braviatv
     host: X9400e
     name: 客厅电视
+  # - platform: dlna_dmr
+  #   name: 天猫精灵
+  #   url: http://Magic:49153/description.xml
 
 panel_iframe:
   dash:
     title: 面板
     icon: mdi:microsoft
-    url: !secret dash_url
+    url: /local/dash.html
 
 actuator:
 
@@ -660,7 +676,7 @@ zhimsg:
     password: !secret miai_password
 
 input_text:
-  xiao_ai_yin_xiang:
-    name: 小爱音箱
+  yu_yin_bo_bao:
+    name: 语音播报
     icon: mdi:account-tie-voice
-    initial: 小爱播报
+    initial: 您好

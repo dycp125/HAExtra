@@ -6,7 +6,7 @@ import os.path
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 
-from homeassistant.components.cover import (CoverDevice, PLATFORM_SCHEMA, SUPPORT_OPEN, SUPPORT_CLOSE)
+from homeassistant.components.cover import (CoverEntity, PLATFORM_SCHEMA, SUPPORT_OPEN, SUPPORT_CLOSE)
 from homeassistant.const import (CONF_NAME, CONF_HOST, CONF_MAC, CONF_TIMEOUT, STATE_OPEN, STATE_CLOSED)
 from homeassistant.helpers.event import track_utc_time_change
 from homeassistant.helpers.event import async_track_state_change
@@ -84,7 +84,7 @@ def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     return True
 
 
-class RMCover(CoverDevice,RestoreEntity):
+class RMCover(CoverEntity,RestoreEntity):
     """Representation of a cover."""
 
     # pylint: disable=no-self-use

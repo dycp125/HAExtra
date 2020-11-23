@@ -193,7 +193,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 })
 
 # True: Thread mode, False: HomeAssistant update/poll mode
-AIRCAT_SENSOR_THREAD_MODE = False
+AIRCAT_SENSOR_THREAD_MODE = True
 
 
 def setup_platform(hass, config, add_devices, discovery_info=None):

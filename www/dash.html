@@ -6,8 +6,10 @@
 		<meta charset="utf-8" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		<link rel="apple-touch-icon" href="/static/images/config_insteon.png" />
-		<link href="https://cdn.bootcss.com/MaterialDesign-Webfont/5.0.45/css/materialdesignicons.min.css" rel="stylesheet" />
+		<!--https://cdn.bootcss.com/MaterialDesign-Webfont/5.2.45/-->
+		<link href="css/materialdesignicons.min.css" rel="stylesheet" />
 		<style>
 			.entity {
 				float: left;
@@ -824,6 +826,18 @@
 				var index1 = _sorted_domains.indexOf(domain1)
 				var index2 = _sorted_domains.indexOf(domain2)
 				if (index1 == index2) {
+					var order1 = entity1.attributes.dash_order
+					var order2 = entity2.attributes.dash_order
+					if (order1) {
+						if (order2) {
+							return parseInt(order1) - parseInt(order2)
+						} else {
+							return -1
+						}
+					} else if (order2) {
+						return 1
+					}
+
 					if (domain1 == 'sensor') {
 						var unit1 = entity1.attributes.unit_of_measurement
 						var unit2 = entity2.attributes.unit_of_measurement

@@ -1,14 +1,14 @@
 default_view:
   icon: mdi:home-assistant
   entities:
+    - group.yang_tai
     - group.ke_ting
     - group.can_ting
     - group.guo_dao
     - group.zhu_wo
-    - group.ci_wo 
+    - group.ci_wo
     - group.er_tong_fang
     - group.shu_fang
-    - group.yang_tai
     - person.ba_ba
     - person.ma_ma
     - person.a_yi
@@ -46,17 +46,21 @@ default_view:
 过道:
   icon: mdi:road
   entities:
+    - sensor.guo_dao_wen_du
+    - sensor.guo_dao_shi_du
+    - sensor.guo_dao_ke_li_wu
+    - sensor.guo_dao_jia_quan
     - binary_sensor.motion_sensor_158d0001d66ce9
     - binary_sensor.door_window_sensor_158d00041c74da
     - binary_sensor.cube_158d0002a66db1
     - light.guo_dao_bei_jing_deng
     - switch.plug_158d0003a58422
     - cover.curtain_158d0003f7951d
-    - input_text.xiao_ai_yin_xiang
     - binary_sensor.motion_sensor_158d0001f4a238
     - binary_sensor.door_window_sensor_158d0003cf4735
     - light.xi_shou_jian_deng
     - switch.xi_shou_jian_pai_qi_shan
+    - input_text.yu_yin_bo_bao
 
 主卧:
   icon: mdi:bed-king
@@ -67,6 +71,7 @@ default_view:
     - sensor.zhu_wo_er_yang_hua_tan
     - sensor.zhu_wo_liang_du
     - binary_sensor.zhu_wo_gan_ying
+    - binary_sensor.door_window_sensor_158d0004611461
     - light.zhu_wo_deng
     #- switch.zhu_wo_dian_shi
     #- switch.yi_gui_chu_shi_ji
@@ -75,6 +80,7 @@ default_view:
     - fan.zhu_wo_xin_feng_ji
     - fan.zhu_wo_jing_hua_qi
     - fan.zhu_wo_bi_shan
+    # - fan.zhu_wo_feng_shan
     - fan.xi_yi_ji
     - climate.zhu_wo_kong_diao
     - climate.zhu_wo_di_nuan
@@ -97,6 +103,7 @@ default_view:
     - sensor.feng_shan_wen_du
     - light.er_tong_fang_deng
     - light.er_tong_fang_tai_deng
+    - cover.curtain_158d00042cf265
     - fan.er_tong_fang_jing_hua_qi
     - fan.er_tong_fang_feng_shan
     - climate.er_tong_fang_kong_diao
@@ -108,6 +115,7 @@ default_view:
     - sensor.shu_fang_shi_du
     - sensor.shu_fang_er_yang_hua_tan
     - sensor.shu_fang_liang_du
+    - binary_sensor.motion_sensor_158d0003d0d46e
     - light.shu_fang_tai_deng
     - light.liang_yi_jia_deng
     - switch.tou_ying_yi

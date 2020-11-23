@@ -2,7 +2,7 @@
 import logging
 from . import MiioEntity, DOMAIN
 
-from homeassistant.components.cover import CoverDevice, ATTR_POSITION
+from homeassistant.components.cover import CoverEntity, ATTR_POSITION
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.event import async_call_later
 
@@ -16,7 +16,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_add_entities([MrBondAirer(hass, discovery_info, hass.data[DOMAIN])], True)
 
 
-class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
+class MrBondAirer(MiioEntity, CoverEntity, RestoreEntity):
     """Representation of a cover."""
 
     def __init__(self, hass, name, device):
@@ -105,4 +105,4 @@ class MrBondAirer(MiioEntity, CoverDevice, RestoreEntity):
                 self._device.status['motor'] == '1'
             else:
                 return
-            async_call_later(self._hass, AIRER_DURATION/2, self.pause_cover)
+            async_call_later(self.hass, AIRER_DURATION/2, self.pause_cover)
